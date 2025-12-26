@@ -1,0 +1,1161 @@
+{
+  "tote-bags": {
+    "name": "Tote Bags",
+    "slug": "tote-bags",
+    "url": "https://www.trusser.in/category/tote-bags",
+    "products": []
+  },
+  "corporate-gift-sets": {
+    "name": "Corporate Gift Sets",
+    "slug": "corporate-gift-sets",
+    "url": "https://www.trusser.in/category/corporate-gift-sets",
+    "products": [
+      {
+        "name": "Corporate Gift Sets 1",
+        "image": "/products/categories/corporate-gift-sets/corporate-gift-sets-1.webp",
+        "filename": "corporate-gift-sets-1.webp"
+      },
+      {
+        "name": "Corporate Gift Sets 2",
+        "image": "/products/categories/corporate-gift-sets/corporate-gift-sets-2.webp",
+        "filename": "corporate-gift-sets-2.webp"
+      },
+      {
+        "name": "Corporate Gift Sets 3",
+        "image": "/products/categories/corporate-gift-sets/corporate-gift-sets-3.webp",
+        "filename": "corporate-gift-sets-3.webp"
+      },
+      {
+        "name": "Corporate Gift Sets 4",
+        "image": "/products/categories/corporate-gift-sets/corporate-gift-sets-4.webp",
+        "filename": "corporate-gift-sets-4.webp"
+      },
+      {
+        "name": "Corporate Gift Sets 5",
+        "image": "/products/categories/corporate-gift-sets/corporate-gift-sets-5.webp",
+        "filename": "corporate-gift-sets-5.webp"
+      },
+      {
+        "name": "Corporate Gift Sets 6",
+        "image": "/products/categories/corporate-gift-sets/corporate-gift-sets-6.webp",
+        "filename": "corporate-gift-sets-6.webp"
+      },
+      {
+        "name": "Corporate Gift Sets 7",
+        "image": "/products/categories/corporate-gift-sets/corporate-gift-sets-7.webp",
+        "filename": "corporate-gift-sets-7.webp"
+      },
+      {
+        "name": "Corporate Gift Sets 8",
+        "image": "/products/categories/corporate-gift-sets/corporate-gift-sets-8.webp",
+        "filename": "corporate-gift-sets-8.webp"
+      }
+    ]
+  },
+  "women-gift-sets": {
+    "name": "Women Gift Sets",
+    "slug": "women-gift-sets",
+    "url": "https://www.trusser.in/category/women-gift-sets",
+    "products": [
+      {
+        "name": "Women Gift Sets 1",
+        "image": "/products/categories/women-gift-sets/women-gift-sets-1.webp",
+        "filename": "women-gift-sets-1.webp"
+      },
+      {
+        "name": "Women Gift Sets 2",
+        "image": "/products/categories/women-gift-sets/women-gift-sets-2.webp",
+        "filename": "women-gift-sets-2.webp"
+      },
+      {
+        "name": "Women Gift Sets 3",
+        "image": "/products/categories/women-gift-sets/women-gift-sets-3.webp",
+        "filename": "women-gift-sets-3.webp"
+      },
+      {
+        "name": "Women Gift Sets 4",
+        "image": "/products/categories/women-gift-sets/women-gift-sets-4.webp",
+        "filename": "women-gift-sets-4.webp"
+      },
+      {
+        "name": "Women Gift Sets 5",
+        "image": "/products/categories/women-gift-sets/women-gift-sets-5.webp",
+        "filename": "women-gift-sets-5.webp"
+      },
+      {
+        "name": "Women Gift Sets 6",
+        "image": "/products/categories/women-gift-sets/women-gift-sets-6.webp",
+        "filename": "women-gift-sets-6.webp"
+      },
+      {
+        "name": "Women Gift Sets 7",
+        "image": "/products/categories/women-gift-sets/women-gift-sets-7.webp",
+        "filename": "women-gift-sets-7.webp"
+      },
+      {
+        "name": "Women Gift Sets 8",
+        "image": "/products/categories/women-gift-sets/women-gift-sets-8.webp",
+        "filename": "women-gift-sets-8.webp"
+      },
+      {
+        "name": "Women Gift Sets 9",
+        "image": "/products/categories/women-gift-sets/women-gift-sets-9.webp",
+        "filename": "women-gift-sets-9.webp"
+      },
+      {
+        "name": "Women Gift Sets 10",
+        "image": "/products/categories/women-gift-sets/women-gift-sets-10.webp",
+        "filename": "women-gift-sets-10.webp"
+      },
+      {
+        "name": "Women Gift Sets 11",
+        "image": "/products/categories/women-gift-sets/women-gift-sets-11.webp",
+        "filename": "women-gift-sets-11.webp"
+      },
+      {
+        "name": "Women Gift Sets 12",
+        "image": "/products/categories/women-gift-sets/women-gift-sets-12.webp",
+        "filename": "women-gift-sets-12.webp"
+      },
+      {
+        "name": "Women Gift Sets 13",
+        "image": "/products/categories/women-gift-sets/women-gift-sets-13.webp",
+        "filename": "women-gift-sets-13.webp"
+      },
+      {
+        "name": "Women Gift Sets 14",
+        "image": "/products/categories/women-gift-sets/women-gift-sets-14.webp",
+        "filename": "women-gift-sets-14.webp"
+      },
+      {
+        "name": "Women Gift Sets 15",
+        "image": "/products/categories/women-gift-sets/women-gift-sets-15.webp",
+        "filename": "women-gift-sets-15.webp"
+      },
+      {
+        "name": "Women Gift Sets 16",
+        "image": "/products/categories/women-gift-sets/women-gift-sets-16.webp",
+        "filename": "women-gift-sets-16.webp"
+      },
+      {
+        "name": "Women Gift Sets 17",
+        "image": "/products/categories/women-gift-sets/women-gift-sets-17.webp",
+        "filename": "women-gift-sets-17.webp"
+      },
+      {
+        "name": "Women Gift Sets 18",
+        "image": "/products/categories/women-gift-sets/women-gift-sets-18.webp",
+        "filename": "women-gift-sets-18.webp"
+      },
+      {
+        "name": "Women Gift Sets 19",
+        "image": "/products/categories/women-gift-sets/women-gift-sets-19.webp",
+        "filename": "women-gift-sets-19.webp"
+      },
+      {
+        "name": "Women Gift Sets 20",
+        "image": "/products/categories/women-gift-sets/women-gift-sets-20.webp",
+        "filename": "women-gift-sets-20.webp"
+      }
+    ]
+  },
+  "kids-gifts-set": {
+    "name": "Kids Gifts Set",
+    "slug": "kids-gifts-set",
+    "url": "https://www.trusser.in/category/kids-gifts-set",
+    "products": [
+      {
+        "name": "Kids Gifts Set 1",
+        "image": "/products/categories/kids-gifts-set/kids-gifts-set-1.webp",
+        "filename": "kids-gifts-set-1.webp"
+      },
+      {
+        "name": "Kids Gifts Set 2",
+        "image": "/products/categories/kids-gifts-set/kids-gifts-set-2.webp",
+        "filename": "kids-gifts-set-2.webp"
+      },
+      {
+        "name": "Kids Gifts Set 3",
+        "image": "/products/categories/kids-gifts-set/kids-gifts-set-3.webp",
+        "filename": "kids-gifts-set-3.webp"
+      },
+      {
+        "name": "Kids Gifts Set 4",
+        "image": "/products/categories/kids-gifts-set/kids-gifts-set-4.webp",
+        "filename": "kids-gifts-set-4.webp"
+      },
+      {
+        "name": "Kids Gifts Set 5",
+        "image": "/products/categories/kids-gifts-set/kids-gifts-set-5.webp",
+        "filename": "kids-gifts-set-5.webp"
+      },
+      {
+        "name": "Kids Gifts Set 6",
+        "image": "/products/categories/kids-gifts-set/kids-gifts-set-6.webp",
+        "filename": "kids-gifts-set-6.webp"
+      },
+      {
+        "name": "Kids Gifts Set 7",
+        "image": "/products/categories/kids-gifts-set/kids-gifts-set-7.webp",
+        "filename": "kids-gifts-set-7.webp"
+      }
+    ]
+  },
+  "bottles": {
+    "name": "Bottles",
+    "slug": "bottles",
+    "url": "https://www.trusser.in/category/bottles",
+    "products": [
+      {
+        "name": "Bottles 1",
+        "image": "/products/categories/bottles/bottles-1.webp",
+        "filename": "bottles-1.webp"
+      },
+      {
+        "name": "Bottles 2",
+        "image": "/products/categories/bottles/bottles-2.webp",
+        "filename": "bottles-2.webp"
+      },
+      {
+        "name": "Bottles 3",
+        "image": "/products/categories/bottles/bottles-3.webp",
+        "filename": "bottles-3.webp"
+      },
+      {
+        "name": "Bottles 4",
+        "image": "/products/categories/bottles/bottles-4.webp",
+        "filename": "bottles-4.webp"
+      },
+      {
+        "name": "Bottles 5",
+        "image": "/products/categories/bottles/bottles-5.webp",
+        "filename": "bottles-5.webp"
+      },
+      {
+        "name": "Bottles 6",
+        "image": "/products/categories/bottles/bottles-6.webp",
+        "filename": "bottles-6.webp"
+      },
+      {
+        "name": "Bottles 7",
+        "image": "/products/categories/bottles/bottles-7.webp",
+        "filename": "bottles-7.webp"
+      },
+      {
+        "name": "Bottles 8",
+        "image": "/products/categories/bottles/bottles-8.webp",
+        "filename": "bottles-8.webp"
+      },
+      {
+        "name": "Bottles 9",
+        "image": "/products/categories/bottles/bottles-9.webp",
+        "filename": "bottles-9.webp"
+      },
+      {
+        "name": "Bottles 10",
+        "image": "/products/categories/bottles/bottles-10.webp",
+        "filename": "bottles-10.webp"
+      }
+    ]
+  },
+  "bottle-bags": {
+    "name": "Bottle Bags",
+    "slug": "bottle-bags",
+    "url": "https://www.trusser.in/category/bottle-bags",
+    "products": [
+      {
+        "name": "Bottle Bags 1",
+        "image": "/products/categories/bottle-bags/bottle-bags-1.webp",
+        "filename": "bottle-bags-1.webp"
+      },
+      {
+        "name": "Bottle Bags 2",
+        "image": "/products/categories/bottle-bags/bottle-bags-2.webp",
+        "filename": "bottle-bags-2.webp"
+      },
+      {
+        "name": "Bottle Bags 3",
+        "image": "/products/categories/bottle-bags/bottle-bags-3.webp",
+        "filename": "bottle-bags-3.webp"
+      },
+      {
+        "name": "Bottle Bags 4",
+        "image": "/products/categories/bottle-bags/bottle-bags-4.webp",
+        "filename": "bottle-bags-4.webp"
+      },
+      {
+        "name": "Bottle Bags 5",
+        "image": "/products/categories/bottle-bags/bottle-bags-5.webp",
+        "filename": "bottle-bags-5.webp"
+      },
+      {
+        "name": "Bottle Bags 6",
+        "image": "/products/categories/bottle-bags/bottle-bags-6.webp",
+        "filename": "bottle-bags-6.webp"
+      },
+      {
+        "name": "Bottle Bags 7",
+        "image": "/products/categories/bottle-bags/bottle-bags-7.webp",
+        "filename": "bottle-bags-7.webp"
+      },
+      {
+        "name": "Bottle Bags 8",
+        "image": "/products/categories/bottle-bags/bottle-bags-8.webp",
+        "filename": "bottle-bags-8.webp"
+      },
+      {
+        "name": "Bottle Bags 9",
+        "image": "/products/categories/bottle-bags/bottle-bags-9.webp",
+        "filename": "bottle-bags-9.webp"
+      },
+      {
+        "name": "Bottle Bags 10",
+        "image": "/products/categories/bottle-bags/bottle-bags-10.webp",
+        "filename": "bottle-bags-10.webp"
+      },
+      {
+        "name": "Bottle Bags 11",
+        "image": "/products/categories/bottle-bags/bottle-bags-11.webp",
+        "filename": "bottle-bags-11.webp"
+      },
+      {
+        "name": "Bottle Bags 12",
+        "image": "/products/categories/bottle-bags/bottle-bags-12.webp",
+        "filename": "bottle-bags-12.webp"
+      },
+      {
+        "name": "Bottle Bags 13",
+        "image": "/products/categories/bottle-bags/bottle-bags-13.webp",
+        "filename": "bottle-bags-13.webp"
+      },
+      {
+        "name": "Bottle Bags 14",
+        "image": "/products/categories/bottle-bags/bottle-bags-14.webp",
+        "filename": "bottle-bags-14.webp"
+      }
+    ]
+  },
+  "festive-bags": {
+    "name": "Festive Bags",
+    "slug": "festive-bags",
+    "url": "https://www.trusser.in/category/festive-bags",
+    "products": [
+      {
+        "name": "Festive Bags 1",
+        "image": "/products/categories/festive-bags/festive-bags-1.webp",
+        "filename": "festive-bags-1.webp"
+      },
+      {
+        "name": "Festive Bags 2",
+        "image": "/products/categories/festive-bags/festive-bags-2.webp",
+        "filename": "festive-bags-2.webp"
+      },
+      {
+        "name": "Festive Bags 3",
+        "image": "/products/categories/festive-bags/festive-bags-3.webp",
+        "filename": "festive-bags-3.webp"
+      },
+      {
+        "name": "Festive Bags 4",
+        "image": "/products/categories/festive-bags/festive-bags-4.webp",
+        "filename": "festive-bags-4.webp"
+      },
+      {
+        "name": "Festive Bags 5",
+        "image": "/products/categories/festive-bags/festive-bags-5.webp",
+        "filename": "festive-bags-5.webp"
+      },
+      {
+        "name": "Festive Bags 6",
+        "image": "/products/categories/festive-bags/festive-bags-6.webp",
+        "filename": "festive-bags-6.webp"
+      },
+      {
+        "name": "Festive Bags 7",
+        "image": "/products/categories/festive-bags/festive-bags-7.webp",
+        "filename": "festive-bags-7.webp"
+      },
+      {
+        "name": "Festive Bags 8",
+        "image": "/products/categories/festive-bags/festive-bags-8.webp",
+        "filename": "festive-bags-8.webp"
+      },
+      {
+        "name": "Festive Bags 9",
+        "image": "/products/categories/festive-bags/festive-bags-9.webp",
+        "filename": "festive-bags-9.webp"
+      },
+      {
+        "name": "Festive Bags 10",
+        "image": "/products/categories/festive-bags/festive-bags-10.webp",
+        "filename": "festive-bags-10.webp"
+      },
+      {
+        "name": "Festive Bags 11",
+        "image": "/products/categories/festive-bags/festive-bags-11.webp",
+        "filename": "festive-bags-11.webp"
+      },
+      {
+        "name": "Festive Bags 12",
+        "image": "/products/categories/festive-bags/festive-bags-12.webp",
+        "filename": "festive-bags-12.webp"
+      },
+      {
+        "name": "Festive Bags 13",
+        "image": "/products/categories/festive-bags/festive-bags-13.webp",
+        "filename": "festive-bags-13.webp"
+      },
+      {
+        "name": "Festive Bags 14",
+        "image": "/products/categories/festive-bags/festive-bags-14.webp",
+        "filename": "festive-bags-14.webp"
+      },
+      {
+        "name": "Festive Bags 15",
+        "image": "/products/categories/festive-bags/festive-bags-15.webp",
+        "filename": "festive-bags-15.webp"
+      },
+      {
+        "name": "Festive Bags 16",
+        "image": "/products/categories/festive-bags/festive-bags-16.webp",
+        "filename": "festive-bags-16.webp"
+      },
+      {
+        "name": "Festive Bags 17",
+        "image": "/products/categories/festive-bags/festive-bags-17.webp",
+        "filename": "festive-bags-17.webp"
+      },
+      {
+        "name": "Festive Bags 18",
+        "image": "/products/categories/festive-bags/festive-bags-18.webp",
+        "filename": "festive-bags-18.webp"
+      },
+      {
+        "name": "Festive Bags 19",
+        "image": "/products/categories/festive-bags/festive-bags-19.webp",
+        "filename": "festive-bags-19.webp"
+      },
+      {
+        "name": "Festive Bags 20",
+        "image": "/products/categories/festive-bags/festive-bags-20.webp",
+        "filename": "festive-bags-20.webp"
+      },
+      {
+        "name": "Festive Bags 21",
+        "image": "/products/categories/festive-bags/festive-bags-21.webp",
+        "filename": "festive-bags-21.webp"
+      }
+    ]
+  },
+  "posters": {
+    "name": "Posters",
+    "slug": "posters",
+    "url": "https://www.trusser.in/category/posters",
+    "products": [
+      {
+        "name": "Posters 1",
+        "image": "/products/categories/posters/posters-1.webp",
+        "filename": "posters-1.webp"
+      },
+      {
+        "name": "Posters 2",
+        "image": "/products/categories/posters/posters-2.webp",
+        "filename": "posters-2.webp"
+      },
+      {
+        "name": "Posters 3",
+        "image": "/products/categories/posters/posters-3.webp",
+        "filename": "posters-3.webp"
+      },
+      {
+        "name": "Posters 4",
+        "image": "/products/categories/posters/posters-4.webp",
+        "filename": "posters-4.webp"
+      },
+      {
+        "name": "Posters 5",
+        "image": "/products/categories/posters/posters-5.webp",
+        "filename": "posters-5.webp"
+      },
+      {
+        "name": "Posters 6",
+        "image": "/products/categories/posters/posters-6.webp",
+        "filename": "posters-6.webp"
+      }
+    ]
+  },
+  "laundry-bags": {
+    "name": "Laundry Bags",
+    "slug": "laundry-bags",
+    "url": "https://www.trusser.in/category/laundry-bags",
+    "products": [
+      {
+        "name": "Laundry Bags 1",
+        "image": "/products/categories/laundry-bags/laundry-bags-1.webp",
+        "filename": "laundry-bags-1.webp"
+      },
+      {
+        "name": "Laundry Bags 2",
+        "image": "/products/categories/laundry-bags/laundry-bags-2.webp",
+        "filename": "laundry-bags-2.webp"
+      },
+      {
+        "name": "Laundry Bags 3",
+        "image": "/products/categories/laundry-bags/laundry-bags-3.webp",
+        "filename": "laundry-bags-3.webp"
+      },
+      {
+        "name": "Laundry Bags 4",
+        "image": "/products/categories/laundry-bags/laundry-bags-4.webp",
+        "filename": "laundry-bags-4.webp"
+      },
+      {
+        "name": "Laundry Bags 5",
+        "image": "/products/categories/laundry-bags/laundry-bags-5.webp",
+        "filename": "laundry-bags-5.webp"
+      }
+    ]
+  },
+  "table-mat-coasters": {
+    "name": "Table Mat Coasters",
+    "slug": "table-mat-coasters",
+    "url": "https://www.trusser.in/category/table-mat-coasters",
+    "products": [
+      {
+        "name": "Table Mat Coasters 1",
+        "image": "/products/categories/table-mat-coasters/table-mat-coasters-1.webp",
+        "filename": "table-mat-coasters-1.webp"
+      },
+      {
+        "name": "Table Mat Coasters 2",
+        "image": "/products/categories/table-mat-coasters/table-mat-coasters-2.webp",
+        "filename": "table-mat-coasters-2.webp"
+      },
+      {
+        "name": "Table Mat Coasters 3",
+        "image": "/products/categories/table-mat-coasters/table-mat-coasters-3.webp",
+        "filename": "table-mat-coasters-3.webp"
+      },
+      {
+        "name": "Table Mat Coasters 4",
+        "image": "/products/categories/table-mat-coasters/table-mat-coasters-4.webp",
+        "filename": "table-mat-coasters-4.webp"
+      },
+      {
+        "name": "Table Mat Coasters 5",
+        "image": "/products/categories/table-mat-coasters/table-mat-coasters-5.webp",
+        "filename": "table-mat-coasters-5.webp"
+      },
+      {
+        "name": "Table Mat Coasters 6",
+        "image": "/products/categories/table-mat-coasters/table-mat-coasters-6.webp",
+        "filename": "table-mat-coasters-6.webp"
+      },
+      {
+        "name": "Table Mat Coasters 7",
+        "image": "/products/categories/table-mat-coasters/table-mat-coasters-7.webp",
+        "filename": "table-mat-coasters-7.webp"
+      },
+      {
+        "name": "Table Mat Coasters 8",
+        "image": "/products/categories/table-mat-coasters/table-mat-coasters-8.webp",
+        "filename": "table-mat-coasters-8.webp"
+      }
+    ]
+  },
+  "cash-pouches": {
+    "name": "Cash Pouches",
+    "slug": "cash-pouches",
+    "url": "https://www.trusser.in/category/cash-pouches",
+    "products": [
+      {
+        "name": "Cash Pouches 1",
+        "image": "/products/categories/cash-pouches/cash-pouches-1.webp",
+        "filename": "cash-pouches-1.webp"
+      },
+      {
+        "name": "Cash Pouches 2",
+        "image": "/products/categories/cash-pouches/cash-pouches-2.webp",
+        "filename": "cash-pouches-2.webp"
+      },
+      {
+        "name": "Cash Pouches 3",
+        "image": "/products/categories/cash-pouches/cash-pouches-3.webp",
+        "filename": "cash-pouches-3.webp"
+      },
+      {
+        "name": "Cash Pouches 4",
+        "image": "/products/categories/cash-pouches/cash-pouches-4.webp",
+        "filename": "cash-pouches-4.webp"
+      },
+      {
+        "name": "Cash Pouches 5",
+        "image": "/products/categories/cash-pouches/cash-pouches-5.webp",
+        "filename": "cash-pouches-5.webp"
+      },
+      {
+        "name": "Cash Pouches 6",
+        "image": "/products/categories/cash-pouches/cash-pouches-6.webp",
+        "filename": "cash-pouches-6.webp"
+      },
+      {
+        "name": "Cash Pouches 7",
+        "image": "/products/categories/cash-pouches/cash-pouches-7.webp",
+        "filename": "cash-pouches-7.webp"
+      },
+      {
+        "name": "Cash Pouches 8",
+        "image": "/products/categories/cash-pouches/cash-pouches-8.webp",
+        "filename": "cash-pouches-8.webp"
+      },
+      {
+        "name": "Cash Pouches 9",
+        "image": "/products/categories/cash-pouches/cash-pouches-9.webp",
+        "filename": "cash-pouches-9.webp"
+      },
+      {
+        "name": "Cash Pouches 10",
+        "image": "/products/categories/cash-pouches/cash-pouches-10.webp",
+        "filename": "cash-pouches-10.webp"
+      },
+      {
+        "name": "Cash Pouches 11",
+        "image": "/products/categories/cash-pouches/cash-pouches-11.webp",
+        "filename": "cash-pouches-11.webp"
+      }
+    ]
+  },
+  "luggage-tags": {
+    "name": "Luggage Tags",
+    "slug": "luggage-tags",
+    "url": "https://www.trusser.in/category/luggage-tags",
+    "products": [
+      {
+        "name": "Luggage Tags 1",
+        "image": "/products/categories/luggage-tags/luggage-tags-1.webp",
+        "filename": "luggage-tags-1.webp"
+      },
+      {
+        "name": "Luggage Tags 2",
+        "image": "/products/categories/luggage-tags/luggage-tags-2.webp",
+        "filename": "luggage-tags-2.webp"
+      },
+      {
+        "name": "Luggage Tags 3",
+        "image": "/products/categories/luggage-tags/luggage-tags-3.webp",
+        "filename": "luggage-tags-3.webp"
+      },
+      {
+        "name": "Luggage Tags 4",
+        "image": "/products/categories/luggage-tags/luggage-tags-4.webp",
+        "filename": "luggage-tags-4.webp"
+      },
+      {
+        "name": "Luggage Tags 5",
+        "image": "/products/categories/luggage-tags/luggage-tags-5.webp",
+        "filename": "luggage-tags-5.webp"
+      }
+    ]
+  },
+  "picnic-bags": {
+    "name": "Picnic Bags",
+    "slug": "picnic-bags",
+    "url": "https://www.trusser.in/category/picnic-bags",
+    "products": [
+      {
+        "name": "Picnic Bags 1",
+        "image": "/products/categories/picnic-bags/picnic-bags-1.webp",
+        "filename": "picnic-bags-1.webp"
+      },
+      {
+        "name": "Picnic Bags 2",
+        "image": "/products/categories/picnic-bags/picnic-bags-2.webp",
+        "filename": "picnic-bags-2.webp"
+      },
+      {
+        "name": "Picnic Bags 3",
+        "image": "/products/categories/picnic-bags/picnic-bags-3.webp",
+        "filename": "picnic-bags-3.webp"
+      },
+      {
+        "name": "Picnic Bags 4",
+        "image": "/products/categories/picnic-bags/picnic-bags-4.webp",
+        "filename": "picnic-bags-4.webp"
+      },
+      {
+        "name": "Picnic Bags 5",
+        "image": "/products/categories/picnic-bags/picnic-bags-5.webp",
+        "filename": "picnic-bags-5.webp"
+      },
+      {
+        "name": "Picnic Bags 6",
+        "image": "/products/categories/picnic-bags/picnic-bags-6.webp",
+        "filename": "picnic-bags-6.webp"
+      },
+      {
+        "name": "Picnic Bags 7",
+        "image": "/products/categories/picnic-bags/picnic-bags-7.webp",
+        "filename": "picnic-bags-7.webp"
+      }
+    ]
+  },
+  "passport-holders": {
+    "name": "Passport Holders",
+    "slug": "passport-holders",
+    "url": "https://www.trusser.in/category/passport-holders",
+    "products": [
+      {
+        "name": "Passport Holders 1",
+        "image": "/products/categories/passport-holders/passport-holders-1.webp",
+        "filename": "passport-holders-1.webp"
+      },
+      {
+        "name": "Passport Holders 2",
+        "image": "/products/categories/passport-holders/passport-holders-2.webp",
+        "filename": "passport-holders-2.webp"
+      },
+      {
+        "name": "Passport Holders 3",
+        "image": "/products/categories/passport-holders/passport-holders-3.webp",
+        "filename": "passport-holders-3.webp"
+      },
+      {
+        "name": "Passport Holders 4",
+        "image": "/products/categories/passport-holders/passport-holders-4.webp",
+        "filename": "passport-holders-4.webp"
+      },
+      {
+        "name": "Passport Holders 5",
+        "image": "/products/categories/passport-holders/passport-holders-5.webp",
+        "filename": "passport-holders-5.webp"
+      }
+    ]
+  },
+  "keychains": {
+    "name": "Keychains",
+    "slug": "keychains",
+    "url": "https://www.trusser.in/category/keychains",
+    "products": [
+      {
+        "name": "Keychains 1",
+        "image": "/products/categories/keychains/keychains-1.webp",
+        "filename": "keychains-1.webp"
+      },
+      {
+        "name": "Keychains 2",
+        "image": "/products/categories/keychains/keychains-2.webp",
+        "filename": "keychains-2.webp"
+      },
+      {
+        "name": "Keychains 3",
+        "image": "/products/categories/keychains/keychains-3.webp",
+        "filename": "keychains-3.webp"
+      },
+      {
+        "name": "Keychains 4",
+        "image": "/products/categories/keychains/keychains-4.webp",
+        "filename": "keychains-4.webp"
+      },
+      {
+        "name": "Keychains 5",
+        "image": "/products/categories/keychains/keychains-5.webp",
+        "filename": "keychains-5.webp"
+      }
+    ]
+  },
+  "notebooks": {
+    "name": "Notebooks",
+    "slug": "notebooks",
+    "url": "https://www.trusser.in/category/notebooks",
+    "products": [
+      {
+        "name": "Notebooks 1",
+        "image": "/products/categories/notebooks/notebooks-1.webp",
+        "filename": "notebooks-1.webp"
+      },
+      {
+        "name": "Notebooks 2",
+        "image": "/products/categories/notebooks/notebooks-2.webp",
+        "filename": "notebooks-2.webp"
+      },
+      {
+        "name": "Notebooks 3",
+        "image": "/products/categories/notebooks/notebooks-3.webp",
+        "filename": "notebooks-3.webp"
+      },
+      {
+        "name": "Notebooks 4",
+        "image": "/products/categories/notebooks/notebooks-4.webp",
+        "filename": "notebooks-4.webp"
+      },
+      {
+        "name": "Notebooks 5",
+        "image": "/products/categories/notebooks/notebooks-5.webp",
+        "filename": "notebooks-5.webp"
+      },
+      {
+        "name": "Notebooks 6",
+        "image": "/products/categories/notebooks/notebooks-6.webp",
+        "filename": "notebooks-6.webp"
+      },
+      {
+        "name": "Notebooks 7",
+        "image": "/products/categories/notebooks/notebooks-7.webp",
+        "filename": "notebooks-7.webp"
+      },
+      {
+        "name": "Notebooks 8",
+        "image": "/products/categories/notebooks/notebooks-8.webp",
+        "filename": "notebooks-8.webp"
+      },
+      {
+        "name": "Notebooks 9",
+        "image": "/products/categories/notebooks/notebooks-9.webp",
+        "filename": "notebooks-9.webp"
+      },
+      {
+        "name": "Notebooks 10",
+        "image": "/products/categories/notebooks/notebooks-10.webp",
+        "filename": "notebooks-10.webp"
+      },
+      {
+        "name": "Notebooks 11",
+        "image": "/products/categories/notebooks/notebooks-11.webp",
+        "filename": "notebooks-11.webp"
+      },
+      {
+        "name": "Notebooks 12",
+        "image": "/products/categories/notebooks/notebooks-12.webp",
+        "filename": "notebooks-12.webp"
+      },
+      {
+        "name": "Notebooks 13",
+        "image": "/products/categories/notebooks/notebooks-13.webp",
+        "filename": "notebooks-13.webp"
+      },
+      {
+        "name": "Notebooks 14",
+        "image": "/products/categories/notebooks/notebooks-14.webp",
+        "filename": "notebooks-14.webp"
+      }
+    ]
+  },
+  "pouches": {
+    "name": "Pouches",
+    "slug": "pouches",
+    "url": "https://www.trusser.in/category/pouches",
+    "products": [
+      {
+        "name": "Pouches 1",
+        "image": "/products/categories/pouches/pouches-1.webp",
+        "filename": "pouches-1.webp"
+      },
+      {
+        "name": "Pouches 2",
+        "image": "/products/categories/pouches/pouches-2.webp",
+        "filename": "pouches-2.webp"
+      },
+      {
+        "name": "Pouches 3",
+        "image": "/products/categories/pouches/pouches-3.webp",
+        "filename": "pouches-3.webp"
+      },
+      {
+        "name": "Pouches 4",
+        "image": "/products/categories/pouches/pouches-4.webp",
+        "filename": "pouches-4.webp"
+      },
+      {
+        "name": "Pouches 5",
+        "image": "/products/categories/pouches/pouches-5.webp",
+        "filename": "pouches-5.webp"
+      },
+      {
+        "name": "Pouches 6",
+        "image": "/products/categories/pouches/pouches-6.webp",
+        "filename": "pouches-6.webp"
+      },
+      {
+        "name": "Pouches 7",
+        "image": "/products/categories/pouches/pouches-7.webp",
+        "filename": "pouches-7.webp"
+      },
+      {
+        "name": "Pouches 8",
+        "image": "/products/categories/pouches/pouches-8.webp",
+        "filename": "pouches-8.webp"
+      },
+      {
+        "name": "Pouches 9",
+        "image": "/products/categories/pouches/pouches-9.webp",
+        "filename": "pouches-9.webp"
+      },
+      {
+        "name": "Pouches 10",
+        "image": "/products/categories/pouches/pouches-10.webp",
+        "filename": "pouches-10.webp"
+      },
+      {
+        "name": "Pouches 11",
+        "image": "/products/categories/pouches/pouches-11.webp",
+        "filename": "pouches-11.webp"
+      },
+      {
+        "name": "Pouches 12",
+        "image": "/products/categories/pouches/pouches-12.webp",
+        "filename": "pouches-12.webp"
+      },
+      {
+        "name": "Pouches 13",
+        "image": "/products/categories/pouches/pouches-13.webp",
+        "filename": "pouches-13.webp"
+      },
+      {
+        "name": "Pouches 14",
+        "image": "/products/categories/pouches/pouches-14.webp",
+        "filename": "pouches-14.webp"
+      },
+      {
+        "name": "Pouches 15",
+        "image": "/products/categories/pouches/pouches-15.webp",
+        "filename": "pouches-15.webp"
+      },
+      {
+        "name": "Pouches 16",
+        "image": "/products/categories/pouches/pouches-16.webp",
+        "filename": "pouches-16.webp"
+      },
+      {
+        "name": "Pouches 17",
+        "image": "/products/categories/pouches/pouches-17.webp",
+        "filename": "pouches-17.webp"
+      },
+      {
+        "name": "Pouches 18",
+        "image": "/products/categories/pouches/pouches-18.webp",
+        "filename": "pouches-18.webp"
+      },
+      {
+        "name": "Pouches 19",
+        "image": "/products/categories/pouches/pouches-19.webp",
+        "filename": "pouches-19.webp"
+      },
+      {
+        "name": "Pouches 20",
+        "image": "/products/categories/pouches/pouches-20.webp",
+        "filename": "pouches-20.webp"
+      },
+      {
+        "name": "Pouches 21",
+        "image": "/products/categories/pouches/pouches-21.webp",
+        "filename": "pouches-21.webp"
+      }
+    ]
+  },
+  "files-folders": {
+    "name": "Files Folders",
+    "slug": "files-folders",
+    "url": "https://www.trusser.in/category/files-folders",
+    "products": [
+      {
+        "name": "Files Folders 1",
+        "image": "/products/categories/files-folders/files-folders-1.webp",
+        "filename": "files-folders-1.webp"
+      },
+      {
+        "name": "Files Folders 2",
+        "image": "/products/categories/files-folders/files-folders-2.webp",
+        "filename": "files-folders-2.webp"
+      },
+      {
+        "name": "Files Folders 3",
+        "image": "/products/categories/files-folders/files-folders-3.webp",
+        "filename": "files-folders-3.webp"
+      },
+      {
+        "name": "Files Folders 4",
+        "image": "/products/categories/files-folders/files-folders-4.webp",
+        "filename": "files-folders-4.webp"
+      },
+      {
+        "name": "Files Folders 5",
+        "image": "/products/categories/files-folders/files-folders-5.webp",
+        "filename": "files-folders-5.webp"
+      },
+      {
+        "name": "Files Folders 6",
+        "image": "/products/categories/files-folders/files-folders-6.webp",
+        "filename": "files-folders-6.webp"
+      },
+      {
+        "name": "Files Folders 7",
+        "image": "/products/categories/files-folders/files-folders-7.webp",
+        "filename": "files-folders-7.webp"
+      },
+      {
+        "name": "Files Folders 8",
+        "image": "/products/categories/files-folders/files-folders-8.webp",
+        "filename": "files-folders-8.webp"
+      },
+      {
+        "name": "Files Folders 9",
+        "image": "/products/categories/files-folders/files-folders-9.webp",
+        "filename": "files-folders-9.webp"
+      },
+      {
+        "name": "Files Folders 10",
+        "image": "/products/categories/files-folders/files-folders-10.webp",
+        "filename": "files-folders-10.webp"
+      },
+      {
+        "name": "Files Folders 11",
+        "image": "/products/categories/files-folders/files-folders-11.webp",
+        "filename": "files-folders-11.webp"
+      },
+      {
+        "name": "Files Folders 12",
+        "image": "/products/categories/files-folders/files-folders-12.webp",
+        "filename": "files-folders-12.webp"
+      },
+      {
+        "name": "Files Folders 13",
+        "image": "/products/categories/files-folders/files-folders-13.webp",
+        "filename": "files-folders-13.webp"
+      },
+      {
+        "name": "Files Folders 14",
+        "image": "/products/categories/files-folders/files-folders-14.webp",
+        "filename": "files-folders-14.webp"
+      },
+      {
+        "name": "Files Folders 15",
+        "image": "/products/categories/files-folders/files-folders-15.webp",
+        "filename": "files-folders-15.webp"
+      },
+      {
+        "name": "Files Folders 16",
+        "image": "/products/categories/files-folders/files-folders-16.webp",
+        "filename": "files-folders-16.webp"
+      },
+      {
+        "name": "Files Folders 17",
+        "image": "/products/categories/files-folders/files-folders-17.webp",
+        "filename": "files-folders-17.webp"
+      },
+      {
+        "name": "Files Folders 18",
+        "image": "/products/categories/files-folders/files-folders-18.webp",
+        "filename": "files-folders-18.webp"
+      },
+      {
+        "name": "Files Folders 19",
+        "image": "/products/categories/files-folders/files-folders-19.webp",
+        "filename": "files-folders-19.webp"
+      },
+      {
+        "name": "Files Folders 20",
+        "image": "/products/categories/files-folders/files-folders-20.webp",
+        "filename": "files-folders-20.webp"
+      }
+    ]
+  },
+  "desk-mouse-pads": {
+    "name": "Desk Mouse Pads",
+    "slug": "desk-mouse-pads",
+    "url": "https://www.trusser.in/category/desk-mouse-pads",
+    "products": [
+      {
+        "name": "Desk Mouse Pads 1",
+        "image": "/products/categories/desk-mouse-pads/desk-mouse-pads-1.webp",
+        "filename": "desk-mouse-pads-1.webp"
+      },
+      {
+        "name": "Desk Mouse Pads 2",
+        "image": "/products/categories/desk-mouse-pads/desk-mouse-pads-2.webp",
+        "filename": "desk-mouse-pads-2.webp"
+      },
+      {
+        "name": "Desk Mouse Pads 3",
+        "image": "/products/categories/desk-mouse-pads/desk-mouse-pads-3.webp",
+        "filename": "desk-mouse-pads-3.webp"
+      },
+      {
+        "name": "Desk Mouse Pads 4",
+        "image": "/products/categories/desk-mouse-pads/desk-mouse-pads-4.webp",
+        "filename": "desk-mouse-pads-4.webp"
+      },
+      {
+        "name": "Desk Mouse Pads 5",
+        "image": "/products/categories/desk-mouse-pads/desk-mouse-pads-5.webp",
+        "filename": "desk-mouse-pads-5.webp"
+      }
+    ]
+  },
+  "laptop-sleeves": {
+    "name": "Laptop Sleeves",
+    "slug": "laptop-sleeves",
+    "url": "https://www.trusser.in/category/laptop-sleeves",
+    "products": [
+      {
+        "name": "Laptop Sleeves 1",
+        "image": "/products/categories/laptop-sleeves/laptop-sleeves-1.webp",
+        "filename": "laptop-sleeves-1.webp"
+      },
+      {
+        "name": "Laptop Sleeves 2",
+        "image": "/products/categories/laptop-sleeves/laptop-sleeves-2.webp",
+        "filename": "laptop-sleeves-2.webp"
+      },
+      {
+        "name": "Laptop Sleeves 3",
+        "image": "/products/categories/laptop-sleeves/laptop-sleeves-3.webp",
+        "filename": "laptop-sleeves-3.webp"
+      },
+      {
+        "name": "Laptop Sleeves 4",
+        "image": "/products/categories/laptop-sleeves/laptop-sleeves-4.webp",
+        "filename": "laptop-sleeves-4.webp"
+      },
+      {
+        "name": "Laptop Sleeves 5",
+        "image": "/products/categories/laptop-sleeves/laptop-sleeves-5.webp",
+        "filename": "laptop-sleeves-5.webp"
+      },
+      {
+        "name": "Laptop Sleeves 6",
+        "image": "/products/categories/laptop-sleeves/laptop-sleeves-6.webp",
+        "filename": "laptop-sleeves-6.webp"
+      },
+      {
+        "name": "Laptop Sleeves 7",
+        "image": "/products/categories/laptop-sleeves/laptop-sleeves-7.webp",
+        "filename": "laptop-sleeves-7.webp"
+      },
+      {
+        "name": "Laptop Sleeves 8",
+        "image": "/products/categories/laptop-sleeves/laptop-sleeves-8.webp",
+        "filename": "laptop-sleeves-8.webp"
+      },
+      {
+        "name": "Laptop Sleeves 9",
+        "image": "/products/categories/laptop-sleeves/laptop-sleeves-9.webp",
+        "filename": "laptop-sleeves-9.webp"
+      },
+      {
+        "name": "Laptop Sleeves 10",
+        "image": "/products/categories/laptop-sleeves/laptop-sleeves-10.webp",
+        "filename": "laptop-sleeves-10.webp"
+      },
+      {
+        "name": "Laptop Sleeves 11",
+        "image": "/products/categories/laptop-sleeves/laptop-sleeves-11.webp",
+        "filename": "laptop-sleeves-11.webp"
+      },
+      {
+        "name": "Laptop Sleeves 12",
+        "image": "/products/categories/laptop-sleeves/laptop-sleeves-12.webp",
+        "filename": "laptop-sleeves-12.webp"
+      }
+    ]
+  }
+}

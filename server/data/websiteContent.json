@@ -1,0 +1,91 @@
+{
+  "hero": {
+    "heading": "Turning Waste Into Purpose",
+    "subheading": "Premium stationery & lifestyle goods crafted from recycled bottles. Simple. Sustainable. New.",
+    "ctaText": "Shop Sustainable Goods",
+    "ctaLink": "/shop",
+    "backgroundImage": "/heroimage.webp"
+  },
+  "productShowcase": {
+    "label": "Selected Goods",
+    "heading": "Curated Essentials."
+  },
+  "shopByMood": {
+    "heading": "Shop by Mood",
+    "subheading": "Curated collections for every aspect of your sustainable life."
+  },
+  "instagramFeed": {
+    "embedUrl": "https://www.instagram.com/trussers.co/",
+    "username": "@trussers.co"
+  },
+  "corporateGifting": {
+    "heading": "Corporate & Event Gifting",
+    "description": "Premium sustainable gifts for your corporate events, employee appreciation, and special occasions.",
+    "ctaText": "Explore Corporate Gifting"
+  },
+  "footer": {
+    "aboutText": "Subscribe to receive updates on new sustainable collections, eco-conscious living tips, and exclusive offers.",
+    "phone": "+91 98765 43210",
+    "email": "hello@trusser.in",
+    "address": "Made with \u2665 in India"
+  },
+  "lastSaved": "2025-12-26T05:20:19.338Z",
+  "instagramEmbeds": [
+    {
+      "id": "ig1",
+      "url": "https://www.instagram.com/reel/DL2Tc7yvAdV/",
+      "username": "@authormeghabajaj"
+    },
+    {
+      "id": "ig2",
+      "url": "https://www.instagram.com/reel/DCriab4Sbj-/",
+      "username": "@trusser.in"
+    },
+    {
+      "id": "ig3",
+      "url": "https://www.instagram.com/reel/CwfDXUXJq8K/",
+      "username": "@trusser.in"
+    },
+    {
+      "id": "ig4",
+      "url": "https://www.instagram.com/reel/CxKsKFsLqZK/",
+      "username": "@trusser.in"
+    },
+    {
+      "id": "ig5",
+      "url": "https://www.instagram.com/reel/CwAWXUIIR-P/",
+      "username": "@trusser.in"
+    },
+    {
+      "id": "ig6",
+      "url": "https://www.instagram.com/reel/DARHFn5PTeW/",
+      "username": "@trusser.in"
+    }
+  ],
+  "socialLinks": [
+    {
+      "id": "58p7vl5",
+      "platform": "Instagram",
+      "url": "https://instagram.com/trussers.in",
+      "label": "Instagram"
+    },
+    {
+      "id": "4cahib3",
+      "platform": "Facebook",
+      "url": "https://facebook.com/trussers",
+      "label": "Facebook"
+    },
+    {
+      "id": "8i09pnf",
+      "platform": "Twitter",
+      "url": "https://twitter.com/trussers",
+      "label": "Twitter/X"
+    },
+    {
+      "id": "66pnas4",
+      "platform": "LinkedIn",
+      "url": "https://in.linkedin.com/in/maitri-wadher-246b298b?trk=public_profile_samename-profile&original_referer=https%3A%2F%2Fin.linkedin.com%2Fin%2Fmaitri-wadher-35a7a829a",
+      "label": "LinkedIn"
+    }
+  ]
+}
