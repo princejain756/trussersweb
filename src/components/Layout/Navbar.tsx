@@ -281,7 +281,13 @@ export const Navbar = () => {
                         className="fixed inset-0 z-[60] flex flex-col bg-[#F4EFEC]/95 backdrop-blur-xl lg:hidden"
                     >
                         <div className="flex items-center justify-between p-6">
-                            <span className="font-serif text-2xl font-bold text-[#2D5F3F]">Trussers.</span>
+                            <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="block">
+                                <img
+                                    src={TrusserLogo}
+                                    alt="Trussers"
+                                    className="h-10 w-auto object-contain"
+                                />
+                            </Link>
                             <button
                                 onClick={() => setIsMobileMenuOpen(false)}
                                 className="flex h-10 w-10 items-center justify-center rounded-full bg-black/5 hover:bg-black/10"

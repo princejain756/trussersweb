@@ -75,7 +75,7 @@ export const Footer = () => {
                 {/* Bottom Section */}
                 <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-[#E8DFD4]/10 gap-6">
                     <p className="text-sm text-[#E8DFD4]/40">
-                        &copy; 2024 Trussers Inc. Made with <span className="text-[#C1A17C]">♥</span> in India.
+                        &copy; 2025 Trussers Inc. <a href="https://maninfini.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#C1A17C] transition-colors">Made By Maninfini Automation</a>.
                     </p>
                     <div className="flex gap-8 text-sm text-[#E8DFD4]/40">
                         <a href="#" className="hover:text-[#E8DFD4] transition-colors">Privacy Policy</a>
