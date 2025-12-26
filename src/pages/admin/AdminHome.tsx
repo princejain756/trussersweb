@@ -106,7 +106,7 @@ const StatCard = ({
 
 export const AdminHome = () => {
     const navigate = useNavigate();
-    const [dateRange, setDateRange] = useState('Last 30 days');
+    const [_dateRange, _setDateRange] = useState('Last 30 days');
     const [liveVisitors, setLiveVisitors] = useState(9);
 
     useEffect(() => {
@@ -131,7 +131,7 @@ export const AdminHome = () => {
                 <div className="flex flex-wrap items-center gap-3">
                     <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
                         <Calendar className="w-4 h-4" />
-                        {dateRange}
+                        {_dateRange}
                         <ChevronDown className="w-4 h-4" />
                     </button>
                     <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
@@ -231,8 +231,8 @@ export const AdminHome = () => {
                                     <div className="text-right">
                                         <p className="font-medium text-gray-900 text-sm">{order.amount}</p>
                                         <span className={`text-xs px-2 py-0.5 rounded-full ${order.status === 'Completed' ? 'bg-green-50 text-green-700' :
-                                                order.status === 'Pending' ? 'bg-yellow-50 text-yellow-700' :
-                                                    'bg-blue-50 text-blue-700'
+                                            order.status === 'Pending' ? 'bg-yellow-50 text-yellow-700' :
+                                                'bg-blue-50 text-blue-700'
                                             }`}>
                                             {order.status}
                                         </span>

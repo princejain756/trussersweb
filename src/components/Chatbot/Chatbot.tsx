@@ -2,30 +2,112 @@ import { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, X, Send, ShoppingBag, Mail, Info, ExternalLink } from 'lucide-react';
+import categoriesData from '../../data/categories.json';
 import productsData from '../../data/products.json';
+
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:5174';
 
 // WhatsApp number (replace with actual business number)
 const WHATSAPP_NUMBER = '919876543210';
 
+type ChatProduct = {
+    id: string;
+    name: string;
+    price: string;
+    image: string;
+    category: string;
+};
+
+// Helper to find product from categories by slug ID (e.g. "pouches-1")
+const findProductBySlugId = (slugId: string): ChatProduct | null => {
+    for (const [categorySlug, catData] of Object.entries(categoriesData)) {
+        const categoryData = catData as any;
+        const products = categoryData.products ?? [];
+        for (let idx = 0; idx < products.length; idx++) {
+            if (`${categorySlug}-${idx}` === slugId) {
+                const prod = products[idx];
+                return {
+                    id: slugId,
+                    name: prod.name || 'Product',
+                    price: prod.price || '₹0',
+                    image: prod.image || '',
+                    category: categoryData.name || categorySlug,
+                };
+            }
+        }
+    }
+    return null;
+};
+
+// Helper to find product from products.json by numeric ID
+const findProductByNumericId = (numId: number): ChatProduct | null => {
+    const prod = productsData.find(p => p.id === numId);
+    if (prod) {
+        return {
+            id: String(numId),
+            name: prod.name,
+            price: prod.price,
+            image: prod.image,
+            category: prod.category,
+        };
+    }
+    return null;
+};
+
 export const Chatbot = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [customMessage, setCustomMessage] = useState('');
+    const [product, setProduct] = useState<ChatProduct | null>(null);
     const location = useLocation();
     const isAdminRoute = location.pathname.startsWith('/admin');
+
+    // Extract product ID from URL path
+    const isPDP = location.pathname.startsWith('/product/');
+    const productId = isPDP ? location.pathname.split('/product/')[1] : null;
+
+    // Load product when page changes
+    useEffect(() => {
+        setCustomMessage('');
+        setProduct(null);
+
+        if (!productId) return;
+
+        // Check if numeric ID (try API first, then products.json)
+        const numId = Number(productId);
+        if (!isNaN(numId) && Number.isFinite(numId)) {
+            // Try API first
+            fetch(`${apiBaseUrl}/api/products/${numId}`)
+                .then(res => res.ok ? res.json() : null)
+                .then(data => {
+                    if (data) {
+                        setProduct({
+                            id: String(numId),
+                            name: data.name,
+                            price: typeof data.price === 'number' ? `₹${data.price}` : data.price,
+                            image: data.image,
+                            category: data.category || '',
+                        });
+                    } else {
+                        // Fall back to products.json
+                        const found = findProductByNumericId(numId);
+                        if (found) setProduct(found);
+                    }
+                })
+                .catch(() => {
+                    // Fall back to products.json
+                    const found = findProductByNumericId(numId);
+                    if (found) setProduct(found);
+                });
+        } else {
+            // Slug-based ID - use categories.json
+            const found = findProductBySlugId(productId);
+            if (found) setProduct(found);
+        }
+    }, [location.pathname, productId]);
 
     if (isAdminRoute) {
         return null;
     }
-
-    // Extract product ID from URL path directly (since useParams doesn't work outside Routes)
-    const isPDP = location.pathname.startsWith('/product/');
-    const productId = isPDP ? location.pathname.split('/product/')[1] : null;
-    const product = productId ? productsData.find(p => p.id === Number(productId)) : null;
-
-    // Reset custom message when navigating to different pages or products
-    useEffect(() => {
-        setCustomMessage('');
-    }, [location.pathname]);
 
     // Generate WhatsApp link
     const getWhatsAppLink = (extraMessage?: string) => {
@@ -110,7 +192,7 @@ export const Chatbot = () => {
                                         <div>
                                             <h4 className="font-serif font-semibold text-[#1A3C27] line-clamp-2">{product.name}</h4>
                                             <p className="text-[#C1A17C] font-medium mt-1">{product.price}</p>
-                                            <span className="inline-block mt-1 px-2 py-0.5 text-xs bg-[#2D5F3F] text-white rounded">{product.tag}</span>
+                                            <span className="inline-block mt-1 px-2 py-0.5 text-xs bg-[#2D5F3F] text-white rounded">{product.category}</span>
                                         </div>
                                     </div>
 

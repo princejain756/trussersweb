@@ -90,7 +90,7 @@ const getStoredToken = () => {
     return window.localStorage.getItem('adminToken');
 };
 
-const buildAuthHeaders = () => {
+const buildAuthHeaders = (): Record<string, string> => {
     const token = getStoredToken();
     return token ? { 'X-Admin-Key': token } : {};
 };

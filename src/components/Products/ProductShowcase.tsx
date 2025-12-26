@@ -81,7 +81,7 @@ export const ProductShowcase = () => {
                                         />
                                         <div className="absolute top-4 left-4 z-10">
                                             <span className="bg-white/90 px-3 py-1.5 text-xs font-bold uppercase tracking-wider backdrop-blur-md text-[#1A3C27]">
-                                                {product.tag}
+                                                {product.category}
                                             </span>
                                         </div>
                                         <button className="absolute right-4 top-4 z-10 rounded-full bg-white/90 p-2.5 text-[#1A3C27] opacity-0 transition-opacity hover:bg-white group-hover:opacity-100 dark:hover:text-red-500">

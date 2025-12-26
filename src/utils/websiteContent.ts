@@ -111,7 +111,7 @@ export const fetchWebsiteContent = async (): Promise<WebsiteContent> => {
         if (response.ok) {
             const data = await response.json();
             cachedContent = { ...DEFAULT_CONTENT, ...data };
-            return cachedContent;
+            return cachedContent!;
         }
     } catch {
         // Fall back to defaults
@@ -138,7 +138,7 @@ export const saveWebsiteContent = async (content: Partial<WebsiteContent>): Prom
 
     const updated = await response.json();
     cachedContent = { ...DEFAULT_CONTENT, ...updated };
-    return cachedContent;
+    return cachedContent!;
 };
 
 export const resetWebsiteContent = async (): Promise<WebsiteContent> => {

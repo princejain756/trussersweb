@@ -8,18 +8,13 @@ import {
     Search,
     Filter,
     Download,
-    MoreVertical,
     Calendar,
     ChevronDown,
-    Eye,
     MessageSquare,
     Package,
     Truck,
     CheckCircle2,
-    XCircle,
     Clock,
-    AlertCircle,
-    RotateCcw,
 } from 'lucide-react';
 
 // Order Types
@@ -352,8 +347,8 @@ export const Orders = () => {
                             key={tab}
                             onClick={() => setActiveTab(tab)}
                             className={`px-4 py-3 text-sm font-medium whitespace-nowrap border-b-2 transition-colors ${activeTab === tab
-                                    ? 'border-gray-900 text-gray-900'
-                                    : 'border-transparent text-gray-500 hover:text-gray-700'
+                                ? 'border-gray-900 text-gray-900'
+                                : 'border-transparent text-gray-500 hover:text-gray-700'
                                 }`}
                         >
                             {tab}

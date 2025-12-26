@@ -108,7 +108,7 @@ export const ProductDetail = () => {
                 for (const [categorySlug, catData] of Object.entries(categorySource)) {
                     const categoryData = catData as any;
                     const productIndex = (categoryData.products ?? []).findIndex(
-                        (p: any, idx: number) => `${categorySlug}-${idx}` === id
+                        (_p: any, idx: number) => `${categorySlug}-${idx}` === id
                     );
 
                     if (productIndex !== -1) {
