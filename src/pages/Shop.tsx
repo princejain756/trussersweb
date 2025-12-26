@@ -1,33 +1,213 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Navbar } from '../components/Layout/Navbar';
 import { Footer } from '../components/Layout/Footer';
 import { ProductCard } from '../components/UI/ProductCard';
 import { Button } from '../components/UI/Button';
-import { Search, ArrowDown } from 'lucide-react';
+import { Search, ArrowDown, Filter } from 'lucide-react';
+import categoriesData from '../data/categories.json';
 import productsData from '../data/products.json';
+import { useSearchParams } from 'react-router-dom';
+
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:5174';
+
+const slugify = (value: string) =>
+    value
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-');
+
+type ShopProduct = {
+    id: string | number;
+    name: string;
+    image: string;
+    category: string;
+    categorySlug: string;
+    price: string | number;
+    tag?: string;
+};
+
+type CategoryData = {
+    name?: string;
+    products?: Array<{
+        name?: string;
+        image?: string;
+        price?: string | number;
+        tag?: string;
+    }>;
+};
 
 export const Shop = () => {
+    const [searchParams] = useSearchParams();
     const [searchQuery, setSearchQuery] = useState('');
-    const [selectedCategory, setSelectedCategory] = useState('All');
+    const [selectedCategory, setSelectedCategory] = useState('all');
     const [visibleCount, setVisibleCount] = useState(12);
+    const [catalogProducts, setCatalogProducts] = useState<ShopProduct[]>([]);
+    const [categoryData, setCategoryData] = useState<Record<string, CategoryData>>(
+        categoriesData as Record<string, CategoryData>
+    );
 
-    // Extract unique categories (if we had categories, for now we use 'New' from tag, or just 'All')
-    // In a real app, products would have a 'category' field.
-    const categories = ['All', 'New', 'Best Sellers', 'Accessories'];
+    // Handle search query from URL parameter
+    useEffect(() => {
+        const urlSearchQuery = searchParams.get('search');
+        setSearchQuery(urlSearchQuery ?? '');
+    }, [searchParams]);
+
+    useEffect(() => {
+        let isActive = true;
+
+        const loadCatalog = async () => {
+            try {
+                const response = await fetch(`${apiBaseUrl}/api/products`);
+                if (!response.ok) {
+                    throw new Error('Failed to load catalog');
+                }
+                const data = (await response.json()) as Array<{
+                    id: number;
+                    name: string;
+                    image: string;
+                    price: string | number;
+                    tag?: string;
+                    category?: string;
+                }>;
+                if (!isActive) {
+                    return;
+                }
+                const normalized = data.map((product) => {
+                    const categoryName = product.category?.trim() || 'Catalog';
+                    return {
+                        id: product.id,
+                        name: product.name,
+                        image: product.image,
+                        category: categoryName,
+                        categorySlug: slugify(categoryName) || 'catalog',
+                        price: product.price,
+                        tag: product.tag,
+                    };
+                });
+                setCatalogProducts(normalized);
+            } catch (error) {
+                if (!isActive) {
+                    return;
+                }
+                const fallback = (productsData as Array<{
+                    id: number;
+                    name: string;
+                    image: string;
+                    price: string | number;
+                    tag?: string;
+                    category?: string;
+                }>).map((product) => {
+                    const categoryName = product.category?.trim() || 'Catalog';
+                    return {
+                        id: product.id,
+                        name: product.name,
+                        image: product.image,
+                        category: categoryName,
+                        categorySlug: slugify(categoryName) || 'catalog',
+                        price: product.price,
+                        tag: product.tag,
+                    };
+                });
+                setCatalogProducts(fallback);
+            }
+        };
+
+        loadCatalog();
+
+        return () => {
+            isActive = false;
+        };
+    }, []);
+
+    useEffect(() => {
+        let isActive = true;
+
+        const loadCategories = async () => {
+            try {
+                const response = await fetch(`${apiBaseUrl}/api/categories`);
+                if (!response.ok) {
+                    throw new Error('Failed to load categories');
+                }
+                const data = (await response.json()) as Record<string, CategoryData>;
+                if (!isActive) {
+                    return;
+                }
+                setCategoryData(data ?? {});
+            } catch (error) {
+                if (!isActive) {
+                    return;
+                }
+                setCategoryData(categoriesData as Record<string, CategoryData>);
+            }
+        };
+
+        loadCategories();
+
+        return () => {
+            isActive = false;
+        };
+    }, []);
+
+    // Get all products from all categories
+    const categoryProducts = useMemo<ShopProduct[]>(() => {
+        const products: ShopProduct[] = [];
+        Object.entries(categoryData).forEach(([categorySlug, catData]) => {
+            const items = catData.products ?? [];
+            items.forEach((product, index) => {
+                const rawPrice = product.price;
+                const price =
+                    typeof rawPrice === 'number'
+                        ? rawPrice
+                        : typeof rawPrice === 'string' && rawPrice.trim().length > 0
+                            ? rawPrice
+                            : 'Price on request';
+                products.push({
+                    id: `${categorySlug}-${index}`,
+                    name: product.name ?? `${catData.name ?? categorySlug} ${index + 1}`,
+                    image: product.image ?? '/heroimage.webp',
+                    category: catData.name ?? categorySlug,
+                    categorySlug,
+                    price,
+                    tag: product.tag ?? (index < 3 ? 'New' : undefined),
+                });
+            });
+        });
+        return products;
+    }, [categoryData]);
+
+    const allProducts = useMemo(() => {
+        return [...catalogProducts, ...categoryProducts];
+    }, [catalogProducts, categoryProducts]);
+
+    const categories = useMemo(() => {
+        const totals = new Map<string, { slug: string; name: string; count: number }>();
+        allProducts.forEach((product) => {
+            const slug = product.categorySlug;
+            const name = product.category;
+            const current = totals.get(slug);
+            if (current) {
+                current.count += 1;
+            } else {
+                totals.set(slug, { slug, name, count: 1 });
+            }
+        });
+        const cats = Array.from(totals.values()).sort((a, b) => a.name.localeCompare(b.name));
+        const totalCount = cats.reduce((sum, cat) => sum + cat.count, 0);
+        return [{ slug: 'all', name: 'All Products', count: totalCount }, ...cats];
+    }, [allProducts]);
 
     const filteredProducts = useMemo(() => {
-        return productsData.filter(product => {
-            const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase());
-            // Since we don't have explicit categories in JSON other than 'tag: New', 
-            // we'll just simulate category filtering or ignore it for now unless tag matches
-            const matchesCategory = selectedCategory === 'All' ||
-                (selectedCategory === 'New' && product.tag === 'New') ||
-                true; // Default to true for mocked categories
+        return allProducts.filter(product => {
+            const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                                 product.category.toLowerCase().includes(searchQuery.toLowerCase());
+            const matchesCategory = selectedCategory === 'all' || product.categorySlug === selectedCategory;
 
             return matchesSearch && matchesCategory;
         });
-    }, [searchQuery, selectedCategory]);
+    }, [searchQuery, selectedCategory, allProducts]);
 
     const visibleProducts = filteredProducts.slice(0, visibleCount);
 
@@ -71,36 +251,54 @@ export const Shop = () => {
                 </section>
 
                 {/* Filters & Search - Sticky Header */}
-                <div className="sticky top-20 z-40 bg-[#F4EFEC]/80 backdrop-blur-md border-b border-[#D4C5B5]">
+                <div className="sticky top-20 z-40 bg-[#F4EFEC]/95 backdrop-blur-md border-b border-[#D4C5B5] shadow-sm">
                     <div className="mx-auto max-w-[1920px] px-6 lg:px-12 py-4">
-                        <div className="flex flex-col md:flex-row gap-4 justify-between items-center">
-                            {/* Categories */}
-                            <div className="flex gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 scrollbar-hide">
-                                {categories.map(cat => (
-                                    <button
-                                        key={cat}
-                                        onClick={() => setSelectedCategory(cat)}
-                                        className={`px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap ${selectedCategory === cat
-                                                ? 'bg-[#1A3C27] text-white'
-                                                : 'bg-white text-[#1A3C27] hover:bg-[#E8DFD4]'
+                        <div className="flex flex-col lg:flex-row gap-4 justify-between items-start lg:items-center">
+                            {/* Categories Filter */}
+                            <div className="w-full lg:w-auto">
+                                <div className="flex items-center gap-2 mb-3">
+                                    <Filter size={18} className="text-[#1A3C27]" />
+                                    <span className="text-sm font-semibold text-[#1A3C27]">Categories</span>
+                                </div>
+                                <div className="flex gap-2 overflow-x-auto w-full pb-2 scrollbar-hide">
+                                    {categories.map(cat => (
+                                        <button
+                                            key={cat.slug}
+                                            onClick={() => {
+                                                setSelectedCategory(cat.slug);
+                                                setVisibleCount(12);
+                                            }}
+                                            className={`px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap flex items-center gap-2 ${
+                                                selectedCategory === cat.slug
+                                                    ? 'bg-[#1A3C27] text-white shadow-md'
+                                                    : 'bg-white text-[#1A3C27] hover:bg-[#E8DFD4] border border-[#D4C5B5]'
                                             }`}
-                                    >
-                                        {cat}
-                                    </button>
-                                ))}
+                                        >
+                                            {cat.name}
+                                            <span className={`text-xs ${selectedCategory === cat.slug ? 'text-white/70' : 'text-[#5C5C5C]'}`}>
+                                                ({cat.count})
+                                            </span>
+                                        </button>
+                                    ))}
+                                </div>
                             </div>
 
                             {/* Search */}
-                            <div className="relative w-full md:w-80">
+                            <div className="relative w-full lg:w-80">
                                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#5C5C5C]" size={20} />
                                 <input
                                     type="text"
                                     placeholder="Search products..."
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
-                                    className="w-full pl-10 pr-4 py-2.5 rounded-full bg-white border border-transparent focus:border-[#1A3C27] focus:outline-none transition-all placeholder:text-[#5C5C5C]/50 text-[#1A3C27]"
+                                    className="w-full pl-10 pr-4 py-2.5 rounded-full bg-white border border-[#D4C5B5] focus:border-[#1A3C27] focus:outline-none focus:ring-2 focus:ring-[#1A3C27]/20 transition-all placeholder:text-[#5C5C5C]/50 text-[#1A3C27]"
                                 />
                             </div>
+                        </div>
+
+                        {/* Results count */}
+                        <div className="mt-3 text-sm text-[#5C5C5C]">
+                            Showing {Math.min(visibleCount, filteredProducts.length)} of {filteredProducts.length} products
                         </div>
                     </div>
                 </div>

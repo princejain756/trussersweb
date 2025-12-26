@@ -6,6 +6,7 @@ import { ShopByMood } from '../components/Home/ShopByMood';
 import { ProductShowcase } from '../components/Products/ProductShowcase';
 import { CorporateGifting } from '../components/Home/CorporateGifting';
 import { ImpactDashboard } from '../components/Home/ImpactDashboard';
+import { InstagramFeed } from '../components/Home/InstagramFeed';
 import { Footer } from '../components/Layout/Footer';
 
 export const Home = () => {
@@ -19,6 +20,7 @@ export const Home = () => {
                 <ProductShowcase />
                 <CorporateGifting />
                 <ImpactDashboard />
+                <InstagramFeed />
             </main>
             <Footer />
         </div>

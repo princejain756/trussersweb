@@ -2,9 +2,11 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { Button } from '../UI/Button';
 import { Leaf, ArrowRight } from 'lucide-react';
 import { useRef } from 'react';
+import { getWebsiteContent } from '../../utils/websiteContent';
 
 export const HeroSection = () => {
     const containerRef = useRef<HTMLDivElement>(null);
+    const content = getWebsiteContent();
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start start", "end start"]
@@ -62,9 +64,9 @@ export const HeroSection = () => {
                                 }}
                             >
                                 <img
-                                    src="/heroimage.webp"
-                                    alt="Turning Waste Into Purpose"
-                                    className="h-auto w-full max-h-[450px] object-contain drop-shadow-2xl lg:max-h-[580px] xl:max-h-[650px]"
+                                    src={content.hero.backgroundImage}
+                                    alt={content.hero.heading}
+                                    className="h-auto w-full max-h-[585px] object-contain drop-shadow-2xl lg:max-h-[754px] xl:max-h-[845px]"
                                 />
                             </motion.div>
                         </motion.div>
@@ -85,9 +87,9 @@ export const HeroSection = () => {
                                     transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
                                     className="font-serif text-5xl font-bold leading-[1.1] tracking-tight text-[#1A3C27] sm:text-6xl lg:text-7xl xl:text-8xl"
                                 >
-                                    <span className="block">Turning Waste</span>
+                                    <span className="block">{content.hero.heading.split(' ').slice(0, 2).join(' ')}</span>
                                     <span className="block bg-gradient-to-r from-[#2D5F3F] to-[#4A8B60] bg-clip-text text-transparent">
-                                        Into Purpose.
+                                        {content.hero.heading.split(' ').slice(2).join(' ') || 'Into Purpose.'}
                                     </span>
                                 </motion.h1>
                             </div>
@@ -99,8 +101,7 @@ export const HeroSection = () => {
                                 transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
                                 className="mb-10 text-lg font-medium leading-relaxed text-[#5C5C5C] sm:text-xl lg:max-w-xl"
                             >
-                                Premium stationery & lifestyle goods crafted from recycled bottles.
-                                <span className="block mt-1 text-[#2D5F3F]">Simple. Sustainable. New.</span>
+                                {content.hero.subheading}
                             </motion.p>
 
                             {/* Buttons */}
@@ -114,10 +115,10 @@ export const HeroSection = () => {
                                     size="lg"
                                     className="group relative overflow-hidden rounded-full bg-[#2D5F3F] px-8 py-4 text-base font-semibold text-white shadow-[0_10px_30px_-10px_rgba(45,95,63,0.4)] transition-all hover:scale-105 hover:bg-[#234A32] hover:shadow-[0_20px_40px_-10px_rgba(45,95,63,0.5)] active:scale-95"
                                 >
-                                    <span className="relative z-10 flex items-center gap-2">
-                                        Shop Sustainable Goods
+                                    <a href={content.hero.ctaLink} className="relative z-10 flex items-center gap-2">
+                                        {content.hero.ctaText}
                                         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                                    </span>
+                                    </a>
                                 </Button>
                                 <Button
                                     size="lg"

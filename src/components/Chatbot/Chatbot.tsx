@@ -11,6 +11,11 @@ export const Chatbot = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [customMessage, setCustomMessage] = useState('');
     const location = useLocation();
+    const isAdminRoute = location.pathname.startsWith('/admin');
+
+    if (isAdminRoute) {
+        return null;
+    }
 
     // Extract product ID from URL path directly (since useParams doesn't work outside Routes)
     const isPDP = location.pathname.startsWith('/product/');

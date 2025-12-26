@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
+import { getWebsiteContent } from '../../utils/websiteContent';
 
 const categories = [
     {
@@ -29,6 +30,8 @@ const categories = [
 ];
 
 export const ShopByMood = () => {
+    const content = getWebsiteContent();
+
     return (
         <section className="py-24 lg:py-32 bg-white">
             <div className="mx-auto max-w-[1920px] px-6 lg:px-12">
@@ -39,10 +42,10 @@ export const ShopByMood = () => {
                             whileInView={{ y: 0, opacity: 1 }}
                             className="font-serif text-5xl md:text-7xl text-[#1A3C27]"
                         >
-                            Shop by Mood
+                            {content.shopByMood.heading}
                         </motion.h2>
                         <p className="mt-4 text-lg text-[#5C5C5C]">
-                            Curated collections for every aspect of your sustainable life.
+                            {content.shopByMood.subheading}
                         </p>
                     </div>
                     <button className="group flex items-center gap-2 border-b border-[#2D5F3F] pb-1 font-medium text-[#2D5F3F] transition-all hover:gap-4 hover:border-[#C1A17C] hover:text-[#C1A17C]">

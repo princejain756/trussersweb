@@ -1,6 +1,9 @@
 import { ArrowRight } from 'lucide-react';
+import { getWebsiteContent } from '../../utils/websiteContent';
 
 export const Footer = () => {
+    const content = getWebsiteContent();
+
     return (
         <footer className="bg-[#1A3C27] text-[#E8DFD4] overflow-hidden">
             <div className="mx-auto max-w-[1920px] px-6 lg:px-12 pt-24 pb-12">
@@ -13,7 +16,7 @@ export const Footer = () => {
                             <span className="text-[#C1A17C]">Movement.</span>
                         </h2>
                         <p className="text-xl text-[#E8DFD4]/70 max-w-md mb-8 leading-relaxed">
-                            Subscribe to receive updates on new sustainable collections, eco-conscious living tips, and exclusive offers.
+                            {content.footer.aboutText}
                         </p>
 
                         <form className="flex max-w-md items-center border-b border-[#E8DFD4]/30 focus-within:border-[#C1A17C] transition-colors pb-4">
@@ -52,10 +55,18 @@ export const Footer = () => {
                         <div className="flex flex-col gap-6">
                             <h4 className="font-serif text-xl text-white">Social</h4>
                             <ul className="flex flex-col gap-4 text-[#E8DFD4]/60">
-                                <li><a href="#" className="hover:text-[#C1A17C] transition-colors">Instagram</a></li>
-                                <li><a href="#" className="hover:text-[#C1A17C] transition-colors">Facebook</a></li>
-                                <li><a href="#" className="hover:text-[#C1A17C] transition-colors">Twitter/X</a></li>
-                                <li><a href="#" className="hover:text-[#C1A17C] transition-colors">LinkedIn</a></li>
+                                {(content.socialLinks || []).map((link) => (
+                                    <li key={link.id}>
+                                        <a
+                                            href={link.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="hover:text-[#C1A17C] transition-colors"
+                                        >
+                                            {link.label}
+                                        </a>
+                                    </li>
+                                ))}
                             </ul>
                         </div>
                     </div>

@@ -1,0 +1,1733 @@
+{
+  "categorized": {
+    "tote-bags": {
+      "name": "Tote Bags",
+      "slug": "tote-bags",
+      "products": [
+        {
+          "name": "Carry Bag Korean",
+          "image": "/products/carry-bag-korean.jpg",
+          "filename": "carry-bag-korean.jpg"
+        },
+        {
+          "name": "Carry Bag Korean",
+          "image": "/products/carry-bag-korean.webp",
+          "filename": "carry-bag-korean.webp"
+        },
+        {
+          "name": "Carry Bag Leaf",
+          "image": "/products/carry-bag-leaf.jpg",
+          "filename": "carry-bag-leaf.jpg"
+        },
+        {
+          "name": "Carry Bag Leaf",
+          "image": "/products/carry-bag-leaf.webp",
+          "filename": "carry-bag-leaf.webp"
+        },
+        {
+          "name": "Carry Bag Planet",
+          "image": "/products/carry-bag-planet.jpg",
+          "filename": "carry-bag-planet.jpg"
+        },
+        {
+          "name": "Carry Bag Planet",
+          "image": "/products/carry-bag-planet.webp",
+          "filename": "carry-bag-planet.webp"
+        },
+        {
+          "name": "Carry Bag Summer",
+          "image": "/products/carry-bag-summer.jpg",
+          "filename": "carry-bag-summer.jpg"
+        },
+        {
+          "name": "Carry Bag Summer",
+          "image": "/products/carry-bag-summer.webp",
+          "filename": "carry-bag-summer.webp"
+        }
+      ]
+    },
+    "corporate-gift-sets": {
+      "name": "Corporate Gift Sets",
+      "slug": "corporate-gift-sets",
+      "products": [
+        {
+          "name": "Pixie Gallop Gift Set",
+          "image": "/products/pixie-gallop-gift-set.png",
+          "filename": "pixie-gallop-gift-set.png"
+        },
+        {
+          "name": "Pixie Gallop Gift Set",
+          "image": "/products/pixie-gallop-gift-set.webp",
+          "filename": "pixie-gallop-gift-set.webp"
+        },
+        {
+          "name": "The Little Explorer Gift Set",
+          "image": "/products/the-little-explorer-gift-set.png",
+          "filename": "the-little-explorer-gift-set.png"
+        },
+        {
+          "name": "The Little Explorer Gift Set",
+          "image": "/products/the-little-explorer-gift-set.webp",
+          "filename": "the-little-explorer-gift-set.webp"
+        }
+      ]
+    },
+    "women-gift-sets": {
+      "name": "Women Gift Sets",
+      "slug": "women-gift-sets",
+      "products": []
+    },
+    "kids-gifts-set": {
+      "name": "Kids Gifts Set",
+      "slug": "kids-gifts-set",
+      "products": [
+        {
+          "name": "Enjoy The Little Things",
+          "image": "/products/enjoy-the-little-things.jpg",
+          "filename": "enjoy-the-little-things.jpg"
+        },
+        {
+          "name": "Enjoy The Little Things",
+          "image": "/products/enjoy-the-little-things.webp",
+          "filename": "enjoy-the-little-things.webp"
+        },
+        {
+          "name": "Mermaid Life",
+          "image": "/products/mermaid-life.png",
+          "filename": "mermaid-life.png"
+        },
+        {
+          "name": "Mermaid Life",
+          "image": "/products/mermaid-life.webp",
+          "filename": "mermaid-life.webp"
+        },
+        {
+          "name": "Mermaid Squad",
+          "image": "/products/mermaid-squad.png",
+          "filename": "mermaid-squad.png"
+        },
+        {
+          "name": "Mermaid Squad",
+          "image": "/products/mermaid-squad.webp",
+          "filename": "mermaid-squad.webp"
+        },
+        {
+          "name": "Panda",
+          "image": "/products/panda.png",
+          "filename": "panda.png"
+        },
+        {
+          "name": "Panda",
+          "image": "/products/panda.webp",
+          "filename": "panda.webp"
+        },
+        {
+          "name": "Sparkle Like A Unicorn",
+          "image": "/products/sparkle-like-a-unicorn.png",
+          "filename": "sparkle-like-a-unicorn.png"
+        },
+        {
+          "name": "Sparkle Like A Unicorn",
+          "image": "/products/sparkle-like-a-unicorn.webp",
+          "filename": "sparkle-like-a-unicorn.webp"
+        },
+        {
+          "name": "Unicorn Notebook",
+          "image": "/products/unicorn-notebook.png",
+          "filename": "unicorn-notebook.png"
+        },
+        {
+          "name": "Unicorn Notebook",
+          "image": "/products/unicorn-notebook.webp",
+          "filename": "unicorn-notebook.webp"
+        },
+        {
+          "name": "Unicorn Spiral Art Pouch",
+          "image": "/products/unicorn-spiral-art-pouch.png",
+          "filename": "unicorn-spiral-art-pouch.png"
+        },
+        {
+          "name": "Unicorn Spiral Art Pouch",
+          "image": "/products/unicorn-spiral-art-pouch.webp",
+          "filename": "unicorn-spiral-art-pouch.webp"
+        },
+        {
+          "name": "Unicorn Spiral Pencil Pouch 1",
+          "image": "/products/unicorn-spiral-pencil-pouch-1.png",
+          "filename": "unicorn-spiral-pencil-pouch-1.png"
+        },
+        {
+          "name": "Unicorn Spiral Pencil Pouch 1",
+          "image": "/products/unicorn-spiral-pencil-pouch-1.webp",
+          "filename": "unicorn-spiral-pencil-pouch-1.webp"
+        },
+        {
+          "name": "Unicorn Spiral Pouch",
+          "image": "/products/unicorn-spiral-pouch.png",
+          "filename": "unicorn-spiral-pouch.png"
+        },
+        {
+          "name": "Unicorn Spiral Pouch",
+          "image": "/products/unicorn-spiral-pouch.webp",
+          "filename": "unicorn-spiral-pouch.webp"
+        }
+      ]
+    },
+    "bottles": {
+      "name": "Bottles",
+      "slug": "bottles",
+      "products": [
+        {
+          "name": "Animal Water Bottle Bag",
+          "image": "/products/animal-water-bottle-bag.jpg",
+          "filename": "animal-water-bottle-bag.jpg"
+        },
+        {
+          "name": "Animal Water Bottle Bag",
+          "image": "/products/animal-water-bottle-bag.webp",
+          "filename": "animal-water-bottle-bag.webp"
+        },
+        {
+          "name": "Breathe Water Bottle Bag",
+          "image": "/products/breathe-water-bottle-bag.jpg",
+          "filename": "breathe-water-bottle-bag.jpg"
+        },
+        {
+          "name": "Breathe Water Bottle Bag",
+          "image": "/products/breathe-water-bottle-bag.webp",
+          "filename": "breathe-water-bottle-bag.webp"
+        },
+        {
+          "name": "Colorful Stripes Bottle Holder",
+          "image": "/products/colorful-stripes-bottle-holder.jpg",
+          "filename": "colorful-stripes-bottle-holder.jpg"
+        },
+        {
+          "name": "Colorful Stripes Bottle Holder",
+          "image": "/products/colorful-stripes-bottle-holder.webp",
+          "filename": "colorful-stripes-bottle-holder.webp"
+        },
+        {
+          "name": "Colorful Water Bottle Bag",
+          "image": "/products/colorful-water-bottle-bag.jpg",
+          "filename": "colorful-water-bottle-bag.jpg"
+        },
+        {
+          "name": "Colorful Water Bottle Bag",
+          "image": "/products/colorful-water-bottle-bag.webp",
+          "filename": "colorful-water-bottle-bag.webp"
+        },
+        {
+          "name": "Funky Green And Pink Bottle Holder",
+          "image": "/products/funky-green-and-pink-bottle-holder.jpg",
+          "filename": "funky-green-and-pink-bottle-holder.jpg"
+        },
+        {
+          "name": "Funky Green And Pink Bottle Holder",
+          "image": "/products/funky-green-and-pink-bottle-holder.webp",
+          "filename": "funky-green-and-pink-bottle-holder.webp"
+        },
+        {
+          "name": "Imagination Water Bottle Bag",
+          "image": "/products/imagination-water-bottle-bag.jpg",
+          "filename": "imagination-water-bottle-bag.jpg"
+        },
+        {
+          "name": "Imagination Water Bottle Bag",
+          "image": "/products/imagination-water-bottle-bag.webp",
+          "filename": "imagination-water-bottle-bag.webp"
+        },
+        {
+          "name": "Leaf Water Bottle Bag",
+          "image": "/products/leaf-water-bottle-bag.jpg",
+          "filename": "leaf-water-bottle-bag.jpg"
+        },
+        {
+          "name": "Leaf Water Bottle Bag",
+          "image": "/products/leaf-water-bottle-bag.webp",
+          "filename": "leaf-water-bottle-bag.webp"
+        },
+        {
+          "name": "Navy Blue Bottle Holder",
+          "image": "/products/navy-blue-bottle-holder.jpg",
+          "filename": "navy-blue-bottle-holder.jpg"
+        },
+        {
+          "name": "Navy Blue Bottle Holder",
+          "image": "/products/navy-blue-bottle-holder.webp",
+          "filename": "navy-blue-bottle-holder.webp"
+        },
+        {
+          "name": "Pastel Green Mandala Bottle Holder",
+          "image": "/products/pastel-green-mandala-bottle-holder.jpg",
+          "filename": "pastel-green-mandala-bottle-holder.jpg"
+        },
+        {
+          "name": "Pastel Green Mandala Bottle Holder",
+          "image": "/products/pastel-green-mandala-bottle-holder.webp",
+          "filename": "pastel-green-mandala-bottle-holder.webp"
+        },
+        {
+          "name": "Retro Stripes Bottle Holder",
+          "image": "/products/retro-stripes-bottle-holder.jpg",
+          "filename": "retro-stripes-bottle-holder.jpg"
+        },
+        {
+          "name": "Retro Stripes Bottle Holder",
+          "image": "/products/retro-stripes-bottle-holder.webp",
+          "filename": "retro-stripes-bottle-holder.webp"
+        },
+        {
+          "name": "T150B",
+          "image": "/products/t150b.jpg",
+          "filename": "t150b.jpg"
+        },
+        {
+          "name": "T150B",
+          "image": "/products/t150b.webp",
+          "filename": "t150b.webp"
+        }
+      ]
+    },
+    "bottle-bags": {
+      "name": "Bottle Bags",
+      "slug": "bottle-bags",
+      "products": []
+    },
+    "festive-bags": {
+      "name": "Festive Bags",
+      "slug": "festive-bags",
+      "products": [
+        {
+          "name": "Baby Shower Bag",
+          "image": "/products/baby-shower-bag.jpg",
+          "filename": "baby-shower-bag.jpg"
+        },
+        {
+          "name": "Baby Shower Bag",
+          "image": "/products/baby-shower-bag.webp",
+          "filename": "baby-shower-bag.webp"
+        },
+        {
+          "name": "Blue Wedding Bag",
+          "image": "/products/blue-wedding-bag.jpg",
+          "filename": "blue-wedding-bag.jpg"
+        },
+        {
+          "name": "Blue Wedding Bag",
+          "image": "/products/blue-wedding-bag.webp",
+          "filename": "blue-wedding-bag.webp"
+        },
+        {
+          "name": "Festive Event Bag",
+          "image": "/products/festive-event-bag.jpg",
+          "filename": "festive-event-bag.jpg"
+        },
+        {
+          "name": "Festive Event Bag",
+          "image": "/products/festive-event-bag.webp",
+          "filename": "festive-event-bag.webp"
+        },
+        {
+          "name": "Gift Bag 01",
+          "image": "/products/gift-bag-01.jpg",
+          "filename": "gift-bag-01.jpg"
+        },
+        {
+          "name": "Gift Bag 01",
+          "image": "/products/gift-bag-01.webp",
+          "filename": "gift-bag-01.webp"
+        },
+        {
+          "name": "Gift Bag 02",
+          "image": "/products/gift-bag-02.jpg",
+          "filename": "gift-bag-02.jpg"
+        },
+        {
+          "name": "Gift Bag 02",
+          "image": "/products/gift-bag-02.webp",
+          "filename": "gift-bag-02.webp"
+        },
+        {
+          "name": "Gift Bag 03",
+          "image": "/products/gift-bag-03.jpg",
+          "filename": "gift-bag-03.jpg"
+        },
+        {
+          "name": "Gift Bag 03",
+          "image": "/products/gift-bag-03.webp",
+          "filename": "gift-bag-03.webp"
+        },
+        {
+          "name": "Gift Bag 06",
+          "image": "/products/gift-bag-06.jpg",
+          "filename": "gift-bag-06.jpg"
+        },
+        {
+          "name": "Gift Bag 06",
+          "image": "/products/gift-bag-06.webp",
+          "filename": "gift-bag-06.webp"
+        },
+        {
+          "name": "Gift Bag 08",
+          "image": "/products/gift-bag-08.jpg",
+          "filename": "gift-bag-08.jpg"
+        },
+        {
+          "name": "Gift Bag 08",
+          "image": "/products/gift-bag-08.webp",
+          "filename": "gift-bag-08.webp"
+        },
+        {
+          "name": "Gift Bag 1",
+          "image": "/products/gift-bag-1.jpg",
+          "filename": "gift-bag-1.jpg"
+        },
+        {
+          "name": "Gift Bag 1",
+          "image": "/products/gift-bag-1.webp",
+          "filename": "gift-bag-1.webp"
+        },
+        {
+          "name": "Gift Bag 10",
+          "image": "/products/gift-bag-10.jpg",
+          "filename": "gift-bag-10.jpg"
+        },
+        {
+          "name": "Gift Bag 10",
+          "image": "/products/gift-bag-10.webp",
+          "filename": "gift-bag-10.webp"
+        },
+        {
+          "name": "Gift Bag 11",
+          "image": "/products/gift-bag-11.jpg",
+          "filename": "gift-bag-11.jpg"
+        },
+        {
+          "name": "Gift Bag 11",
+          "image": "/products/gift-bag-11.webp",
+          "filename": "gift-bag-11.webp"
+        },
+        {
+          "name": "Gift Bag 12",
+          "image": "/products/gift-bag-12.jpg",
+          "filename": "gift-bag-12.jpg"
+        },
+        {
+          "name": "Gift Bag 12",
+          "image": "/products/gift-bag-12.webp",
+          "filename": "gift-bag-12.webp"
+        },
+        {
+          "name": "Gift Bag 14",
+          "image": "/products/gift-bag-14.jpg",
+          "filename": "gift-bag-14.jpg"
+        },
+        {
+          "name": "Gift Bag 14",
+          "image": "/products/gift-bag-14.webp",
+          "filename": "gift-bag-14.webp"
+        },
+        {
+          "name": "Gift Bag 15",
+          "image": "/products/gift-bag-15.jpg",
+          "filename": "gift-bag-15.jpg"
+        },
+        {
+          "name": "Gift Bag 15",
+          "image": "/products/gift-bag-15.webp",
+          "filename": "gift-bag-15.webp"
+        },
+        {
+          "name": "Gift Bag 16",
+          "image": "/products/gift-bag-16.jpg",
+          "filename": "gift-bag-16.jpg"
+        },
+        {
+          "name": "Gift Bag 16",
+          "image": "/products/gift-bag-16.webp",
+          "filename": "gift-bag-16.webp"
+        },
+        {
+          "name": "Gift Bag 18",
+          "image": "/products/gift-bag-18.jpg",
+          "filename": "gift-bag-18.jpg"
+        },
+        {
+          "name": "Gift Bag 18",
+          "image": "/products/gift-bag-18.webp",
+          "filename": "gift-bag-18.webp"
+        },
+        {
+          "name": "Gift Bag 19",
+          "image": "/products/gift-bag-19.jpg",
+          "filename": "gift-bag-19.jpg"
+        },
+        {
+          "name": "Gift Bag 19",
+          "image": "/products/gift-bag-19.webp",
+          "filename": "gift-bag-19.webp"
+        },
+        {
+          "name": "Gift Bag 2",
+          "image": "/products/gift-bag-2.jpg",
+          "filename": "gift-bag-2.jpg"
+        },
+        {
+          "name": "Gift Bag 2",
+          "image": "/products/gift-bag-2.webp",
+          "filename": "gift-bag-2.webp"
+        },
+        {
+          "name": "Gift Bag 20",
+          "image": "/products/gift-bag-20.jpg",
+          "filename": "gift-bag-20.jpg"
+        },
+        {
+          "name": "Gift Bag 20",
+          "image": "/products/gift-bag-20.webp",
+          "filename": "gift-bag-20.webp"
+        },
+        {
+          "name": "Gift Bag 21",
+          "image": "/products/gift-bag-21.jpg",
+          "filename": "gift-bag-21.jpg"
+        },
+        {
+          "name": "Gift Bag 21",
+          "image": "/products/gift-bag-21.webp",
+          "filename": "gift-bag-21.webp"
+        },
+        {
+          "name": "Gift Bag 22",
+          "image": "/products/gift-bag-22.jpg",
+          "filename": "gift-bag-22.jpg"
+        },
+        {
+          "name": "Gift Bag 22",
+          "image": "/products/gift-bag-22.webp",
+          "filename": "gift-bag-22.webp"
+        },
+        {
+          "name": "Gift Bag 23",
+          "image": "/products/gift-bag-23.jpg",
+          "filename": "gift-bag-23.jpg"
+        },
+        {
+          "name": "Gift Bag 23",
+          "image": "/products/gift-bag-23.webp",
+          "filename": "gift-bag-23.webp"
+        },
+        {
+          "name": "Gift Bag 24",
+          "image": "/products/gift-bag-24.jpg",
+          "filename": "gift-bag-24.jpg"
+        },
+        {
+          "name": "Gift Bag 24",
+          "image": "/products/gift-bag-24.webp",
+          "filename": "gift-bag-24.webp"
+        },
+        {
+          "name": "Gift Bag 25",
+          "image": "/products/gift-bag-25.jpg",
+          "filename": "gift-bag-25.jpg"
+        },
+        {
+          "name": "Gift Bag 25",
+          "image": "/products/gift-bag-25.webp",
+          "filename": "gift-bag-25.webp"
+        },
+        {
+          "name": "Gift Bag 26",
+          "image": "/products/gift-bag-26.jpg",
+          "filename": "gift-bag-26.jpg"
+        },
+        {
+          "name": "Gift Bag 26",
+          "image": "/products/gift-bag-26.webp",
+          "filename": "gift-bag-26.webp"
+        },
+        {
+          "name": "Gift Bag 28",
+          "image": "/products/gift-bag-28.jpg",
+          "filename": "gift-bag-28.jpg"
+        },
+        {
+          "name": "Gift Bag 28",
+          "image": "/products/gift-bag-28.webp",
+          "filename": "gift-bag-28.webp"
+        },
+        {
+          "name": "Gift Bag 29",
+          "image": "/products/gift-bag-29.jpg",
+          "filename": "gift-bag-29.jpg"
+        },
+        {
+          "name": "Gift Bag 29",
+          "image": "/products/gift-bag-29.webp",
+          "filename": "gift-bag-29.webp"
+        },
+        {
+          "name": "Gift Bag 3",
+          "image": "/products/gift-bag-3.jpg",
+          "filename": "gift-bag-3.jpg"
+        },
+        {
+          "name": "Gift Bag 3",
+          "image": "/products/gift-bag-3.webp",
+          "filename": "gift-bag-3.webp"
+        },
+        {
+          "name": "Gift Bag 30",
+          "image": "/products/gift-bag-30.jpg",
+          "filename": "gift-bag-30.jpg"
+        },
+        {
+          "name": "Gift Bag 30",
+          "image": "/products/gift-bag-30.webp",
+          "filename": "gift-bag-30.webp"
+        },
+        {
+          "name": "Gift Bag 31",
+          "image": "/products/gift-bag-31.jpg",
+          "filename": "gift-bag-31.jpg"
+        },
+        {
+          "name": "Gift Bag 31",
+          "image": "/products/gift-bag-31.webp",
+          "filename": "gift-bag-31.webp"
+        },
+        {
+          "name": "Gift Bag 32",
+          "image": "/products/gift-bag-32.jpg",
+          "filename": "gift-bag-32.jpg"
+        },
+        {
+          "name": "Gift Bag 32",
+          "image": "/products/gift-bag-32.webp",
+          "filename": "gift-bag-32.webp"
+        },
+        {
+          "name": "Gift Bag 33",
+          "image": "/products/gift-bag-33.jpg",
+          "filename": "gift-bag-33.jpg"
+        },
+        {
+          "name": "Gift Bag 33",
+          "image": "/products/gift-bag-33.webp",
+          "filename": "gift-bag-33.webp"
+        },
+        {
+          "name": "Gift Bag 34",
+          "image": "/products/gift-bag-34.jpg",
+          "filename": "gift-bag-34.jpg"
+        },
+        {
+          "name": "Gift Bag 34",
+          "image": "/products/gift-bag-34.webp",
+          "filename": "gift-bag-34.webp"
+        },
+        {
+          "name": "Gift Bag 35",
+          "image": "/products/gift-bag-35.jpeg",
+          "filename": "gift-bag-35.jpeg"
+        },
+        {
+          "name": "Gift Bag 35",
+          "image": "/products/gift-bag-35.jpg",
+          "filename": "gift-bag-35.jpg"
+        },
+        {
+          "name": "Gift Bag 35",
+          "image": "/products/gift-bag-35.webp",
+          "filename": "gift-bag-35.webp"
+        },
+        {
+          "name": "Gift Bag 90",
+          "image": "/products/gift-bag-90.jpg",
+          "filename": "gift-bag-90.jpg"
+        },
+        {
+          "name": "Gift Bag 90",
+          "image": "/products/gift-bag-90.webp",
+          "filename": "gift-bag-90.webp"
+        },
+        {
+          "name": "Gift Bag Blue Print",
+          "image": "/products/gift-bag-blue-print.jpg",
+          "filename": "gift-bag-blue-print.jpg"
+        },
+        {
+          "name": "Gift Bag Blue Print",
+          "image": "/products/gift-bag-blue-print.webp",
+          "filename": "gift-bag-blue-print.webp"
+        },
+        {
+          "name": "Gift Bag Blue",
+          "image": "/products/gift-bag-blue.jpg",
+          "filename": "gift-bag-blue.jpg"
+        },
+        {
+          "name": "Gift Bag Blue",
+          "image": "/products/gift-bag-blue.webp",
+          "filename": "gift-bag-blue.webp"
+        },
+        {
+          "name": "Gift Bag Cherry Blossom",
+          "image": "/products/gift-bag-cherry-blossom.jpg",
+          "filename": "gift-bag-cherry-blossom.jpg"
+        },
+        {
+          "name": "Gift Bag Cherry Blossom",
+          "image": "/products/gift-bag-cherry-blossom.webp",
+          "filename": "gift-bag-cherry-blossom.webp"
+        },
+        {
+          "name": "Gift Bag Flamingo",
+          "image": "/products/gift-bag-flamingo.jpg",
+          "filename": "gift-bag-flamingo.jpg"
+        },
+        {
+          "name": "Gift Bag Flamingo",
+          "image": "/products/gift-bag-flamingo.webp",
+          "filename": "gift-bag-flamingo.webp"
+        },
+        {
+          "name": "Gift Bag Lemon",
+          "image": "/products/gift-bag-lemon.jpg",
+          "filename": "gift-bag-lemon.jpg"
+        },
+        {
+          "name": "Gift Bag Lemon",
+          "image": "/products/gift-bag-lemon.webp",
+          "filename": "gift-bag-lemon.webp"
+        },
+        {
+          "name": "Gift Bag Maroon Design",
+          "image": "/products/gift-bag-maroon-design.jpg",
+          "filename": "gift-bag-maroon-design.jpg"
+        },
+        {
+          "name": "Gift Bag Maroon Design",
+          "image": "/products/gift-bag-maroon-design.webp",
+          "filename": "gift-bag-maroon-design.webp"
+        },
+        {
+          "name": "Gift Bag More Dogs",
+          "image": "/products/gift-bag-more-dogs.jpg",
+          "filename": "gift-bag-more-dogs.jpg"
+        },
+        {
+          "name": "Gift Bag More Dogs",
+          "image": "/products/gift-bag-more-dogs.webp",
+          "filename": "gift-bag-more-dogs.webp"
+        },
+        {
+          "name": "Gift Bag Traditional",
+          "image": "/products/gift-bag-traditional.jpg",
+          "filename": "gift-bag-traditional.jpg"
+        },
+        {
+          "name": "Gift Bag Traditional",
+          "image": "/products/gift-bag-traditional.webp",
+          "filename": "gift-bag-traditional.webp"
+        },
+        {
+          "name": "Gift Bag",
+          "image": "/products/gift-bag.jpg",
+          "filename": "gift-bag.jpg"
+        },
+        {
+          "name": "Gift Bag",
+          "image": "/products/gift-bag.webp",
+          "filename": "gift-bag.webp"
+        },
+        {
+          "name": "Gift Bags 13",
+          "image": "/products/gift-bags-13.jpg",
+          "filename": "gift-bags-13.jpg"
+        },
+        {
+          "name": "Gift Bags 13",
+          "image": "/products/gift-bags-13.webp",
+          "filename": "gift-bags-13.webp"
+        },
+        {
+          "name": "Gift Bags Tropical",
+          "image": "/products/gift-bags-tropical.jpg",
+          "filename": "gift-bags-tropical.jpg"
+        },
+        {
+          "name": "Gift Bags Tropical",
+          "image": "/products/gift-bags-tropical.webp",
+          "filename": "gift-bags-tropical.webp"
+        },
+        {
+          "name": "Gift Bags Village",
+          "image": "/products/gift-bags-village.jpg",
+          "filename": "gift-bags-village.jpg"
+        },
+        {
+          "name": "Gift Bags Village",
+          "image": "/products/gift-bags-village.webp",
+          "filename": "gift-bags-village.webp"
+        },
+        {
+          "name": "Gift Bags",
+          "image": "/products/gift-bags.jpg",
+          "filename": "gift-bags.jpg"
+        },
+        {
+          "name": "Gift Bags",
+          "image": "/products/gift-bags.webp",
+          "filename": "gift-bags.webp"
+        },
+        {
+          "name": "Indian Wedding Bag",
+          "image": "/products/indian-wedding-bag.jpg",
+          "filename": "indian-wedding-bag.jpg"
+        },
+        {
+          "name": "Indian Wedding Bag",
+          "image": "/products/indian-wedding-bag.webp",
+          "filename": "indian-wedding-bag.webp"
+        },
+        {
+          "name": "Marriage Bag",
+          "image": "/products/marriage-bag.jpg",
+          "filename": "marriage-bag.jpg"
+        },
+        {
+          "name": "Marriage Bag",
+          "image": "/products/marriage-bag.webp",
+          "filename": "marriage-bag.webp"
+        },
+        {
+          "name": "Pink Thank You Bag",
+          "image": "/products/pink-thank-you-bag.jpg",
+          "filename": "pink-thank-you-bag.jpg"
+        },
+        {
+          "name": "Pink Thank You Bag",
+          "image": "/products/pink-thank-you-bag.webp",
+          "filename": "pink-thank-you-bag.webp"
+        },
+        {
+          "name": "Royal Wedding Bag",
+          "image": "/products/royal-wedding-bag.jpg",
+          "filename": "royal-wedding-bag.jpg"
+        },
+        {
+          "name": "Royal Wedding Bag",
+          "image": "/products/royal-wedding-bag.webp",
+          "filename": "royal-wedding-bag.webp"
+        },
+        {
+          "name": "Save The Date Bag",
+          "image": "/products/save-the-date-bag.jpg",
+          "filename": "save-the-date-bag.jpg"
+        },
+        {
+          "name": "Save The Date Bag",
+          "image": "/products/save-the-date-bag.webp",
+          "filename": "save-the-date-bag.webp"
+        },
+        {
+          "name": "Thank You Bag",
+          "image": "/products/thank-you-bag.jpg",
+          "filename": "thank-you-bag.jpg"
+        },
+        {
+          "name": "Thank You Bag",
+          "image": "/products/thank-you-bag.webp",
+          "filename": "thank-you-bag.webp"
+        },
+        {
+          "name": "Traditional Thank You Bag",
+          "image": "/products/traditional-thank-you-bag.jpg",
+          "filename": "traditional-thank-you-bag.jpg"
+        },
+        {
+          "name": "Traditional Thank You Bag",
+          "image": "/products/traditional-thank-you-bag.webp",
+          "filename": "traditional-thank-you-bag.webp"
+        }
+      ]
+    },
+    "posters": {
+      "name": "Posters",
+      "slug": "posters",
+      "products": []
+    },
+    "laundry-bags": {
+      "name": "Laundry Bags",
+      "slug": "laundry-bags",
+      "products": []
+    },
+    "table-mat-coasters": {
+      "name": "Table Mat Coasters",
+      "slug": "table-mat-coasters",
+      "products": [
+        {
+          "name": "Botanic Mandala Placemats",
+          "image": "/products/botanic-mandala-placemats.jpg",
+          "filename": "botanic-mandala-placemats.jpg"
+        },
+        {
+          "name": "Botanic Mandala Placemats",
+          "image": "/products/botanic-mandala-placemats.webp",
+          "filename": "botanic-mandala-placemats.webp"
+        },
+        {
+          "name": "Eco Foliage Placemat Set Of 6",
+          "image": "/products/eco-foliage-placemat-set-of-6.jpg",
+          "filename": "eco-foliage-placemat-set-of-6.jpg"
+        },
+        {
+          "name": "Eco Foliage Placemat Set Of 6",
+          "image": "/products/eco-foliage-placemat-set-of-6.webp",
+          "filename": "eco-foliage-placemat-set-of-6.webp"
+        },
+        {
+          "name": "Eco Tropic Placemats Set Of 6",
+          "image": "/products/eco-tropic-placemats-set-of-6.jpg",
+          "filename": "eco-tropic-placemats-set-of-6.jpg"
+        },
+        {
+          "name": "Eco Tropic Placemats Set Of 6",
+          "image": "/products/eco-tropic-placemats-set-of-6.webp",
+          "filename": "eco-tropic-placemats-set-of-6.webp"
+        },
+        {
+          "name": "Red Bloom Placemat Set Of 6",
+          "image": "/products/red-bloom-placemat-set-of-6.jpg",
+          "filename": "red-bloom-placemat-set-of-6.jpg"
+        },
+        {
+          "name": "Red Bloom Placemat Set Of 6",
+          "image": "/products/red-bloom-placemat-set-of-6.webp",
+          "filename": "red-bloom-placemat-set-of-6.webp"
+        }
+      ]
+    },
+    "cash-pouches": {
+      "name": "Cash Pouches",
+      "slug": "cash-pouches",
+      "products": [
+        {
+          "name": "Blue Green Cash Pouch",
+          "image": "/products/blue-green-cash-pouch.png",
+          "filename": "blue-green-cash-pouch.png"
+        },
+        {
+          "name": "Blue Green Cash Pouch",
+          "image": "/products/blue-green-cash-pouch.webp",
+          "filename": "blue-green-cash-pouch.webp"
+        },
+        {
+          "name": "Colorful Cash Pouch",
+          "image": "/products/colorful-cash-pouch.png",
+          "filename": "colorful-cash-pouch.png"
+        },
+        {
+          "name": "Colorful Cash Pouch",
+          "image": "/products/colorful-cash-pouch.webp",
+          "filename": "colorful-cash-pouch.webp"
+        },
+        {
+          "name": "Floral Cash Pouch",
+          "image": "/products/floral-cash-pouch.png",
+          "filename": "floral-cash-pouch.png"
+        },
+        {
+          "name": "Floral Cash Pouch",
+          "image": "/products/floral-cash-pouch.webp",
+          "filename": "floral-cash-pouch.webp"
+        },
+        {
+          "name": "Mandala Design Cash Pouch",
+          "image": "/products/mandala-design-cash-pouch.png",
+          "filename": "mandala-design-cash-pouch.png"
+        },
+        {
+          "name": "Mandala Design Cash Pouch",
+          "image": "/products/mandala-design-cash-pouch.webp",
+          "filename": "mandala-design-cash-pouch.webp"
+        },
+        {
+          "name": "Purple Cash Pouch",
+          "image": "/products/purple-cash-pouch.png",
+          "filename": "purple-cash-pouch.png"
+        },
+        {
+          "name": "Purple Cash Pouch",
+          "image": "/products/purple-cash-pouch.webp",
+          "filename": "purple-cash-pouch.webp"
+        }
+      ]
+    },
+    "luggage-tags": {
+      "name": "Luggage Tags",
+      "slug": "luggage-tags",
+      "products": []
+    },
+    "picnic-bags": {
+      "name": "Picnic Bags",
+      "slug": "picnic-bags",
+      "products": [
+        {
+          "name": "Sustainable Caddy Bags",
+          "image": "/products/sustainable-caddy-bags.jpg",
+          "filename": "sustainable-caddy-bags.jpg"
+        },
+        {
+          "name": "Sustainable Caddy Bags",
+          "image": "/products/sustainable-caddy-bags.webp",
+          "filename": "sustainable-caddy-bags.webp"
+        }
+      ]
+    },
+    "passport-holders": {
+      "name": "Passport Holders",
+      "slug": "passport-holders",
+      "products": []
+    },
+    "keychains": {
+      "name": "Keychains",
+      "slug": "keychains",
+      "products": []
+    },
+    "notebooks": {
+      "name": "Notebooks",
+      "slug": "notebooks",
+      "products": [
+        {
+          "name": "Make It Notebook 1",
+          "image": "/products/make-it-notebook-1.png",
+          "filename": "make-it-notebook-1.png"
+        },
+        {
+          "name": "Make It Notebook 1",
+          "image": "/products/make-it-notebook-1.webp",
+          "filename": "make-it-notebook-1.webp"
+        },
+        {
+          "name": "Make It Notebook",
+          "image": "/products/make-it-notebook.jpg",
+          "filename": "make-it-notebook.jpg"
+        },
+        {
+          "name": "Make It Notebook",
+          "image": "/products/make-it-notebook.webp",
+          "filename": "make-it-notebook.webp"
+        }
+      ]
+    },
+    "pouches": {
+      "name": "Pouches",
+      "slug": "pouches",
+      "products": [
+        {
+          "name": "Abstract Art Pouch",
+          "image": "/products/abstract-art-pouch.png",
+          "filename": "abstract-art-pouch.png"
+        },
+        {
+          "name": "Abstract Art Pouch",
+          "image": "/products/abstract-art-pouch.webp",
+          "filename": "abstract-art-pouch.webp"
+        },
+        {
+          "name": "Abstract Pencil Pouch",
+          "image": "/products/abstract-pencil-pouch.png",
+          "filename": "abstract-pencil-pouch.png"
+        },
+        {
+          "name": "Abstract Pencil Pouch",
+          "image": "/products/abstract-pencil-pouch.webp",
+          "filename": "abstract-pencil-pouch.webp"
+        },
+        {
+          "name": "Abstract Pouch",
+          "image": "/products/abstract-pouch.png",
+          "filename": "abstract-pouch.png"
+        },
+        {
+          "name": "Abstract Pouch",
+          "image": "/products/abstract-pouch.webp",
+          "filename": "abstract-pouch.webp"
+        },
+        {
+          "name": "Abstract Zig Zag Art Pouch",
+          "image": "/products/abstract-zig-zag-art-pouch.png",
+          "filename": "abstract-zig-zag-art-pouch.png"
+        },
+        {
+          "name": "Abstract Zig Zag Art Pouch",
+          "image": "/products/abstract-zig-zag-art-pouch.webp",
+          "filename": "abstract-zig-zag-art-pouch.webp"
+        },
+        {
+          "name": "Abstract Zig Zag Pencil Pouch",
+          "image": "/products/abstract-zig-zag-pencil-pouch.png",
+          "filename": "abstract-zig-zag-pencil-pouch.png"
+        },
+        {
+          "name": "Abstract Zig Zag Pencil Pouch",
+          "image": "/products/abstract-zig-zag-pencil-pouch.webp",
+          "filename": "abstract-zig-zag-pencil-pouch.webp"
+        },
+        {
+          "name": "Autumn 3 Art Pouch",
+          "image": "/products/autumn-3-art-pouch.png",
+          "filename": "autumn-3-art-pouch.png"
+        },
+        {
+          "name": "Autumn 3 Art Pouch",
+          "image": "/products/autumn-3-art-pouch.webp",
+          "filename": "autumn-3-art-pouch.webp"
+        },
+        {
+          "name": "Autumn 3 Pencil Pouch",
+          "image": "/products/autumn-3-pencil-pouch.png",
+          "filename": "autumn-3-pencil-pouch.png"
+        },
+        {
+          "name": "Autumn 3 Pencil Pouch",
+          "image": "/products/autumn-3-pencil-pouch.webp",
+          "filename": "autumn-3-pencil-pouch.webp"
+        },
+        {
+          "name": "Autumn 3 Pouch",
+          "image": "/products/autumn-3-pouch.png",
+          "filename": "autumn-3-pouch.png"
+        },
+        {
+          "name": "Autumn 3 Pouch",
+          "image": "/products/autumn-3-pouch.webp",
+          "filename": "autumn-3-pouch.webp"
+        },
+        {
+          "name": "Autumn Art Pouch",
+          "image": "/products/autumn-art-pouch.png",
+          "filename": "autumn-art-pouch.png"
+        },
+        {
+          "name": "Autumn Art Pouch",
+          "image": "/products/autumn-art-pouch.webp",
+          "filename": "autumn-art-pouch.webp"
+        },
+        {
+          "name": "Autumn Pencil Pouch",
+          "image": "/products/autumn-pencil-pouch.png",
+          "filename": "autumn-pencil-pouch.png"
+        },
+        {
+          "name": "Autumn Pencil Pouch",
+          "image": "/products/autumn-pencil-pouch.webp",
+          "filename": "autumn-pencil-pouch.webp"
+        },
+        {
+          "name": "Autumn Pouch",
+          "image": "/products/autumn-pouch.png",
+          "filename": "autumn-pouch.png"
+        },
+        {
+          "name": "Autumn Pouch",
+          "image": "/products/autumn-pouch.webp",
+          "filename": "autumn-pouch.webp"
+        },
+        {
+          "name": "Bandini Art Pouch",
+          "image": "/products/bandini-art-pouch.png",
+          "filename": "bandini-art-pouch.png"
+        },
+        {
+          "name": "Bandini Art Pouch",
+          "image": "/products/bandini-art-pouch.webp",
+          "filename": "bandini-art-pouch.webp"
+        },
+        {
+          "name": "Bandini Pencil Pouch",
+          "image": "/products/bandini-pencil-pouch.png",
+          "filename": "bandini-pencil-pouch.png"
+        },
+        {
+          "name": "Bandini Pencil Pouch",
+          "image": "/products/bandini-pencil-pouch.webp",
+          "filename": "bandini-pencil-pouch.webp"
+        },
+        {
+          "name": "Bandini Pouch",
+          "image": "/products/bandini-pouch.png",
+          "filename": "bandini-pouch.png"
+        },
+        {
+          "name": "Bandini Pouch",
+          "image": "/products/bandini-pouch.webp",
+          "filename": "bandini-pouch.webp"
+        },
+        {
+          "name": "Blue And White Stripes Art Pouch",
+          "image": "/products/blue-and-white-stripes-art-pouch.png",
+          "filename": "blue-and-white-stripes-art-pouch.png"
+        },
+        {
+          "name": "Blue And White Stripes Art Pouch",
+          "image": "/products/blue-and-white-stripes-art-pouch.webp",
+          "filename": "blue-and-white-stripes-art-pouch.webp"
+        },
+        {
+          "name": "Blue And White Stripes Pencil Pouch",
+          "image": "/products/blue-and-white-stripes-pencil-pouch.png",
+          "filename": "blue-and-white-stripes-pencil-pouch.png"
+        },
+        {
+          "name": "Blue And White Stripes Pencil Pouch",
+          "image": "/products/blue-and-white-stripes-pencil-pouch.webp",
+          "filename": "blue-and-white-stripes-pencil-pouch.webp"
+        },
+        {
+          "name": "Blue And White Stripes Pouch",
+          "image": "/products/blue-and-white-stripes-pouch.png",
+          "filename": "blue-and-white-stripes-pouch.png"
+        },
+        {
+          "name": "Blue And White Stripes Pouch",
+          "image": "/products/blue-and-white-stripes-pouch.webp",
+          "filename": "blue-and-white-stripes-pouch.webp"
+        },
+        {
+          "name": "Colorful Abstract Art Pouch",
+          "image": "/products/colorful-abstract-art-pouch.png",
+          "filename": "colorful-abstract-art-pouch.png"
+        },
+        {
+          "name": "Colorful Abstract Art Pouch",
+          "image": "/products/colorful-abstract-art-pouch.webp",
+          "filename": "colorful-abstract-art-pouch.webp"
+        },
+        {
+          "name": "Colorful Abstract Pencil Pouch",
+          "image": "/products/colorful-abstract-pencil-pouch.png",
+          "filename": "colorful-abstract-pencil-pouch.png"
+        },
+        {
+          "name": "Colorful Abstract Pencil Pouch",
+          "image": "/products/colorful-abstract-pencil-pouch.webp",
+          "filename": "colorful-abstract-pencil-pouch.webp"
+        },
+        {
+          "name": "Colorful Abstract Pouch",
+          "image": "/products/colorful-abstract-pouch.png",
+          "filename": "colorful-abstract-pouch.png"
+        },
+        {
+          "name": "Colorful Abstract Pouch",
+          "image": "/products/colorful-abstract-pouch.webp",
+          "filename": "colorful-abstract-pouch.webp"
+        },
+        {
+          "name": "Colorful Spiral Art Pouch",
+          "image": "/products/colorful-spiral-art-pouch.png",
+          "filename": "colorful-spiral-art-pouch.png"
+        },
+        {
+          "name": "Colorful Spiral Art Pouch",
+          "image": "/products/colorful-spiral-art-pouch.webp",
+          "filename": "colorful-spiral-art-pouch.webp"
+        },
+        {
+          "name": "Colorful Spiral Pencil Pouch 1",
+          "image": "/products/colorful-spiral-pencil-pouch-1.png",
+          "filename": "colorful-spiral-pencil-pouch-1.png"
+        },
+        {
+          "name": "Colorful Spiral Pencil Pouch 1",
+          "image": "/products/colorful-spiral-pencil-pouch-1.webp",
+          "filename": "colorful-spiral-pencil-pouch-1.webp"
+        },
+        {
+          "name": "Colorful Spiral Pouch",
+          "image": "/products/colorful-spiral-pouch.png",
+          "filename": "colorful-spiral-pouch.png"
+        },
+        {
+          "name": "Colorful Spiral Pouch",
+          "image": "/products/colorful-spiral-pouch.webp",
+          "filename": "colorful-spiral-pouch.webp"
+        },
+        {
+          "name": "Colorful Triangle Red Document Pouch",
+          "image": "/products/colorful-triangle-red-document-pouch.png",
+          "filename": "colorful-triangle-red-document-pouch.png"
+        },
+        {
+          "name": "Colorful Triangle Red Document Pouch",
+          "image": "/products/colorful-triangle-red-document-pouch.webp",
+          "filename": "colorful-triangle-red-document-pouch.webp"
+        },
+        {
+          "name": "Floral Art Pouch",
+          "image": "/products/floral-art-pouch.png",
+          "filename": "floral-art-pouch.png"
+        },
+        {
+          "name": "Floral Art Pouch",
+          "image": "/products/floral-art-pouch.webp",
+          "filename": "floral-art-pouch.webp"
+        },
+        {
+          "name": "Floral Pencil Pouch",
+          "image": "/products/floral-pencil-pouch.png",
+          "filename": "floral-pencil-pouch.png"
+        },
+        {
+          "name": "Floral Pencil Pouch",
+          "image": "/products/floral-pencil-pouch.webp",
+          "filename": "floral-pencil-pouch.webp"
+        },
+        {
+          "name": "Floral Pouch",
+          "image": "/products/floral-pouch.png",
+          "filename": "floral-pouch.png"
+        },
+        {
+          "name": "Floral Pouch",
+          "image": "/products/floral-pouch.webp",
+          "filename": "floral-pouch.webp"
+        },
+        {
+          "name": "Geometric Blue Document Pouch",
+          "image": "/products/geometric-blue-document-pouch.png",
+          "filename": "geometric-blue-document-pouch.png"
+        },
+        {
+          "name": "Geometric Blue Document Pouch",
+          "image": "/products/geometric-blue-document-pouch.webp",
+          "filename": "geometric-blue-document-pouch.webp"
+        },
+        {
+          "name": "Green Fabric Print Art Pouch",
+          "image": "/products/green-fabric-print-art-pouch.png",
+          "filename": "green-fabric-print-art-pouch.png"
+        },
+        {
+          "name": "Green Fabric Print Art Pouch",
+          "image": "/products/green-fabric-print-art-pouch.webp",
+          "filename": "green-fabric-print-art-pouch.webp"
+        },
+        {
+          "name": "Green Fabric Print Pencil Pouch",
+          "image": "/products/green-fabric-print-pencil-pouch.png",
+          "filename": "green-fabric-print-pencil-pouch.png"
+        },
+        {
+          "name": "Green Fabric Print Pencil Pouch",
+          "image": "/products/green-fabric-print-pencil-pouch.webp",
+          "filename": "green-fabric-print-pencil-pouch.webp"
+        },
+        {
+          "name": "Green Fabric Print Pouch",
+          "image": "/products/green-fabric-print-pouch.png",
+          "filename": "green-fabric-print-pouch.png"
+        },
+        {
+          "name": "Green Fabric Print Pouch",
+          "image": "/products/green-fabric-print-pouch.webp",
+          "filename": "green-fabric-print-pouch.webp"
+        },
+        {
+          "name": "Green Yellow Document Pouch",
+          "image": "/products/green-yellow-document-pouch.png",
+          "filename": "green-yellow-document-pouch.png"
+        },
+        {
+          "name": "Green Yellow Document Pouch",
+          "image": "/products/green-yellow-document-pouch.webp",
+          "filename": "green-yellow-document-pouch.webp"
+        },
+        {
+          "name": "Helophelia Art Pouch",
+          "image": "/products/helophelia-art-pouch.png",
+          "filename": "helophelia-art-pouch.png"
+        },
+        {
+          "name": "Helophelia Art Pouch",
+          "image": "/products/helophelia-art-pouch.webp",
+          "filename": "helophelia-art-pouch.webp"
+        },
+        {
+          "name": "Helophelia Pencil Pouch 1",
+          "image": "/products/helophelia-pencil-pouch-1.png",
+          "filename": "helophelia-pencil-pouch-1.png"
+        },
+        {
+          "name": "Helophelia Pencil Pouch 1",
+          "image": "/products/helophelia-pencil-pouch-1.webp",
+          "filename": "helophelia-pencil-pouch-1.webp"
+        },
+        {
+          "name": "Helophelia Pouch",
+          "image": "/products/helophelia-pouch.png",
+          "filename": "helophelia-pouch.png"
+        },
+        {
+          "name": "Helophelia Pouch",
+          "image": "/products/helophelia-pouch.webp",
+          "filename": "helophelia-pouch.webp"
+        },
+        {
+          "name": "Leaf Art Pouch",
+          "image": "/products/leaf-art-pouch.png",
+          "filename": "leaf-art-pouch.png"
+        },
+        {
+          "name": "Leaf Art Pouch",
+          "image": "/products/leaf-art-pouch.webp",
+          "filename": "leaf-art-pouch.webp"
+        },
+        {
+          "name": "Leaf Pencil Pouch 1",
+          "image": "/products/leaf-pencil-pouch-1.png",
+          "filename": "leaf-pencil-pouch-1.png"
+        },
+        {
+          "name": "Leaf Pencil Pouch 1",
+          "image": "/products/leaf-pencil-pouch-1.webp",
+          "filename": "leaf-pencil-pouch-1.webp"
+        },
+        {
+          "name": "Leaf Pouch",
+          "image": "/products/leaf-pouch.png",
+          "filename": "leaf-pouch.png"
+        },
+        {
+          "name": "Leaf Pouch",
+          "image": "/products/leaf-pouch.webp",
+          "filename": "leaf-pouch.webp"
+        },
+        {
+          "name": "Peepal Leaf Document Pouch",
+          "image": "/products/peepal-leaf-document-pouch.png",
+          "filename": "peepal-leaf-document-pouch.png"
+        },
+        {
+          "name": "Peepal Leaf Document Pouch",
+          "image": "/products/peepal-leaf-document-pouch.webp",
+          "filename": "peepal-leaf-document-pouch.webp"
+        },
+        {
+          "name": "Pineapple Art Pouch",
+          "image": "/products/pineapple-art-pouch.png",
+          "filename": "pineapple-art-pouch.png"
+        },
+        {
+          "name": "Pineapple Art Pouch",
+          "image": "/products/pineapple-art-pouch.webp",
+          "filename": "pineapple-art-pouch.webp"
+        },
+        {
+          "name": "Pineapple Pencil Pouch",
+          "image": "/products/pineapple-pencil-pouch.png",
+          "filename": "pineapple-pencil-pouch.png"
+        },
+        {
+          "name": "Pineapple Pencil Pouch",
+          "image": "/products/pineapple-pencil-pouch.webp",
+          "filename": "pineapple-pencil-pouch.webp"
+        },
+        {
+          "name": "Pineapple Pouch",
+          "image": "/products/pineapple-pouch.png",
+          "filename": "pineapple-pouch.png"
+        },
+        {
+          "name": "Pineapple Pouch",
+          "image": "/products/pineapple-pouch.webp",
+          "filename": "pineapple-pouch.webp"
+        },
+        {
+          "name": "Stripes And Checks Document Pouch",
+          "image": "/products/stripes-and-checks-document-pouch.png",
+          "filename": "stripes-and-checks-document-pouch.png"
+        },
+        {
+          "name": "Stripes And Checks Document Pouch",
+          "image": "/products/stripes-and-checks-document-pouch.webp",
+          "filename": "stripes-and-checks-document-pouch.webp"
+        },
+        {
+          "name": "Summer Art Pouch",
+          "image": "/products/summer-art-pouch.png",
+          "filename": "summer-art-pouch.png"
+        },
+        {
+          "name": "Summer Art Pouch",
+          "image": "/products/summer-art-pouch.webp",
+          "filename": "summer-art-pouch.webp"
+        },
+        {
+          "name": "Summer Pencil Pouch 1",
+          "image": "/products/summer-pencil-pouch-1.png",
+          "filename": "summer-pencil-pouch-1.png"
+        },
+        {
+          "name": "Summer Pencil Pouch 1",
+          "image": "/products/summer-pencil-pouch-1.webp",
+          "filename": "summer-pencil-pouch-1.webp"
+        },
+        {
+          "name": "Summer Pouch",
+          "image": "/products/summer-pouch.png",
+          "filename": "summer-pouch.png"
+        },
+        {
+          "name": "Summer Pouch",
+          "image": "/products/summer-pouch.webp",
+          "filename": "summer-pouch.webp"
+        },
+        {
+          "name": "Yellow Zig Zag Art Pouch",
+          "image": "/products/yellow-zig-zag-art-pouch.png",
+          "filename": "yellow-zig-zag-art-pouch.png"
+        },
+        {
+          "name": "Yellow Zig Zag Art Pouch",
+          "image": "/products/yellow-zig-zag-art-pouch.webp",
+          "filename": "yellow-zig-zag-art-pouch.webp"
+        },
+        {
+          "name": "Yellow Zig Zag Pencil Pouch",
+          "image": "/products/yellow-zig-zag-pencil-pouch.png",
+          "filename": "yellow-zig-zag-pencil-pouch.png"
+        },
+        {
+          "name": "Yellow Zig Zag Pencil Pouch",
+          "image": "/products/yellow-zig-zag-pencil-pouch.webp",
+          "filename": "yellow-zig-zag-pencil-pouch.webp"
+        },
+        {
+          "name": "Yellow Zig Zag Pouch",
+          "image": "/products/yellow-zig-zag-pouch.png",
+          "filename": "yellow-zig-zag-pouch.png"
+        },
+        {
+          "name": "Yellow Zig Zag Pouch",
+          "image": "/products/yellow-zig-zag-pouch.webp",
+          "filename": "yellow-zig-zag-pouch.webp"
+        }
+      ]
+    },
+    "files-folders": {
+      "name": "Files Folders",
+      "slug": "files-folders",
+      "products": [
+        {
+          "name": "Blue Document Folder",
+          "image": "/products/blue-document-folder.png",
+          "filename": "blue-document-folder.png"
+        },
+        {
+          "name": "Blue Document Folder",
+          "image": "/products/blue-document-folder.webp",
+          "filename": "blue-document-folder.webp"
+        },
+        {
+          "name": "Cardeco Stripes File",
+          "image": "/products/cardeco-stripes-file.png",
+          "filename": "cardeco-stripes-file.png"
+        },
+        {
+          "name": "Cardeco Stripes File",
+          "image": "/products/cardeco-stripes-file.webp",
+          "filename": "cardeco-stripes-file.webp"
+        },
+        {
+          "name": "Ethnic Ikat File",
+          "image": "/products/ethnic-ikat-file.png",
+          "filename": "ethnic-ikat-file.png"
+        },
+        {
+          "name": "Ethnic Ikat File",
+          "image": "/products/ethnic-ikat-file.webp",
+          "filename": "ethnic-ikat-file.webp"
+        },
+        {
+          "name": "Exotic Pink Abstract File",
+          "image": "/products/exotic-pink-abstract-file.jpg",
+          "filename": "exotic-pink-abstract-file.jpg"
+        },
+        {
+          "name": "Exotic Pink Abstract File",
+          "image": "/products/exotic-pink-abstract-file.webp",
+          "filename": "exotic-pink-abstract-file.webp"
+        },
+        {
+          "name": "Fabric Print Document Folder",
+          "image": "/products/fabric-print-document-folder.png",
+          "filename": "fabric-print-document-folder.png"
+        },
+        {
+          "name": "Fabric Print Document Folder",
+          "image": "/products/fabric-print-document-folder.webp",
+          "filename": "fabric-print-document-folder.webp"
+        },
+        {
+          "name": "Floral Document Folder",
+          "image": "/products/floral-document-folder.png",
+          "filename": "floral-document-folder.png"
+        },
+        {
+          "name": "Floral Document Folder",
+          "image": "/products/floral-document-folder.webp",
+          "filename": "floral-document-folder.webp"
+        },
+        {
+          "name": "Geometric File",
+          "image": "/products/geometric-file.png",
+          "filename": "geometric-file.png"
+        },
+        {
+          "name": "Geometric File",
+          "image": "/products/geometric-file.webp",
+          "filename": "geometric-file.webp"
+        },
+        {
+          "name": "Peacock Document Folder",
+          "image": "/products/peacock-document-folder.png",
+          "filename": "peacock-document-folder.png"
+        },
+        {
+          "name": "Peacock Document Folder",
+          "image": "/products/peacock-document-folder.webp",
+          "filename": "peacock-document-folder.webp"
+        },
+        {
+          "name": "Yellow Document Folder",
+          "image": "/products/yellow-document-folder.png",
+          "filename": "yellow-document-folder.png"
+        },
+        {
+          "name": "Yellow Document Folder",
+          "image": "/products/yellow-document-folder.webp",
+          "filename": "yellow-document-folder.webp"
+        }
+      ]
+    },
+    "desk-mouse-pads": {
+      "name": "Desk Mouse Pads",
+      "slug": "desk-mouse-pads",
+      "products": []
+    },
+    "laptop-sleeves": {
+      "name": "Laptop Sleeves",
+      "slug": "laptop-sleeves",
+      "products": [
+        {
+          "name": "Ermis Canvas Laptop Bag",
+          "image": "/products/ermis-canvas-laptop-bag.png",
+          "filename": "ermis-canvas-laptop-bag.png"
+        },
+        {
+          "name": "Ermis Canvas Laptop Bag",
+          "image": "/products/ermis-canvas-laptop-bag.webp",
+          "filename": "ermis-canvas-laptop-bag.webp"
+        },
+        {
+          "name": "Floral Laptop Sleeve",
+          "image": "/products/floral-laptop-sleeve.jpg",
+          "filename": "floral-laptop-sleeve.jpg"
+        },
+        {
+          "name": "Floral Laptop Sleeve",
+          "image": "/products/floral-laptop-sleeve.webp",
+          "filename": "floral-laptop-sleeve.webp"
+        },
+        {
+          "name": "Tropical Laptop Sleeve",
+          "image": "/products/tropical-laptop-sleeve.jpg",
+          "filename": "tropical-laptop-sleeve.jpg"
+        },
+        {
+          "name": "Tropical Laptop Sleeve",
+          "image": "/products/tropical-laptop-sleeve.webp",
+          "filename": "tropical-laptop-sleeve.webp"
+        }
+      ]
+    }
+  },
+  "uncategorized": [
+    "autumn-glow.jpg",
+    "autumn-glow.webp",
+    "beep-beep.png",
+    "beep-beep.webp",
+    "black-aprese.jpg",
+    "black-aprese.webp",
+    "blue-golden-bag.jpg",
+    "blue-golden-bag.webp",
+    "boho-pattern.jpg",
+    "boho-pattern.webp",
+    "butterfly-handle-bag.jpg",
+    "butterfly-handle-bag.webp",
+    "eco-bloom.jpg",
+    "eco-bloom.webp",
+    "eco-wardrobe-organisers.jpg",
+    "eco-wardrobe-organisers.webp",
+    "floral.png",
+    "floral.webp",
+    "geometric-gradeint.jpg",
+    "geometric-gradeint.webp",
+    "geometric.jpg",
+    "geometric.webp",
+    "geovibe.jpg",
+    "geovibe.webp",
+    "grey-lozenge.png",
+    "grey-lozenge.webp",
+    "heart-handle-bag.png",
+    "heart-handle-bag.webp",
+    "heliophelia.jpg",
+    "heliophelia.webp",
+    "love-for-cars.png",
+    "love-for-cars.webp",
+    "mandala-art-bag.jpg",
+    "mandala-art-bag.webp",
+    "maple-glow.jpg",
+    "maple-glow.webp",
+    "modern-angular-design.jpg",
+    "modern-angular-design.webp",
+    "mosaic-bloom.jpg",
+    "mosaic-bloom.webp",
+    "mystic-bloom.jpg",
+    "mystic-bloom.webp",
+    "navy-blue-medallion.png",
+    "navy-blue-medallion.webp",
+    "ocean-stripe.jpg",
+    "ocean-stripe.webp",
+    "orange-tropical.png",
+    "orange-tropical.webp",
+    "pink-diamond-face.jpeg",
+    "pink-diamond-face.jpg",
+    "pink-diamond-face.webp",
+    "prism-flow.jpg",
+    "prism-flow.webp",
+    "rain-leaf.jpg",
+    "rain-leaf.webp",
+    "retro-triangles.jpg",
+    "retro-triangles.webp",
+    "stripes.png",
+    "stripes.webp",
+    "summer-vibe.jpg",
+    "summer-vibe.webp",
+    "sunny-pine.jpg",
+    "sunny-pine.webp",
+    "sunset-chevron.png",
+    "sunset-chevron.webp",
+    "twilight-bloom.jpeg",
+    "twilight-bloom.jpg",
+    "twilight-bloom.webp",
+    "zade-strides.jpg",
+    "zade-strides.webp"
+  ]
+}
