@@ -66,7 +66,7 @@ export const HeroSection = () => {
                                 <img
                                     src={content.hero.backgroundImage}
                                     alt={content.hero.heading}
-                                    className="h-auto w-full max-h-[585px] object-contain drop-shadow-2xl lg:max-h-[754px] xl:max-h-[845px]"
+                                    className="h-auto w-full max-h-[585px] object-contain drop-shadow-2xl lg:max-h-[400px] xl:max-h-[450px]"
                                 />
                             </motion.div>
                         </motion.div>
