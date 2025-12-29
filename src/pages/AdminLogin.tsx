@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Database, Eye, EyeOff, KeyRound, LayoutGrid, ShieldCheck, User } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/UI/Button';
+import { Seo } from '../seo/Seo';
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:5174';
 
@@ -75,6 +76,7 @@ export const AdminLogin = () => {
 
     return (
         <div className="relative min-h-screen overflow-hidden bg-[#F4EFEC]">
+            <Seo title="Admin login | Trussers" canonicalPath="/admin/login" noindex />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.9),_transparent_55%)]" />
             <motion.div
                 className="pointer-events-none absolute -left-32 top-6 h-72 w-72 rounded-full bg-[#C1A17C]/35 blur-3xl"

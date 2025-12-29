@@ -5,6 +5,7 @@ import { BadgeCheck, Lock, Mail, Phone, User } from 'lucide-react';
 import { Navbar } from '../components/Layout/Navbar';
 import { Footer } from '../components/Layout/Footer';
 import { Button } from '../components/UI/Button';
+import { Seo } from '../seo/Seo';
 import { registerAccount } from '../utils/accountApi';
 
 export const AccountRegister = () => {
@@ -58,6 +59,7 @@ export const AccountRegister = () => {
 
     return (
         <div className="min-h-screen bg-[#F4EFEC]">
+            <Seo title="Create account | Trussers" canonicalPath="/account/register" noindex />
             <Navbar />
             <main className="pt-24 pb-20">
                 <div className="mx-auto max-w-6xl px-6">

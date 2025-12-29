@@ -143,7 +143,7 @@ async function ensureSeedData() {
                 },
                 productShowcase: { label: 'Selected Goods', heading: 'Curated Essentials.' },
                 shopByMood: { heading: 'Shop by Mood', subheading: 'Curated collections for every aspect of your sustainable life.' },
-                instagramFeed: { embedUrl: 'https://www.instagram.com/trussers.co/', username: '@trussers.co' },
+                instagramFeed: { embedUrl: 'https://www.instagram.com/trusser.in/', username: '@trusser.in' },
                 corporateGifting: {
                     heading: 'Corporate & Event Gifting',
                     description: 'Premium sustainable gifts for your corporate events, employee appreciation, and special occasions.',
@@ -152,9 +152,9 @@ async function ensureSeedData() {
                 footer: {
                     aboutText: 'Subscribe to receive updates on new sustainable collections, eco-conscious living tips, and exclusive offers.',
                     phone: '+91 9008138404',
-                    email: 'hello@trussers.com',
+                    email: 'info@trusser.in',
                     address: 'Made with ♥ in India',
-                    instagramLink: 'https://instagram.com/trussers.co',
+                    instagramLink: 'https://instagram.com/trusser.in',
                     facebookLink: 'https://facebook.com/trussers',
                     twitterLink: 'https://twitter.com/trussers',
                 },

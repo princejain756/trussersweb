@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Navbar } from '../components/Layout/Navbar';
 import { Footer } from '../components/Layout/Footer';
 import { Button } from '../components/UI/Button';
+import { Seo } from '../seo/Seo';
 import {
     Calendar,
     Clock,
@@ -17,6 +18,8 @@ import {
     Palette,
     Building2,
 } from 'lucide-react';
+
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:5174';
 
 type Blog = {
     id: string;
@@ -151,7 +154,7 @@ export const Journal = () => {
 
     const fetchBlogs = async () => {
         try {
-            const response = await fetch('http://localhost:5174/api/blogs');
+            const response = await fetch(`${apiBaseUrl}/api/blogs`);
             const data = await response.json();
             setBlogs(data || []);
         } catch (error) {
@@ -193,6 +196,12 @@ export const Journal = () => {
 
     return (
         <div className="min-h-screen bg-[#F4EFEC] selection:bg-[#C1A17C] selection:text-white">
+            <Seo
+                title="Journal | Trussers"
+                description="Stories and guides on sustainability, eco-friendly living, and corporate gifting."
+                canonicalPath="/journal"
+                ogType="website"
+            />
             <Navbar />
 
             <main className="overflow-hidden">
@@ -315,7 +324,7 @@ export const Journal = () => {
                 {/* ═══════════════════════════════════════════════════════════════════════════
                     ARTICLES GRID - Bento Style
                 ═══════════════════════════════════════════════════════════════════════════ */}
-                <section className="py-16 lg:py-24">
+                <section id="articles-grid" className="py-16 lg:py-24">
                     <div className="mx-auto max-w-[1920px] px-6 lg:px-12">
                         {filteredArticles.length > 0 ? (
                             <>
@@ -410,24 +419,25 @@ export const Journal = () => {
 
                         <AnimatedSection delay={0.2}>
                             <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
-                                {[
-                                    'Eco-Friendly Materials',
-                                    'Corporate Gifting',
-                                    'Recycled Products',
-                                    'Welcome Kits',
-                                    'Sustainability Tips',
-                                    'Festival Gifting',
-                                    'Zero Waste',
-                                    'Artisan Stories',
-                                    'Brand Values',
-                                    'Employee Engagement',
-                                    'Green Business',
-                                    'Design Trends',
-                                ].map((topic) => (
+                                {/* Generate unique tags from all blogs */}
+                                {Array.from(new Set(blogs.flatMap(blog => blog.tags || []))).map((topic) => (
                                     <motion.button
                                         key={topic}
                                         whileHover={{ scale: 1.05, y: -2 }}
-                                        className="px-5 py-2.5 bg-white rounded-full text-sm text-[#1A3C27] font-medium shadow-sm hover:shadow-md hover:bg-[#C1A17C] hover:text-white transition-all border border-[#E8DFD4]"
+                                        onClick={() => {
+                                            setActiveCategory(topic);
+                                            // Smooth scroll to articles grid
+                                            setTimeout(() => {
+                                                document.getElementById('articles-grid')?.scrollIntoView({
+                                                    behavior: 'smooth',
+                                                    block: 'start'
+                                                });
+                                            }, 100);
+                                        }}
+                                        className={`px-5 py-2.5 rounded-full text-sm font-medium shadow-sm hover:shadow-md transition-all border ${activeCategory === topic
+                                                ? 'bg-[#C1A17C] text-white border-[#C1A17C]'
+                                                : 'bg-white text-[#1A3C27] border-[#E8DFD4] hover:bg-[#C1A17C] hover:text-white'
+                                            }`}
                                     >
                                         {topic}
                                     </motion.button>

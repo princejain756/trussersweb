@@ -224,6 +224,7 @@ export const Navbar = () => {
                             {navLinks.map((item) => {
                                 // Pages that need React Router Links
                                 const routeMap: Record<string, string> = {
+                                    'About Us': '/about',
                                     'Shop': '/shop',
                                     'Corporate Gifting': '/corporate-gifting',
                                     'Journal': '/journal',
@@ -329,6 +330,7 @@ export const Navbar = () => {
 
                                 // Pages that need React Router Links
                                 const routeMap: Record<string, string> = {
+                                    'About Us': '/about',
                                     'Shop': '/shop',
                                     'Corporate Gifting': '/corporate-gifting',
                                     'Journal': '/journal',

@@ -9,6 +9,13 @@ import { CheckoutSuccess } from './pages/CheckoutSuccess';
 import { CorporateGifting } from './pages/CorporateGifting';
 import { Journal } from './pages/Journal';
 import BlogPost from './pages/BlogPost';
+import { About } from './pages/About';
+import { Sustainability } from './pages/Sustainability';
+import { Contact } from './pages/Contact';
+import { PrivacyPolicy } from './pages/PrivacyPolicy';
+import { TermsOfService } from './pages/TermsOfService';
+import { EcoFriendlyProductsBangalore } from './pages/EcoFriendlyProductsBangalore';
+import { EcoFriendlyProductsChickpetBangalore } from './pages/EcoFriendlyProductsChickpetBangalore';
 import { AdminLogin } from './pages/AdminLogin';
 import { AdminDashboard } from './pages/AdminDashboard';
 import { AccountLogin } from './pages/AccountLogin';
@@ -72,6 +79,13 @@ function AppContent() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/sustainability" element={<Sustainability />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-of-service" element={<TermsOfService />} />
+        <Route path="/eco-friendly-products-bangalore" element={<EcoFriendlyProductsBangalore />} />
+        <Route path="/eco-friendly-products-chickpet-bangalore" element={<EcoFriendlyProductsChickpetBangalore />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />

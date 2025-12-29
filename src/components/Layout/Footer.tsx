@@ -1,4 +1,5 @@
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { getWebsiteContent } from '../../utils/websiteContent';
 
 export const Footer = () => {
@@ -31,25 +32,29 @@ export const Footer = () => {
                         </form>
                     </div>
 
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-12 lg:pl-12">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-12 lg:pl-12">
                         <div className="flex flex-col gap-6">
                             <h4 className="font-serif text-xl text-white">Shop</h4>
                             <ul className="flex flex-col gap-4 text-[#E8DFD4]/60">
-                                <li><a href="#" className="hover:text-[#C1A17C] transition-colors">New Arrivals</a></li>
-                                <li><a href="#" className="hover:text-[#C1A17C] transition-colors">Best Sellers</a></li>
-                                <li><a href="#" className="hover:text-[#C1A17C] transition-colors">Accessories</a></li>
-                                <li><a href="#" className="hover:text-[#C1A17C] transition-colors">Stationery</a></li>
-                                <li><a href="#" className="hover:text-[#C1A17C] transition-colors">Gift Cards</a></li>
+                                <li><Link to="/shop" className="hover:text-[#C1A17C] transition-colors">Shop All</Link></li>
+                                <li><Link to="/shop" className="hover:text-[#C1A17C] transition-colors">New Arrivals</Link></li>
+                                <li><Link to="/corporate-gifting" className="hover:text-[#C1A17C] transition-colors">Corporate Gifting</Link></li>
+                                <li><Link to="/journal" className="hover:text-[#C1A17C] transition-colors">Journal</Link></li>
                             </ul>
                         </div>
                         <div className="flex flex-col gap-6">
                             <h4 className="font-serif text-xl text-white">Company</h4>
                             <ul className="flex flex-col gap-4 text-[#E8DFD4]/60">
-                                <li><a href="#" className="hover:text-[#C1A17C] transition-colors">Our Story</a></li>
-                                <li><a href="#" className="hover:text-[#C1A17C] transition-colors">Sustainability</a></li>
-                                <li><a href="#" className="hover:text-[#C1A17C] transition-colors">Impact Report</a></li>
-                                <li><a href="#" className="hover:text-[#C1A17C] transition-colors">Careers</a></li>
-                                <li><a href="#" className="hover:text-[#C1A17C] transition-colors">Contact</a></li>
+                                <li><Link to="/about" className="hover:text-[#C1A17C] transition-colors">About</Link></li>
+                                <li><Link to="/sustainability" className="hover:text-[#C1A17C] transition-colors">Sustainability</Link></li>
+                                <li><Link to="/contact" className="hover:text-[#C1A17C] transition-colors">Contact</Link></li>
+                            </ul>
+                        </div>
+                        <div className="flex flex-col gap-6">
+                            <h4 className="font-serif text-xl text-white">Locations</h4>
+                            <ul className="flex flex-col gap-4 text-[#E8DFD4]/60">
+                                <li><Link to="/eco-friendly-products-bangalore" className="hover:text-[#C1A17C] transition-colors">Bangalore</Link></li>
+                                <li><Link to="/eco-friendly-products-chickpet-bangalore" className="hover:text-[#C1A17C] transition-colors">Chickpet</Link></li>
                             </ul>
                         </div>
                         <div className="flex flex-col gap-6">
@@ -78,8 +83,8 @@ export const Footer = () => {
                         &copy; 2025 Trussers Inc. <a href="https://maninfini.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#C1A17C] transition-colors">Made By Maninfini Automation</a>.
                     </p>
                     <div className="flex gap-8 text-sm text-[#E8DFD4]/40">
-                        <a href="#" className="hover:text-[#E8DFD4] transition-colors">Privacy Policy</a>
-                        <a href="#" className="hover:text-[#E8DFD4] transition-colors">Terms of Service</a>
+                        <Link to="/privacy-policy" className="hover:text-[#E8DFD4] transition-colors">Privacy Policy</Link>
+                        <Link to="/terms-of-service" className="hover:text-[#E8DFD4] transition-colors">Terms of Service</Link>
                     </div>
                 </div>
 

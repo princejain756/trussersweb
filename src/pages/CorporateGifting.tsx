@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Navbar } from '../components/Layout/Navbar';
 import { Footer } from '../components/Layout/Footer';
 import { Button } from '../components/UI/Button';
+import { Seo } from '../seo/Seo';
 import {
     Gift,
     Palette,
@@ -182,6 +183,12 @@ export const CorporateGifting = () => {
 
     return (
         <div className="min-h-screen bg-[#F4EFEC] selection:bg-[#C1A17C] selection:text-white">
+            <Seo
+                title="Eco-Friendly Corporate Gifts in Bangalore | Trussers"
+                description="Premium sustainable corporate and event gifting. Curated eco-friendly gift sets crafted from recycled bottles—made in Bengaluru, delivered across India."
+                canonicalPath="/corporate-gifting"
+                ogType="website"
+            />
             <Navbar />
 
             <main className="overflow-hidden">

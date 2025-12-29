@@ -77,10 +77,7 @@ export const DEFAULT_CONTENT: WebsiteContent = {
         { id: 'ig6', url: 'https://www.instagram.com/reel/DARHFn5PTeW/', username: '@trusser.in' },
     ],
     socialLinks: [
-        { id: generateId(), platform: 'Instagram', url: 'https://instagram.com/trussers.co', label: 'Instagram' },
-        { id: generateId(), platform: 'Facebook', url: 'https://facebook.com/trussers', label: 'Facebook' },
-        { id: generateId(), platform: 'Twitter', url: 'https://twitter.com/trussers', label: 'Twitter/X' },
-        { id: generateId(), platform: 'LinkedIn', url: 'https://linkedin.com/company/trussers', label: 'LinkedIn' },
+        { id: generateId(), platform: 'Instagram', url: 'https://instagram.com/trusser.in', label: 'Instagram' },
     ],
     corporateGifting: {
         heading: 'Corporate & Event Gifting',
@@ -90,7 +87,7 @@ export const DEFAULT_CONTENT: WebsiteContent = {
     footer: {
         aboutText: 'Subscribe to receive updates on new sustainable collections, eco-conscious living tips, and exclusive offers.',
         phone: '+91 9008138404',
-        email: 'hello@trussers.com',
+        email: 'info@trusser.in',
         address: 'Made with ♥ in India',
     },
     lastSaved: '',

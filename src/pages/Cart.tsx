@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Navbar } from '../components/Layout/Navbar';
 import { Footer } from '../components/Layout/Footer';
 import { Button } from '../components/UI/Button';
+import { Seo } from '../seo/Seo';
 import {
     Minus,
     Plus,
@@ -355,6 +356,7 @@ export const Cart = () => {
 
     return (
         <div className="min-h-screen bg-[#F4EFEC] selection:bg-[#C1A17C] selection:text-white">
+            <Seo title="Cart | Trussers" canonicalPath="/cart" noindex />
             <Navbar />
 
             <main className="pt-32 pb-20">

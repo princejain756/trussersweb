@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Seo } from '../../seo/Seo';
 import {
     Home,
     ShoppingBag,
@@ -53,6 +54,7 @@ export const AdminLayout = ({ children, title, actions }: AdminLayoutProps) => {
 
     return (
         <div className="min-h-screen bg-[#F7F7F7]">
+            <Seo title={title ? `${title} | Trussers Admin` : 'Trussers Admin'} canonicalPath={location.pathname} noindex />
             {/* Mobile Header */}
             <header className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 h-16 flex items-center px-4">
                 <button

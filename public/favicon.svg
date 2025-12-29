@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Trussers">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1A3C27" />
+      <stop offset="1" stop-color="#2D5F3F" />
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="url(#g)" />
+  <path
+    d="M36 36h56v14H71v42H57V50H36V36Z"
+    fill="#E8DFD4"
+  />
+  <path
+    d="M92 94c-8 7-18 10-28 10-11 0-21-4-29-12l10-10c5 5 12 8 19 8 6 0 12-2 17-6l11 10Z"
+    fill="#C1A17C"
+    opacity="0.9"
+  />
+</svg>

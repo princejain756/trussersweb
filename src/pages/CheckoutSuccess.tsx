@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { Navbar } from '../components/Layout/Navbar';
 import { Footer } from '../components/Layout/Footer';
+import { Seo } from '../seo/Seo';
 import { formatPriceSimple } from '../utils/currency';
 import { clearCart } from '../utils/cart';
 
@@ -145,6 +146,7 @@ export const CheckoutSuccess = () => {
 
     return (
         <div className="min-h-screen bg-[#F7F0E8]">
+            <Seo title="Order confirmation | Trussers" canonicalPath="/checkout/success" noindex />
             <Navbar />
             <main className="relative overflow-hidden">
                 <div className="absolute inset-0">

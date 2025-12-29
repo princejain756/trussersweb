@@ -9,6 +9,8 @@ import categoriesData from '../../data/categories.json';
 import { useEffect, useRef, useState } from 'react';
 import { formatPriceSimple, getCurrency } from '../../utils/currency';
 import { addToCart } from '../../utils/cart';
+import { Seo } from '../../seo/Seo';
+import { toAbsoluteUrl } from '../../seo/siteConfig';
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:5174';
 const defaultFeatures = [
@@ -185,6 +187,7 @@ export const ProductDetail = () => {
     if (isLoading) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-[#F4EFEC]">
+                <Seo title="Loading product | Trussers" canonicalPath={id ? `/product/${id}` : '/shop'} noindex />
                 <div className="text-center">
                     <h2 className="text-3xl font-serif text-[#1A3C27] mb-4">Loading product...</h2>
                     <p className="text-[#5C5C5C]">Fetching the latest details.</p>
@@ -196,6 +199,7 @@ export const ProductDetail = () => {
     if (!product) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-[#F4EFEC]">
+                <Seo title="Product not found | Trussers" canonicalPath={id ? `/product/${id}` : '/shop'} noindex />
                 <div className="text-center">
                     <h2 className="text-3xl font-serif text-[#1A3C27] mb-4">Product Not Found</h2>
                     <Button onClick={() => navigate('/')}>Return Home</Button>
@@ -253,8 +257,53 @@ export const ProductDetail = () => {
         navigate('/checkout', { state: { items: [cartItem] } });
     };
 
+    const canonicalPath = `/product/${product.id}`;
+    const metaDescription =
+        resolvedDescription.length > 155 ? `${resolvedDescription.slice(0, 152)}…` : resolvedDescription;
+    const hasOfferPrice = Number.isFinite(cartPrice) && cartPrice > 0;
+
     return (
         <div className="min-h-screen bg-[#F4EFEC] selection:bg-[#C1A17C] selection:text-white" ref={containerRef}>
+            <Seo
+                title={`${safeName} | Trussers`}
+                description={metaDescription}
+                canonicalPath={canonicalPath}
+                ogType="product"
+                ogImage={imageSrc}
+                jsonLd={[
+                    {
+                        '@context': 'https://schema.org',
+                        '@type': 'BreadcrumbList',
+                        itemListElement: [
+                            { '@type': 'ListItem', position: 1, name: 'Home', item: toAbsoluteUrl('/') },
+                            { '@type': 'ListItem', position: 2, name: 'Shop', item: toAbsoluteUrl('/shop') },
+                            { '@type': 'ListItem', position: 3, name: safeName, item: toAbsoluteUrl(canonicalPath) },
+                        ],
+                    },
+                    {
+                        '@context': 'https://schema.org',
+                        '@type': 'Product',
+                        name: safeName,
+                        image: [toAbsoluteUrl(imageSrc)],
+                        description: resolvedDescription,
+                        sku: `TRUSSERS-${product.id}`,
+                        brand: { '@type': 'Brand', name: 'Trussers' },
+                        ...(product.category ? { category: product.category } : {}),
+                        ...(hasOfferPrice
+                            ? {
+                                offers: {
+                                    '@type': 'Offer',
+                                    url: toAbsoluteUrl(canonicalPath),
+                                    priceCurrency: 'INR',
+                                    price: cartPrice.toFixed(2),
+                                    availability: 'https://schema.org/InStock',
+                                    itemCondition: 'https://schema.org/NewCondition',
+                                },
+                            }
+                            : {}),
+                    },
+                ]}
+            />
             <Navbar />
 
             <main className="pt-24 lg:pt-32 pb-20">

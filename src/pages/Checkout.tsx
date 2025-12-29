@@ -26,6 +26,7 @@ import {
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Navbar } from '../components/Layout/Navbar';
 import { Footer } from '../components/Layout/Footer';
+import { Seo } from '../seo/Seo';
 import { formatPriceSimple } from '../utils/currency';
 import { getCartItems, subscribeToCart } from '../utils/cart';
 import { fetchAccount, getCachedAccount, subscribeToAccount } from '../utils/accountApi';
@@ -569,6 +570,7 @@ export const Checkout = () => {
 
     return (
         <div className="min-h-screen bg-[#F7F0E8]">
+            <Seo title="Checkout | Trussers" canonicalPath="/checkout" noindex />
             <Navbar />
             <main className="relative overflow-hidden">
                 <div className="absolute inset-0">

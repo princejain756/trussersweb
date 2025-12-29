@@ -5,6 +5,7 @@ import { BadgeCheck, LogOut, Mail, MapPin, Phone, Sparkles } from 'lucide-react'
 import { Navbar } from '../components/Layout/Navbar';
 import { Footer } from '../components/Layout/Footer';
 import { Button } from '../components/UI/Button';
+import { Seo } from '../seo/Seo';
 import {
     addAccountAddress,
     fetchAccount,
@@ -79,6 +80,7 @@ export const Account = () => {
 
     return (
         <div className="min-h-screen bg-[#F4EFEC]">
+            <Seo title="Account | Trussers" canonicalPath="/account" noindex />
             <Navbar />
             <main className="pt-24 pb-20">
                 <div className="mx-auto max-w-6xl px-6 space-y-10">

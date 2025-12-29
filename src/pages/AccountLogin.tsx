@@ -5,6 +5,7 @@ import { Mail, Lock, ArrowRight } from 'lucide-react';
 import { Navbar } from '../components/Layout/Navbar';
 import { Footer } from '../components/Layout/Footer';
 import { Button } from '../components/UI/Button';
+import { Seo } from '../seo/Seo';
 import { loginAccount, loginWithGoogle } from '../utils/accountApi';
 import { GoogleSignInButton } from '../components/Auth/GoogleSignInButton';
 
@@ -56,6 +57,7 @@ export const AccountLogin = () => {
 
     return (
         <div className="min-h-screen bg-[#F4EFEC]">
+            <Seo title="Sign in | Trussers" canonicalPath="/account/login" noindex />
             <Navbar />
             <main className="pt-24 pb-20">
                 <div className="mx-auto max-w-6xl px-6">

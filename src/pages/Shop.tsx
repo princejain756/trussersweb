@@ -4,6 +4,7 @@ import { Navbar } from '../components/Layout/Navbar';
 import { Footer } from '../components/Layout/Footer';
 import { ProductCard } from '../components/UI/ProductCard';
 import { Button } from '../components/UI/Button';
+import { Seo } from '../seo/Seo';
 import {
     Search,
     ArrowDown,
@@ -564,6 +565,12 @@ export const Shop = () => {
 
     return (
         <div className="min-h-screen bg-[#F4EFEC] selection:bg-[#C1A17C] selection:text-white">
+            <Seo
+                title="Shop Eco-Friendly Products | Trussers"
+                description="Shop eco-friendly stationery & lifestyle products crafted from recycled bottles. Sustainable gifts and corporate gifting—made in Bengaluru, India."
+                canonicalPath="/shop"
+                ogType="website"
+            />
             <Navbar />
 
             <main>

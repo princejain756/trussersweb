@@ -248,7 +248,7 @@ export const Chatbot = () => {
                                     </a>
 
                                     <Link
-                                        to="/#about"
+                                        to="/about"
                                         onClick={() => setIsOpen(false)}
                                         className="flex items-center gap-3 p-4 bg-[#F4EFEC] rounded-xl hover:bg-[#E8DFD4] transition-colors group"
                                     >
@@ -262,7 +262,7 @@ export const Chatbot = () => {
                                     </Link>
 
                                     <a
-                                        href="mailto:hello@trussers.com"
+                                        href="mailto:info@trusser.in"
                                         className="flex items-center gap-3 p-4 bg-[#F4EFEC] rounded-xl hover:bg-[#E8DFD4] transition-colors group"
                                     >
                                         <div className="p-2 bg-[#1A3C27] rounded-lg text-white group-hover:scale-110 transition-transform">
@@ -270,7 +270,7 @@ export const Chatbot = () => {
                                         </div>
                                         <div>
                                             <h4 className="font-semibold text-[#1A3C27]">Email Us</h4>
-                                            <p className="text-xs text-[#5C5C5C]">hello@trussers.com</p>
+                                            <p className="text-xs text-[#5C5C5C]">info@trusser.in</p>
                                         </div>
                                     </a>
                                 </div>
