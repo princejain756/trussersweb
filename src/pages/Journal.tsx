@@ -1,5 +1,6 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { Navbar } from '../components/Layout/Navbar';
 import { Footer } from '../components/Layout/Footer';
 import { Button } from '../components/UI/Button';
@@ -17,6 +18,23 @@ import {
     Building2,
 } from 'lucide-react';
 
+type Blog = {
+    id: string;
+    title: string;
+    slug: string;
+    excerpt: string;
+    author: string;
+    publishedDate: string;
+    status: string;
+    tags: string[];
+    readingTime: number;
+    wordCount: number;
+    featured?: boolean;
+    category?: string;
+    image?: string;
+    coverImage?: string;
+};
+
 // Article Categories
 const categories = [
     { name: 'All', icon: Sparkles, count: 12 },
@@ -24,97 +42,6 @@ const categories = [
     { name: 'Behind the Craft', icon: Palette, count: 3 },
     { name: 'Style Guide', icon: Bookmark, count: 2 },
     { name: 'Company News', icon: Building2, count: 2 },
-];
-
-// Featured Article
-const featuredArticle = {
-    id: 1,
-    title: 'The Future of Sustainable Corporate Gifting: 2025 Trends',
-    excerpt: 'Discover how eco-conscious companies are revolutionizing corporate gifting with sustainable materials, personalized experiences, and meaningful impact.',
-    image: '/products/categories/corporate-gift-sets/corporate-gift-sets-3.webp',
-    category: 'Sustainability',
-    author: 'Priya Sharma',
-    authorImage: '/heroimage.webp',
-    date: 'December 25, 2024',
-    readTime: '8 min read',
-};
-
-// Articles Data
-const articles = [
-    {
-        id: 2,
-        title: 'From Waste to Wonder: How We Transform Recycled Materials',
-        excerpt: 'Take a behind-the-scenes look at our manufacturing process and see how we turn discarded materials into premium products.',
-        image: '/products/categories/corporate-gift-sets/corporate-gift-sets-8.webp',
-        category: 'Behind the Craft',
-        date: 'December 20, 2024',
-        readTime: '5 min read',
-        featured: true,
-    },
-    {
-        id: 3,
-        title: '5 Creative Ways to Personalize Your Corporate Gifts',
-        excerpt: 'Stand out with unique customization ideas that make your corporate gifts memorable and meaningful.',
-        image: '/products/categories/corporate-gift-sets/corporate-gift-sets-3.webp',
-        category: 'Style Guide',
-        date: 'December 18, 2024',
-        readTime: '4 min read',
-    },
-    {
-        id: 4,
-        title: 'Trussers Expands to 5 New Cities Across India',
-        excerpt: 'We\'re excited to announce our expansion, bringing sustainable gifting solutions closer to you.',
-        image: '/products/categories/corporate-gift-sets/corporate-gift-sets-4.webp',
-        category: 'Company News',
-        date: 'December 15, 2024',
-        readTime: '3 min read',
-    },
-    {
-        id: 5,
-        title: 'The Environmental Impact of Traditional vs. Sustainable Packaging',
-        excerpt: 'A deep dive into the numbers behind packaging waste and how making the switch can make a difference.',
-        image: '/products/categories/women-gift-sets/women-gift-sets-1.webp',
-        category: 'Sustainability',
-        date: 'December 12, 2024',
-        readTime: '6 min read',
-        featured: true,
-    },
-    {
-        id: 6,
-        title: 'Welcome Kit Inspiration: What Top Companies Include',
-        excerpt: 'Learn from the best - see what leading companies are including in their employee welcome kits.',
-        image: '/products/categories/women-gift-sets/women-gift-sets-2.webp',
-        category: 'Style Guide',
-        date: 'December 10, 2024',
-        readTime: '4 min read',
-    },
-    {
-        id: 7,
-        title: 'Meet the Artisans: Stories of Skill and Sustainability',
-        excerpt: 'The talented craftspeople behind every Trussers product share their journey and passion.',
-        image: '/products/categories/women-gift-sets/women-gift-sets-10.webp',
-        category: 'Behind the Craft',
-        date: 'December 8, 2024',
-        readTime: '7 min read',
-    },
-    {
-        id: 8,
-        title: 'Reducing Carbon Footprint: Our 2024 Sustainability Report',
-        excerpt: 'Transparency matters. Here\'s our complete breakdown of environmental impact and future goals.',
-        image: '/products/categories/festive-bags/festive-bags-1.webp',
-        category: 'Sustainability',
-        date: 'December 5, 2024',
-        readTime: '10 min read',
-    },
-    {
-        id: 9,
-        title: 'Festive Gifting Guide: Make This Season Memorable',
-        excerpt: 'Expert tips for choosing the perfect sustainable gifts for Diwali, Christmas, and New Year.',
-        image: '/products/categories/festive-bags/festive-bags-2.webp',
-        category: 'Sustainability',
-        date: 'December 1, 2024',
-        readTime: '5 min read',
-    },
 ];
 
 // Animated Section Component
@@ -136,7 +63,7 @@ const AnimatedSection = ({ children, className = '', delay = 0 }: { children: Re
 };
 
 // Article Card Component
-const ArticleCard = ({ article, index, large = false }: { article: typeof articles[0]; index: number; large?: boolean }) => {
+const ArticleCard = ({ article, index, large = false }: { article: Blog; index: number; large?: boolean }) => {
     return (
         <AnimatedSection delay={index * 0.1}>
             <motion.article
@@ -168,11 +95,11 @@ const ArticleCard = ({ article, index, large = false }: { article: typeof articl
                     <div className="flex items-center gap-4 text-sm text-[#5C5C5C] mb-3">
                         <span className="flex items-center gap-1">
                             <Calendar className="w-4 h-4" />
-                            {article.date}
+                            {new Date(article.publishedDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
                         </span>
                         <span className="flex items-center gap-1">
                             <Clock className="w-4 h-4" />
-                            {article.readTime}
+                            {article.readingTime} min read
                         </span>
                     </div>
 
@@ -186,10 +113,13 @@ const ArticleCard = ({ article, index, large = false }: { article: typeof articl
                     </p>
 
                     <div className="flex items-center justify-between">
-                        <button className="flex items-center gap-2 text-[#C1A17C] font-medium text-sm group-hover:gap-3 transition-all">
+                        <Link
+                            to={`/journal/${article.slug}`}
+                            className="flex items-center gap-2 text-[#C1A17C] font-medium text-sm group-hover:gap-3 transition-all"
+                        >
                             Read More
                             <ArrowRight className="w-4 h-4" />
-                        </button>
+                        </Link>
                         <div className="flex items-center gap-2">
                             <button className="w-8 h-8 rounded-full bg-[#F4EFEC] flex items-center justify-center hover:bg-[#C1A17C] hover:text-white transition-colors">
                                 <Bookmark className="w-4 h-4" />
@@ -208,6 +138,8 @@ const ArticleCard = ({ article, index, large = false }: { article: typeof articl
 export const Journal = () => {
     const [activeCategory, setActiveCategory] = useState('All');
     const [searchQuery, setSearchQuery] = useState('');
+    const [blogs, setBlogs] = useState<Blog[]>([]);
+    const [loading, setLoading] = useState(true);
     const heroRef = useRef(null);
     const { scrollYProgress } = useScroll({
         target: heroRef,
@@ -217,12 +149,51 @@ export const Journal = () => {
     const heroY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
     const textY = useTransform(scrollYProgress, [0, 1], ['0%', '10%']);
 
-    const filteredArticles = articles.filter(article => {
-        const matchesCategory = activeCategory === 'All' || article.category === activeCategory;
+    useEffect(() => {
+        fetchBlogs();
+    }, []);
+
+    const fetchBlogs = async () => {
+        try {
+            const response = await fetch('/api/blogs');
+            const data = await response.json();
+            setBlogs(data || []);
+        } catch (error) {
+            console.error('Error fetching blogs:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const featuredBlog = blogs.find(b => b.featured) || blogs[0];
+    const otherBlogs = blogs.filter(b => b.id !== featuredBlog?.id);
+
+    // Map blog data to featured article format for hero section
+    const featuredArticle = featuredBlog ? {
+        image: featuredBlog.coverImage || featuredBlog.image || 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=1920',
+        title: featuredBlog.title,
+        excerpt: featuredBlog.excerpt,
+        category: featuredBlog.category || 'Sustainability',
+        author: featuredBlog.author || 'Trussers Team',
+        authorImage: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100',
+        date: new Date(featuredBlog.publishedDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+        readTime: `${featuredBlog.readingTime} min read`,
+    } : null;
+
+    const filteredArticles = otherBlogs.filter(article => {
+        const matchesCategory = activeCategory === 'All' || article.tags?.includes(activeCategory);
         const matchesSearch = article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
             article.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
         return matchesCategory && matchesSearch;
     });
+
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-[#F4EFEC] flex items-center justify-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#1A3C27] border-t-transparent" />
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-[#F4EFEC] selection:bg-[#C1A17C] selection:text-white">
@@ -232,95 +203,99 @@ export const Journal = () => {
                 {/* ═══════════════════════════════════════════════════════════════════════════
                     HERO SECTION - Featured Article Spotlight
                 ═══════════════════════════════════════════════════════════════════════════ */}
-                <section ref={heroRef} className="relative min-h-[80vh] lg:min-h-screen flex items-end overflow-hidden">
-                    {/* Background Image with Parallax */}
-                    <motion.div
-                        style={{ y: heroY }}
-                        className="absolute inset-0"
-                    >
-                        <img
-                            src={featuredArticle.image}
-                            alt={featuredArticle.title}
-                            className="w-full h-[120%] object-cover"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#1A3C27] via-[#1A3C27]/60 to-transparent" />
-                    </motion.div>
-
-                    {/* Content */}
-                    <motion.div
-                        style={{ y: textY }}
-                        className="relative z-10 w-full mx-auto max-w-[1920px] px-6 lg:px-12 py-16 lg:py-24"
-                    >
+                {featuredArticle && (
+                    <section ref={heroRef} className="relative min-h-[80vh] lg:min-h-screen flex items-end overflow-hidden">
+                        {/* Background Image with Parallax */}
                         <motion.div
-                            initial={{ opacity: 0, y: 40 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.3 }}
-                            className="max-w-4xl"
+                            style={{ y: heroY }}
+                            className="absolute inset-0"
                         >
-                            {/* Featured Badge */}
-                            <div className="inline-flex items-center gap-2 bg-[#C1A17C] rounded-full px-4 py-2 mb-6">
-                                <Sparkles className="w-4 h-4 text-[#1A3C27]" />
-                                <span className="text-[#1A3C27] font-medium text-sm">Featured Article</span>
-                            </div>
+                            <img
+                                src={featuredArticle.image}
+                                alt={featuredArticle.title}
+                                className="w-full h-[120%] object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#1A3C27] via-[#1A3C27]/60 to-transparent" />
+                        </motion.div>
 
-                            {/* Category */}
-                            <span className="inline-block text-white/70 text-sm font-medium uppercase tracking-widest mb-4">
-                                {featuredArticle.category}
-                            </span>
+                        {/* Content */}
+                        <motion.div
+                            style={{ y: textY }}
+                            className="relative z-10 w-full mx-auto max-w-[1920px] px-6 lg:px-12 py-16 lg:py-24"
+                        >
+                            <motion.div
+                                initial={{ opacity: 0, y: 40 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.8, delay: 0.3 }}
+                                className="max-w-4xl"
+                            >
+                                {/* Featured Badge */}
+                                <div className="inline-flex items-center gap-2 bg-[#C1A17C] rounded-full px-4 py-2 mb-6">
+                                    <Sparkles className="w-4 h-4 text-[#1A3C27]" />
+                                    <span className="text-[#1A3C27] font-medium text-sm">Featured Article</span>
+                                </div>
 
-                            {/* Title */}
-                            <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl text-white leading-tight mb-6">
-                                {featuredArticle.title}
-                            </h1>
+                                {/* Category */}
+                                <span className="inline-block text-white/70 text-sm font-medium uppercase tracking-widest mb-4">
+                                    {featuredArticle.category}
+                                </span>
 
-                            {/* Excerpt */}
-                            <p className="text-lg md:text-xl text-white/80 max-w-2xl mb-8 leading-relaxed">
-                                {featuredArticle.excerpt}
-                            </p>
+                                {/* Title */}
+                                <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl text-white leading-tight mb-6">
+                                    {featuredArticle.title}
+                                </h1>
 
-                            {/* Meta */}
-                            <div className="flex flex-wrap items-center gap-6 mb-8">
-                                <div className="flex items-center gap-3">
-                                    <img
-                                        src={featuredArticle.authorImage}
-                                        alt={featuredArticle.author}
-                                        className="w-12 h-12 rounded-full object-cover border-2 border-white/20"
-                                    />
-                                    <div>
-                                        <p className="text-white font-medium">{featuredArticle.author}</p>
-                                        <p className="text-white/60 text-sm">{featuredArticle.date}</p>
+                                {/* Excerpt */}
+                                <p className="text-lg md:text-xl text-white/80 max-w-2xl mb-8 leading-relaxed">
+                                    {featuredArticle.excerpt}
+                                </p>
+
+                                {/* Meta */}
+                                <div className="flex flex-wrap items-center gap-6 mb-8">
+                                    <div className="flex items-center gap-3">
+                                        <img
+                                            src={featuredArticle.authorImage}
+                                            alt={featuredArticle.author}
+                                            className="w-12 h-12 rounded-full object-cover border-2 border-white/20"
+                                        />
+                                        <div>
+                                            <p className="text-white font-medium">{featuredArticle.author}</p>
+                                            <p className="text-white/60 text-sm">{featuredArticle.date}</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center gap-2 text-white/60 text-sm">
+                                        <Clock className="w-4 h-4" />
+                                        {featuredArticle.readTime}
                                     </div>
                                 </div>
-                                <div className="flex items-center gap-2 text-white/60 text-sm">
-                                    <Clock className="w-4 h-4" />
-                                    {featuredArticle.readTime}
-                                </div>
-                            </div>
 
-                            {/* CTA */}
-                            <Button className="bg-white text-[#1A3C27] hover:bg-[#C1A17C] hover:text-[#1A3C27] rounded-full px-8 py-5 text-base font-semibold group">
-                                Read Full Article
-                                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                            </Button>
+                                {/* CTA */}
+                                <Link to={`/journal/${featuredBlog?.slug}`}>
+                                    <Button className="bg-white text-[#1A3C27] hover:bg-[#C1A17C] hover:text-[#1A3C27] rounded-full px-8 py-5 text-base font-semibold group">
+                                        Read Full Article
+                                        <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                                    </Button>
+                                </Link>
+                            </motion.div>
                         </motion.div>
-                    </motion.div>
 
-                    {/* Scroll Indicator */}
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 1.5 }}
-                        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:block"
-                    >
+                        {/* Scroll Indicator */}
                         <motion.div
-                            animate={{ y: [0, 8, 0] }}
-                            transition={{ duration: 1.5, repeat: Infinity }}
-                            className="w-6 h-10 rounded-full border-2 border-white/30 flex items-start justify-center p-2"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 1.5 }}
+                            className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:block"
                         >
-                            <motion.div className="w-1.5 h-3 bg-white/50 rounded-full" />
+                            <motion.div
+                                animate={{ y: [0, 8, 0] }}
+                                transition={{ duration: 1.5, repeat: Infinity }}
+                                className="w-6 h-10 rounded-full border-2 border-white/30 flex items-start justify-center p-2"
+                            >
+                                <motion.div className="w-1.5 h-3 bg-white/50 rounded-full" />
+                            </motion.div>
                         </motion.div>
-                    </motion.div>
-                </section>
+                    </section>
+                )}
 
                 {/* ═══════════════════════════════════════════════════════════════════════════
                     CATEGORIES & SEARCH - Sticky Filter Bar

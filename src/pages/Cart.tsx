@@ -56,13 +56,7 @@ const frequentlyBoughtTogether = [
     },
 ];
 
-// Coupon codes
-const validCoupons: Record<string, { discount: number; type: 'percent' | 'fixed'; minOrder: number }> = {
-    'WELCOME10': { discount: 10, type: 'percent', minOrder: 1000 },
-    'SAVE20': { discount: 20, type: 'percent', minOrder: 2500 },
-    'FLAT500': { discount: 500, type: 'fixed', minOrder: 3000 },
-    'NEWYEAR25': { discount: 25, type: 'percent', minOrder: 5000 },
-};
+// Coupon validation will be done via backend API
 
 // Animated Section Component
 const AnimatedSection = ({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) => {
@@ -263,9 +257,10 @@ const ProductSuggestionCard = ({ product, index }: { product: typeof frequentlyB
 export const Cart = () => {
     const [cartItems, setCartItems] = useState<CartLineItem[]>(() => getCartItems());
     const [couponCode, setCouponCode] = useState('');
-    const [appliedCoupon, setAppliedCoupon] = useState<string | null>(null);
+    const [appliedCoupon, setAppliedCoupon] = useState<{ code: string; type: 'percent' | 'fixed'; value: number } | null>(null);
     const [couponError, setCouponError] = useState('');
     const [couponSuccess, setCouponSuccess] = useState('');
+    const [isValidatingCoupon, setIsValidatingCoupon] = useState(false);
 
     useEffect(() => {
         return subscribeToCart((items) => setCartItems(items));
@@ -278,12 +273,11 @@ export const Cart = () => {
 
     // Calculate discount
     let discount = 0;
-    if (appliedCoupon && validCoupons[appliedCoupon]) {
-        const coupon = validCoupons[appliedCoupon];
-        if (coupon.type === 'percent') {
-            discount = Math.round(subtotal * (coupon.discount / 100));
+    if (appliedCoupon) {
+        if (appliedCoupon.type === 'percent') {
+            discount = Math.round(subtotal * (appliedCoupon.value / 100));
         } else {
-            discount = coupon.discount;
+            discount = appliedCoupon.value;
         }
     }
 
@@ -300,7 +294,7 @@ export const Cart = () => {
     };
 
     // Apply coupon
-    const applyCoupon = () => {
+    const applyCoupon = async () => {
         const code = couponCode.toUpperCase().trim();
         setCouponError('');
         setCouponSuccess('');
@@ -310,23 +304,46 @@ export const Cart = () => {
             return;
         }
 
-        const coupon = validCoupons[code];
-        if (!coupon) {
-            setCouponError('Invalid coupon code');
-            return;
-        }
+        setIsValidatingCoupon(true);
 
-        if (subtotal < coupon.minOrder) {
-            setCouponError(`Minimum order of ${formatPriceSimple(coupon.minOrder)} required`);
-            return;
-        }
+        try {
+            const response = await fetch('/api/discounts/validate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    code,
+                    subtotal,
+                    itemCount: cartItems.reduce((sum, item) => sum + item.quantity, 0),
+                }),
+            });
 
-        setAppliedCoupon(code);
-        setCouponSuccess(
-            coupon.type === 'percent'
-                ? `${coupon.discount}% discount applied!`
-                : `${formatPriceSimple(coupon.discount)} discount applied!`
-        );
+            const data = await response.json();
+
+            if (!response.ok || !data.valid) {
+                setCouponError(data.error || 'Invalid coupon code');
+                return;
+            }
+
+            // Store the validated coupon data
+            setAppliedCoupon({
+                code: data.discount.code,
+                type: data.discount.type,
+                value: data.discount.value,
+            });
+
+            setCouponSuccess(
+                data.discount.type === 'percent'
+                    ? `${data.discount.value}% discount applied!`
+                    : `${formatPriceSimple(data.discount.value)} discount applied!`
+            );
+        } catch (error) {
+            console.error('Error validating coupon:', error);
+            setCouponError('Failed to validate coupon. Please try again.');
+        } finally {
+            setIsValidatingCoupon(false);
+        }
     };
 
     // Remove coupon
@@ -420,7 +437,7 @@ export const Cart = () => {
                                                 >
                                                     <div className="flex items-center gap-2">
                                                         <CheckCircle2 className="w-5 h-5 text-green-600" />
-                                                        <span className="font-medium text-green-700">{appliedCoupon}</span>
+                                                        <span className="font-medium text-green-700">{appliedCoupon.code}</span>
                                                     </div>
                                                     <button
                                                         onClick={removeCoupon}
@@ -442,9 +459,10 @@ export const Cart = () => {
                                                         whileHover={{ scale: 1.02 }}
                                                         whileTap={{ scale: 0.98 }}
                                                         onClick={applyCoupon}
-                                                        className="px-5 py-3 bg-[#1A3C27] text-white rounded-xl hover:bg-[#2D5F3F] transition-colors font-medium"
+                                                        disabled={isValidatingCoupon}
+                                                        className="px-5 py-3 bg-[#1A3C27] text-white rounded-xl hover:bg-[#2D5F3F] transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                                                     >
-                                                        Apply
+                                                        {isValidatingCoupon ? 'Validating...' : 'Apply'}
                                                     </motion.button>
                                                 </div>
                                             )}

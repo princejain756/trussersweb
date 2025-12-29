@@ -92,6 +92,21 @@ export const loginAccount = async (payload: { email: string; password: string })
     return { account: data.account as AccountProfile };
 };
 
+export const loginWithGoogle = async (payload: { credential: string }) => {
+    const response = await fetch(`${apiBaseUrl}/api/auth/google`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify(payload),
+    });
+    const data = await response.json();
+    if (!response.ok) {
+        return { error: data?.error ?? 'Unable to sign in with Google.' };
+    }
+    setCachedAccount(data.account ?? null);
+    return { account: data.account as AccountProfile };
+};
+
 export const registerAccount = async (payload: {
     fullName: string;
     username: string;

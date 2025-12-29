@@ -17,9 +17,11 @@ import {
     QrCode,
     ShieldCheck,
     Sparkles,
+    Tag,
     Truck,
     User,
     Wallet,
+    X,
 } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Navbar } from '../components/Layout/Navbar';
@@ -183,6 +185,11 @@ export const Checkout = () => {
     const [account, setAccount] = useState<AccountProfile | null>(() => getCachedAccount());
     const [useGuestCheckout, setUseGuestCheckout] = useState(false);
     const [hasPrefilled, setHasPrefilled] = useState(false);
+    const [couponCode, setCouponCode] = useState('');
+    const [appliedCoupon, setAppliedCoupon] = useState<{ code: string; type: 'percent' | 'fixed'; value: number } | null>(null);
+    const [couponError, setCouponError] = useState('');
+    const [couponSuccess, setCouponSuccess] = useState('');
+    const [isValidatingCoupon, setIsValidatingCoupon] = useState(false);
 
     const stateItems = (location.state as CheckoutLocationState | null)?.items;
     const lineItems = useMemo<LineItem[]>(() => {
@@ -246,11 +253,19 @@ export const Checkout = () => {
 
     const pricing = useMemo(() => {
         const subtotal = lineItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        let discount = 0;
+        if (appliedCoupon) {
+            if (appliedCoupon.type === 'percent') {
+                discount = Math.round(subtotal * (appliedCoupon.value / 100));
+            } else {
+                discount = appliedCoupon.value;
+            }
+        }
         const shipping = subtotal > 3000 ? 0 : lineItems.length > 0 ? 199 : 0;
         const taxes = Math.round(subtotal * 0.12);
-        const total = subtotal + shipping + taxes;
-        return { subtotal, shipping, taxes, total };
-    }, [lineItems]);
+        const total = subtotal - discount + shipping + taxes;
+        return { subtotal, discount, shipping, taxes, total };
+    }, [lineItems, appliedCoupon]);
 
     const updateField = <K extends keyof CheckoutFormValues>(field: K, value: CheckoutFormValues[K]) => {
         setFormValues((prev) => ({ ...prev, [field]: value }));
@@ -318,6 +333,66 @@ export const Checkout = () => {
         return errors;
     };
 
+    // Apply coupon
+    const applyCoupon = async () => {
+        const code = couponCode.toUpperCase().trim();
+        setCouponError('');
+        setCouponSuccess('');
+
+        if (!code) {
+            setCouponError('Please enter a coupon code');
+            return;
+        }
+
+        setIsValidatingCoupon(true);
+
+        try {
+            const response = await fetch(`${apiBaseUrl}/api/discounts/validate`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    code,
+                    subtotal: pricing.subtotal,
+                    itemCount: lineItems.reduce((sum, item) => sum + item.quantity, 0),
+                }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok || !data.valid) {
+                setCouponError(data.error || 'Invalid coupon code');
+                return;
+            }
+
+            // Store the validated coupon data
+            setAppliedCoupon({
+                code: data.discount.code,
+                type: data.discount.type,
+                value: data.discount.value,
+            });
+
+            setCouponSuccess(
+                data.discount.type === 'percent'
+                    ? `${data.discount.value}% discount applied!`
+                    : `${formatPriceSimple(data.discount.value)} discount applied!`
+            );
+        } catch (error) {
+            console.error('Error validating coupon:', error);
+            setCouponError('Failed to validate coupon. Please try again.');
+        } finally {
+            setIsValidatingCoupon(false);
+        }
+    };
+
+    // Remove coupon
+    const removeCoupon = () => {
+        setAppliedCoupon(null);
+        setCouponCode('');
+        setCouponSuccess('');
+    };
+
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
@@ -363,6 +438,7 @@ export const Checkout = () => {
                         requested: formValues.wantInvoice,
                         gstNumber: formValues.wantInvoice ? formValues.gstNumber.trim().toUpperCase() : undefined,
                     },
+                    couponCode: appliedCoupon?.code,
                     guestCheckout: useGuestCheckout,
                 }),
             });
@@ -418,18 +494,18 @@ export const Checkout = () => {
                     }
                 };
 
-                const options: RazorpayOptions = {
-                    key: paymentAction.keyId,
-                    amount: paymentAction.amount ?? 0,
-                    currency: paymentAction.currency ?? 'INR',
-                    name: 'Trusser',
-                    description: `Order ${order?.orderNumber ?? ''}`.trim(),
-                    order_id: paymentAction.orderId,
-                    prefill: {
-                        name: formValues.fullName,
-                        email: formValues.email,
-                        contact: formValues.phone,
-                    },
+	                const options: RazorpayOptions = {
+	                    key: paymentAction.keyId!,
+	                    amount: paymentAction.amount ?? 0,
+	                    currency: paymentAction.currency ?? 'INR',
+	                    name: 'Trusser',
+	                    description: `Order ${order?.orderNumber ?? ''}`.trim(),
+	                    order_id: paymentAction.orderId!,
+	                    prefill: {
+	                        name: formValues.fullName,
+	                        email: formValues.email,
+	                        contact: formValues.phone,
+	                    },
                     notes: {
                         internal_order_id: orderId,
                     },
@@ -501,12 +577,12 @@ export const Checkout = () => {
                     <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[420px] bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.8),_transparent_70%)]" />
                 </div>
 
-                <section className="relative pt-14 pb-12">
-                    <div className="container mx-auto px-6">
-                        <AnimatedSection>
-                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/70 backdrop-blur border border-white/60 shadow-sm text-sm text-[#1A3C27]">
-                                <Sparkles className="w-4 h-4 text-[#C1A17C]" />
-                                Secure checkout with verified payments
+	                <section className="relative pt-28 sm:pt-32 lg:pt-36 pb-12">
+	                    <div className="container mx-auto px-6">
+	                        <AnimatedSection>
+	                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/70 backdrop-blur border border-white/60 shadow-sm text-sm text-[#1A3C27]">
+	                                <Sparkles className="w-4 h-4 text-[#C1A17C]" />
+	                                Secure checkout with verified payments
                             </div>
                         </AnimatedSection>
                         <AnimatedSection delay={0.1}>
@@ -864,11 +940,86 @@ export const Checkout = () => {
                                             )}
                                         </div>
 
+                                        {/* Coupon Code */}
+                                        <div className="mt-6 pt-6 border-t border-[#E8DFD4]">
+                                            <label className="flex items-center gap-2 text-sm font-medium text-[#1A3C27] mb-3">
+                                                <Tag className="w-4 h-4 text-[#C1A17C]" />
+                                                Apply Coupon
+                                            </label>
+                                            {appliedCoupon ? (
+                                                <motion.div
+                                                    initial={{ opacity: 0, y: -10 }}
+                                                    animate={{ opacity: 1, y: 0 }}
+                                                    className="flex items-center justify-between p-3 bg-green-50 rounded-xl border border-green-200"
+                                                >
+                                                    <div className="flex items-center gap-2">
+                                                        <CheckCircle2 className="w-5 h-5 text-green-600" />
+                                                        <span className="font-medium text-green-700">{appliedCoupon.code}</span>
+                                                    </div>
+                                                    <button
+                                                        type="button"
+                                                        onClick={removeCoupon}
+                                                        className="text-green-600 hover:text-green-800"
+                                                    >
+                                                        <X className="w-5 h-5" />
+                                                    </button>
+                                                </motion.div>
+                                            ) : (
+                                                <div className="flex gap-2">
+                                                    <input
+                                                        type="text"
+                                                        value={couponCode}
+                                                        onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
+                                                        placeholder="Enter code"
+                                                        className="flex-1 px-4 py-3 rounded-xl bg-[#FBF8F4] border-2 border-transparent focus:border-[#C1A17C] focus:outline-none transition-colors uppercase placeholder:normal-case placeholder:text-[#9C8F84]/50"
+                                                    />
+                                                    <motion.button
+                                                        type="button"
+                                                        whileHover={{ scale: 1.02 }}
+                                                        whileTap={{ scale: 0.98 }}
+                                                        onClick={applyCoupon}
+                                                        disabled={isValidatingCoupon}
+                                                        className="px-5 py-3 bg-[#1A3C27] text-white rounded-xl hover:bg-[#2D5F3F] transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                                                    >
+                                                        {isValidatingCoupon ? 'Validating...' : 'Apply'}
+                                                    </motion.button>
+                                                </div>
+                                            )}
+                                            {couponError && (
+                                                <motion.p
+                                                    initial={{ opacity: 0 }}
+                                                    animate={{ opacity: 1 }}
+                                                    className="text-red-500 text-sm mt-2"
+                                                >
+                                                    {couponError}
+                                                </motion.p>
+                                            )}
+                                            {couponSuccess && (
+                                                <motion.p
+                                                    initial={{ opacity: 0 }}
+                                                    animate={{ opacity: 1 }}
+                                                    className="text-green-600 text-sm mt-2"
+                                                >
+                                                    {couponSuccess}
+                                                </motion.p>
+                                            )}
+                                        </div>
+
                                         <div className="mt-6 space-y-3 text-sm text-[#5C5C5C]">
                                             <div className="flex justify-between">
                                                 <span>Subtotal</span>
                                                 <span>{formatPriceSimple(pricing.subtotal)}</span>
                                             </div>
+                                            {pricing.discount > 0 && (
+                                                <motion.div
+                                                    initial={{ opacity: 0, height: 0 }}
+                                                    animate={{ opacity: 1, height: 'auto' }}
+                                                    className="flex justify-between text-green-600"
+                                                >
+                                                    <span>Discount</span>
+                                                    <span>-{formatPriceSimple(pricing.discount)}</span>
+                                                </motion.div>
+                                            )}
                                             <div className="flex justify-between">
                                                 <span>Shipping</span>
                                                 <span className={pricing.shipping === 0 ? 'text-green-600' : ''}>

@@ -5,7 +5,8 @@ import { Mail, Lock, ArrowRight } from 'lucide-react';
 import { Navbar } from '../components/Layout/Navbar';
 import { Footer } from '../components/Layout/Footer';
 import { Button } from '../components/UI/Button';
-import { loginAccount } from '../utils/accountApi';
+import { loginAccount, loginWithGoogle } from '../utils/accountApi';
+import { GoogleSignInButton } from '../components/Auth/GoogleSignInButton';
 
 export const AccountLogin = () => {
     const navigate = useNavigate();
@@ -13,6 +14,8 @@ export const AccountLogin = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState<string | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isGoogleSubmitting, setIsGoogleSubmitting] = useState(false);
+    const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID ?? '';
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -28,6 +31,23 @@ export const AccountLogin = () => {
         if (result.error) {
             setError(result.error);
             setIsSubmitting(false);
+            return;
+        }
+
+        navigate('/account');
+    };
+
+    const handleGoogleCredential = async (credential: string) => {
+        if (!credential) {
+            return;
+        }
+        setError(null);
+        setIsGoogleSubmitting(true);
+
+        const result = await loginWithGoogle({ credential });
+        if (result.error) {
+            setError(result.error);
+            setIsGoogleSubmitting(false);
             return;
         }
 
@@ -121,6 +141,25 @@ export const AccountLogin = () => {
                                     {isSubmitting ? 'Signing in...' : 'Sign in'}
                                 </Button>
                             </form>
+
+                            <div className="mt-8 flex items-center gap-4">
+                                <div className="h-px flex-1 bg-[#E8DFD4]" />
+                                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#5C5C5C]">or</span>
+                                <div className="h-px flex-1 bg-[#E8DFD4]" />
+                            </div>
+
+                            <div className="mt-6">
+                                <GoogleSignInButton
+                                    clientId={googleClientId}
+                                    disabled={isGoogleSubmitting || !googleClientId}
+                                    onCredential={handleGoogleCredential}
+                                />
+                                {!googleClientId ? (
+                                    <div className="mt-3 text-center text-xs text-[#5C5C5C]">
+                                        Google sign-in is not configured.
+                                    </div>
+                                ) : null}
+                            </div>
                         </motion.div>
                     </div>
                 </div>

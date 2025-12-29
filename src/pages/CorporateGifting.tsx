@@ -543,11 +543,10 @@ export const CorporateGifting = () => {
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-6">
                             {featuredProducts.map((product, index) => (
                                 <AnimatedSection key={index} delay={index * 0.1}>
-                                    <motion.div
-                                        whileHover={{ scale: 1.03 }}
-                                        className={`group relative rounded-2xl overflow-hidden cursor-pointer ${index === 0 || index === 3 ? 'md:row-span-2 aspect-[3/4]' : 'aspect-square'
-                                            }`}
-                                    >
+	                                    <motion.div
+	                                        whileHover={{ scale: 1.03 }}
+	                                        className="group relative rounded-2xl overflow-hidden cursor-pointer aspect-square"
+	                                    >
                                         <img
                                             src={product.image}
                                             alt={product.name}

@@ -8,6 +8,7 @@ import { Checkout } from './pages/Checkout';
 import { CheckoutSuccess } from './pages/CheckoutSuccess';
 import { CorporateGifting } from './pages/CorporateGifting';
 import { Journal } from './pages/Journal';
+import BlogPost from './pages/BlogPost';
 import { AdminLogin } from './pages/AdminLogin';
 import { AdminDashboard } from './pages/AdminDashboard';
 import { AccountLogin } from './pages/AccountLogin';
@@ -20,6 +21,7 @@ import { Marketing } from './pages/admin/Marketing';
 import { Discounts } from './pages/admin/Discounts';
 import { CreateDiscount } from './pages/admin/CreateDiscount';
 import { Settings } from './pages/admin/Settings';
+import { Journal as AdminJournal } from './pages/admin/Journal';
 import { OnlineStore } from './pages/admin/OnlineStore';
 import { ThemeEditor } from './pages/admin/ThemeEditor';
 import { ProductDetail } from './components/ProductDetail/ProductDetail';
@@ -76,6 +78,7 @@ function AppContent() {
         <Route path="/checkout/success" element={<CheckoutSuccess />} />
         <Route path="/corporate-gifting" element={<CorporateGifting />} />
         <Route path="/journal" element={<Journal />} />
+        <Route path="/journal/:slug" element={<BlogPost />} />
         <Route path="/account" element={<Account />} />
         <Route path="/account/login" element={<AccountLogin />} />
         <Route path="/account/register" element={<AccountRegister />} />
@@ -92,6 +95,7 @@ function AppContent() {
         <Route path="/admin/settings" element={<Settings />} />
         <Route path="/admin/online-store" element={<OnlineStore />} />
         <Route path="/admin/online-store/editor" element={<ThemeEditor />} />
+        <Route path="/admin/journal" element={<AdminJournal />} />
       </Routes>
       <Chatbot />
       <CartToast />

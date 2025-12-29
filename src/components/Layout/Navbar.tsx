@@ -78,10 +78,10 @@ export const Navbar = () => {
                     category: product.category ?? 'Catalog',
                 }));
                 setCatalogProducts(normalized);
-            } catch (error) {
-                if (!isActive) {
-                    return;
-                }
+	            } catch {
+	                if (!isActive) {
+	                    return;
+	                }
                 const fallback = (productsData as Array<{ id: number; name: string; image: string; category?: string }>).map(
                     (product) => ({
                         id: product.id,
@@ -115,10 +115,10 @@ export const Navbar = () => {
                     return;
                 }
                 setCategories(data ?? {});
-            } catch (error) {
-                if (!isActive) {
-                    return;
-                }
+	            } catch {
+	                if (!isActive) {
+	                    return;
+	                }
                 setCategories(categoriesData as Record<string, CategoryData>);
             }
         };
@@ -354,14 +354,35 @@ export const Navbar = () => {
                             })}
                         </div>
 
-                        <div className="flex flex-col gap-4 p-8">
-                            <Button size="lg" className="w-full justify-center rounded-full bg-[#2D5F3F] py-6 text-lg">
-                                Login / Register
-                            </Button>
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+	                        <div className="flex flex-col gap-4 p-8">
+	                            {account ? (
+	                                <Link to="/account" onClick={() => setIsMobileMenuOpen(false)} className="block">
+	                                    <Button size="lg" className="w-full justify-center rounded-full bg-[#2D5F3F] py-6 text-lg">
+	                                        My Account
+	                                    </Button>
+	                                </Link>
+	                            ) : (
+	                                <div className="grid grid-cols-2 gap-3">
+	                                    <Link to="/account/login" onClick={() => setIsMobileMenuOpen(false)} className="block">
+	                                        <Button size="lg" className="w-full justify-center rounded-full bg-[#2D5F3F] py-6 text-lg">
+	                                            Sign in
+	                                        </Button>
+	                                    </Link>
+	                                    <Link to="/account/register" onClick={() => setIsMobileMenuOpen(false)} className="block">
+	                                        <Button
+	                                            size="lg"
+	                                            variant="outline"
+	                                            className="w-full justify-center border-[#2D5F3F] text-[#2D5F3F] py-6 text-lg hover:bg-[#2D5F3F] hover:text-white"
+	                                        >
+	                                            Register
+	                                        </Button>
+	                                    </Link>
+	                                </div>
+	                            )}
+	                        </div>
+	                    </motion.div>
+	                )}
+	            </AnimatePresence>
 
             {/* Search Modal */}
             <AnimatePresence>

@@ -15,6 +15,7 @@ import {
     Bell,
     Search,
     Store,
+    BookOpen,
 } from 'lucide-react';
 
 // Sidebar Navigation Items
@@ -26,6 +27,7 @@ const navItems = [
     { name: 'Customers', path: '/admin/customers', icon: Users },
     { name: 'Marketing', path: '/admin/marketing', icon: Megaphone },
     { name: 'Discounts', path: '/admin/discounts', icon: Percent },
+    { name: 'Journal', path: '/admin/journal', icon: BookOpen },
 ];
 
 interface AdminLayoutProps {

@@ -59,6 +59,15 @@ const sortOptions: { value: SortOption; label: string }[] = [
     { value: 'name-asc', label: 'Name: A to Z' },
 ];
 
+type ApiCatalogProduct = {
+    id: string | number;
+    name: string;
+    image: string;
+    category?: string;
+    price: string | number;
+    tag?: string;
+};
+
 const FloatingOrb = ({ delay = 0, size = 300, color = '#C1A17C' }: { delay?: number; size?: number; color?: string }) => (
     <motion.div
         className="absolute rounded-full pointer-events-none"
@@ -400,59 +409,59 @@ export const Shop = () => {
         setSearchQuery(urlSearchQuery ?? '');
     }, [searchParams]);
 
-    useEffect(() => {
-        let isActive = true;
-        const loadCatalog = async () => {
-            try {
-                const response = await fetch(`${apiBaseUrl}/api/products`);
-                if (!response.ok) throw new Error('Failed to load catalog');
-                const data = await response.json();
-                if (!isActive) return;
-                const normalized = data.map((product: any) => ({
-                    id: product.id,
-                    name: product.name,
-                    image: product.image,
-                    category: product.category?.trim() || 'Catalog',
-                    categorySlug: slugify(product.category?.trim() || 'Catalog'),
-                    price: product.price,
-                    tag: product.tag,
-                }));
-                setCatalogProducts(normalized);
-            } catch (error) {
-                if (!isActive) return;
-                const fallback = productsData.map((product: any) => ({
-                    id: product.id,
-                    name: product.name,
-                    image: product.image,
-                    category: product.category?.trim() || 'Catalog',
-                    categorySlug: slugify(product.category?.trim() || 'Catalog'),
-                    price: product.price,
-                    tag: product.tag,
-                }));
-                setCatalogProducts(fallback);
-            }
-        };
-        loadCatalog();
-        return () => { isActive = false; };
-    }, []);
+	    useEffect(() => {
+	        let isActive = true;
+	        const loadCatalog = async () => {
+	            try {
+	                const response = await fetch(`${apiBaseUrl}/api/products`);
+	                if (!response.ok) throw new Error('Failed to load catalog');
+	                const data = (await response.json()) as ApiCatalogProduct[];
+	                if (!isActive) return;
+	                const normalized = data.map((product) => ({
+	                    id: product.id,
+	                    name: product.name,
+	                    image: product.image,
+	                    category: product.category?.trim() || 'Catalog',
+	                    categorySlug: slugify(product.category?.trim() || 'Catalog'),
+	                    price: product.price,
+	                    tag: product.tag,
+	                }));
+	                setCatalogProducts(normalized);
+	            } catch {
+	                if (!isActive) return;
+	                const fallback = (productsData as ApiCatalogProduct[]).map((product) => ({
+	                    id: product.id,
+	                    name: product.name,
+	                    image: product.image,
+	                    category: product.category?.trim() || 'Catalog',
+	                    categorySlug: slugify(product.category?.trim() || 'Catalog'),
+	                    price: product.price,
+	                    tag: product.tag,
+	                }));
+	                setCatalogProducts(fallback);
+	            }
+	        };
+	        loadCatalog();
+	        return () => { isActive = false; };
+	    }, []);
 
-    useEffect(() => {
-        let isActive = true;
-        const loadCategories = async () => {
-            try {
-                const response = await fetch(`${apiBaseUrl}/api/categories`);
-                if (!response.ok) throw new Error('Failed to load categories');
-                const data = await response.json();
-                if (!isActive) return;
-                setCategoryData(data ?? {});
-            } catch (error) {
-                if (!isActive) return;
-                setCategoryData(categoriesData as Record<string, CategoryData>);
-            }
-        };
-        loadCategories();
-        return () => { isActive = false; };
-    }, []);
+	    useEffect(() => {
+	        let isActive = true;
+	        const loadCategories = async () => {
+	            try {
+	                const response = await fetch(`${apiBaseUrl}/api/categories`);
+	                if (!response.ok) throw new Error('Failed to load categories');
+	                const data = (await response.json()) as Record<string, CategoryData>;
+	                if (!isActive) return;
+	                setCategoryData(data ?? {});
+	            } catch {
+	                if (!isActive) return;
+	                setCategoryData(categoriesData as Record<string, CategoryData>);
+	            }
+	        };
+	        loadCategories();
+	        return () => { isActive = false; };
+	    }, []);
 
     const categoryProducts = useMemo<ShopProduct[]>(() => {
         const products: ShopProduct[] = [];
@@ -642,11 +651,11 @@ export const Shop = () => {
                             />
 
                             <div className="flex-1 min-w-0">
-                                <motion.div
-                                    initial={{ opacity: 0, y: -20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    className="sticky top-20 z-30 mb-8"
-                                >
+	                                <motion.div
+	                                    initial={{ opacity: 0, y: -20 }}
+	                                    animate={{ opacity: 1, y: 0 }}
+	                                    className="sticky top-24 sm:top-28 z-30 mb-8"
+	                                >
                                     <div className="bg-white/70 backdrop-blur-xl rounded-2xl border border-white/60 shadow-lg shadow-[#1A3C27]/5 p-4">
                                         <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-between">
                                             <div className="flex items-center gap-4">

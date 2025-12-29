@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { createPortal } from 'react-dom';
 import { Button } from '../UI/Button';
 import { ArrowRight, Heart } from 'lucide-react';
 import { useRef, useState, useEffect } from 'react';
@@ -132,66 +133,69 @@ export const ProductShowcase = () => {
                 </div>
             </div>
 
-            {isMiniCartOpen && (
-                <div className="fixed inset-0 z-50">
-                    <button
-                        type="button"
-                        aria-label="Close mini cart"
-                        onClick={() => setIsMiniCartOpen(false)}
-                        className="absolute inset-0 bg-black/40"
-                    />
-                    <div className="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl">
-                        <div className="flex h-full flex-col p-6">
-                            <div className="flex items-center justify-between border-b border-[#E8DFD4] pb-4">
-                                <div>
-                                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#C1A17C]">Mini Cart</p>
-                                    <h3 className="font-serif text-2xl text-[#1A3C27]">Added to cart</h3>
-                                </div>
-                                <button
-                                    type="button"
-                                    onClick={() => setIsMiniCartOpen(false)}
-                                    className="rounded-full border border-[#E8DFD4] px-3 py-1 text-xs font-semibold text-[#1A3C27] hover:bg-[#F4EFEC]"
-                                >
-                                    Close
-                                </button>
-                            </div>
+	            {isMiniCartOpen &&
+	                typeof document !== 'undefined' &&
+	                createPortal(
+	                    <div className="fixed inset-0 z-[100]">
+	                        <button
+	                            type="button"
+	                            aria-label="Close mini cart"
+	                            onClick={() => setIsMiniCartOpen(false)}
+	                            className="absolute inset-0 bg-black/40"
+	                        />
+	                        <div className="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl">
+	                            <div className="flex h-full flex-col p-6">
+	                                <div className="flex items-center justify-between border-b border-[#E8DFD4] pb-4">
+	                                    <div>
+	                                        <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#C1A17C]">Mini Cart</p>
+	                                        <h3 className="font-serif text-2xl text-[#1A3C27]">Added to cart</h3>
+	                                    </div>
+	                                    <button
+	                                        type="button"
+	                                        onClick={() => setIsMiniCartOpen(false)}
+	                                        className="rounded-full border border-[#E8DFD4] px-3 py-1 text-xs font-semibold text-[#1A3C27] hover:bg-[#F4EFEC]"
+	                                    >
+	                                        Close
+	                                    </button>
+	                                </div>
 
-                            {miniCartProduct && (
-                                <div className="mt-6 flex gap-4 rounded-2xl bg-[#F4EFEC] p-4">
-                                    <div className="h-20 w-20 overflow-hidden rounded-xl bg-white">
-                                        <img
-                                            src={miniCartProduct.image}
-                                            alt={miniCartProduct.name}
-                                            className="h-full w-full object-cover"
-                                        />
-                                    </div>
-                                    <div className="flex flex-1 flex-col justify-center">
-                                        <p className="text-sm font-semibold text-[#1A3C27] line-clamp-2">
-                                            {miniCartProduct.name}
-                                        </p>
-                                        <p className="text-sm text-[#5C5C5C]">{formatPrice(miniCartProduct.price)}</p>
-                                    </div>
-                                </div>
-                            )}
+	                                {miniCartProduct && (
+	                                    <div className="mt-6 flex gap-4 rounded-2xl bg-[#F4EFEC] p-4">
+	                                        <div className="h-20 w-20 overflow-hidden rounded-xl bg-white">
+	                                            <img
+	                                                src={miniCartProduct.image}
+	                                                alt={miniCartProduct.name}
+	                                                className="h-full w-full object-cover"
+	                                            />
+	                                        </div>
+	                                        <div className="flex flex-1 flex-col justify-center">
+	                                            <p className="text-sm font-semibold text-[#1A3C27] line-clamp-2">
+	                                                {miniCartProduct.name}
+	                                            </p>
+	                                            <p className="text-sm text-[#5C5C5C]">{formatPrice(miniCartProduct.price)}</p>
+	                                        </div>
+	                                    </div>
+	                                )}
 
-                            <div className="mt-auto space-y-3">
-                                <Button
-                                    variant="outline"
-                                    className="w-full border-[#1A3C27] text-[#1A3C27] hover:bg-[#1A3C27] hover:text-white"
-                                    onClick={() => setIsMiniCartOpen(false)}
-                                >
-                                    Continue Shopping
-                                </Button>
-                                <Link to="/shop" className="block">
-                                    <Button className="w-full bg-[#2D5F3F] text-white hover:bg-[#1A3C27]">
-                                        View Shop
-                                    </Button>
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )}
-        </section>
-    );
+	                                <div className="mt-auto space-y-3">
+	                                    <Button
+	                                        variant="outline"
+	                                        className="w-full border-[#1A3C27] text-[#1A3C27] hover:bg-[#1A3C27] hover:text-white"
+	                                        onClick={() => setIsMiniCartOpen(false)}
+	                                    >
+	                                        Continue Shopping
+	                                    </Button>
+	                                    <Link to="/shop" className="block">
+	                                        <Button className="w-full bg-[#2D5F3F] text-white hover:bg-[#1A3C27]">
+	                                            View Shop
+	                                        </Button>
+	                                    </Link>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>,
+	                    document.body
+	                )}
+	        </section>
+	    );
 };
