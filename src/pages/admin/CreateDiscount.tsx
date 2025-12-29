@@ -42,6 +42,9 @@ export const CreateDiscount = () => {
     const [endDate, setEndDate] = useState('');
     const [endTime, setEndTime] = useState('12:00');
     const [saving, setSaving] = useState(false);
+    const [saveError, setSaveError] = useState<string | null>(null);
+
+    const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:5174';
 
     useEffect(() => {
         const token = typeof window !== 'undefined' ? window.localStorage.getItem('adminToken') : null;
@@ -61,11 +64,55 @@ export const CreateDiscount = () => {
     };
 
     const handleSave = async () => {
+        const token = window.localStorage.getItem('adminToken');
+        if (!token) {
+            navigate('/admin');
+            return;
+        }
+
         setSaving(true);
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        setSaving(false);
-        navigate('/admin/discounts');
+        setSaveError(null);
+
+        try {
+            const response = await fetch(`${apiBaseUrl}/api/admin/discounts`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Admin-Key': token,
+                },
+                body: JSON.stringify({
+                    type: discountType,
+                    method,
+                    code,
+                    title,
+                    valueType,
+                    value: discountValue,
+                    minRequirement,
+                    minAmount,
+                    minQuantity,
+                    customerEligibility,
+                    usageLimit,
+                    usageLimitValue,
+                    onePerCustomer,
+                    startDate,
+                    startTime,
+                    endDate: hasEndDate ? endDate : undefined,
+                    endTime: hasEndDate ? endTime : undefined,
+                }),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Failed to create discount');
+            }
+
+            navigate('/admin/discounts');
+        } catch (error) {
+            console.error('Failed to save discount:', error);
+            setSaveError(error instanceof Error ? error.message : 'Failed to save discount');
+        } finally {
+            setSaving(false);
+        }
     };
 
     return (
@@ -461,6 +508,11 @@ export const CreateDiscount = () => {
                             </div>
 
                             <div className="mt-6 space-y-3">
+                                {saveError && (
+                                    <div className="p-3 text-sm text-red-600 bg-red-50 rounded-lg">
+                                        {saveError}
+                                    </div>
+                                )}
                                 <Button
                                     onClick={handleSave}
                                     disabled={saving || (!code && method === 'code') || (!title && method === 'automatic')}

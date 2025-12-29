@@ -88,7 +88,7 @@ export const Settings = () => {
     const [storeDetails, setStoreDetails] = useState({
         name: 'Trussers',
         email: 'contact@trussers.com',
-        phone: '+91 98765 43210',
+        phone: '+91 9008138404',
     });
     const [billingAddress, setBillingAddress] = useState({
         line1: 'Trussers Eco Products',

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AdminLayout } from '../../components/Admin/AdminLayout';
@@ -15,7 +15,10 @@ import {
     Truck,
     CheckCircle2,
     Clock,
+    Loader2,
 } from 'lucide-react';
+
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:5174';
 
 // Order Types
 type PaymentStatus = 'Paid' | 'Payment pending' | 'Refunded' | 'Voided';
@@ -39,169 +42,13 @@ interface Order {
     hasNote: boolean;
 }
 
-// Mock Orders Data
-const mockOrders: Order[] = [
-    {
-        id: '1',
-        orderNumber: '#1108',
-        date: 'Tuesday at 07:40 am',
-        customer: 'Sagar salot',
-        email: 'sagar@example.com',
-        channel: 'Online Store',
-        total: '₹3,990.00',
-        paymentStatus: 'Payment pending',
-        fulfillmentStatus: 'Unfulfilled',
-        items: 1,
-        deliveryStatus: 'Pending',
-        deliveryMethod: 'Standard Shipping',
-        tags: ['COD', 'GoKwik', 'MEDIUM RTO Risk'],
-        hasNote: false,
-    },
-    {
-        id: '2',
-        orderNumber: '#1107',
-        date: 'Saturday at 09:45 am',
-        customer: 'Anita Komani',
-        email: 'anita@example.com',
-        channel: 'Online Store',
-        total: '₹3,399.00',
-        paymentStatus: 'Payment pending',
-        fulfillmentStatus: 'Unfulfilled',
-        items: 1,
-        deliveryStatus: 'Pending',
-        deliveryMethod: 'Standard Shipping',
-        tags: ['COD', 'GoKwik', 'High Risk', 'MEDIUM RTO Risk'],
-        hasNote: false,
-    },
-    {
-        id: '3',
-        orderNumber: '#1106',
-        date: 'Dec 10 at 6:57 pm',
-        customer: 'MANOSHI MAJUMDER',
-        email: 'manoshi@example.com',
-        channel: 'Online Store',
-        total: '₹0.00',
-        paymentStatus: 'Voided',
-        fulfillmentStatus: 'Unfulfilled',
-        items: 0,
-        deliveryStatus: 'Pending',
-        deliveryMethod: 'Standard Shipping',
-        tags: ['GoKwik', 'MEDIUM RTO Risk'],
-        hasNote: false,
-    },
-    {
-        id: '4',
-        orderNumber: '#1102',
-        date: 'Dec 13 at 7:25 am',
-        customer: 'Jayashree',
-        email: 'jayashree@example.com',
-        channel: 'Online Store',
-        total: '₹9,979.00',
-        paymentStatus: 'Payment pending',
-        fulfillmentStatus: 'Fulfilled',
-        items: 3,
-        deliveryStatus: 'In transit',
-        deliveryMethod: 'Standard Shipping',
-        tags: ['COD', 'GoKwik', 'High Risk', 'MEDIUM RTO Risk'],
-        hasNote: false,
-    },
-    {
-        id: '5',
-        orderNumber: '#1101',
-        date: 'Dec 12 at 10:18 pm',
-        customer: 'Yogamonica K',
-        email: 'yogamonica@example.com',
-        channel: 'Online Store',
-        total: '₹3,990.00',
-        paymentStatus: 'Voided',
-        fulfillmentStatus: 'Unfulfilled',
-        items: 0,
-        deliveryStatus: 'Pending',
-        deliveryMethod: 'Standard Shipping',
-        tags: ['COD', 'GoKwik', 'High Risk', 'MEDIUM RTO Risk'],
-        hasNote: true,
-    },
-    {
-        id: '6',
-        orderNumber: '#1100',
-        date: 'Dec 12 at 9:52 pm',
-        customer: 'Mina Shah',
-        email: 'mina@example.com',
-        channel: 'Online Store',
-        total: '₹3,399.00',
-        paymentStatus: 'Payment pending',
-        fulfillmentStatus: 'Fulfilled',
-        items: 1,
-        deliveryStatus: 'Delivered',
-        deliveryMethod: 'Standard Shipping',
-        tags: ['COD', 'GoKwik', 'High Risk', 'MEDIUM RTO Risk'],
-        hasNote: false,
-    },
-    {
-        id: '7',
-        orderNumber: '#1099',
-        date: 'Dec 12 at 8:03 pm',
-        customer: 'Santosh Jain',
-        email: 'santosh@example.com',
-        channel: 'Online Store',
-        total: '₹2,780.00',
-        paymentStatus: 'Payment pending',
-        fulfillmentStatus: 'Fulfilled',
-        items: 1,
-        deliveryStatus: 'In transit',
-        deliveryMethod: 'Standard Shipping',
-        tags: ['COD', 'GoKwik', 'High Risk', 'LOW RTO Risk'],
-        hasNote: false,
-    },
-    {
-        id: '8',
-        orderNumber: '#1098',
-        date: 'Dec 12 at 9:53 am',
-        customer: 'Pooja Jaisingh',
-        email: 'pooja@example.com',
-        channel: 'Online Store',
-        total: '₹2,780.00',
-        paymentStatus: 'Payment pending',
-        fulfillmentStatus: 'Fulfilled',
-        items: 1,
-        deliveryStatus: 'In transit',
-        deliveryMethod: 'Standard Shipping',
-        tags: ['COD', 'GoKwik', 'High Risk', 'LOW RTO Risk'],
-        hasNote: false,
-    },
-    {
-        id: '9',
-        orderNumber: '#1097',
-        date: 'Dec 11 at 7:02 pm',
-        customer: 'Nimmy Chacko',
-        email: 'nimmy@example.com',
-        channel: 'Online Store',
-        total: '₹3,990.00',
-        paymentStatus: 'Paid',
-        fulfillmentStatus: 'Fulfilled',
-        items: 1,
-        deliveryStatus: 'In transit',
-        deliveryMethod: 'Standard Shipping',
-        tags: ['GoKwik', 'UPI'],
-        hasNote: false,
-    },
-    {
-        id: '10',
-        orderNumber: '#1089',
-        date: 'Dec 4 at 2:21 pm',
-        customer: 'Prince Jain',
-        email: 'prince@example.com',
-        channel: 'Online Store',
-        total: '₹13,700.00',
-        paymentStatus: 'Payment pending',
-        fulfillmentStatus: 'Fulfilled',
-        items: 1,
-        deliveryStatus: 'Delivered',
-        deliveryMethod: 'Standard Shipping',
-        tags: ['COD', 'GoKwik', 'High Risk'],
-        hasNote: false,
-    },
-];
+interface OrderStats {
+    total: number;
+    itemsOrdered: number;
+    returns: number;
+    fulfilled: number;
+    delivered: number;
+}
 
 // Status Badge Components
 const PaymentBadge = ({ status }: { status: PaymentStatus }) => {
@@ -213,7 +60,7 @@ const PaymentBadge = ({ status }: { status: PaymentStatus }) => {
     };
 
     return (
-        <span className={`inline-flex items-center px-2 py-0.5 text-xs font-medium rounded ${styles[status]}`}>
+        <span className={`inline-flex items-center px-2 py-0.5 text-xs font-medium rounded ${styles[status] || 'bg-gray-100 text-gray-600'}`}>
             {status}
         </span>
     );
@@ -232,10 +79,10 @@ const FulfillmentBadge = ({ status }: { status: FulfillmentStatus }) => {
         'Partially fulfilled': Package,
     };
 
-    const Icon = icons[status];
+    const Icon = icons[status] || Clock;
 
     return (
-        <span className={`inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium rounded border ${styles[status]}`}>
+        <span className={`inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium rounded border ${styles[status] || 'bg-gray-50 text-gray-600 border-gray-200'}`}>
             <Icon className="w-3 h-3" />
             {status}
         </span>
@@ -251,7 +98,7 @@ const DeliveryBadge = ({ status }: { status: DeliveryStatus }) => {
     };
 
     return (
-        <span className={`inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium rounded ${styles[status]}`}>
+        <span className={`inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium rounded ${styles[status] || 'bg-gray-50 text-gray-600'}`}>
             {status === 'In transit' && <Truck className="w-3 h-3" />}
             {status === 'Delivered' && <CheckCircle2 className="w-3 h-3" />}
             {status}
@@ -261,16 +108,61 @@ const DeliveryBadge = ({ status }: { status: DeliveryStatus }) => {
 
 export const Orders = () => {
     const navigate = useNavigate();
-    const [orders] = useState<Order[]>(mockOrders);
+    const [orders, setOrders] = useState<Order[]>([]);
+    const [orderStats, setOrderStats] = useState<OrderStats | null>(null);
     const [searchQuery, setSearchQuery] = useState('');
     const [activeTab, setActiveTab] = useState('All');
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
-    useEffect(() => {
-        const token = typeof window !== 'undefined' ? window.localStorage.getItem('adminToken') : null;
+    const getAdminToken = useCallback(() => {
+        return typeof window !== 'undefined' ? window.localStorage.getItem('adminToken') : null;
+    }, []);
+
+    const fetchOrders = useCallback(async () => {
+        const token = getAdminToken();
         if (!token) {
             navigate('/admin');
+            return;
         }
-    }, [navigate]);
+
+        try {
+            setLoading(true);
+            const response = await fetch(`${apiBaseUrl}/api/admin/orders`, {
+                headers: {
+                    'X-Admin-Key': token,
+                },
+            });
+
+            if (!response.ok) {
+                if (response.status === 401) {
+                    window.localStorage.removeItem('adminToken');
+                    navigate('/admin');
+                    return;
+                }
+                throw new Error('Failed to fetch orders');
+            }
+
+            const data = await response.json();
+            setOrders(data.orders || []);
+            setOrderStats(data.stats || null);
+            setError(null);
+        } catch (err) {
+            console.error('Failed to fetch orders:', err);
+            setError(err instanceof Error ? err.message : 'Failed to load orders');
+        } finally {
+            setLoading(false);
+        }
+    }, [getAdminToken, navigate]);
+
+    useEffect(() => {
+        const token = getAdminToken();
+        if (!token) {
+            navigate('/admin');
+            return;
+        }
+        fetchOrders();
+    }, [getAdminToken, navigate, fetchOrders]);
 
     const tabs = ['All', 'Unfulfilled', 'Unpaid', 'Open', 'Archived', 'Return requests'];
 
@@ -285,13 +177,39 @@ export const Orders = () => {
 
     // Stats
     const stats = [
-        { label: 'Orders', value: orders.length, change: '—' },
-        { label: 'Items ordered', value: orders.reduce((acc, o) => acc + o.items, 0), change: '—' },
-        { label: 'Returns', value: 0, change: '₹0' },
-        { label: 'Orders fulfilled', value: orders.filter(o => o.fulfillmentStatus === 'Fulfilled').length, change: '—' },
-        { label: 'Orders delivered', value: orders.filter(o => o.deliveryStatus === 'Delivered').length, change: '—' },
+        { label: 'Orders', value: orderStats?.total || 0, change: '—' },
+        { label: 'Items ordered', value: orderStats?.itemsOrdered || 0, change: '—' },
+        { label: 'Returns', value: orderStats?.returns || 0, change: '₹0' },
+        { label: 'Orders fulfilled', value: orderStats?.fulfilled || 0, change: '—' },
+        { label: 'Orders delivered', value: orderStats?.delivered || 0, change: '—' },
         { label: 'Order to fulfillment time', value: '—', change: '' },
     ];
+
+    if (loading) {
+        return (
+            <AdminLayout title="Orders">
+                <div className="flex items-center justify-center min-h-[400px]">
+                    <Loader2 className="w-8 h-8 animate-spin text-[#1A3C27]" />
+                </div>
+            </AdminLayout>
+        );
+    }
+
+    if (error) {
+        return (
+            <AdminLayout title="Orders">
+                <div className="flex flex-col items-center justify-center min-h-[400px] gap-4">
+                    <p className="text-red-600">{error}</p>
+                    <button
+                        onClick={fetchOrders}
+                        className="px-4 py-2 bg-[#1A3C27] text-white rounded-lg hover:bg-[#2D5F3F]"
+                    >
+                        Retry
+                    </button>
+                </div>
+            </AdminLayout>
+        );
+    }
 
     return (
         <AdminLayout
@@ -399,51 +317,57 @@ export const Orders = () => {
 
                     {/* Table Body */}
                     <div className="divide-y divide-gray-50">
-                        <AnimatePresence mode="popLayout">
-                            {filteredOrders.map((order, index) => (
-                                <motion.div
-                                    key={order.id}
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    exit={{ opacity: 0 }}
-                                    transition={{ delay: index * 0.02 }}
-                                    className="grid grid-cols-12 gap-2 items-center px-4 py-3 hover:bg-gray-50 transition-colors cursor-pointer group"
-                                >
-                                    <div className="col-span-1 flex items-center gap-2">
-                                        <input type="checkbox" className="w-4 h-4 rounded border-gray-300" />
-                                        {order.hasNote && <MessageSquare className="w-3.5 h-3.5 text-gray-400" />}
-                                    </div>
-                                    <div className="col-span-1">
-                                        <span className="text-sm font-medium text-gray-900">{order.orderNumber}</span>
-                                    </div>
-                                    <div className="col-span-2 text-sm text-gray-600">{order.date}</div>
-                                    <div className="col-span-2 text-sm text-gray-900">{order.customer}</div>
-                                    <div className="col-span-1 text-sm font-medium text-gray-900">{order.total}</div>
-                                    <div className="col-span-1">
-                                        <PaymentBadge status={order.paymentStatus} />
-                                    </div>
-                                    <div className="col-span-1">
-                                        <FulfillmentBadge status={order.fulfillmentStatus} />
-                                    </div>
-                                    <div className="col-span-1 text-sm text-gray-600">
-                                        {order.items} item{order.items !== 1 ? 's' : ''}
-                                    </div>
-                                    <div className="col-span-1">
-                                        <DeliveryBadge status={order.deliveryStatus} />
-                                    </div>
-                                    <div className="col-span-1 flex flex-wrap gap-1">
-                                        {order.tags.slice(0, 2).map((tag, i) => (
-                                            <span key={i} className="px-1.5 py-0.5 text-[10px] bg-gray-100 text-gray-600 rounded">
-                                                {tag}
-                                            </span>
-                                        ))}
-                                        {order.tags.length > 2 && (
-                                            <span className="text-[10px] text-gray-400">+{order.tags.length - 2}</span>
-                                        )}
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </AnimatePresence>
+                        {filteredOrders.length === 0 ? (
+                            <div className="p-8 text-center text-gray-500">
+                                {orders.length === 0 ? 'No orders yet' : 'No orders match your search'}
+                            </div>
+                        ) : (
+                            <AnimatePresence mode="popLayout">
+                                {filteredOrders.map((order, index) => (
+                                    <motion.div
+                                        key={order.id}
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        transition={{ delay: index * 0.02 }}
+                                        className="grid grid-cols-12 gap-2 items-center px-4 py-3 hover:bg-gray-50 transition-colors cursor-pointer group"
+                                    >
+                                        <div className="col-span-1 flex items-center gap-2">
+                                            <input type="checkbox" className="w-4 h-4 rounded border-gray-300" />
+                                            {order.hasNote && <MessageSquare className="w-3.5 h-3.5 text-gray-400" />}
+                                        </div>
+                                        <div className="col-span-1">
+                                            <span className="text-sm font-medium text-gray-900">{order.orderNumber}</span>
+                                        </div>
+                                        <div className="col-span-2 text-sm text-gray-600">{order.date}</div>
+                                        <div className="col-span-2 text-sm text-gray-900">{order.customer}</div>
+                                        <div className="col-span-1 text-sm font-medium text-gray-900">{order.total}</div>
+                                        <div className="col-span-1">
+                                            <PaymentBadge status={order.paymentStatus} />
+                                        </div>
+                                        <div className="col-span-1">
+                                            <FulfillmentBadge status={order.fulfillmentStatus} />
+                                        </div>
+                                        <div className="col-span-1 text-sm text-gray-600">
+                                            {order.items} item{order.items !== 1 ? 's' : ''}
+                                        </div>
+                                        <div className="col-span-1">
+                                            <DeliveryBadge status={order.deliveryStatus} />
+                                        </div>
+                                        <div className="col-span-1 flex flex-wrap gap-1">
+                                            {order.tags.slice(0, 2).map((tag, i) => (
+                                                <span key={i} className="px-1.5 py-0.5 text-[10px] bg-gray-100 text-gray-600 rounded">
+                                                    {tag}
+                                                </span>
+                                            ))}
+                                            {order.tags.length > 2 && (
+                                                <span className="text-[10px] text-gray-400">+{order.tags.length - 2}</span>
+                                            )}
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </AnimatePresence>
+                        )}
                     </div>
 
                     {/* Pagination */}

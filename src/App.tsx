@@ -4,10 +4,15 @@ import Lenis from '@studio-freight/lenis';
 import { Home } from './pages/Home';
 import { Shop } from './pages/Shop';
 import { Cart } from './pages/Cart';
+import { Checkout } from './pages/Checkout';
+import { CheckoutSuccess } from './pages/CheckoutSuccess';
 import { CorporateGifting } from './pages/CorporateGifting';
 import { Journal } from './pages/Journal';
 import { AdminLogin } from './pages/AdminLogin';
 import { AdminDashboard } from './pages/AdminDashboard';
+import { AccountLogin } from './pages/AccountLogin';
+import { AccountRegister } from './pages/AccountRegister';
+import { Account } from './pages/Account';
 import { AdminHome } from './pages/admin/AdminHome';
 import { Orders } from './pages/admin/Orders';
 import { Customers } from './pages/admin/Customers';
@@ -20,6 +25,7 @@ import { ThemeEditor } from './pages/admin/ThemeEditor';
 import { ProductDetail } from './components/ProductDetail/ProductDetail';
 import { ScrollToTop } from './components/UI/ScrollToTop';
 import { Chatbot } from './components/Chatbot/Chatbot';
+import { CartToast } from './components/UI/CartToast';
 
 function AppContent() {
   const location = useLocation();
@@ -66,8 +72,13 @@ function AppContent() {
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/checkout/success" element={<CheckoutSuccess />} />
         <Route path="/corporate-gifting" element={<CorporateGifting />} />
         <Route path="/journal" element={<Journal />} />
+        <Route path="/account" element={<Account />} />
+        <Route path="/account/login" element={<AccountLogin />} />
+        <Route path="/account/register" element={<AccountRegister />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/admin" element={<AdminLogin />} />
         <Route path="/admin/login" element={<AdminLogin />} />
@@ -83,6 +94,7 @@ function AppContent() {
         <Route path="/admin/online-store/editor" element={<ThemeEditor />} />
       </Routes>
       <Chatbot />
+      <CartToast />
     </>
   );
 }
@@ -96,4 +108,3 @@ function App() {
 }
 
 export default App;
-

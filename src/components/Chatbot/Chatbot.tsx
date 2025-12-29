@@ -8,7 +8,7 @@ import productsData from '../../data/products.json';
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:5174';
 
 // WhatsApp number (replace with actual business number)
-const WHATSAPP_NUMBER = '919876543210';
+const WHATSAPP_NUMBER = '919008138404';
 
 type ChatProduct = {
     id: string;

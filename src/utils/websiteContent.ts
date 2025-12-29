@@ -89,7 +89,7 @@ export const DEFAULT_CONTENT: WebsiteContent = {
     },
     footer: {
         aboutText: 'Subscribe to receive updates on new sustainable collections, eco-conscious living tips, and exclusive offers.',
-        phone: '+91 98765 43210',
+        phone: '+91 9008138404',
         email: 'hello@trussers.com',
         address: 'Made with ♥ in India',
     },

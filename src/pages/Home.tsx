@@ -2,7 +2,6 @@
 import { Navbar } from '../components/Layout/Navbar';
 import { HeroSection } from '../components/Hero/HeroSection';
 import { WhyTrusser } from '../components/Home/WhyTrusser';
-import { ShopByMood } from '../components/Home/ShopByMood';
 import { ProductShowcase } from '../components/Products/ProductShowcase';
 import { CorporateGifting } from '../components/Home/CorporateGifting';
 import { ImpactDashboard } from '../components/Home/ImpactDashboard';
@@ -16,7 +15,6 @@ export const Home = () => {
             <main className="relative z-10 w-full overflow-hidden">
                 <HeroSection />
                 <WhyTrusser />
-                <ShopByMood />
                 <ProductShowcase />
                 <CorporateGifting />
                 <ImpactDashboard />

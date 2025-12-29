@@ -1,0 +1,25 @@
+[
+  {
+    "id": "fb60ec65-d3f6-4e92-90a7-dcf89fcda102",
+    "title": "ZXL4DRF4",
+    "description": "\u20b9100 off entire order",
+    "type": "Amount off order",
+    "method": "Code",
+    "code": "ZXL4DRF4",
+    "valueType": "fixed",
+    "value": "\u20b9100",
+    "rawValue": 100,
+    "minRequirement": "none",
+    "customerEligibility": "all",
+    "onePerCustomer": false,
+    "startDate": "2025-08-10",
+    "startTime": "12:00",
+    "combinations": {
+      "products": false,
+      "orders": false,
+      "shipping": false
+    },
+    "usedCount": 0,
+    "createdAt": "2025-12-29T08:25:01.570Z"
+  }
+]

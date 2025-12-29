@@ -23,5 +23,13 @@ dist-ssr
 *.sln
 *.sw?
 
+.env
+.env.*.local
+
 # Uploaded assets
 server/uploads
+
+# Runtime data
+server/data/orders.json
+server/data/users.json
+server/data/sessions.json

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AdminLayout } from '../../components/Admin/AdminLayout';
@@ -10,7 +10,6 @@ import {
     Download,
     MoreVertical,
     Tag,
-
     ShoppingCart,
     Trash2,
     Edit3,
@@ -19,7 +18,10 @@ import {
     CheckCircle2,
     XCircle,
     Clock,
+    Loader2,
 } from 'lucide-react';
+
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:5174';
 
 // Discount Types
 type DiscountStatus = 'Active' | 'Scheduled' | 'Expired';
@@ -47,119 +49,6 @@ interface Discount {
     };
 }
 
-// Mock Discounts Data
-const mockDiscounts: Discount[] = [
-    {
-        id: '1',
-        title: 'SECOND ORDER DISCOUNT',
-        description: '₹150.00 off entire order',
-        status: 'Expired',
-        method: 'Automatic',
-        type: 'Amount off order',
-        usedCount: 0,
-        value: '₹150',
-        startDate: '2024-01-01',
-        endDate: '2024-06-30',
-        combinations: { products: false, orders: false, shipping: false },
-    },
-    {
-        id: '2',
-        title: 'gokwik-test_yash',
-        description: '₹2,493.00 off entire order',
-        status: 'Expired',
-        method: 'Code',
-        type: 'Amount off order',
-        usedCount: 2,
-        code: 'GOKWIK2493',
-        value: '₹2,493',
-        startDate: '2024-03-01',
-        endDate: '2024-05-31',
-        combinations: { products: false, orders: false, shipping: false },
-    },
-    {
-        id: '3',
-        title: 'WELCOME10',
-        description: '₹100.00 off entire order • One use per customer',
-        status: 'Active',
-        method: 'Code',
-        type: 'Amount off order',
-        usedCount: 30,
-        code: 'WELCOME10',
-        value: '₹100',
-        minRequirement: 'Minimum ₹1,000',
-        startDate: '2024-01-01',
-        combinations: { products: false, orders: false, shipping: false },
-    },
-    {
-        id: '4',
-        title: 'BUNDLE200',
-        description: '₹200.00 off entire order • Minimum quantity of 4',
-        status: 'Active',
-        method: 'Code',
-        type: 'Amount off order',
-        usedCount: 0,
-        code: 'BUNDLE200',
-        value: '₹200',
-        minRequirement: 'Minimum 4 items',
-        startDate: '2024-06-01',
-        combinations: { products: false, orders: false, shipping: false },
-    },
-    {
-        id: '5',
-        title: 'Buy 6 Get ₹1800 OFF',
-        description: '₹1,800.00 off entire order • Minimum quantity of 6',
-        status: 'Active',
-        method: 'Automatic',
-        type: 'Amount off order',
-        usedCount: 0,
-        value: '₹1,800',
-        minRequirement: 'Minimum 6 items',
-        startDate: '2024-06-01',
-        combinations: { products: false, orders: false, shipping: false },
-    },
-    {
-        id: '6',
-        title: 'Buy 6 Get ₹1800 OFF',
-        description: '₹1,800.00 off entire order • Minimum quantity of 6',
-        status: 'Expired',
-        method: 'Code',
-        type: 'Amount off order',
-        usedCount: 0,
-        code: 'BUY6OFF',
-        value: '₹1,800',
-        minRequirement: 'Minimum 6 items',
-        startDate: '2024-03-01',
-        endDate: '2024-05-31',
-        combinations: { products: false, orders: false, shipping: false },
-    },
-    {
-        id: '7',
-        title: 'Buy 4 Get ₹1000 OFF',
-        description: '₹1,000.00 off entire order • Minimum quantity of 4',
-        status: 'Active',
-        method: 'Automatic',
-        type: 'Amount off order',
-        usedCount: 0,
-        value: '₹1,000',
-        minRequirement: 'Minimum 4 items',
-        startDate: '2024-06-01',
-        combinations: { products: false, orders: false, shipping: false },
-    },
-    {
-        id: '8',
-        title: 'Buy 2 Get ₹500 OFF',
-        description: '₹500.00 off entire order • Minimum quantity of 2',
-        status: 'Active',
-        method: 'Automatic',
-        type: 'Amount off order',
-        usedCount: 3,
-        value: '₹500',
-        minRequirement: 'Minimum 2 items',
-        startDate: '2024-06-01',
-        combinations: { products: false, orders: false, shipping: false },
-    },
-];
-
 // Status Badge Component
 const StatusBadge = ({ status }: { status: DiscountStatus }) => {
     const styles = {
@@ -174,10 +63,10 @@ const StatusBadge = ({ status }: { status: DiscountStatus }) => {
         Expired: XCircle,
     };
 
-    const Icon = icons[status];
+    const Icon = icons[status] || Clock;
 
     return (
-        <span className={`inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium rounded-full border ${styles[status]}`}>
+        <span className={`inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium rounded-full border ${styles[status] || 'bg-gray-100 text-gray-600 border-gray-200'}`}>
             <Icon className="w-3 h-3" />
             {status}
         </span>
@@ -225,10 +114,10 @@ const DiscountRow = ({ discount, onDelete }: { discount: Discount; onDelete: (id
 
             {/* Combinations */}
             <div className="col-span-2 hidden xl:flex items-center gap-1">
-                {discount.combinations.products && <ShoppingCart className="w-4 h-4 text-gray-400" />}
-                {discount.combinations.orders && <Tag className="w-4 h-4 text-gray-400" />}
-                {discount.combinations.shipping && <Tag className="w-4 h-4 text-gray-400" />}
-                {!discount.combinations.products && !discount.combinations.orders && !discount.combinations.shipping && (
+                {discount.combinations?.products && <ShoppingCart className="w-4 h-4 text-gray-400" />}
+                {discount.combinations?.orders && <Tag className="w-4 h-4 text-gray-400" />}
+                {discount.combinations?.shipping && <Tag className="w-4 h-4 text-gray-400" />}
+                {!discount.combinations?.products && !discount.combinations?.orders && !discount.combinations?.shipping && (
                     <span className="text-sm text-gray-400">—</span>
                 )}
             </div>
@@ -264,7 +153,10 @@ const DiscountRow = ({ discount, onDelete }: { discount: Discount; onDelete: (id
                                     <Copy className="w-4 h-4" /> Duplicate
                                 </button>
                                 <button
-                                    onClick={() => onDelete(discount.id)}
+                                    onClick={() => {
+                                        setMenuOpen(false);
+                                        onDelete(discount.id);
+                                    }}
                                     className="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50"
                                 >
                                     <Trash2 className="w-4 h-4" /> Delete
@@ -280,20 +172,84 @@ const DiscountRow = ({ discount, onDelete }: { discount: Discount; onDelete: (id
 
 export const Discounts = () => {
     const navigate = useNavigate();
-    const [discounts, setDiscounts] = useState<Discount[]>(mockDiscounts);
+    const [discounts, setDiscounts] = useState<Discount[]>([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [statusFilter, setStatusFilter] = useState<'All' | DiscountStatus>('All');
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
-    useEffect(() => {
-        const token = typeof window !== 'undefined' ? window.localStorage.getItem('adminToken') : null;
+    const getAdminToken = useCallback(() => {
+        return typeof window !== 'undefined' ? window.localStorage.getItem('adminToken') : null;
+    }, []);
+
+    const fetchDiscounts = useCallback(async () => {
+        const token = getAdminToken();
         if (!token) {
             navigate('/admin');
+            return;
         }
-    }, [navigate]);
 
-    const handleDelete = (id: string) => {
-        if (confirm('Are you sure you want to delete this discount?')) {
-            setDiscounts(prev => prev.filter(d => d.id !== id));
+        try {
+            setLoading(true);
+            const response = await fetch(`${apiBaseUrl}/api/admin/discounts`, {
+                headers: {
+                    'X-Admin-Key': token,
+                },
+            });
+
+            if (!response.ok) {
+                if (response.status === 401) {
+                    window.localStorage.removeItem('adminToken');
+                    navigate('/admin');
+                    return;
+                }
+                throw new Error('Failed to fetch discounts');
+            }
+
+            const data = await response.json();
+            setDiscounts(data.discounts || []);
+            setError(null);
+        } catch (err) {
+            console.error('Failed to fetch discounts:', err);
+            setError(err instanceof Error ? err.message : 'Failed to load discounts');
+        } finally {
+            setLoading(false);
+        }
+    }, [getAdminToken, navigate]);
+
+    useEffect(() => {
+        const token = getAdminToken();
+        if (!token) {
+            navigate('/admin');
+            return;
+        }
+        fetchDiscounts();
+    }, [getAdminToken, navigate, fetchDiscounts]);
+
+    const handleDelete = async (id: string) => {
+        if (!confirm('Are you sure you want to delete this discount?')) {
+            return;
+        }
+
+        const token = getAdminToken();
+        if (!token) return;
+
+        try {
+            const response = await fetch(`${apiBaseUrl}/api/admin/discounts/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'X-Admin-Key': token,
+                },
+            });
+
+            if (response.ok) {
+                setDiscounts(prev => prev.filter(d => d.id !== id));
+            } else {
+                alert('Failed to delete discount');
+            }
+        } catch (err) {
+            console.error('Failed to delete discount:', err);
+            alert('Failed to delete discount');
         }
     };
 
@@ -310,6 +266,32 @@ export const Discounts = () => {
         Scheduled: discounts.filter(d => d.status === 'Scheduled').length,
         Expired: discounts.filter(d => d.status === 'Expired').length,
     };
+
+    if (loading) {
+        return (
+            <AdminLayout title="Discounts">
+                <div className="flex items-center justify-center min-h-[400px]">
+                    <Loader2 className="w-8 h-8 animate-spin text-[#1A3C27]" />
+                </div>
+            </AdminLayout>
+        );
+    }
+
+    if (error) {
+        return (
+            <AdminLayout title="Discounts">
+                <div className="flex flex-col items-center justify-center min-h-[400px] gap-4">
+                    <p className="text-red-600">{error}</p>
+                    <button
+                        onClick={fetchDiscounts}
+                        className="px-4 py-2 bg-[#1A3C27] text-white rounded-lg hover:bg-[#2D5F3F]"
+                    >
+                        Retry
+                    </button>
+                </div>
+            </AdminLayout>
+        );
+    }
 
     return (
         <AdminLayout
@@ -412,7 +394,9 @@ export const Discounts = () => {
                                 className="text-center py-12"
                             >
                                 <Tag className="w-12 h-12 mx-auto text-gray-300 mb-3" />
-                                <p className="text-gray-500">No discounts found</p>
+                                <p className="text-gray-500">
+                                    {discounts.length === 0 ? 'No discounts yet' : 'No discounts match your search'}
+                                </p>
                                 <Link to="/admin/discounts/create" className="text-[#1A3C27] font-medium text-sm hover:underline mt-2 inline-block">
                                     Create your first discount
                                 </Link>

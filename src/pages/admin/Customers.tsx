@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AdminLayout } from '../../components/Admin/AdminLayout';
@@ -13,7 +13,10 @@ import {
     MapPin,
     ShoppingBag,
     IndianRupee,
+    Loader2,
 } from 'lucide-react';
+
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:5174';
 
 // Customer Types
 interface Customer {
@@ -29,48 +32,61 @@ interface Customer {
     tags: string[];
 }
 
-// Mock Customers Data
-const mockCustomers: Customer[] = [
-    { id: '1', name: 'poikiingkathal4141@gmail.com', email: 'poikiingkathal4141@gmail.com', emailSubscription: 'Subscribed', location: 'India', ordersCount: 0, amountSpent: '₹0.00', tags: [] },
-    { id: '2', name: 'Khusro Qasim', email: 'khusro@example.com', emailSubscription: 'Subscribed', location: 'ALIGARH UP, India', ordersCount: 1, amountSpent: '₹0.00', tags: [] },
-    { id: '3', name: 'Pamarty Venkataramana Bhagoda saala chor', email: 'pamarty@example.com', emailSubscription: 'Subscribed', location: 'HYDERABAD TG, India', ordersCount: 0, amountSpent: '₹0.00', tags: [] },
-    { id: '4', name: 'Sagar salot', email: 'sagar@example.com', emailSubscription: 'Subscribed', location: 'BHAVNAGAR GJ, India', ordersCount: 1, amountSpent: '₹3,990.00', tags: [] },
-    { id: '5', name: 'Shekhar Sharmaji', email: 'shekhar@example.com', emailSubscription: 'Subscribed', location: 'LUDHIANA PB, India', ordersCount: 0, amountSpent: '₹0.00', tags: [] },
-    { id: '6', name: 'MANOSHI MAJUMDER', email: 'manoshi@example.com', emailSubscription: 'Subscribed', location: 'KOLKATA WB, India', ordersCount: 0, amountSpent: '₹0.00', tags: [] },
-    { id: '7', name: 'rajivvermadhurra@gmail.com', email: 'rajivvermadhurra@gmail.com', emailSubscription: 'Subscribed', location: 'India', ordersCount: 0, amountSpent: '₹0.00', tags: [] },
-    { id: '8', name: 'mashipooja41@gmail.com', email: 'mashipooja41@gmail.com', emailSubscription: 'Subscribed', location: 'India', ordersCount: 0, amountSpent: '₹0.00', tags: [] },
-    { id: '9', name: 'Anita Kamani', email: 'anita@example.com', emailSubscription: 'Subscribed', location: 'GORAKHPUR UP, India', ordersCount: 1, amountSpent: '₹3,399.00', tags: [] },
-    { id: '10', name: 'aabhishekyadav2476@gmail.com', email: 'aabhishekyadav2476@gmail.com', emailSubscription: 'Subscribed', location: 'India', ordersCount: 0, amountSpent: '₹0.00', tags: [] },
-    { id: '11', name: 'manojmajumder18@gmail.com', email: 'manojmajumder18@gmail.com', emailSubscription: 'Not subscribed', location: 'India', ordersCount: 0, amountSpent: '₹0.00', tags: [] },
-    { id: '12', name: 'sachy545664@gmail.com', email: 'sachy545664@gmail.com', emailSubscription: 'Subscribed', location: 'India', ordersCount: 0, amountSpent: '₹0.00', tags: [] },
-    { id: '13', name: 'yoglanik15556@gmail.com', email: 'yoglanik15556@gmail.com', emailSubscription: 'Subscribed', location: 'India', ordersCount: 0, amountSpent: '₹0.00', tags: [] },
-    { id: '14', name: 'Yogamonica K', email: 'yogamonica@example.com', emailSubscription: 'Subscribed', location: 'BANGALORE KA, India', ordersCount: 2, amountSpent: '₹3,890.00', tags: [] },
-    { id: '15', name: 'ssunnychoudhary19@gmail.com', email: 'ssunnychoudhary19@gmail.com', emailSubscription: 'Subscribed', location: 'India', ordersCount: 0, amountSpent: '₹0.00', tags: [] },
-    { id: '16', name: 'monikabairwa8969@gmail.com', email: 'monikabairwa8969@gmail.com', emailSubscription: 'Subscribed', location: 'India', ordersCount: 0, amountSpent: '₹0.00', tags: [] },
-    { id: '17', name: 'Sonu Sonu', email: 'sonu@example.com', emailSubscription: 'Subscribed', location: 'Ajmer RJ, India', ordersCount: 1, amountSpent: '₹0.00', tags: [] },
-    { id: '18', name: 'rayalmenpower@gmail.com', email: 'rayalmenpower@gmail.com', emailSubscription: 'Subscribed', location: 'India', ordersCount: 0, amountSpent: '₹0.00', tags: [] },
-    { id: '19', name: 'Ena Gpi', email: 'ena@example.com', emailSubscription: 'Subscribed', location: 'Ajmer RJ, India', ordersCount: 4, amountSpent: '₹0.00', tags: [] },
-    { id: '20', name: 'Jayashree .', email: 'jayashree@example.com', emailSubscription: 'Subscribed', location: 'CHENNAI TN, India', ordersCount: 1, amountSpent: '₹9,979.00', tags: [] },
-    { id: '21', name: 'Mina Shah', email: 'mina@example.com', emailSubscription: 'Subscribed', location: 'AHMEDABAD GJ, India', ordersCount: 1, amountSpent: '₹3,399.00', tags: [] },
-    { id: '22', name: 'Santosh Jain', email: 'santosh@example.com', emailSubscription: 'Subscribed', location: 'SURAT GJ, India', ordersCount: 1, amountSpent: '₹2,780.00', tags: [] },
-    { id: '23', name: 'Pooja Jaisingh', email: 'pooja@example.com', emailSubscription: 'Subscribed', location: 'Mumbai MH, India', ordersCount: 1, amountSpent: '₹2,780.00', tags: [] },
-    { id: '24', name: 'Nimmy Chacko', email: 'nimmy@example.com', emailSubscription: 'Subscribed', location: 'ERNAKULAM KL, India', ordersCount: 1, amountSpent: '₹3,990.00', tags: [] },
-    { id: '25', name: 'Sangita Shah', email: 'sangita@example.com', emailSubscription: 'Subscribed', location: 'AHMEDABAD GJ, India', ordersCount: 1, amountSpent: '₹3,399.00', tags: [] },
-    { id: '26', name: 'Shruti solanki', email: 'shruti@example.com', emailSubscription: 'Subscribed', location: 'JUNAGADH GJ, India', ordersCount: 1, amountSpent: '₹2,780.00', tags: [] },
-];
-
 export const Customers = () => {
     const navigate = useNavigate();
-    const [customers] = useState<Customer[]>(mockCustomers);
+    const [customers, setCustomers] = useState<Customer[]>([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
-    useEffect(() => {
-        const token = typeof window !== 'undefined' ? window.localStorage.getItem('adminToken') : null;
+    const getAdminToken = useCallback(() => {
+        return typeof window !== 'undefined' ? window.localStorage.getItem('adminToken') : null;
+    }, []);
+
+    const fetchCustomers = useCallback(async () => {
+        const token = getAdminToken();
         if (!token) {
             navigate('/admin');
+            return;
         }
-    }, [navigate]);
+
+        try {
+            setLoading(true);
+            const response = await fetch(`${apiBaseUrl}/api/admin/customers`, {
+                headers: {
+                    'X-Admin-Key': token,
+                },
+            });
+
+            if (!response.ok) {
+                if (response.status === 401) {
+                    window.localStorage.removeItem('adminToken');
+                    navigate('/admin');
+                    return;
+                }
+                throw new Error('Failed to fetch customers');
+            }
+
+            const data = await response.json();
+            setCustomers(data.customers || []);
+            setError(null);
+        } catch (err) {
+            console.error('Failed to fetch customers:', err);
+            setError(err instanceof Error ? err.message : 'Failed to load customers');
+        } finally {
+            setLoading(false);
+        }
+    }, [getAdminToken, navigate]);
+
+    useEffect(() => {
+        const token = getAdminToken();
+        if (!token) {
+            navigate('/admin');
+            return;
+        }
+        fetchCustomers();
+    }, [getAdminToken, navigate, fetchCustomers]);
 
     const filteredCustomers = customers.filter(customer => {
         return customer.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -80,6 +96,31 @@ export const Customers = () => {
 
     const totalCustomers = customers.length;
 
+    if (loading) {
+        return (
+            <AdminLayout title="Customers">
+                <div className="flex items-center justify-center min-h-[400px]">
+                    <Loader2 className="w-8 h-8 animate-spin text-[#1A3C27]" />
+                </div>
+            </AdminLayout>
+        );
+    }
+
+    if (error) {
+        return (
+            <AdminLayout title="Customers">
+                <div className="flex flex-col items-center justify-center min-h-[400px] gap-4">
+                    <p className="text-red-600">{error}</p>
+                    <button
+                        onClick={fetchCustomers}
+                        className="px-4 py-2 bg-[#1A3C27] text-white rounded-lg hover:bg-[#2D5F3F]"
+                    >
+                        Retry
+                    </button>
+                </div>
+            </AdminLayout>
+        );
+    }
 
     return (
         <AdminLayout
@@ -105,7 +146,7 @@ export const Customers = () => {
                 {/* Stats */}
                 <div className="flex items-center gap-6">
                     <div className="flex items-center gap-2">
-                        <span className="text-2xl font-semibold text-gray-900">{totalCustomers} customers</span>
+                        <span className="text-2xl font-semibold text-gray-900">{totalCustomers} customer{totalCustomers !== 1 ? 's' : ''}</span>
                         <span className="text-sm text-gray-500">100% of your customer base</span>
                     </div>
                     <button className="text-sm text-gray-500 hover:text-gray-700">
@@ -143,44 +184,50 @@ export const Customers = () => {
 
                     {/* Table Body */}
                     <div className="divide-y divide-gray-50 max-h-[600px] overflow-y-auto">
-                        <AnimatePresence mode="popLayout">
-                            {filteredCustomers.map((customer, index) => (
-                                <motion.div
-                                    key={customer.id}
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    exit={{ opacity: 0 }}
-                                    transition={{ delay: index * 0.01 }}
-                                    onClick={() => setSelectedCustomer(customer)}
-                                    className={`grid grid-cols-12 gap-4 items-center px-4 py-3 hover:bg-gray-50 transition-colors cursor-pointer ${selectedCustomer?.id === customer.id ? 'bg-blue-50' : ''
-                                        }`}
-                                >
-                                    <div className="col-span-1">
-                                        <input type="checkbox" className="w-4 h-4 rounded border-gray-300" />
-                                    </div>
-                                    <div className="col-span-3">
-                                        <span className="text-sm text-gray-900 hover:text-blue-600 transition-colors">
-                                            {customer.name}
-                                        </span>
-                                    </div>
-                                    <div className="col-span-2">
-                                        <span className={`inline-flex items-center px-2 py-0.5 text-xs font-medium rounded ${customer.emailSubscription === 'Subscribed'
-                                            ? 'bg-green-100 text-green-700'
-                                            : 'bg-gray-100 text-gray-600'
-                                            }`}>
-                                            {customer.emailSubscription}
-                                        </span>
-                                    </div>
-                                    <div className="col-span-3 text-sm text-gray-600">{customer.location}</div>
-                                    <div className="col-span-1 text-sm text-gray-600 text-right">
-                                        {customer.ordersCount} order{customer.ordersCount !== 1 ? 's' : ''}
-                                    </div>
-                                    <div className="col-span-2 text-sm font-medium text-gray-900 text-right">
-                                        {customer.amountSpent}
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </AnimatePresence>
+                        {filteredCustomers.length === 0 ? (
+                            <div className="p-8 text-center text-gray-500">
+                                {customers.length === 0 ? 'No customers yet' : 'No customers match your search'}
+                            </div>
+                        ) : (
+                            <AnimatePresence mode="popLayout">
+                                {filteredCustomers.map((customer, index) => (
+                                    <motion.div
+                                        key={customer.id}
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        transition={{ delay: index * 0.01 }}
+                                        onClick={() => setSelectedCustomer(customer)}
+                                        className={`grid grid-cols-12 gap-4 items-center px-4 py-3 hover:bg-gray-50 transition-colors cursor-pointer ${selectedCustomer?.id === customer.id ? 'bg-blue-50' : ''
+                                            }`}
+                                    >
+                                        <div className="col-span-1">
+                                            <input type="checkbox" className="w-4 h-4 rounded border-gray-300" />
+                                        </div>
+                                        <div className="col-span-3">
+                                            <span className="text-sm text-gray-900 hover:text-blue-600 transition-colors">
+                                                {customer.name}
+                                            </span>
+                                        </div>
+                                        <div className="col-span-2">
+                                            <span className={`inline-flex items-center px-2 py-0.5 text-xs font-medium rounded ${customer.emailSubscription === 'Subscribed'
+                                                ? 'bg-green-100 text-green-700'
+                                                : 'bg-gray-100 text-gray-600'
+                                                }`}>
+                                                {customer.emailSubscription}
+                                            </span>
+                                        </div>
+                                        <div className="col-span-3 text-sm text-gray-600">{customer.location}</div>
+                                        <div className="col-span-1 text-sm text-gray-600 text-right">
+                                            {customer.ordersCount} order{customer.ordersCount !== 1 ? 's' : ''}
+                                        </div>
+                                        <div className="col-span-2 text-sm font-medium text-gray-900 text-right">
+                                            {customer.amountSpent}
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </AnimatePresence>
+                        )}
                     </div>
 
                     {/* Pagination */}

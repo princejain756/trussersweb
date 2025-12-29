@@ -663,7 +663,7 @@ export const CorporateGifting = () => {
 
                                 <div className="space-y-6">
                                     {[
-                                        { icon: Phone, label: 'Call Us', value: '+91 98765 43210' },
+                                        { icon: Phone, label: 'Call Us', value: '+91 9008138404' },
                                         { icon: Mail, label: 'Email', value: 'corporate@trussers.in' },
                                         { icon: MapPin, label: 'Office', value: 'Mumbai, Maharashtra' },
                                     ].map((contact, index) => (

@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Navbar } from '../components/Layout/Navbar';
@@ -21,34 +21,8 @@ import {
     Heart,
 } from 'lucide-react';
 import { formatPriceSimple, getCurrency } from '../utils/currency';
-
-// Sample cart items (in real app, this would come from state management)
-const initialCartItems = [
-    {
-        id: 1,
-        name: 'Premium Corporate Gift Set',
-        image: '/products/categories/corporate-gift-sets/corporate-gift-sets-3.webp',
-        price: 2499,
-        quantity: 2,
-        category: 'Gift Sets',
-    },
-    {
-        id: 2,
-        name: 'Eco-Friendly Bottle Bag',
-        image: '/products/categories/bottle-bags/bottle-bags-1.webp',
-        price: 499,
-        quantity: 1,
-        category: 'Bags',
-    },
-    {
-        id: 3,
-        name: 'Festive Celebration Bag',
-        image: '/products/categories/festive-bags/festive-bags-1.webp',
-        price: 899,
-        quantity: 3,
-        category: 'Festive',
-    },
-];
+import { addToCart, getCartItems, removeCartItem, subscribeToCart, updateCartQuantity } from '../utils/cart';
+import type { CartItem as CartLineItem } from '../utils/cart';
 
 // Frequently bought together products
 const frequentlyBoughtTogether = [
@@ -115,9 +89,9 @@ const CartItem = ({
     onRemove,
     index,
 }: {
-    item: typeof initialCartItems[0];
-    onUpdateQuantity: (id: number, quantity: number) => void;
-    onRemove: (id: number) => void;
+    item: CartLineItem;
+    onUpdateQuantity: (id: string, quantity: number) => void;
+    onRemove: (id: string) => void;
     index: number;
 }) => {
     return (
@@ -149,9 +123,11 @@ const CartItem = ({
                 {/* Product Info */}
                 <div className="flex-1 flex flex-col justify-between min-w-0">
                     <div>
-                        <span className="text-xs text-[#C1A17C] font-medium uppercase tracking-wide">
-                            {item.category}
-                        </span>
+                        {item.category && (
+                            <span className="text-xs text-[#C1A17C] font-medium uppercase tracking-wide">
+                                {item.category}
+                            </span>
+                        )}
                         <h3 className="font-serif text-lg md:text-xl text-[#1A3C27] mt-1 truncate">
                             {item.name}
                         </h3>
@@ -214,6 +190,16 @@ const CartItem = ({
 // Frequently Bought Together Card
 const ProductSuggestionCard = ({ product, index }: { product: typeof frequentlyBoughtTogether[0]; index: number }) => {
     const [isAdded, setIsAdded] = useState(false);
+    const handleAdd = () => {
+        addToCart({
+            id: String(product.id),
+            name: product.name,
+            image: product.image,
+            price: product.price,
+            quantity: 1,
+        });
+        setIsAdded(true);
+    };
 
     return (
         <motion.div
@@ -253,7 +239,7 @@ const ProductSuggestionCard = ({ product, index }: { product: typeof frequentlyB
                 <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    onClick={() => setIsAdded(!isAdded)}
+                    onClick={handleAdd}
                     className={`w-full py-2.5 rounded-full text-sm font-medium transition-all ${isAdded
                         ? 'bg-[#1A3C27] text-white'
                         : 'bg-[#F4EFEC] text-[#1A3C27] hover:bg-[#C1A17C] hover:text-white'
@@ -275,11 +261,15 @@ const ProductSuggestionCard = ({ product, index }: { product: typeof frequentlyB
 };
 
 export const Cart = () => {
-    const [cartItems, setCartItems] = useState(initialCartItems);
+    const [cartItems, setCartItems] = useState<CartLineItem[]>(() => getCartItems());
     const [couponCode, setCouponCode] = useState('');
     const [appliedCoupon, setAppliedCoupon] = useState<string | null>(null);
     const [couponError, setCouponError] = useState('');
     const [couponSuccess, setCouponSuccess] = useState('');
+
+    useEffect(() => {
+        return subscribeToCart((items) => setCartItems(items));
+    }, []);
 
     // Calculate totals
     const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -300,15 +290,13 @@ export const Cart = () => {
     const total = subtotal - discount + shipping;
 
     // Update quantity
-    const updateQuantity = (id: number, quantity: number) => {
-        setCartItems(prev => prev.map(item =>
-            item.id === id ? { ...item, quantity } : item
-        ));
+    const updateQuantity = (id: string, quantity: number) => {
+        setCartItems(updateCartQuantity(id, quantity));
     };
 
     // Remove item
-    const removeItem = (id: number) => {
-        setCartItems(prev => prev.filter(item => item.id !== id));
+    const removeItem = (id: string) => {
+        setCartItems(removeCartItem(id));
     };
 
     // Apply coupon
@@ -527,14 +515,16 @@ export const Cart = () => {
                                         </div>
 
                                         {/* Checkout Button */}
-                                        <motion.button
-                                            whileHover={{ scale: 1.02 }}
-                                            whileTap={{ scale: 0.98 }}
-                                            className="w-full py-4 bg-gradient-to-r from-[#1A3C27] to-[#2D5F3F] text-white rounded-full font-semibold text-lg flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-shadow"
-                                        >
-                                            Proceed to Checkout
-                                            <ArrowRight className="w-5 h-5" />
-                                        </motion.button>
+                                        <Link to="/checkout" state={{ items: cartItems }}>
+                                            <motion.button
+                                                whileHover={{ scale: 1.02 }}
+                                                whileTap={{ scale: 0.98 }}
+                                                className="w-full py-4 bg-gradient-to-r from-[#1A3C27] to-[#2D5F3F] text-white rounded-full font-semibold text-lg flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-shadow"
+                                            >
+                                                Proceed to Checkout
+                                                <ArrowRight className="w-5 h-5" />
+                                            </motion.button>
+                                        </Link>
 
                                         {/* Gift Option */}
                                         <div className="mt-6 p-4 rounded-xl bg-gradient-to-r from-[#C1A17C]/10 to-[#D4B995]/10 border border-[#C1A17C]/30">

@@ -8,6 +8,7 @@ import productsData from '../../data/products.json';
 import categoriesData from '../../data/categories.json';
 import { useEffect, useRef, useState } from 'react';
 import { formatPriceSimple, getCurrency } from '../../utils/currency';
+import { addToCart } from '../../utils/cart';
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:5174';
 const defaultFeatures = [
@@ -38,6 +39,9 @@ export const ProductDetail = () => {
     const navigate = useNavigate();
     const [product, setProduct] = useState<ProductDetailData | null>(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [wasAdded, setWasAdded] = useState(false);
+    const resetTimerRef = useRef<number | null>(null);
+    const [quantity, setQuantity] = useState(1);
 
     useEffect(() => {
         let isActive = true;
@@ -166,6 +170,18 @@ export const ProductDetail = () => {
 
     const containerRef = useRef<HTMLDivElement>(null);
 
+    useEffect(() => {
+        return () => {
+            if (resetTimerRef.current) {
+                window.clearTimeout(resetTimerRef.current);
+            }
+        };
+    }, []);
+
+    useEffect(() => {
+        setQuantity(1);
+    }, [product?.id]);
+
     if (isLoading) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-[#F4EFEC]">
@@ -204,6 +220,38 @@ export const ProductDetail = () => {
                 : 'Price on request';
     const imageSrc = product.image?.trim() ? product.image : '/heroimage.webp';
     const freeShippingText = getCurrency() === 'USD' ? 'On orders over $12' : 'On orders over ₹999';
+    const cartPrice =
+        typeof product.price === 'number'
+            ? product.price
+            : typeof product.price === 'string'
+                ? Number(product.price.replace(/[₹$,\s]/g, '')) || 0
+                : 0;
+
+    const cartItem = {
+        id: String(product.id),
+        name: safeName,
+        image: imageSrc,
+        price: cartPrice,
+        quantity,
+        category: product.category,
+    };
+
+    const incrementQuantity = () => setQuantity((prev) => Math.min(99, prev + 1));
+    const decrementQuantity = () => setQuantity((prev) => Math.max(1, prev - 1));
+
+    const handleAddToCart = () => {
+        addToCart(cartItem);
+        setWasAdded(true);
+        if (resetTimerRef.current) {
+            window.clearTimeout(resetTimerRef.current);
+        }
+        resetTimerRef.current = window.setTimeout(() => setWasAdded(false), 2000);
+    };
+
+    const handleBuyNow = () => {
+        addToCart(cartItem);
+        navigate('/checkout', { state: { items: [cartItem] } });
+    };
 
     return (
         <div className="min-h-screen bg-[#F4EFEC] selection:bg-[#C1A17C] selection:text-white" ref={containerRef}>
@@ -287,15 +335,44 @@ export const ProductDetail = () => {
                                     ))}
                                 </div>
 
-                                {/* Action Buttons */}
-                                <div className="flex flex-col sm:flex-row gap-4 mb-12">
-                                    <Button className="flex-1 py-6 text-lg bg-[#2D5F3F] hover:bg-[#1A3C27] text-white shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1">
+                                {/* Quantity + Action Buttons */}
+                                <div className="flex flex-col gap-6 mb-12">
+                                    <div className="flex flex-wrap items-center gap-4">
+                                        <span className="text-sm uppercase tracking-[0.2em] text-[#9C8F84]">Quantity</span>
+                                        <div className="flex items-center gap-3 rounded-full border border-[#E8DFD4] bg-white/70 px-4 py-2">
+                                            <button
+                                                type="button"
+                                                onClick={decrementQuantity}
+                                                className="flex h-9 w-9 items-center justify-center rounded-full bg-[#F4EFEC] text-[#1A3C27] hover:bg-[#1A3C27] hover:text-white transition-colors"
+                                            >
+                                                -
+                                            </button>
+                                            <span className="w-8 text-center text-lg font-semibold text-[#1A3C27]">{quantity}</span>
+                                            <button
+                                                type="button"
+                                                onClick={incrementQuantity}
+                                                className="flex h-9 w-9 items-center justify-center rounded-full bg-[#1A3C27] text-white hover:bg-[#2D5F3F] transition-colors"
+                                            >
+                                                +
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-col sm:flex-row gap-4">
+                                    <Button
+                                        onClick={handleAddToCart}
+                                        className="flex-1 py-6 text-lg bg-[#2D5F3F] hover:bg-[#1A3C27] text-white shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1"
+                                    >
                                         <ShoppingBag className="mr-3" size={20} />
-                                        Add to Cart
+                                        {wasAdded ? 'Added to Cart' : 'Add to Cart'}
                                     </Button>
-                                    <Button variant="outline" className="flex-1 py-6 text-lg border-[#1A3C27] text-[#1A3C27] hover:bg-[#1A3C27] hover:text-white transition-all">
+                                    <Button
+                                        variant="outline"
+                                        onClick={handleBuyNow}
+                                        className="flex-1 py-6 text-lg border-[#1A3C27] text-[#1A3C27] hover:bg-[#1A3C27] hover:text-white transition-all"
+                                    >
                                         Buy Now
                                     </Button>
+                                    </div>
                                 </div>
 
                                 {/* Features Grid */}

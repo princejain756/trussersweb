@@ -6,6 +6,8 @@ import { Button } from '../UI/Button';
 import TrusserLogo from '../../assets/TrusserLOGO.avif';
 import categoriesData from '../../data/categories.json';
 import productsData from '../../data/products.json';
+import { getCartCount, getCartItems, subscribeToCart } from '../../utils/cart';
+import { fetchAccount, getCachedAccount, subscribeToAccount } from '../../utils/accountApi';
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:5174';
 
@@ -34,6 +36,8 @@ export const Navbar = () => {
     const [categories, setCategories] = useState<Record<string, CategoryData>>(
         categoriesData as Record<string, CategoryData>
     );
+    const [cartCount, setCartCount] = useState(() => getCartCount(getCartItems()));
+    const [account, setAccount] = useState(() => getCachedAccount());
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -42,6 +46,16 @@ export const Navbar = () => {
         };
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    useEffect(() => {
+        setCartCount(getCartCount(getCartItems()));
+        return subscribeToCart((items) => setCartCount(getCartCount(items)));
+    }, []);
+
+    useEffect(() => {
+        fetchAccount().then((next) => setAccount(next));
+        return subscribeToAccount((next) => setAccount(next));
     }, []);
 
     useEffect(() => {
@@ -250,9 +264,13 @@ export const Navbar = () => {
                                 >
                                     <Search size={20} className="text-[#2D5F3F] transition-transform group-hover:scale-110" />
                                 </button>
-                                <button className="group flex h-10 w-10 items-center justify-center rounded-full border border-transparent transition-all hover:bg-white/40 hover:backdrop-blur-sm">
+                                <Link
+                                    to={account ? '/account' : '/account/login'}
+                                    className="group flex h-10 w-10 items-center justify-center rounded-full border border-transparent transition-all hover:bg-white/40 hover:backdrop-blur-sm"
+                                    aria-label={account ? 'Account' : 'Sign in'}
+                                >
                                     <User size={20} className="text-[#2D5F3F] transition-transform group-hover:scale-110" />
-                                </button>
+                                </Link>
                             </div>
 
                             <Link
@@ -261,9 +279,11 @@ export const Navbar = () => {
                                 className="group relative flex h-10 w-10 items-center justify-center rounded-full bg-[#2D5F3F] text-white shadow-lg transition-all hover:bg-[#1A3C27] hover:scale-105"
                             >
                                 <ShoppingBag size={18} />
-                                <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#D45D48] text-[10px] font-bold text-white shadow-sm">
-                                    2
-                                </span>
+                                {cartCount > 0 && (
+                                    <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#D45D48] text-[10px] font-bold text-white shadow-sm">
+                                        {cartCount > 9 ? '9+' : cartCount}
+                                    </span>
+                                )}
                             </Link>
                         </div>
                     </div>

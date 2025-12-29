@@ -6,6 +6,7 @@ import { useRef, useState, useEffect } from 'react';
 import productsData from '../../data/products.json';
 import { formatPriceSimple } from '../../utils/currency';
 import { getWebsiteContent } from '../../utils/websiteContent';
+import { addToCart } from '../../utils/cart';
 
 const products = productsData;
 
@@ -28,11 +29,23 @@ export const ProductShowcase = () => {
         offset: ["start end", "end start"]
     });
 
-    const x = useTransform(scrollYProgress, [0, 1], ["0%", "-25%"]);
+    const x = useTransform(scrollYProgress, (value) => `${-25 * value}%`);
     const formatPrice = (price: string | number) =>
         formatPriceSimple(price);
 
     const handleQuickAdd = (product: (typeof products)[number]) => {
+        const price =
+            typeof product.price === 'number'
+                ? product.price
+                : Number(String(product.price ?? 0).replace(/[₹$,\s]/g, ''));
+        addToCart({
+            id: String(product.id),
+            name: product.name,
+            image: product.image,
+            price: Number.isFinite(price) ? price : 0,
+            quantity: 1,
+            category: product.category,
+        });
         setMiniCartProduct(product);
         setIsMiniCartOpen(true);
     };
