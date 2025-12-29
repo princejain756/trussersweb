@@ -9,7 +9,7 @@ const mapUrl =
   'https://www.google.com/maps/search/?api=1&query=No%205%2C%2012th%20Cross%20Road%2C%20Cubbonpet%2C%20Bengaluru%20560002';
 
 export const EcoFriendlyProductsChickpetBangalore = () => {
-  const title = 'Eco Friendly Products in Chickpet, Bangalore | Trussers';
+  const title = 'Eco Friendly Products in Chickpet, Bangalore | Trusser';
   const description =
     'Searching for eco friendly products in Chickpet, Bangalore? Shop sustainable stationery & lifestyle essentials crafted from recycled bottles. Made in Bengaluru (near Chickpet).';
 
@@ -22,7 +22,7 @@ export const EcoFriendlyProductsChickpetBangalore = () => {
         name: 'Where can I find eco friendly products in Chickpet, Bangalore?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Trussers offers eco-friendly stationery and lifestyle essentials crafted from recycled bottles. Browse the collection online and contact us for help with orders in the Chickpet area.',
+          text: 'Trusser offers eco-friendly stationery and lifestyle essentials crafted from recycled bottles. Browse the collection online and contact us for help with orders in the Chickpet area.',
         },
       },
       {
@@ -56,7 +56,7 @@ export const EcoFriendlyProductsChickpetBangalore = () => {
             Eco Friendly Products in Chickpet, Bangalore
           </h1>
           <p className="mt-6 text-lg text-[#5C5C5C] leading-relaxed">
-            If you’re in Chickpet and searching for eco-friendly products, Trussers brings premium sustainable goods made
+            If you’re in Chickpet and searching for eco-friendly products, Trusser brings premium sustainable goods made
             from recycled bottles—ideal for daily carry, gifting, and office essentials.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
@@ -76,7 +76,7 @@ export const EcoFriendlyProductsChickpetBangalore = () => {
         </header>
 
         <section className="mt-16 rounded-3xl bg-white/70 border border-white/40 p-10">
-          <h2 className="font-serif text-3xl text-[#1A3C27]">Why people choose Trussers</h2>
+          <h2 className="font-serif text-3xl text-[#1A3C27]">Why people choose Trusser</h2>
           <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="rounded-2xl bg-white/70 border border-white/40 p-6">
               <div className="w-12 h-12 rounded-2xl bg-[#C1A17C] text-[#1A3C27] flex items-center justify-center mb-4">

@@ -213,7 +213,7 @@ export const Navbar = () => {
                             <Link to="/" className="block">
                                 <img
                                     src={TrusserLogo}
-                                    alt="Trussers"
+                                    alt="Trusser"
                                     className="h-10 w-auto object-contain lg:h-12"
                                 />
                             </Link>
@@ -305,7 +305,7 @@ export const Navbar = () => {
                             <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="block">
                                 <img
                                     src={TrusserLogo}
-                                    alt="Trussers"
+                                    alt="Trusser"
                                     className="h-10 w-auto object-contain"
                                 />
                             </Link>

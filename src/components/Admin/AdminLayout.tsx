@@ -54,7 +54,7 @@ export const AdminLayout = ({ children, title, actions }: AdminLayoutProps) => {
 
     return (
         <div className="min-h-screen bg-[#F7F7F7]">
-            <Seo title={title ? `${title} | Trussers Admin` : 'Trussers Admin'} canonicalPath={location.pathname} noindex />
+            <Seo title={title ? `${title} | Trusser Admin` : 'Trusser Admin'} canonicalPath={location.pathname} noindex />
             {/* Mobile Header */}
             <header className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 h-16 flex items-center px-4">
                 <button
@@ -63,7 +63,7 @@ export const AdminLayout = ({ children, title, actions }: AdminLayoutProps) => {
                 >
                     <Menu className="w-6 h-6 text-gray-700" />
                 </button>
-                <span className="ml-4 font-semibold text-gray-900">Trussers Admin</span>
+                <span className="ml-4 font-semibold text-gray-900">Trusser Admin</span>
             </header>
 
             {/* Mobile Sidebar Overlay */}
@@ -85,7 +85,7 @@ export const AdminLayout = ({ children, title, actions }: AdminLayoutProps) => {
                             className="lg:hidden fixed top-0 left-0 bottom-0 w-[280px] bg-white z-50 shadow-xl"
                         >
                             <div className="flex items-center justify-between h-16 px-4 border-b border-gray-200">
-                                <span className="font-bold text-lg text-gray-900">Trussers</span>
+                                <span className="font-bold text-lg text-gray-900">Trusser</span>
                                 <button
                                     onClick={() => setSidebarOpen(false)}
                                     className="p-2 rounded-lg hover:bg-gray-100"
@@ -124,7 +124,7 @@ export const AdminLayout = ({ children, title, actions }: AdminLayoutProps) => {
                 {/* Logo */}
                 <div className="h-16 flex items-center px-5 border-b border-gray-100">
                     <Link to="/admin/home" className="flex items-center gap-2">
-                        <img src="/src/assets/TrusserLOGO.avif" alt="Trussers" className="h-8 w-auto" />
+                        <img src="/src/assets/TrusserLOGO.avif" alt="Trusser" className="h-8 w-auto" />
                     </Link>
                 </div>
 

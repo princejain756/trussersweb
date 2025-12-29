@@ -6,8 +6,8 @@ export const PrivacyPolicy = () => {
   return (
     <div className="min-h-screen bg-[#F4EFEC] text-[#1A1A1A] antialiased selection:bg-[#C1A17C] selection:text-white">
       <Seo
-        title="Privacy Policy | Trussers"
-        description="Read the Trussers privacy policy."
+        title="Privacy Policy | Trusser"
+        description="Read the Trusser privacy policy."
         canonicalPath="/privacy-policy"
         ogType="website"
       />
@@ -16,7 +16,7 @@ export const PrivacyPolicy = () => {
       <main className="mx-auto max-w-4xl px-6 pt-32 pb-20">
         <h1 className="font-serif text-5xl text-[#1A3C27]">Privacy Policy</h1>
         <p className="mt-6 text-[#5C5C5C] leading-relaxed">
-          This Privacy Policy explains how Trussers collects, uses, and protects your information when you visit and use
+          This Privacy Policy explains how Trusser collects, uses, and protects your information when you visit and use
           our website.
         </p>
 
@@ -60,4 +60,3 @@ export const PrivacyPolicy = () => {
     </div>
   );
 };
-

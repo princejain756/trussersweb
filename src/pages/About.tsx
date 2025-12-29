@@ -10,8 +10,8 @@ export const About = () => {
   return (
     <div className="min-h-screen bg-[#F4EFEC] text-[#1A1A1A] antialiased selection:bg-[#C1A17C] selection:text-white">
       <Seo
-        title="About Trussers | Sustainable Eco-Friendly Products"
-        description="Trussers creates premium eco-friendly stationery & lifestyle products crafted from recycled bottles. Made in Bengaluru, India."
+        title="About Trusser | Sustainable Eco-Friendly Products"
+        description="Trusser creates premium eco-friendly stationery & lifestyle products crafted from recycled bottles. Made in Bengaluru, India."
         canonicalPath="/about"
         ogType="website"
       />
@@ -25,7 +25,7 @@ export const About = () => {
               Turning Waste Into Purpose
             </h1>
             <p className="mt-6 text-lg text-[#5C5C5C] leading-relaxed">
-              Trussers crafts premium stationery and lifestyle essentials from recycled bottles. Our goal is simple: make
+              Trusser crafts premium stationery and lifestyle essentials from recycled bottles. Our goal is simple: make
               sustainable choices feel effortless—beautiful to use, easy to gift, and built to last.
             </p>
 
@@ -182,4 +182,3 @@ export const About = () => {
     </div>
   );
 };
-

@@ -146,7 +146,7 @@ export const CheckoutSuccess = () => {
 
     return (
         <div className="min-h-screen bg-[#F7F0E8]">
-            <Seo title="Order confirmation | Trussers" canonicalPath="/checkout/success" noindex />
+            <Seo title="Order confirmation | Trusser" canonicalPath="/checkout/success" noindex />
             <Navbar />
             <main className="relative overflow-hidden">
                 <div className="absolute inset-0">

@@ -6,8 +6,8 @@ export const TermsOfService = () => {
   return (
     <div className="min-h-screen bg-[#F4EFEC] text-[#1A1A1A] antialiased selection:bg-[#C1A17C] selection:text-white">
       <Seo
-        title="Terms of Service | Trussers"
-        description="Read the Trussers terms of service."
+        title="Terms of Service | Trusser"
+        description="Read the Trusser terms of service."
         canonicalPath="/terms-of-service"
         ogType="website"
       />
@@ -16,7 +16,7 @@ export const TermsOfService = () => {
       <main className="mx-auto max-w-4xl px-6 pt-32 pb-20">
         <h1 className="font-serif text-5xl text-[#1A3C27]">Terms of Service</h1>
         <p className="mt-6 text-[#5C5C5C] leading-relaxed">
-          These Terms of Service govern your use of the Trussers website and purchases made through it.
+          These Terms of Service govern your use of the Trusser website and purchases made through it.
         </p>
 
         <section className="mt-10 space-y-6 text-[#5C5C5C] leading-relaxed">
@@ -59,4 +59,3 @@ export const TermsOfService = () => {
     </div>
   );
 };
-

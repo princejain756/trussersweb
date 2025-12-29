@@ -10,8 +10,8 @@ export const Sustainability = () => {
   return (
     <div className="min-h-screen bg-[#F4EFEC] text-[#1A1A1A] antialiased selection:bg-[#C1A17C] selection:text-white">
       <Seo
-        title="Sustainability | Trussers"
-        description="Learn how Trussers turns recycled bottles into premium stationery & lifestyle products, and why sustainable design matters."
+        title="Sustainability | Trusser"
+        description="Learn how Trusser turns recycled bottles into premium stationery & lifestyle products, and why sustainable design matters."
         canonicalPath="/sustainability"
         ogType="website"
       />
@@ -86,4 +86,3 @@ export const Sustainability = () => {
     </div>
   );
 };
-

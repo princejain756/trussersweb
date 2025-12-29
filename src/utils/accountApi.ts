@@ -176,7 +176,7 @@ export const subscribeToAccount = (callback: AccountUpdateCallback) => {
     };
 
     const handleStorage: StorageEventListener = (event) => {
-        if (event.key === 'trussers_account_refresh') {
+        if (event.key === 'trusser_account_refresh') {
             callback(cachedAccount);
         }
     };

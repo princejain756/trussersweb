@@ -59,7 +59,7 @@ export const AccountRegister = () => {
 
     return (
         <div className="min-h-screen bg-[#F4EFEC]">
-            <Seo title="Create account | Trussers" canonicalPath="/account/register" noindex />
+            <Seo title="Create account | Trusser" canonicalPath="/account/register" noindex />
             <Navbar />
             <main className="pt-24 pb-20">
                 <div className="mx-auto max-w-6xl px-6">

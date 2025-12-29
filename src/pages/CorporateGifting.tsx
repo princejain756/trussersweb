@@ -116,7 +116,7 @@ const features = [
 // Testimonials
 const testimonials = [
     {
-        quote: "Trussers transformed our employee gifting experience. The quality and sustainability aspect resonated deeply with our brand values.",
+        quote: "Trusser transformed our employee gifting experience. The quality and sustainability aspect resonated deeply with our brand values.",
         author: 'Priya Sharma',
         role: 'HR Director',
         company: 'Tech Innovations Ltd',
@@ -128,7 +128,7 @@ const testimonials = [
         company: 'Global Solutions Inc',
     },
     {
-        quote: "Working with Trussers was seamless from start to finish. They delivered 500+ kits on time with impeccable quality.",
+        quote: "Working with Trusser was seamless from start to finish. They delivered 500+ kits on time with impeccable quality.",
         author: 'Ananya Patel',
         role: 'Operations Manager',
         company: 'Sunrise Enterprises',
@@ -184,7 +184,7 @@ export const CorporateGifting = () => {
     return (
         <div className="min-h-screen bg-[#F4EFEC] selection:bg-[#C1A17C] selection:text-white">
             <Seo
-                title="Eco-Friendly Corporate Gifts in Bangalore | Trussers"
+                title="Eco-Friendly Corporate Gifts in Bangalore | Trusser"
                 description="Premium sustainable corporate and event gifting. Curated eco-friendly gift sets crafted from recycled bottles—made in Bengaluru, delivered across India."
                 canonicalPath="/corporate-gifting"
                 ogType="website"
@@ -374,7 +374,7 @@ export const CorporateGifting = () => {
                     <div className="mx-auto max-w-[1920px] px-6 lg:px-12">
                         <AnimatedSection className="text-center max-w-3xl mx-auto mb-16">
                             <span className="text-[#C1A17C] font-bold tracking-[0.2em] text-sm uppercase mb-4 block">
-                                Why Trussers
+                                Why Trusser
                             </span>
                             <h2 className="font-serif text-4xl md:text-6xl text-[#1A3C27] mb-6">
                                 The <span className="text-[#C1A17C]">Sustainable</span> Choice
@@ -670,7 +670,7 @@ export const CorporateGifting = () => {
                                 <div className="space-y-6">
                                     {[
                                         { icon: Phone, label: 'Call Us', value: '+91 9008138404' },
-                                        { icon: Mail, label: 'Email', value: 'corporate@trussers.in' },
+                                        { icon: Mail, label: 'Email', value: 'info@trusser.in' },
                                         { icon: MapPin, label: 'Office', value: 'Mumbai, Maharashtra' },
                                     ].map((contact, index) => (
                                         <div key={index} className="flex items-center gap-4">

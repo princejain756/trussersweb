@@ -187,7 +187,7 @@ export const ProductDetail = () => {
     if (isLoading) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-[#F4EFEC]">
-                <Seo title="Loading product | Trussers" canonicalPath={id ? `/product/${id}` : '/shop'} noindex />
+                <Seo title="Loading product | Trusser" canonicalPath={id ? `/product/${id}` : '/shop'} noindex />
                 <div className="text-center">
                     <h2 className="text-3xl font-serif text-[#1A3C27] mb-4">Loading product...</h2>
                     <p className="text-[#5C5C5C]">Fetching the latest details.</p>
@@ -199,7 +199,7 @@ export const ProductDetail = () => {
     if (!product) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-[#F4EFEC]">
-                <Seo title="Product not found | Trussers" canonicalPath={id ? `/product/${id}` : '/shop'} noindex />
+                <Seo title="Product not found | Trusser" canonicalPath={id ? `/product/${id}` : '/shop'} noindex />
                 <div className="text-center">
                     <h2 className="text-3xl font-serif text-[#1A3C27] mb-4">Product Not Found</h2>
                     <Button onClick={() => navigate('/')}>Return Home</Button>
@@ -265,7 +265,7 @@ export const ProductDetail = () => {
     return (
         <div className="min-h-screen bg-[#F4EFEC] selection:bg-[#C1A17C] selection:text-white" ref={containerRef}>
             <Seo
-                title={`${safeName} | Trussers`}
+                title={`${safeName} | Trusser`}
                 description={metaDescription}
                 canonicalPath={canonicalPath}
                 ogType="product"
@@ -286,8 +286,8 @@ export const ProductDetail = () => {
                         name: safeName,
                         image: [toAbsoluteUrl(imageSrc)],
                         description: resolvedDescription,
-                        sku: `TRUSSERS-${product.id}`,
-                        brand: { '@type': 'Brand', name: 'Trussers' },
+                        sku: `TRUSSER-${product.id}`,
+                        brand: { '@type': 'Brand', name: 'Trusser' },
                         ...(product.category ? { category: product.category } : {}),
                         ...(hasOfferPrice
                             ? {

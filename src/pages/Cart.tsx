@@ -356,7 +356,7 @@ export const Cart = () => {
 
     return (
         <div className="min-h-screen bg-[#F4EFEC] selection:bg-[#C1A17C] selection:text-white">
-            <Seo title="Cart | Trussers" canonicalPath="/cart" noindex />
+            <Seo title="Cart | Trusser" canonicalPath="/cart" noindex />
             <Navbar />
 
             <main className="pt-32 pb-20">

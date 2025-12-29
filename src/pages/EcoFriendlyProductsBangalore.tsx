@@ -9,7 +9,7 @@ const mapUrl =
   'https://www.google.com/maps/search/?api=1&query=No%205%2C%2012th%20Cross%20Road%2C%20Cubbonpet%2C%20Bengaluru%20560002';
 
 export const EcoFriendlyProductsBangalore = () => {
-  const title = 'Eco Friendly Products in Bangalore | Trussers';
+  const title = 'Eco Friendly Products in Bangalore | Trusser';
   const description =
     'Shop eco-friendly products in Bangalore—premium stationery & lifestyle essentials crafted from recycled bottles. Sustainable gifts and corporate gifting, made in Bengaluru.';
 
@@ -19,10 +19,10 @@ export const EcoFriendlyProductsBangalore = () => {
     mainEntity: [
       {
         '@type': 'Question',
-        name: 'What eco-friendly products can I buy from Trussers in Bangalore?',
+        name: 'What eco-friendly products can I buy from Trusser in Bangalore?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Trussers makes sustainable stationery and lifestyle essentials crafted from recycled bottles—designed for everyday use and gifting.',
+          text: 'Trusser makes sustainable stationery and lifestyle essentials crafted from recycled bottles—designed for everyday use and gifting.',
         },
       },
       {
@@ -64,7 +64,7 @@ export const EcoFriendlyProductsBangalore = () => {
             Eco Friendly Products in Bangalore
           </h1>
           <p className="mt-6 text-lg text-[#5C5C5C] leading-relaxed">
-            Trussers crafts premium stationery and lifestyle goods from recycled bottles—built for everyday use, gifting,
+            Trusser crafts premium stationery and lifestyle goods from recycled bottles—built for everyday use, gifting,
             and corporate orders. If you’re searching for eco-friendly products in Bangalore, start here.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">

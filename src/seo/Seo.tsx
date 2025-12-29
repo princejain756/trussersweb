@@ -87,7 +87,7 @@ function getDefaultJsonLd(pathname: string) {
       {
         '@type': 'Organization',
         '@id': `${siteUrl}/#organization`,
-        name: 'Trussers',
+        name: SITE_NAME,
         url: `${siteUrl}/`,
         logo: toAbsoluteUrl(DEFAULT_LOGO_PATH),
         sameAs: [BUSINESS.instagram],
@@ -96,7 +96,7 @@ function getDefaultJsonLd(pathname: string) {
         '@type': 'WebSite',
         '@id': `${siteUrl}/#website`,
         url: `${siteUrl}/`,
-        name: 'Trussers',
+        name: SITE_NAME,
         publisher: { '@id': `${siteUrl}/#organization` },
         potentialAction: {
           '@type': 'SearchAction',
@@ -107,7 +107,7 @@ function getDefaultJsonLd(pathname: string) {
       {
         '@type': 'LocalBusiness',
         '@id': `${siteUrl}/#localbusiness`,
-        name: 'Trussers',
+        name: SITE_NAME,
         url: `${siteUrl}/`,
         telephone: BUSINESS.phone,
         email: BUSINESS.email,
@@ -177,8 +177,8 @@ export function Seo({
     jsonLdList.forEach((item) => appendJsonLd(item));
 
     upsertMeta({ name: 'application-name' }, SITE_NAME);
-    upsertMeta({ name: 'author' }, 'Trussers');
-    upsertMeta({ name: 'publisher' }, 'Trussers');
+    upsertMeta({ name: 'author' }, SITE_NAME);
+    upsertMeta({ name: 'publisher' }, SITE_NAME);
     upsertMeta({ name: 'theme-color' }, '#1A3C27');
 
     if (resolvedSiteUrl.includes('trusser.in')) {

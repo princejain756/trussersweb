@@ -103,7 +103,7 @@ const BlogPost: React.FC = () => {
     if (loading) {
         return (
             <div className="min-h-screen bg-gradient-to-br from-[#0A0F0D] via-[#1A3C27] to-[#0A0F0D] flex items-center justify-center">
-                <Seo title="Loading article | Trussers Journal" canonicalPath={slug ? `/journal/${slug}` : '/journal'} noindex />
+                <Seo title="Loading article | Trusser Journal" canonicalPath={slug ? `/journal/${slug}` : '/journal'} noindex />
                 <div className="text-center">
                     <div className="w-16 h-16 border-4 border-[#C1A17C] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
                     <p className="text-[#F5F1E8] font-['Inter']">Loading article...</p>
@@ -115,7 +115,7 @@ const BlogPost: React.FC = () => {
     if (error || !blog) {
         return (
             <div className="min-h-screen bg-gradient-to-br from-[#0A0F0D] via-[#1A3C27] to-[#0A0F0D] flex items-center justify-center">
-                <Seo title="Article not found | Trussers Journal" canonicalPath={slug ? `/journal/${slug}` : '/journal'} noindex />
+                <Seo title="Article not found | Trusser Journal" canonicalPath={slug ? `/journal/${slug}` : '/journal'} noindex />
                 <div className="text-center max-w-md mx-auto px-4">
                     <h1 className="text-4xl font-['Playfair_Display'] text-[#F5F1E8] mb-4">
                         {error || 'Article Not Found'}
@@ -138,7 +138,7 @@ const BlogPost: React.FC = () => {
     return (
         <>
             <Seo
-                title={`${blog.title} | Trussers Journal`}
+                title={`${blog.title} | Trusser Journal`}
                 description={blog.excerpt}
                 canonicalPath={`/journal/${blog.slug}`}
                 ogType="article"
@@ -153,11 +153,11 @@ const BlogPost: React.FC = () => {
                     datePublished: blog.publishedDate,
                     author: {
                         '@type': 'Person',
-                        name: blog.author?.name || 'Trussers Team',
+                        name: blog.author?.name || 'Trusser Team',
                     },
                     publisher: {
                         '@type': 'Organization',
-                        name: 'Trussers',
+                        name: 'Trusser',
                     },
                 }}
             />

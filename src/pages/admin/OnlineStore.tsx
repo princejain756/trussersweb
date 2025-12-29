@@ -151,7 +151,7 @@ export const OnlineStore = () => {
                                 </div>
                                 <div>
                                     <div className="flex items-center gap-3">
-                                        <h3 className="font-semibold text-gray-900 text-lg">Trussers Theme</h3>
+                                        <h3 className="font-semibold text-gray-900 text-lg">Trusser Theme</h3>
                                         <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full">
                                             <CheckCircle className="w-3 h-3" />
                                             Current theme

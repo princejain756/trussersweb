@@ -57,7 +57,7 @@ export const AccountLogin = () => {
 
     return (
         <div className="min-h-screen bg-[#F4EFEC]">
-            <Seo title="Sign in | Trussers" canonicalPath="/account/login" noindex />
+            <Seo title="Sign in | Trusser" canonicalPath="/account/login" noindex />
             <Navbar />
             <main className="pt-24 pb-20">
                 <div className="mx-auto max-w-6xl px-6">

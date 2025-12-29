@@ -173,7 +173,7 @@ export const Journal = () => {
         title: featuredBlog.title,
         excerpt: featuredBlog.excerpt,
         category: featuredBlog.category || 'Sustainability',
-        author: featuredBlog.author || 'Trussers Team',
+        author: featuredBlog.author || 'Trusser Team',
         authorImage: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100',
         date: new Date(featuredBlog.publishedDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
         readTime: `${featuredBlog.readingTime} min read`,
@@ -197,7 +197,7 @@ export const Journal = () => {
     return (
         <div className="min-h-screen bg-[#F4EFEC] selection:bg-[#C1A17C] selection:text-white">
             <Seo
-                title="Journal | Trussers"
+                title="Journal | Trusser"
                 description="Stories and guides on sustainability, eco-friendly living, and corporate gifting."
                 canonicalPath="/journal"
                 ogType="website"

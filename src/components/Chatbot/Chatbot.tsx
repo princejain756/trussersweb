@@ -121,7 +121,7 @@ export const Chatbot = () => {
                 message += `\n\nMy Question: ${extraMessage}`;
             }
         } else {
-            message = extraMessage || `Hi! I'm interested in learning more about Trussers products.`;
+            message = extraMessage || `Hi! I'm interested in learning more about Trusser products.`;
         }
 
         return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
@@ -171,7 +171,7 @@ export const Chatbot = () => {
                     >
                         {/* Header */}
                         <div className="bg-gradient-to-r from-[#1A3C27] to-[#2D5F3F] p-5 text-white">
-                            <h3 className="font-serif text-xl font-semibold">Trussers Assistant</h3>
+                            <h3 className="font-serif text-xl font-semibold">Trusser Assistant</h3>
                             <p className="text-sm text-white/70 mt-1">
                                 {isPDP && product ? 'Interested in this product?' : 'How can we help you today?'}
                             </p>
@@ -215,7 +215,7 @@ export const Chatbot = () => {
                                 /* General Mode */
                                 <div className="space-y-3">
                                     <p className="text-sm text-[#5C5C5C] mb-4">
-                                        Welcome to Trussers! Explore our sustainable, premium goods.
+                                        Welcome to Trusser! Explore our sustainable, premium goods.
                                     </p>
 
                                     <Link
@@ -256,7 +256,7 @@ export const Chatbot = () => {
                                             <Info size={18} />
                                         </div>
                                         <div>
-                                            <h4 className="font-semibold text-[#1A3C27]">About Trussers</h4>
+                                            <h4 className="font-semibold text-[#1A3C27]">About Trusser</h4>
                                             <p className="text-xs text-[#5C5C5C]">Our story & values</p>
                                         </div>
                                     </Link>
@@ -301,7 +301,7 @@ export const Chatbot = () => {
                         {/* Footer */}
                         <div className="p-2 border-t border-[#E8DFD4] text-center">
                             <p className="text-xs text-[#5C5C5C]">
-                                Powered by <span className="font-semibold text-[#1A3C27]">Trussers</span>
+                                Powered by <span className="font-semibold text-[#1A3C27]">Trusser</span>
                             </p>
                         </div>
                     </motion.div>

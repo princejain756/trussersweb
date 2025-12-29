@@ -30,9 +30,9 @@ const blogsPath = path.join(dataDir, 'blogs.json');
 const sourceProductsPath = path.join(__dirname, '..', 'src', 'data', 'products.json');
 const sourceCategoriesPath = path.join(__dirname, '..', 'src', 'data', 'categories.json');
 const sourceWebsiteContentPath = path.join(__dirname, '..', 'public', 'websiteContent.json');
-const adminUser = process.env.ADMIN_USER?.trim() || 'trussers-admin';
-const adminPassword = process.env.ADMIN_PASSWORD?.trim() || 'Trussers-2024';
-const adminToken = process.env.ADMIN_TOKEN?.trim() || 'trussers-admin-token-2024';
+const adminUser = process.env.ADMIN_USER?.trim() || 'trusser-admin';
+const adminPassword = process.env.ADMIN_PASSWORD?.trim() || 'Trusser-2024';
+const adminToken = process.env.ADMIN_TOKEN?.trim() || 'trusser-admin-token-2024';
 const googleClientId = process.env.GOOGLE_CLIENT_ID?.trim();
 const googleOAuthClient = googleClientId ? new OAuth2Client(googleClientId) : null;
 const businessDetails = {
@@ -155,8 +155,8 @@ async function ensureSeedData() {
                     email: 'info@trusser.in',
                     address: 'Made with ♥ in India',
                     instagramLink: 'https://instagram.com/trusser.in',
-                    facebookLink: 'https://facebook.com/trussers',
-                    twitterLink: 'https://twitter.com/trussers',
+                    facebookLink: '',
+                    twitterLink: '',
                 },
                 lastSaved: '',
             };
@@ -390,7 +390,7 @@ function parseCookies(rawCookie) {
 
 function getSessionToken(req) {
     const cookies = parseCookies(req.headers.cookie);
-    return cookies.trussers_session || null;
+    return cookies.trusser_session || null;
 }
 
 function getSessionUser(req) {
@@ -428,7 +428,7 @@ function clearSession(token) {
 function setSessionCookie(res, token) {
     const isProd = process.env.NODE_ENV === 'production';
     const parts = [
-        `trussers_session=${encodeURIComponent(token)}`,
+        `trusser_session=${encodeURIComponent(token)}`,
         'Path=/',
         'HttpOnly',
         'SameSite=Lax',
@@ -441,7 +441,7 @@ function setSessionCookie(res, token) {
 }
 
 function clearSessionCookie(res) {
-    res.setHeader('Set-Cookie', 'trussers_session=; Path=/; HttpOnly; Max-Age=0; SameSite=Lax');
+    res.setHeader('Set-Cookie', 'trusser_session=; Path=/; HttpOnly; Max-Age=0; SameSite=Lax');
 }
 
 async function getLogoBuffer() {
@@ -2036,7 +2036,7 @@ app.post('/api/admin/blogs', requireAdmin, async (req, res) => {
         slug,
         content,
         excerpt: excerpt || content.substring(0, 200).replace(/<[^>]*>/g, '') + '...',
-        author: 'Trussers Team',
+        author: 'Trusser Team',
         publishedDate: new Date().toISOString(),
         status: status || 'draft',
         tags: tags || [],

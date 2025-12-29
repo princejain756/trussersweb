@@ -76,7 +76,7 @@ export const AdminLogin = () => {
 
     return (
         <div className="relative min-h-screen overflow-hidden bg-[#F4EFEC]">
-            <Seo title="Admin login | Trussers" canonicalPath="/admin/login" noindex />
+            <Seo title="Admin login | Trusser" canonicalPath="/admin/login" noindex />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.9),_transparent_55%)]" />
             <motion.div
                 className="pointer-events-none absolute -left-32 top-6 h-72 w-72 rounded-full bg-[#C1A17C]/35 blur-3xl"
@@ -104,7 +104,7 @@ export const AdminLogin = () => {
 
                         <div className="space-y-5">
                             <h1 className="text-4xl font-serif leading-tight text-[#1A3C27] sm:text-5xl lg:text-6xl">
-                                Trussers Admin Console
+                                Trusser Admin Console
                             </h1>
                             <p className="max-w-xl text-lg text-[#5C5C5C]">
                                 Secure access to the product catalog, pricing, and media. Log in to update inventory
@@ -164,7 +164,7 @@ export const AdminLogin = () => {
                                         type="text"
                                         value={username}
                                         onChange={(event) => setUsername(event.target.value)}
-                                        placeholder="trussers-admin"
+                                        placeholder="trusser-admin"
                                         autoComplete="username"
                                         className="w-full bg-transparent text-sm text-[#1A1A1A] placeholder:text-[#9B8F82] focus:outline-none"
                                     />

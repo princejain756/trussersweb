@@ -570,7 +570,7 @@ export const Checkout = () => {
 
     return (
         <div className="min-h-screen bg-[#F7F0E8]">
-            <Seo title="Checkout | Trussers" canonicalPath="/checkout" noindex />
+            <Seo title="Checkout | Trusser" canonicalPath="/checkout" noindex />
             <Navbar />
             <main className="relative overflow-hidden">
                 <div className="absolute inset-0">

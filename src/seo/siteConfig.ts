@@ -6,7 +6,7 @@ export type PostalAddress = {
   addressCountry: string;
 };
 
-export const SITE_NAME = 'Trussers';
+export const SITE_NAME = 'Trusser';
 export const DEFAULT_TITLE = `${SITE_NAME} | Sustainable Premium Goods`;
 export const DEFAULT_DESCRIPTION =
   'Eco-friendly stationery & lifestyle products crafted from recycled bottles. Sustainable gifts, corporate gifting, and everyday essentials—made in Bengaluru, India.';

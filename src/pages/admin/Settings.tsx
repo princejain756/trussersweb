@@ -78,7 +78,7 @@ const generatePassword = (): string => {
 };
 
 const mockUsers: AdminUser[] = [
-    { id: '1', name: 'Maitri Wadher', email: 'maitri@trussers.com', password: generatePassword(), status: 'Active', role: 'Store owner', lastLogin: 'Today', twoFactorEnabled: true, permissions: ALL_MODULES },
+    { id: '1', name: 'Maitri Wadher', email: 'maitri@trusser.in', password: generatePassword(), status: 'Active', role: 'Store owner', lastLogin: 'Today', twoFactorEnabled: true, permissions: ALL_MODULES },
     { id: '2', name: 'GoKwik Commerce Solution', email: 'support@gokwik.co', password: generatePassword(), status: 'Active', role: 'App-only', lastLogin: 'Yesterday', twoFactorEnabled: false, permissions: ['Orders', 'Products'] },
 ];
 
@@ -86,12 +86,12 @@ export const Settings = () => {
     const navigate = useNavigate();
     const [theme, setTheme] = useState<ThemeMode>('light');
     const [storeDetails, setStoreDetails] = useState({
-        name: 'Trussers',
-        email: 'contact@trussers.com',
+        name: 'Trusser',
+        email: 'info@trusser.in',
         phone: '+91 9008138404',
     });
     const [billingAddress, setBillingAddress] = useState({
-        line1: 'Trussers Eco Products',
+        line1: 'Trusser Eco Products',
         line2: 'Plot No. 45, Industrial Area',
         city: 'Bengaluru',
         state: 'Karnataka',

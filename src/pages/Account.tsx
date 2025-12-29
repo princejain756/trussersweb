@@ -80,7 +80,7 @@ export const Account = () => {
 
     return (
         <div className="min-h-screen bg-[#F4EFEC]">
-            <Seo title="Account | Trussers" canonicalPath="/account" noindex />
+            <Seo title="Account | Trusser" canonicalPath="/account" noindex />
             <Navbar />
             <main className="pt-24 pb-20">
                 <div className="mx-auto max-w-6xl px-6 space-y-10">

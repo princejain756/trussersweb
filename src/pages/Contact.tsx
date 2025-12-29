@@ -10,14 +10,14 @@ const mapUrl =
 
 export const Contact = () => {
   const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-    "Hi! I'm interested in Trussers eco-friendly products. Please help me with my order."
+    "Hi! I'm interested in Trusser eco-friendly products. Please help me with my order."
   )}`;
 
   return (
     <div className="min-h-screen bg-[#F4EFEC] text-[#1A1A1A] antialiased selection:bg-[#C1A17C] selection:text-white">
       <Seo
-        title="Contact Trussers | Eco-Friendly Products"
-        description="Contact Trussers for sustainable stationery, lifestyle essentials, and corporate gifting. Based in Bengaluru, India."
+        title="Contact Trusser | Eco-Friendly Products"
+        description="Contact Trusser for sustainable stationery, lifestyle essentials, and corporate gifting. Based in Bengaluru, India."
         canonicalPath="/contact"
         ogType="website"
       />
@@ -98,4 +98,3 @@ export const Contact = () => {
     </div>
   );
 };
-

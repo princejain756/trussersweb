@@ -85,7 +85,7 @@ const defaultBlogDraft: BlogDraft = {
     slug: '',
     excerpt: '',
     content: '',
-    author: 'Trussers Team',
+    author: 'Trusser Team',
     status: 'draft',
     tags: [],
     featured: false,
@@ -226,7 +226,7 @@ export const Journal = () => {
                 slug: blogDraft.slug.trim() || slugify(blogDraft.title),
                 excerpt: blogDraft.excerpt.trim(),
                 content: blogDraft.content.trim(),
-                author: blogDraft.author.trim() || 'Trussers Team',
+                author: blogDraft.author.trim() || 'Trusser Team',
             };
 
             const isEditing = !!editingId;
@@ -456,7 +456,7 @@ export const Journal = () => {
                                                 type="text"
                                                 value={blogDraft.author}
                                                 onChange={(e) => setBlogDraft(prev => ({ ...prev, author: e.target.value }))}
-                                                placeholder="Trussers Team"
+                                                placeholder="Trusser Team"
                                                 className="w-full px-4 py-3 bg-[#F4EFEC] border-2 border-transparent focus:border-[#1A3C27] rounded-xl outline-none transition-all text-sm"
                                             />
                                         </div>

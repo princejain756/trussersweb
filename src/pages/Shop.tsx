@@ -566,7 +566,7 @@ export const Shop = () => {
     return (
         <div className="min-h-screen bg-[#F4EFEC] selection:bg-[#C1A17C] selection:text-white">
             <Seo
-                title="Shop Eco-Friendly Products | Trussers"
+                title="Shop Eco-Friendly Products | Trusser"
                 description="Shop eco-friendly stationery & lifestyle products crafted from recycled bottles. Sustainable gifts and corporate gifting—made in Bengaluru, India."
                 canonicalPath="/shop"
                 ogType="website"

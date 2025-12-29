@@ -15,8 +15,8 @@
     "subheading": "Curated collections for every aspect of your sustainable life."
   },
   "instagramFeed": {
-    "embedUrl": "https://www.instagram.com/trussers.co/",
-    "username": "@trussers.co"
+    "embedUrl": "https://www.instagram.com/trusser.in/",
+    "username": "@trusser.in"
   },
   "corporateGifting": {
     "heading": "Corporate & Event Gifting",
@@ -26,7 +26,7 @@
   "footer": {
     "aboutText": "Subscribe to receive updates on new sustainable collections, eco-conscious living tips, and exclusive offers.",
     "phone": "+91 9008138404",
-    "email": "hello@trusser.in",
+    "email": "info@trusser.in",
     "address": "Made with \u2665 in India"
   },
   "lastSaved": "2025-12-26T05:20:19.338Z",
@@ -66,26 +66,8 @@
     {
       "id": "58p7vl5",
       "platform": "Instagram",
-      "url": "https://instagram.com/trussers.in",
+      "url": "https://instagram.com/trusser.in",
       "label": "Instagram"
-    },
-    {
-      "id": "4cahib3",
-      "platform": "Facebook",
-      "url": "https://facebook.com/trussers",
-      "label": "Facebook"
-    },
-    {
-      "id": "8i09pnf",
-      "platform": "Twitter",
-      "url": "https://twitter.com/trussers",
-      "label": "Twitter/X"
-    },
-    {
-      "id": "66pnas4",
-      "platform": "LinkedIn",
-      "url": "https://in.linkedin.com/in/maitri-wadher-246b298b?trk=public_profile_samename-profile&original_referer=https%3A%2F%2Fin.linkedin.com%2Fin%2Fmaitri-wadher-35a7a829a",
-      "label": "LinkedIn"
     }
   ]
 }

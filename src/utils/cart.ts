@@ -7,7 +7,7 @@ export type CartItem = {
     category?: string;
 };
 
-const CART_STORAGE_KEY = 'trussers_cart_v1';
+const CART_STORAGE_KEY = 'trusser_cart_v1';
 
 type CartUpdateCallback = (items: CartItem[]) => void;
 
