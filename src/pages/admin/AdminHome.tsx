@@ -129,11 +129,17 @@ const StatCard = ({
 
 export const AdminHome = () => {
     const navigate = useNavigate();
-    const [_dateRange, _setDateRange] = useState('Last 30 days');
+    const [dateRange, setDateRange] = useState('Last 30 days');
+    const [channel, setChannel] = useState('All channels');
+    const [showDateDropdown, setShowDateDropdown] = useState(false);
+    const [showChannelDropdown, setShowChannelDropdown] = useState(false);
     const [liveVisitors, setLiveVisitors] = useState(0);
     const [loading, setLoading] = useState(true);
     const [stats, setStats] = useState<DashboardStats | null>(null);
     const [error, setError] = useState<string | null>(null);
+
+    const dateRangeOptions = ['Today', 'Yesterday', 'Last 7 days', 'Last 30 days', 'Last 90 days', 'Last 12 months', 'All time'];
+    const channelOptions = ['All channels', 'Website', 'WhatsApp', 'Corporate Inquiries'];
 
     const getAdminToken = useCallback(() => {
         return typeof window !== 'undefined' ? window.localStorage.getItem('adminToken') : null;
@@ -191,6 +197,16 @@ export const AdminHome = () => {
         return () => clearInterval(interval);
     }, []);
 
+    // Close dropdowns when clicking outside
+    useEffect(() => {
+        const handleClickOutside = () => {
+            setShowDateDropdown(false);
+            setShowChannelDropdown(false);
+        };
+        document.addEventListener('click', handleClickOutside);
+        return () => document.removeEventListener('click', handleClickOutside);
+    }, []);
+
     if (loading) {
         return (
             <AdminLayout title="Dashboard">
@@ -224,15 +240,73 @@ export const AdminHome = () => {
             <div className="max-w-7xl mx-auto space-y-6">
                 {/* Filters Row */}
                 <div className="flex flex-wrap items-center gap-3">
-                    <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
-                        <Calendar className="w-4 h-4" />
-                        {_dateRange}
-                        <ChevronDown className="w-4 h-4" />
-                    </button>
-                    <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
-                        All channels
-                        <ChevronDown className="w-4 h-4" />
-                    </button>
+                    {/* Date Range Dropdown */}
+                    <div className="relative">
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setShowDateDropdown(!showDateDropdown);
+                                setShowChannelDropdown(false);
+                            }}
+                            className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+                        >
+                            <Calendar className="w-4 h-4" />
+                            {dateRange}
+                            <ChevronDown className={`w-4 h-4 transition-transform ${showDateDropdown ? 'rotate-180' : ''}`} />
+                        </button>
+                        {showDateDropdown && (
+                            <div className="absolute top-full left-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50 py-1">
+                                {dateRangeOptions.map((option) => (
+                                    <button
+                                        key={option}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            setDateRange(option);
+                                            setShowDateDropdown(false);
+                                        }}
+                                        className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 transition-colors ${dateRange === option ? 'bg-[#1A3C27]/10 text-[#1A3C27] font-medium' : 'text-gray-700'
+                                            }`}
+                                    >
+                                        {option}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Channel Dropdown */}
+                    <div className="relative">
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setShowChannelDropdown(!showChannelDropdown);
+                                setShowDateDropdown(false);
+                            }}
+                            className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+                        >
+                            {channel}
+                            <ChevronDown className={`w-4 h-4 transition-transform ${showChannelDropdown ? 'rotate-180' : ''}`} />
+                        </button>
+                        {showChannelDropdown && (
+                            <div className="absolute top-full left-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-50 py-1">
+                                {channelOptions.map((option) => (
+                                    <button
+                                        key={option}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            setChannel(option);
+                                            setShowChannelDropdown(false);
+                                        }}
+                                        className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 transition-colors ${channel === option ? 'bg-[#1A3C27]/10 text-[#1A3C27] font-medium' : 'text-gray-700'
+                                            }`}
+                                    >
+                                        {option}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+
                     <div className="flex items-center gap-2 px-4 py-2 bg-green-50 border border-green-200 rounded-lg text-sm font-medium text-green-700">
                         <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
                         {liveVisitors} live visitors

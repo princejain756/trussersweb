@@ -23,7 +23,7 @@
   },
   {
     "id": 3,
-    "name": "Gift bag 34",
+    "name": "Birdsong Revival Tote",
     "price": "₹449.00",
     "image": "/products/gift-bag-34.webp",
     "tag": "New"
@@ -37,14 +37,14 @@
   },
   {
     "id": 5,
-    "name": "Gift bag 29",
+    "name": "Elephant Bloom Bag",
     "price": "₹499.00",
     "image": "/products/gift-bag-29.webp",
     "tag": "New"
   },
   {
     "id": 6,
-    "name": "Gift bag 23",
+    "name": "Floral Bloom Pouch",
     "price": "₹449.00",
     "image": "/products/gift-bag-23.webp",
     "tag": "New"
@@ -114,7 +114,7 @@
   },
   {
     "id": 16,
-    "name": "Gift bag 15",
+    "name": "Lotus Bloom Tote",
     "price": "₹399.00",
     "image": "/products/gift-bag-15.webp",
     "tag": "New"
@@ -128,7 +128,7 @@
   },
   {
     "id": 18,
-    "name": "Gift bag 05",
+    "name": "Crimson Blossom Bag",
     "price": "₹499.00",
     "image": "/products/gift-bag-1.webp",
     "tag": "New"
@@ -191,7 +191,7 @@
   },
   {
     "id": 27,
-    "name": "Gift Bag 01",
+    "name": "Lotus Blossom Carryall",
     "price": "₹499.00",
     "image": "/products/gift-bag-01.webp",
     "tag": "New"
@@ -205,7 +205,7 @@
   },
   {
     "id": 29,
-    "name": "Gift bag 10",
+    "name": "Peacock Bloom Bag",
     "price": "₹499.00",
     "image": "/products/gift-bag-10.webp",
     "tag": "New"
@@ -303,7 +303,7 @@
   },
   {
     "id": 43,
-    "name": "Gift bag 20",
+    "name": "Indigo Lotus Gift Bag",
     "price": "₹399.00",
     "image": "/products/gift-bag-20.webp",
     "tag": "New"
@@ -324,14 +324,14 @@
   },
   {
     "id": 46,
-    "name": "Gift bags 13",
+    "name": "Lotus Bloom Bag",
     "price": "₹449.00",
     "image": "/products/gift-bags-13.webp",
     "tag": "New"
   },
   {
     "id": 47,
-    "name": "Gift bag 08",
+    "name": "Rainbow Bloom Bag",
     "price": "₹449.00",
     "image": "/products/gift-bag-08.webp",
     "tag": "New"
@@ -366,21 +366,21 @@
   },
   {
     "id": 52,
-    "name": "Gift bag 21",
+    "name": "Hibiscus Bloom Bag",
     "price": "₹399.00",
     "image": "/products/gift-bag-21.webp",
     "tag": "New"
   },
   {
     "id": 53,
-    "name": "Gift bag 03",
+    "name": "Peacock Bloom Pouch",
     "price": "₹449.00",
     "image": "/products/gift-bag-03.webp",
     "tag": "New"
   },
   {
     "id": 54,
-    "name": "Gift bag 31",
+    "name": "Indigo Forest Tote",
     "price": "₹449.00",
     "image": "/products/gift-bag-31.webp",
     "tag": "New"
@@ -485,7 +485,7 @@
   },
   {
     "id": 69,
-    "name": "Gift bag 24",
+    "name": "Lotus Blossom Gift Bag",
     "price": "₹499.00",
     "image": "/products/gift-bag-24.webp",
     "tag": "New"
@@ -520,14 +520,14 @@
   },
   {
     "id": 74,
-    "name": "Gift bag 28",
+    "name": "Lotus Bloom Gift Bag",
     "price": "₹449.00",
     "image": "/products/gift-bag-28.webp",
     "tag": "New"
   },
   {
     "id": 75,
-    "name": "Gift bag 02",
+    "name": "Lotus Bloom Bag",
     "price": "₹449.00",
     "image": "/products/gift-bag-02.webp",
     "tag": "New"
@@ -548,7 +548,7 @@
   },
   {
     "id": 78,
-    "name": "Gift bag 35",
+    "name": "Lotus Bloom Gift Bag",
     "price": "₹449.00",
     "image": "/products/gift-bag-35.webp",
     "tag": "New"
@@ -632,7 +632,7 @@
   },
   {
     "id": 90,
-    "name": "Gift bag 26",
+    "name": "Lotus Blossom Tote",
     "price": "₹499.00",
     "image": "/products/gift-bag-26.webp",
     "tag": "New"
@@ -723,7 +723,7 @@
   },
   {
     "id": 103,
-    "name": "Gift bag 06",
+    "name": "Floral Bloom Gift Bag",
     "price": "₹499.00",
     "image": "/products/gift-bag-06.webp",
     "tag": "New"
@@ -828,7 +828,7 @@
   },
   {
     "id": 118,
-    "name": "Gift bag 19",
+    "name": "Lotus Bloom Gift Bag",
     "price": "₹399.00",
     "image": "/products/gift-bag-19.webp",
     "tag": "New"
@@ -863,7 +863,7 @@
   },
   {
     "id": 123,
-    "name": "Gift bag 17",
+    "name": "Lotus Blossom Gift Bag",
     "price": "₹399.00",
     "image": "/products/gift-bag-3.webp",
     "tag": "New"
@@ -898,7 +898,7 @@
   },
   {
     "id": 128,
-    "name": "Gift bag 18",
+    "name": "Lotus Bloom Gift Bag",
     "price": "₹399.00",
     "image": "/products/gift-bag-18.webp",
     "tag": "New"
@@ -940,7 +940,7 @@
   },
   {
     "id": 134,
-    "name": "Gift bag 22",
+    "name": "Floral Bloom Gift Bag",
     "price": "₹449.00",
     "image": "/products/gift-bag-22.webp",
     "tag": "New"
@@ -1003,7 +1003,7 @@
   },
   {
     "id": 143,
-    "name": "Gift bag 04",
+    "name": "Indigo Cattle Canvas",
     "price": "₹449.00",
     "image": "/products/gift-bag.webp",
     "tag": "New"
@@ -1066,7 +1066,7 @@
   },
   {
     "id": 152,
-    "name": "Gift bag 12",
+    "name": "Crimson Bloom Bag",
     "price": "₹499.00",
     "image": "/products/gift-bag-12.webp",
     "tag": "New"
@@ -1087,7 +1087,7 @@
   },
   {
     "id": 155,
-    "name": "Gift bag 16",
+    "name": "Rainbow Bloom Bag",
     "price": "₹399.00",
     "image": "/products/gift-bag-16.webp",
     "tag": "New"
@@ -1115,7 +1115,7 @@
   },
   {
     "id": 159,
-    "name": "Gift bags 27",
+    "name": "Golden Bloom Gift Bag",
     "price": "₹449.00",
     "image": "/products/gift-bags.webp",
     "tag": "New"
@@ -1164,7 +1164,7 @@
   },
   {
     "id": 166,
-    "name": "Gift bag 25",
+    "name": "Peacock Bloom Pouch",
     "price": "₹499.00",
     "image": "/products/gift-bag-25.webp",
     "tag": "New"
@@ -1185,21 +1185,21 @@
   },
   {
     "id": 169,
-    "name": "Gift bag 14",
+    "name": "Sunflower Bloom Bag",
     "price": "₹399.00",
     "image": "/products/gift-bag-14.webp",
     "tag": "New"
   },
   {
     "id": 170,
-    "name": "Gift bag 32",
+    "name": "Rainbow Heritage Pouch",
     "price": "₹449.00",
     "image": "/products/gift-bag-32.webp",
     "tag": "New"
   },
   {
     "id": 171,
-    "name": "gift bag 30",
+    "name": "Lotus Grove Gift Bag",
     "price": "₹499.00",
     "image": "/products/gift-bag-30.webp",
     "tag": "New"
@@ -1220,14 +1220,14 @@
   },
   {
     "id": 174,
-    "name": "Gift bag 33",
+    "name": "Blue Wave Gift Bag",
     "price": "₹449.00",
     "image": "/products/gift-bag-33.webp",
     "tag": "New"
   },
   {
     "id": 175,
-    "name": "Gift bag 09",
+    "name": "Lotus Bloom Gift Bag",
     "price": "₹499.00",
     "image": "/products/gift-bag-90.webp",
     "tag": "New"
@@ -1241,14 +1241,14 @@
   },
   {
     "id": 177,
-    "name": "Gift bag 11",
+    "name": "Indigo Bloom Pouch",
     "price": "₹499.00",
     "image": "/products/gift-bag-11.webp",
     "tag": "New"
   },
   {
     "id": 178,
-    "name": "Gift bag 07",
+    "name": "Tropical Bloom Bag",
     "price": "₹449.00",
     "image": "/products/gift-bag-2.webp",
     "tag": "New"

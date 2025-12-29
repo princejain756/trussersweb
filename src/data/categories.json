@@ -3,7 +3,28 @@
     "name": "Tote Bags",
     "slug": "tote-bags",
     "url": "https://www.trusser.in/category/tote-bags",
-    "products": []
+    "products": [
+      {
+        "name": "Carry Bag Korean",
+        "image": "/products/carry-bag-korean.webp",
+        "filename": "carry-bag-korean.webp"
+      },
+      {
+        "name": "Carry Bag Leaf",
+        "image": "/products/carry-bag-leaf.webp",
+        "filename": "carry-bag-leaf.webp"
+      },
+      {
+        "name": "Carry Bag Planet",
+        "image": "/products/carry-bag-planet.webp",
+        "filename": "carry-bag-planet.webp"
+      },
+      {
+        "name": "Carry Bag Summer",
+        "image": "/products/carry-bag-summer.webp",
+        "filename": "carry-bag-summer.webp"
+      }
+    ]
   },
   "corporate-gift-sets": {
     "name": "Corporate Gift Sets",
@@ -11,44 +32,14 @@
     "url": "https://www.trusser.in/category/corporate-gift-sets",
     "products": [
       {
-        "name": "Corporate Gift Sets 1",
-        "image": "/products/categories/corporate-gift-sets/corporate-gift-sets-1.webp",
-        "filename": "corporate-gift-sets-1.webp"
+        "name": "Pixie Gallop Gift Set",
+        "image": "/products/pixie-gallop-gift-set.webp",
+        "filename": "pixie-gallop-gift-set.webp"
       },
       {
-        "name": "Corporate Gift Sets 2",
-        "image": "/products/categories/corporate-gift-sets/corporate-gift-sets-2.webp",
-        "filename": "corporate-gift-sets-2.webp"
-      },
-      {
-        "name": "Corporate Gift Sets 3",
-        "image": "/products/categories/corporate-gift-sets/corporate-gift-sets-3.webp",
-        "filename": "corporate-gift-sets-3.webp"
-      },
-      {
-        "name": "Corporate Gift Sets 4",
-        "image": "/products/categories/corporate-gift-sets/corporate-gift-sets-4.webp",
-        "filename": "corporate-gift-sets-4.webp"
-      },
-      {
-        "name": "Corporate Gift Sets 5",
-        "image": "/products/categories/corporate-gift-sets/corporate-gift-sets-5.webp",
-        "filename": "corporate-gift-sets-5.webp"
-      },
-      {
-        "name": "Corporate Gift Sets 6",
-        "image": "/products/categories/corporate-gift-sets/corporate-gift-sets-6.webp",
-        "filename": "corporate-gift-sets-6.webp"
-      },
-      {
-        "name": "Corporate Gift Sets 7",
-        "image": "/products/categories/corporate-gift-sets/corporate-gift-sets-7.webp",
-        "filename": "corporate-gift-sets-7.webp"
-      },
-      {
-        "name": "Corporate Gift Sets 8",
-        "image": "/products/categories/corporate-gift-sets/corporate-gift-sets-8.webp",
-        "filename": "corporate-gift-sets-8.webp"
+        "name": "The Little Explorer Gift Set",
+        "image": "/products/the-little-explorer-gift-set.webp",
+        "filename": "the-little-explorer-gift-set.webp"
       }
     ]
   },
@@ -58,102 +49,102 @@
     "url": "https://www.trusser.in/category/women-gift-sets",
     "products": [
       {
-        "name": "Women Gift Sets 1",
+        "name": "Heliophile Bloom Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-1.webp",
         "filename": "women-gift-sets-1.webp"
       },
       {
-        "name": "Women Gift Sets 2",
+        "name": "Pine Sunshine Pouch Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-2.webp",
         "filename": "women-gift-sets-2.webp"
       },
       {
-        "name": "Women Gift Sets 3",
+        "name": "Lotus Bloom Gift Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-3.webp",
         "filename": "women-gift-sets-3.webp"
       },
       {
-        "name": "Women Gift Sets 4",
+        "name": "Ocean Stripe Pouch Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-4.webp",
         "filename": "women-gift-sets-4.webp"
       },
       {
-        "name": "Women Gift Sets 5",
+        "name": "Zestful Zig Zag Pouch Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-5.webp",
         "filename": "women-gift-sets-5.webp"
       },
       {
-        "name": "Women Gift Sets 6",
+        "name": "Autumn Leaf Pouch Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-6.webp",
         "filename": "women-gift-sets-6.webp"
       },
       {
-        "name": "Women Gift Sets 7",
+        "name": "Tropical Bloom Pouch Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-7.webp",
         "filename": "women-gift-sets-7.webp"
       },
       {
-        "name": "Women Gift Sets 8",
+        "name": "GeoVibe Pouch Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-8.webp",
         "filename": "women-gift-sets-8.webp"
       },
       {
-        "name": "Women Gift Sets 9",
+        "name": "Lotus Bloom Gift Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-9.webp",
         "filename": "women-gift-sets-9.webp"
       },
       {
-        "name": "Women Gift Sets 10",
+        "name": "Rain Leaf Pouch Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-10.webp",
         "filename": "women-gift-sets-10.webp"
       },
       {
-        "name": "Women Gift Sets 11",
+        "name": "Sunset Chevron Pouch Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-11.webp",
         "filename": "women-gift-sets-11.webp"
       },
       {
-        "name": "Women Gift Sets 12",
+        "name": "Mosaic Bloom Pouch Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-12.webp",
         "filename": "women-gift-sets-12.webp"
       },
       {
-        "name": "Women Gift Sets 13",
+        "name": "Sunbeam Fabric Pouch Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-13.webp",
         "filename": "women-gift-sets-13.webp"
       },
       {
-        "name": "Women Gift Sets 14",
+        "name": "Lotus Bloom Tote",
         "image": "/products/categories/women-gift-sets/women-gift-sets-14.webp",
         "filename": "women-gift-sets-14.webp"
       },
       {
-        "name": "Women Gift Sets 15",
+        "name": "Maple Autumn Pouch Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-15.webp",
         "filename": "women-gift-sets-15.webp"
       },
       {
-        "name": "Women Gift Sets 16",
+        "name": "Autumn Leaf Pouch Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-16.webp",
         "filename": "women-gift-sets-16.webp"
       },
       {
-        "name": "Women Gift Sets 17",
+        "name": "Prism Flow Pouch Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-17.webp",
         "filename": "women-gift-sets-17.webp"
       },
       {
-        "name": "Women Gift Sets 18",
+        "name": "Maple Autumn Pouch Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-18.webp",
         "filename": "women-gift-sets-18.webp"
       },
       {
-        "name": "Women Gift Sets 19",
+        "name": "Boho Pattern Pouch Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-19.webp",
         "filename": "women-gift-sets-19.webp"
       },
       {
-        "name": "Women Gift Sets 20",
+        "name": "Pine Palm Pouch Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-20.webp",
         "filename": "women-gift-sets-20.webp"
       }
@@ -165,39 +156,44 @@
     "url": "https://www.trusser.in/category/kids-gifts-set",
     "products": [
       {
-        "name": "Kids Gifts Set 1",
-        "image": "/products/categories/kids-gifts-set/kids-gifts-set-1.webp",
-        "filename": "kids-gifts-set-1.webp"
+        "name": "Enjoy The Little Things",
+        "image": "/products/enjoy-the-little-things.webp",
+        "filename": "enjoy-the-little-things.webp"
       },
       {
-        "name": "Kids Gifts Set 2",
-        "image": "/products/categories/kids-gifts-set/kids-gifts-set-2.webp",
-        "filename": "kids-gifts-set-2.webp"
+        "name": "Mermaid Life",
+        "image": "/products/mermaid-life.webp",
+        "filename": "mermaid-life.webp"
       },
       {
-        "name": "Kids Gifts Set 3",
-        "image": "/products/categories/kids-gifts-set/kids-gifts-set-3.webp",
-        "filename": "kids-gifts-set-3.webp"
+        "name": "Mermaid Squad",
+        "image": "/products/mermaid-squad.webp",
+        "filename": "mermaid-squad.webp"
       },
       {
-        "name": "Kids Gifts Set 4",
-        "image": "/products/categories/kids-gifts-set/kids-gifts-set-4.webp",
-        "filename": "kids-gifts-set-4.webp"
+        "name": "Panda",
+        "image": "/products/panda.webp",
+        "filename": "panda.webp"
       },
       {
-        "name": "Kids Gifts Set 5",
-        "image": "/products/categories/kids-gifts-set/kids-gifts-set-5.webp",
-        "filename": "kids-gifts-set-5.webp"
+        "name": "Sparkle Like A Unicorn",
+        "image": "/products/sparkle-like-a-unicorn.webp",
+        "filename": "sparkle-like-a-unicorn.webp"
       },
       {
-        "name": "Kids Gifts Set 6",
-        "image": "/products/categories/kids-gifts-set/kids-gifts-set-6.webp",
-        "filename": "kids-gifts-set-6.webp"
+        "name": "Unicorn Notebook",
+        "image": "/products/unicorn-notebook.webp",
+        "filename": "unicorn-notebook.webp"
       },
       {
-        "name": "Kids Gifts Set 7",
-        "image": "/products/categories/kids-gifts-set/kids-gifts-set-7.webp",
-        "filename": "kids-gifts-set-7.webp"
+        "name": "Unicorn Spiral Art Pouch",
+        "image": "/products/unicorn-spiral-art-pouch.webp",
+        "filename": "unicorn-spiral-art-pouch.webp"
+      },
+      {
+        "name": "Unicorn Spiral Pouch",
+        "image": "/products/unicorn-spiral-pouch.webp",
+        "filename": "unicorn-spiral-pouch.webp"
       }
     ]
   },
@@ -207,54 +203,59 @@
     "url": "https://www.trusser.in/category/bottles",
     "products": [
       {
-        "name": "Bottles 1",
-        "image": "/products/categories/bottles/bottles-1.webp",
-        "filename": "bottles-1.webp"
+        "name": "Animal Water Bottle Bag",
+        "image": "/products/animal-water-bottle-bag.webp",
+        "filename": "animal-water-bottle-bag.webp"
       },
       {
-        "name": "Bottles 2",
-        "image": "/products/categories/bottles/bottles-2.webp",
-        "filename": "bottles-2.webp"
+        "name": "Breathe Water Bottle Bag",
+        "image": "/products/breathe-water-bottle-bag.webp",
+        "filename": "breathe-water-bottle-bag.webp"
       },
       {
-        "name": "Bottles 3",
-        "image": "/products/categories/bottles/bottles-3.webp",
-        "filename": "bottles-3.webp"
+        "name": "Colorful Stripes Bottle Holder",
+        "image": "/products/colorful-stripes-bottle-holder.webp",
+        "filename": "colorful-stripes-bottle-holder.webp"
       },
       {
-        "name": "Bottles 4",
-        "image": "/products/categories/bottles/bottles-4.webp",
-        "filename": "bottles-4.webp"
+        "name": "Colorful Water Bottle Bag",
+        "image": "/products/colorful-water-bottle-bag.webp",
+        "filename": "colorful-water-bottle-bag.webp"
       },
       {
-        "name": "Bottles 5",
-        "image": "/products/categories/bottles/bottles-5.webp",
-        "filename": "bottles-5.webp"
+        "name": "Funky Green And Pink Bottle Holder",
+        "image": "/products/funky-green-and-pink-bottle-holder.webp",
+        "filename": "funky-green-and-pink-bottle-holder.webp"
       },
       {
-        "name": "Bottles 6",
-        "image": "/products/categories/bottles/bottles-6.webp",
-        "filename": "bottles-6.webp"
+        "name": "Imagination Water Bottle Bag",
+        "image": "/products/imagination-water-bottle-bag.webp",
+        "filename": "imagination-water-bottle-bag.webp"
       },
       {
-        "name": "Bottles 7",
-        "image": "/products/categories/bottles/bottles-7.webp",
-        "filename": "bottles-7.webp"
+        "name": "Leaf Water Bottle Bag",
+        "image": "/products/leaf-water-bottle-bag.webp",
+        "filename": "leaf-water-bottle-bag.webp"
       },
       {
-        "name": "Bottles 8",
-        "image": "/products/categories/bottles/bottles-8.webp",
-        "filename": "bottles-8.webp"
+        "name": "Navy Blue Bottle Holder",
+        "image": "/products/navy-blue-bottle-holder.webp",
+        "filename": "navy-blue-bottle-holder.webp"
       },
       {
-        "name": "Bottles 9",
-        "image": "/products/categories/bottles/bottles-9.webp",
-        "filename": "bottles-9.webp"
+        "name": "Pastel Green Mandala Bottle Holder",
+        "image": "/products/pastel-green-mandala-bottle-holder.webp",
+        "filename": "pastel-green-mandala-bottle-holder.webp"
       },
       {
-        "name": "Bottles 10",
-        "image": "/products/categories/bottles/bottles-10.webp",
-        "filename": "bottles-10.webp"
+        "name": "Retro Stripes Bottle Holder",
+        "image": "/products/retro-stripes-bottle-holder.webp",
+        "filename": "retro-stripes-bottle-holder.webp"
+      },
+      {
+        "name": "T150B",
+        "image": "/products/t150b.webp",
+        "filename": "t150b.webp"
       }
     ]
   },
@@ -264,72 +265,72 @@
     "url": "https://www.trusser.in/category/bottle-bags",
     "products": [
       {
-        "name": "Bottle Bags 1",
+        "name": "Azure Imagination Bottle Carrier",
         "image": "/products/categories/bottle-bags/bottle-bags-1.webp",
         "filename": "bottle-bags-1.webp"
       },
       {
-        "name": "Bottle Bags 2",
+        "name": "Blue Animal Bottle Carrier",
         "image": "/products/categories/bottle-bags/bottle-bags-2.webp",
         "filename": "bottle-bags-2.webp"
       },
       {
-        "name": "Bottle Bags 3",
+        "name": "Pink Triangle Bottle Carrier",
         "image": "/products/categories/bottle-bags/bottle-bags-3.webp",
         "filename": "bottle-bags-3.webp"
       },
       {
-        "name": "Bottle Bags 4",
+        "name": "Blue Dino Bottle Carrier",
         "image": "/products/categories/bottle-bags/bottle-bags-4.webp",
         "filename": "bottle-bags-4.webp"
       },
       {
-        "name": "Bottle Bags 5",
+        "name": "Rainbow Striped Recycled Carry",
         "image": "/products/categories/bottle-bags/bottle-bags-5.webp",
         "filename": "bottle-bags-5.webp"
       },
       {
-        "name": "Bottle Bags 6",
+        "name": "Blue Animal Bottle Carrier",
         "image": "/products/categories/bottle-bags/bottle-bags-6.webp",
         "filename": "bottle-bags-6.webp"
       },
       {
-        "name": "Bottle Bags 7",
+        "name": "Patchwork Revival Bottle Carrier",
         "image": "/products/categories/bottle-bags/bottle-bags-7.webp",
         "filename": "bottle-bags-7.webp"
       },
       {
-        "name": "Bottle Bags 8",
+        "name": "Striped Recycled Carry",
         "image": "/products/categories/bottle-bags/bottle-bags-8.webp",
         "filename": "bottle-bags-8.webp"
       },
       {
-        "name": "Bottle Bags 9",
+        "name": "Navy Dot Bottle Carrier",
         "image": "/products/categories/bottle-bags/bottle-bags-9.webp",
         "filename": "bottle-bags-9.webp"
       },
       {
-        "name": "Bottle Bags 10",
+        "name": "Blue Animal Bottle Carrier",
         "image": "/products/categories/bottle-bags/bottle-bags-10.webp",
         "filename": "bottle-bags-10.webp"
       },
       {
-        "name": "Bottle Bags 11",
+        "name": "Azure Imagination Bottle Carrier",
         "image": "/products/categories/bottle-bags/bottle-bags-11.webp",
         "filename": "bottle-bags-11.webp"
       },
       {
-        "name": "Bottle Bags 12",
+        "name": "Blue Dino Bottle Carrier",
         "image": "/products/categories/bottle-bags/bottle-bags-12.webp",
         "filename": "bottle-bags-12.webp"
       },
       {
-        "name": "Bottle Bags 13",
+        "name": "Pink Blossom Bottle Carrier",
         "image": "/products/categories/bottle-bags/bottle-bags-13.webp",
         "filename": "bottle-bags-13.webp"
       },
       {
-        "name": "Bottle Bags 14",
+        "name": "Rainbow Striped Bottle Carrier",
         "image": "/products/categories/bottle-bags/bottle-bags-14.webp",
         "filename": "bottle-bags-14.webp"
       }
@@ -341,109 +342,114 @@
     "url": "https://www.trusser.in/category/festive-bags",
     "products": [
       {
-        "name": "Festive Bags 1",
-        "image": "/products/categories/festive-bags/festive-bags-1.webp",
-        "filename": "festive-bags-1.webp"
+        "name": "Baby Shower Bag",
+        "image": "/products/baby-shower-bag.webp",
+        "filename": "baby-shower-bag.webp"
       },
       {
-        "name": "Festive Bags 2",
-        "image": "/products/categories/festive-bags/festive-bags-2.webp",
-        "filename": "festive-bags-2.webp"
+        "name": "Blue Wedding Bag",
+        "image": "/products/blue-wedding-bag.webp",
+        "filename": "blue-wedding-bag.webp"
       },
       {
-        "name": "Festive Bags 3",
-        "image": "/products/categories/festive-bags/festive-bags-3.webp",
-        "filename": "festive-bags-3.webp"
+        "name": "Festive Event Bag",
+        "image": "/products/festive-event-bag.webp",
+        "filename": "festive-event-bag.webp"
       },
       {
-        "name": "Festive Bags 4",
-        "image": "/products/categories/festive-bags/festive-bags-4.webp",
-        "filename": "festive-bags-4.webp"
+        "name": "Gift Bag Blue Print",
+        "image": "/products/gift-bag-blue-print.webp",
+        "filename": "gift-bag-blue-print.webp"
       },
       {
-        "name": "Festive Bags 5",
-        "image": "/products/categories/festive-bags/festive-bags-5.webp",
-        "filename": "festive-bags-5.webp"
+        "name": "Gift Bag Blue",
+        "image": "/products/gift-bag-blue.webp",
+        "filename": "gift-bag-blue.webp"
       },
       {
-        "name": "Festive Bags 6",
-        "image": "/products/categories/festive-bags/festive-bags-6.webp",
-        "filename": "festive-bags-6.webp"
+        "name": "Gift Bag Cherry Blossom",
+        "image": "/products/gift-bag-cherry-blossom.webp",
+        "filename": "gift-bag-cherry-blossom.webp"
       },
       {
-        "name": "Festive Bags 7",
-        "image": "/products/categories/festive-bags/festive-bags-7.webp",
-        "filename": "festive-bags-7.webp"
+        "name": "Gift Bag Flamingo",
+        "image": "/products/gift-bag-flamingo.webp",
+        "filename": "gift-bag-flamingo.webp"
       },
       {
-        "name": "Festive Bags 8",
-        "image": "/products/categories/festive-bags/festive-bags-8.webp",
-        "filename": "festive-bags-8.webp"
+        "name": "Gift Bag Lemon",
+        "image": "/products/gift-bag-lemon.webp",
+        "filename": "gift-bag-lemon.webp"
       },
       {
-        "name": "Festive Bags 9",
-        "image": "/products/categories/festive-bags/festive-bags-9.webp",
-        "filename": "festive-bags-9.webp"
+        "name": "Gift Bag Maroon Design",
+        "image": "/products/gift-bag-maroon-design.webp",
+        "filename": "gift-bag-maroon-design.webp"
       },
       {
-        "name": "Festive Bags 10",
-        "image": "/products/categories/festive-bags/festive-bags-10.webp",
-        "filename": "festive-bags-10.webp"
+        "name": "Gift Bag More Dogs",
+        "image": "/products/gift-bag-more-dogs.webp",
+        "filename": "gift-bag-more-dogs.webp"
       },
       {
-        "name": "Festive Bags 11",
-        "image": "/products/categories/festive-bags/festive-bags-11.webp",
-        "filename": "festive-bags-11.webp"
+        "name": "Gift Bag Traditional",
+        "image": "/products/gift-bag-traditional.webp",
+        "filename": "gift-bag-traditional.webp"
       },
       {
-        "name": "Festive Bags 12",
-        "image": "/products/categories/festive-bags/festive-bags-12.webp",
-        "filename": "festive-bags-12.webp"
+        "name": "Gift Bag",
+        "image": "/products/gift-bag.webp",
+        "filename": "gift-bag.webp"
       },
       {
-        "name": "Festive Bags 13",
-        "image": "/products/categories/festive-bags/festive-bags-13.webp",
-        "filename": "festive-bags-13.webp"
+        "name": "Gift Bags Tropical",
+        "image": "/products/gift-bags-tropical.webp",
+        "filename": "gift-bags-tropical.webp"
       },
       {
-        "name": "Festive Bags 14",
-        "image": "/products/categories/festive-bags/festive-bags-14.webp",
-        "filename": "festive-bags-14.webp"
+        "name": "Gift Bags Village",
+        "image": "/products/gift-bags-village.webp",
+        "filename": "gift-bags-village.webp"
       },
       {
-        "name": "Festive Bags 15",
-        "image": "/products/categories/festive-bags/festive-bags-15.webp",
-        "filename": "festive-bags-15.webp"
+        "name": "Gift Bags",
+        "image": "/products/gift-bags.webp",
+        "filename": "gift-bags.webp"
       },
       {
-        "name": "Festive Bags 16",
-        "image": "/products/categories/festive-bags/festive-bags-16.webp",
-        "filename": "festive-bags-16.webp"
+        "name": "Indian Wedding Bag",
+        "image": "/products/indian-wedding-bag.webp",
+        "filename": "indian-wedding-bag.webp"
       },
       {
-        "name": "Festive Bags 17",
-        "image": "/products/categories/festive-bags/festive-bags-17.webp",
-        "filename": "festive-bags-17.webp"
+        "name": "Marriage Bag",
+        "image": "/products/marriage-bag.webp",
+        "filename": "marriage-bag.webp"
       },
       {
-        "name": "Festive Bags 18",
-        "image": "/products/categories/festive-bags/festive-bags-18.webp",
-        "filename": "festive-bags-18.webp"
+        "name": "Pink Thank You Bag",
+        "image": "/products/pink-thank-you-bag.webp",
+        "filename": "pink-thank-you-bag.webp"
       },
       {
-        "name": "Festive Bags 19",
-        "image": "/products/categories/festive-bags/festive-bags-19.webp",
-        "filename": "festive-bags-19.webp"
+        "name": "Royal Wedding Bag",
+        "image": "/products/royal-wedding-bag.webp",
+        "filename": "royal-wedding-bag.webp"
       },
       {
-        "name": "Festive Bags 20",
-        "image": "/products/categories/festive-bags/festive-bags-20.webp",
-        "filename": "festive-bags-20.webp"
+        "name": "Save The Date Bag",
+        "image": "/products/save-the-date-bag.webp",
+        "filename": "save-the-date-bag.webp"
       },
       {
-        "name": "Festive Bags 21",
-        "image": "/products/categories/festive-bags/festive-bags-21.webp",
-        "filename": "festive-bags-21.webp"
+        "name": "Thank You Bag",
+        "image": "/products/thank-you-bag.webp",
+        "filename": "thank-you-bag.webp"
+      },
+      {
+        "name": "Traditional Thank You Bag",
+        "image": "/products/traditional-thank-you-bag.webp",
+        "filename": "traditional-thank-you-bag.webp"
       }
     ]
   },
@@ -490,27 +496,27 @@
     "url": "https://www.trusser.in/category/laundry-bags",
     "products": [
       {
-        "name": "Laundry Bags 1",
+        "name": "Lotus Bloom Laundry",
         "image": "/products/categories/laundry-bags/laundry-bags-1.webp",
         "filename": "laundry-bags-1.webp"
       },
       {
-        "name": "Laundry Bags 2",
+        "name": "Lotus Bloom Laundry",
         "image": "/products/categories/laundry-bags/laundry-bags-2.webp",
         "filename": "laundry-bags-2.webp"
       },
       {
-        "name": "Laundry Bags 3",
+        "name": "Lotus Bloom Laundry",
         "image": "/products/categories/laundry-bags/laundry-bags-3.webp",
         "filename": "laundry-bags-3.webp"
       },
       {
-        "name": "Laundry Bags 4",
+        "name": "Lotus Bloom Laundry",
         "image": "/products/categories/laundry-bags/laundry-bags-4.webp",
         "filename": "laundry-bags-4.webp"
       },
       {
-        "name": "Laundry Bags 5",
+        "name": "Lotus Bloom Laundry",
         "image": "/products/categories/laundry-bags/laundry-bags-5.webp",
         "filename": "laundry-bags-5.webp"
       }
@@ -522,44 +528,9 @@
     "url": "https://www.trusser.in/category/table-mat-coasters",
     "products": [
       {
-        "name": "Table Mat Coasters 1",
-        "image": "/products/categories/table-mat-coasters/table-mat-coasters-1.webp",
-        "filename": "table-mat-coasters-1.webp"
-      },
-      {
-        "name": "Table Mat Coasters 2",
-        "image": "/products/categories/table-mat-coasters/table-mat-coasters-2.webp",
-        "filename": "table-mat-coasters-2.webp"
-      },
-      {
-        "name": "Table Mat Coasters 3",
-        "image": "/products/categories/table-mat-coasters/table-mat-coasters-3.webp",
-        "filename": "table-mat-coasters-3.webp"
-      },
-      {
-        "name": "Table Mat Coasters 4",
-        "image": "/products/categories/table-mat-coasters/table-mat-coasters-4.webp",
-        "filename": "table-mat-coasters-4.webp"
-      },
-      {
-        "name": "Table Mat Coasters 5",
-        "image": "/products/categories/table-mat-coasters/table-mat-coasters-5.webp",
-        "filename": "table-mat-coasters-5.webp"
-      },
-      {
-        "name": "Table Mat Coasters 6",
-        "image": "/products/categories/table-mat-coasters/table-mat-coasters-6.webp",
-        "filename": "table-mat-coasters-6.webp"
-      },
-      {
-        "name": "Table Mat Coasters 7",
-        "image": "/products/categories/table-mat-coasters/table-mat-coasters-7.webp",
-        "filename": "table-mat-coasters-7.webp"
-      },
-      {
-        "name": "Table Mat Coasters 8",
-        "image": "/products/categories/table-mat-coasters/table-mat-coasters-8.webp",
-        "filename": "table-mat-coasters-8.webp"
+        "name": "Botanic Mandala Placemats",
+        "image": "/products/botanic-mandala-placemats.webp",
+        "filename": "botanic-mandala-placemats.webp"
       }
     ]
   },
@@ -569,59 +540,29 @@
     "url": "https://www.trusser.in/category/cash-pouches",
     "products": [
       {
-        "name": "Cash Pouches 1",
-        "image": "/products/categories/cash-pouches/cash-pouches-1.webp",
-        "filename": "cash-pouches-1.webp"
+        "name": "Blue Green Cash Pouch",
+        "image": "/products/blue-green-cash-pouch.webp",
+        "filename": "blue-green-cash-pouch.webp"
       },
       {
-        "name": "Cash Pouches 2",
-        "image": "/products/categories/cash-pouches/cash-pouches-2.webp",
-        "filename": "cash-pouches-2.webp"
+        "name": "Colorful Cash Pouch",
+        "image": "/products/colorful-cash-pouch.webp",
+        "filename": "colorful-cash-pouch.webp"
       },
       {
-        "name": "Cash Pouches 3",
-        "image": "/products/categories/cash-pouches/cash-pouches-3.webp",
-        "filename": "cash-pouches-3.webp"
+        "name": "Floral Cash Pouch",
+        "image": "/products/floral-cash-pouch.webp",
+        "filename": "floral-cash-pouch.webp"
       },
       {
-        "name": "Cash Pouches 4",
-        "image": "/products/categories/cash-pouches/cash-pouches-4.webp",
-        "filename": "cash-pouches-4.webp"
+        "name": "Mandala Design Cash Pouch",
+        "image": "/products/mandala-design-cash-pouch.webp",
+        "filename": "mandala-design-cash-pouch.webp"
       },
       {
-        "name": "Cash Pouches 5",
-        "image": "/products/categories/cash-pouches/cash-pouches-5.webp",
-        "filename": "cash-pouches-5.webp"
-      },
-      {
-        "name": "Cash Pouches 6",
-        "image": "/products/categories/cash-pouches/cash-pouches-6.webp",
-        "filename": "cash-pouches-6.webp"
-      },
-      {
-        "name": "Cash Pouches 7",
-        "image": "/products/categories/cash-pouches/cash-pouches-7.webp",
-        "filename": "cash-pouches-7.webp"
-      },
-      {
-        "name": "Cash Pouches 8",
-        "image": "/products/categories/cash-pouches/cash-pouches-8.webp",
-        "filename": "cash-pouches-8.webp"
-      },
-      {
-        "name": "Cash Pouches 9",
-        "image": "/products/categories/cash-pouches/cash-pouches-9.webp",
-        "filename": "cash-pouches-9.webp"
-      },
-      {
-        "name": "Cash Pouches 10",
-        "image": "/products/categories/cash-pouches/cash-pouches-10.webp",
-        "filename": "cash-pouches-10.webp"
-      },
-      {
-        "name": "Cash Pouches 11",
-        "image": "/products/categories/cash-pouches/cash-pouches-11.webp",
-        "filename": "cash-pouches-11.webp"
+        "name": "Purple Cash Pouch",
+        "image": "/products/purple-cash-pouch.webp",
+        "filename": "purple-cash-pouch.webp"
       }
     ]
   },
@@ -663,39 +604,9 @@
     "url": "https://www.trusser.in/category/picnic-bags",
     "products": [
       {
-        "name": "Picnic Bags 1",
-        "image": "/products/categories/picnic-bags/picnic-bags-1.webp",
-        "filename": "picnic-bags-1.webp"
-      },
-      {
-        "name": "Picnic Bags 2",
-        "image": "/products/categories/picnic-bags/picnic-bags-2.webp",
-        "filename": "picnic-bags-2.webp"
-      },
-      {
-        "name": "Picnic Bags 3",
-        "image": "/products/categories/picnic-bags/picnic-bags-3.webp",
-        "filename": "picnic-bags-3.webp"
-      },
-      {
-        "name": "Picnic Bags 4",
-        "image": "/products/categories/picnic-bags/picnic-bags-4.webp",
-        "filename": "picnic-bags-4.webp"
-      },
-      {
-        "name": "Picnic Bags 5",
-        "image": "/products/categories/picnic-bags/picnic-bags-5.webp",
-        "filename": "picnic-bags-5.webp"
-      },
-      {
-        "name": "Picnic Bags 6",
-        "image": "/products/categories/picnic-bags/picnic-bags-6.webp",
-        "filename": "picnic-bags-6.webp"
-      },
-      {
-        "name": "Picnic Bags 7",
-        "image": "/products/categories/picnic-bags/picnic-bags-7.webp",
-        "filename": "picnic-bags-7.webp"
+        "name": "Sustainable Caddy Bags",
+        "image": "/products/sustainable-caddy-bags.webp",
+        "filename": "sustainable-caddy-bags.webp"
       }
     ]
   },
@@ -769,74 +680,9 @@
     "url": "https://www.trusser.in/category/notebooks",
     "products": [
       {
-        "name": "Notebooks 1",
-        "image": "/products/categories/notebooks/notebooks-1.webp",
-        "filename": "notebooks-1.webp"
-      },
-      {
-        "name": "Notebooks 2",
-        "image": "/products/categories/notebooks/notebooks-2.webp",
-        "filename": "notebooks-2.webp"
-      },
-      {
-        "name": "Notebooks 3",
-        "image": "/products/categories/notebooks/notebooks-3.webp",
-        "filename": "notebooks-3.webp"
-      },
-      {
-        "name": "Notebooks 4",
-        "image": "/products/categories/notebooks/notebooks-4.webp",
-        "filename": "notebooks-4.webp"
-      },
-      {
-        "name": "Notebooks 5",
-        "image": "/products/categories/notebooks/notebooks-5.webp",
-        "filename": "notebooks-5.webp"
-      },
-      {
-        "name": "Notebooks 6",
-        "image": "/products/categories/notebooks/notebooks-6.webp",
-        "filename": "notebooks-6.webp"
-      },
-      {
-        "name": "Notebooks 7",
-        "image": "/products/categories/notebooks/notebooks-7.webp",
-        "filename": "notebooks-7.webp"
-      },
-      {
-        "name": "Notebooks 8",
-        "image": "/products/categories/notebooks/notebooks-8.webp",
-        "filename": "notebooks-8.webp"
-      },
-      {
-        "name": "Notebooks 9",
-        "image": "/products/categories/notebooks/notebooks-9.webp",
-        "filename": "notebooks-9.webp"
-      },
-      {
-        "name": "Notebooks 10",
-        "image": "/products/categories/notebooks/notebooks-10.webp",
-        "filename": "notebooks-10.webp"
-      },
-      {
-        "name": "Notebooks 11",
-        "image": "/products/categories/notebooks/notebooks-11.webp",
-        "filename": "notebooks-11.webp"
-      },
-      {
-        "name": "Notebooks 12",
-        "image": "/products/categories/notebooks/notebooks-12.webp",
-        "filename": "notebooks-12.webp"
-      },
-      {
-        "name": "Notebooks 13",
-        "image": "/products/categories/notebooks/notebooks-13.webp",
-        "filename": "notebooks-13.webp"
-      },
-      {
-        "name": "Notebooks 14",
-        "image": "/products/categories/notebooks/notebooks-14.webp",
-        "filename": "notebooks-14.webp"
+        "name": "Make It Notebook",
+        "image": "/products/make-it-notebook.webp",
+        "filename": "make-it-notebook.webp"
       }
     ]
   },
@@ -846,109 +692,229 @@
     "url": "https://www.trusser.in/category/pouches",
     "products": [
       {
-        "name": "Pouches 1",
-        "image": "/products/categories/pouches/pouches-1.webp",
-        "filename": "pouches-1.webp"
+        "name": "Abstract Art Pouch",
+        "image": "/products/abstract-art-pouch.webp",
+        "filename": "abstract-art-pouch.webp"
       },
       {
-        "name": "Pouches 2",
-        "image": "/products/categories/pouches/pouches-2.webp",
-        "filename": "pouches-2.webp"
+        "name": "Abstract Pencil Pouch",
+        "image": "/products/abstract-pencil-pouch.webp",
+        "filename": "abstract-pencil-pouch.webp"
       },
       {
-        "name": "Pouches 3",
-        "image": "/products/categories/pouches/pouches-3.webp",
-        "filename": "pouches-3.webp"
+        "name": "Abstract Pouch",
+        "image": "/products/abstract-pouch.webp",
+        "filename": "abstract-pouch.webp"
       },
       {
-        "name": "Pouches 4",
-        "image": "/products/categories/pouches/pouches-4.webp",
-        "filename": "pouches-4.webp"
+        "name": "Abstract Zig Zag Art Pouch",
+        "image": "/products/abstract-zig-zag-art-pouch.webp",
+        "filename": "abstract-zig-zag-art-pouch.webp"
       },
       {
-        "name": "Pouches 5",
-        "image": "/products/categories/pouches/pouches-5.webp",
-        "filename": "pouches-5.webp"
+        "name": "Abstract Zig Zag Pencil Pouch",
+        "image": "/products/abstract-zig-zag-pencil-pouch.webp",
+        "filename": "abstract-zig-zag-pencil-pouch.webp"
       },
       {
-        "name": "Pouches 6",
-        "image": "/products/categories/pouches/pouches-6.webp",
-        "filename": "pouches-6.webp"
+        "name": "Autumn 3 Art Pouch",
+        "image": "/products/autumn-3-art-pouch.webp",
+        "filename": "autumn-3-art-pouch.webp"
       },
       {
-        "name": "Pouches 7",
-        "image": "/products/categories/pouches/pouches-7.webp",
-        "filename": "pouches-7.webp"
+        "name": "Autumn 3 Pencil Pouch",
+        "image": "/products/autumn-3-pencil-pouch.webp",
+        "filename": "autumn-3-pencil-pouch.webp"
       },
       {
-        "name": "Pouches 8",
-        "image": "/products/categories/pouches/pouches-8.webp",
-        "filename": "pouches-8.webp"
+        "name": "Autumn 3 Pouch",
+        "image": "/products/autumn-3-pouch.webp",
+        "filename": "autumn-3-pouch.webp"
       },
       {
-        "name": "Pouches 9",
-        "image": "/products/categories/pouches/pouches-9.webp",
-        "filename": "pouches-9.webp"
+        "name": "Autumn Art Pouch",
+        "image": "/products/autumn-art-pouch.webp",
+        "filename": "autumn-art-pouch.webp"
       },
       {
-        "name": "Pouches 10",
-        "image": "/products/categories/pouches/pouches-10.webp",
-        "filename": "pouches-10.webp"
+        "name": "Autumn Pencil Pouch",
+        "image": "/products/autumn-pencil-pouch.webp",
+        "filename": "autumn-pencil-pouch.webp"
       },
       {
-        "name": "Pouches 11",
-        "image": "/products/categories/pouches/pouches-11.webp",
-        "filename": "pouches-11.webp"
+        "name": "Autumn Pouch",
+        "image": "/products/autumn-pouch.webp",
+        "filename": "autumn-pouch.webp"
       },
       {
-        "name": "Pouches 12",
-        "image": "/products/categories/pouches/pouches-12.webp",
-        "filename": "pouches-12.webp"
+        "name": "Bandini Art Pouch",
+        "image": "/products/bandini-art-pouch.webp",
+        "filename": "bandini-art-pouch.webp"
       },
       {
-        "name": "Pouches 13",
-        "image": "/products/categories/pouches/pouches-13.webp",
-        "filename": "pouches-13.webp"
+        "name": "Bandini Pencil Pouch",
+        "image": "/products/bandini-pencil-pouch.webp",
+        "filename": "bandini-pencil-pouch.webp"
       },
       {
-        "name": "Pouches 14",
-        "image": "/products/categories/pouches/pouches-14.webp",
-        "filename": "pouches-14.webp"
+        "name": "Bandini Pouch",
+        "image": "/products/bandini-pouch.webp",
+        "filename": "bandini-pouch.webp"
       },
       {
-        "name": "Pouches 15",
-        "image": "/products/categories/pouches/pouches-15.webp",
-        "filename": "pouches-15.webp"
+        "name": "Blue And White Stripes Art Pouch",
+        "image": "/products/blue-and-white-stripes-art-pouch.webp",
+        "filename": "blue-and-white-stripes-art-pouch.webp"
       },
       {
-        "name": "Pouches 16",
-        "image": "/products/categories/pouches/pouches-16.webp",
-        "filename": "pouches-16.webp"
+        "name": "Blue And White Stripes Pencil Pouch",
+        "image": "/products/blue-and-white-stripes-pencil-pouch.webp",
+        "filename": "blue-and-white-stripes-pencil-pouch.webp"
       },
       {
-        "name": "Pouches 17",
-        "image": "/products/categories/pouches/pouches-17.webp",
-        "filename": "pouches-17.webp"
+        "name": "Blue And White Stripes Pouch",
+        "image": "/products/blue-and-white-stripes-pouch.webp",
+        "filename": "blue-and-white-stripes-pouch.webp"
       },
       {
-        "name": "Pouches 18",
-        "image": "/products/categories/pouches/pouches-18.webp",
-        "filename": "pouches-18.webp"
+        "name": "Colorful Abstract Art Pouch",
+        "image": "/products/colorful-abstract-art-pouch.webp",
+        "filename": "colorful-abstract-art-pouch.webp"
       },
       {
-        "name": "Pouches 19",
-        "image": "/products/categories/pouches/pouches-19.webp",
-        "filename": "pouches-19.webp"
+        "name": "Colorful Abstract Pencil Pouch",
+        "image": "/products/colorful-abstract-pencil-pouch.webp",
+        "filename": "colorful-abstract-pencil-pouch.webp"
       },
       {
-        "name": "Pouches 20",
-        "image": "/products/categories/pouches/pouches-20.webp",
-        "filename": "pouches-20.webp"
+        "name": "Colorful Abstract Pouch",
+        "image": "/products/colorful-abstract-pouch.webp",
+        "filename": "colorful-abstract-pouch.webp"
       },
       {
-        "name": "Pouches 21",
-        "image": "/products/categories/pouches/pouches-21.webp",
-        "filename": "pouches-21.webp"
+        "name": "Colorful Spiral Art Pouch",
+        "image": "/products/colorful-spiral-art-pouch.webp",
+        "filename": "colorful-spiral-art-pouch.webp"
+      },
+      {
+        "name": "Colorful Spiral Pouch",
+        "image": "/products/colorful-spiral-pouch.webp",
+        "filename": "colorful-spiral-pouch.webp"
+      },
+      {
+        "name": "Colorful Triangle Red Document Pouch",
+        "image": "/products/colorful-triangle-red-document-pouch.webp",
+        "filename": "colorful-triangle-red-document-pouch.webp"
+      },
+      {
+        "name": "Floral Art Pouch",
+        "image": "/products/floral-art-pouch.webp",
+        "filename": "floral-art-pouch.webp"
+      },
+      {
+        "name": "Floral Pencil Pouch",
+        "image": "/products/floral-pencil-pouch.webp",
+        "filename": "floral-pencil-pouch.webp"
+      },
+      {
+        "name": "Floral Pouch",
+        "image": "/products/floral-pouch.webp",
+        "filename": "floral-pouch.webp"
+      },
+      {
+        "name": "Geometric Blue Document Pouch",
+        "image": "/products/geometric-blue-document-pouch.webp",
+        "filename": "geometric-blue-document-pouch.webp"
+      },
+      {
+        "name": "Green Fabric Print Art Pouch",
+        "image": "/products/green-fabric-print-art-pouch.webp",
+        "filename": "green-fabric-print-art-pouch.webp"
+      },
+      {
+        "name": "Green Fabric Print Pencil Pouch",
+        "image": "/products/green-fabric-print-pencil-pouch.webp",
+        "filename": "green-fabric-print-pencil-pouch.webp"
+      },
+      {
+        "name": "Green Fabric Print Pouch",
+        "image": "/products/green-fabric-print-pouch.webp",
+        "filename": "green-fabric-print-pouch.webp"
+      },
+      {
+        "name": "Green Yellow Document Pouch",
+        "image": "/products/green-yellow-document-pouch.webp",
+        "filename": "green-yellow-document-pouch.webp"
+      },
+      {
+        "name": "Helophelia Art Pouch",
+        "image": "/products/helophelia-art-pouch.webp",
+        "filename": "helophelia-art-pouch.webp"
+      },
+      {
+        "name": "Helophelia Pouch",
+        "image": "/products/helophelia-pouch.webp",
+        "filename": "helophelia-pouch.webp"
+      },
+      {
+        "name": "Leaf Art Pouch",
+        "image": "/products/leaf-art-pouch.webp",
+        "filename": "leaf-art-pouch.webp"
+      },
+      {
+        "name": "Leaf Pouch",
+        "image": "/products/leaf-pouch.webp",
+        "filename": "leaf-pouch.webp"
+      },
+      {
+        "name": "Peepal Leaf Document Pouch",
+        "image": "/products/peepal-leaf-document-pouch.webp",
+        "filename": "peepal-leaf-document-pouch.webp"
+      },
+      {
+        "name": "Pineapple Art Pouch",
+        "image": "/products/pineapple-art-pouch.webp",
+        "filename": "pineapple-art-pouch.webp"
+      },
+      {
+        "name": "Pineapple Pencil Pouch",
+        "image": "/products/pineapple-pencil-pouch.webp",
+        "filename": "pineapple-pencil-pouch.webp"
+      },
+      {
+        "name": "Pineapple Pouch",
+        "image": "/products/pineapple-pouch.webp",
+        "filename": "pineapple-pouch.webp"
+      },
+      {
+        "name": "Stripes And Checks Document Pouch",
+        "image": "/products/stripes-and-checks-document-pouch.webp",
+        "filename": "stripes-and-checks-document-pouch.webp"
+      },
+      {
+        "name": "Summer Art Pouch",
+        "image": "/products/summer-art-pouch.webp",
+        "filename": "summer-art-pouch.webp"
+      },
+      {
+        "name": "Summer Pouch",
+        "image": "/products/summer-pouch.webp",
+        "filename": "summer-pouch.webp"
+      },
+      {
+        "name": "Yellow Zig Zag Art Pouch",
+        "image": "/products/yellow-zig-zag-art-pouch.webp",
+        "filename": "yellow-zig-zag-art-pouch.webp"
+      },
+      {
+        "name": "Yellow Zig Zag Pencil Pouch",
+        "image": "/products/yellow-zig-zag-pencil-pouch.webp",
+        "filename": "yellow-zig-zag-pencil-pouch.webp"
+      },
+      {
+        "name": "Yellow Zig Zag Pouch",
+        "image": "/products/yellow-zig-zag-pouch.webp",
+        "filename": "yellow-zig-zag-pouch.webp"
       }
     ]
   },
@@ -958,104 +924,49 @@
     "url": "https://www.trusser.in/category/files-folders",
     "products": [
       {
-        "name": "Files Folders 1",
-        "image": "/products/categories/files-folders/files-folders-1.webp",
-        "filename": "files-folders-1.webp"
+        "name": "Blue Document Folder",
+        "image": "/products/blue-document-folder.webp",
+        "filename": "blue-document-folder.webp"
       },
       {
-        "name": "Files Folders 2",
-        "image": "/products/categories/files-folders/files-folders-2.webp",
-        "filename": "files-folders-2.webp"
+        "name": "Cardeco Stripes File",
+        "image": "/products/cardeco-stripes-file.webp",
+        "filename": "cardeco-stripes-file.webp"
       },
       {
-        "name": "Files Folders 3",
-        "image": "/products/categories/files-folders/files-folders-3.webp",
-        "filename": "files-folders-3.webp"
+        "name": "Ethnic Ikat File",
+        "image": "/products/ethnic-ikat-file.webp",
+        "filename": "ethnic-ikat-file.webp"
       },
       {
-        "name": "Files Folders 4",
-        "image": "/products/categories/files-folders/files-folders-4.webp",
-        "filename": "files-folders-4.webp"
+        "name": "Exotic Pink Abstract File",
+        "image": "/products/exotic-pink-abstract-file.webp",
+        "filename": "exotic-pink-abstract-file.webp"
       },
       {
-        "name": "Files Folders 5",
-        "image": "/products/categories/files-folders/files-folders-5.webp",
-        "filename": "files-folders-5.webp"
+        "name": "Fabric Print Document Folder",
+        "image": "/products/fabric-print-document-folder.webp",
+        "filename": "fabric-print-document-folder.webp"
       },
       {
-        "name": "Files Folders 6",
-        "image": "/products/categories/files-folders/files-folders-6.webp",
-        "filename": "files-folders-6.webp"
+        "name": "Floral Document Folder",
+        "image": "/products/floral-document-folder.webp",
+        "filename": "floral-document-folder.webp"
       },
       {
-        "name": "Files Folders 7",
-        "image": "/products/categories/files-folders/files-folders-7.webp",
-        "filename": "files-folders-7.webp"
+        "name": "Geometric File",
+        "image": "/products/geometric-file.webp",
+        "filename": "geometric-file.webp"
       },
       {
-        "name": "Files Folders 8",
-        "image": "/products/categories/files-folders/files-folders-8.webp",
-        "filename": "files-folders-8.webp"
+        "name": "Peacock Document Folder",
+        "image": "/products/peacock-document-folder.webp",
+        "filename": "peacock-document-folder.webp"
       },
       {
-        "name": "Files Folders 9",
-        "image": "/products/categories/files-folders/files-folders-9.webp",
-        "filename": "files-folders-9.webp"
-      },
-      {
-        "name": "Files Folders 10",
-        "image": "/products/categories/files-folders/files-folders-10.webp",
-        "filename": "files-folders-10.webp"
-      },
-      {
-        "name": "Files Folders 11",
-        "image": "/products/categories/files-folders/files-folders-11.webp",
-        "filename": "files-folders-11.webp"
-      },
-      {
-        "name": "Files Folders 12",
-        "image": "/products/categories/files-folders/files-folders-12.webp",
-        "filename": "files-folders-12.webp"
-      },
-      {
-        "name": "Files Folders 13",
-        "image": "/products/categories/files-folders/files-folders-13.webp",
-        "filename": "files-folders-13.webp"
-      },
-      {
-        "name": "Files Folders 14",
-        "image": "/products/categories/files-folders/files-folders-14.webp",
-        "filename": "files-folders-14.webp"
-      },
-      {
-        "name": "Files Folders 15",
-        "image": "/products/categories/files-folders/files-folders-15.webp",
-        "filename": "files-folders-15.webp"
-      },
-      {
-        "name": "Files Folders 16",
-        "image": "/products/categories/files-folders/files-folders-16.webp",
-        "filename": "files-folders-16.webp"
-      },
-      {
-        "name": "Files Folders 17",
-        "image": "/products/categories/files-folders/files-folders-17.webp",
-        "filename": "files-folders-17.webp"
-      },
-      {
-        "name": "Files Folders 18",
-        "image": "/products/categories/files-folders/files-folders-18.webp",
-        "filename": "files-folders-18.webp"
-      },
-      {
-        "name": "Files Folders 19",
-        "image": "/products/categories/files-folders/files-folders-19.webp",
-        "filename": "files-folders-19.webp"
-      },
-      {
-        "name": "Files Folders 20",
-        "image": "/products/categories/files-folders/files-folders-20.webp",
-        "filename": "files-folders-20.webp"
+        "name": "Yellow Document Folder",
+        "image": "/products/yellow-document-folder.webp",
+        "filename": "yellow-document-folder.webp"
       }
     ]
   },
@@ -1097,64 +1008,19 @@
     "url": "https://www.trusser.in/category/laptop-sleeves",
     "products": [
       {
-        "name": "Laptop Sleeves 1",
-        "image": "/products/categories/laptop-sleeves/laptop-sleeves-1.webp",
-        "filename": "laptop-sleeves-1.webp"
+        "name": "Ermis Canvas Laptop Bag",
+        "image": "/products/ermis-canvas-laptop-bag.webp",
+        "filename": "ermis-canvas-laptop-bag.webp"
       },
       {
-        "name": "Laptop Sleeves 2",
-        "image": "/products/categories/laptop-sleeves/laptop-sleeves-2.webp",
-        "filename": "laptop-sleeves-2.webp"
+        "name": "Floral Laptop Sleeve",
+        "image": "/products/floral-laptop-sleeve.webp",
+        "filename": "floral-laptop-sleeve.webp"
       },
       {
-        "name": "Laptop Sleeves 3",
-        "image": "/products/categories/laptop-sleeves/laptop-sleeves-3.webp",
-        "filename": "laptop-sleeves-3.webp"
-      },
-      {
-        "name": "Laptop Sleeves 4",
-        "image": "/products/categories/laptop-sleeves/laptop-sleeves-4.webp",
-        "filename": "laptop-sleeves-4.webp"
-      },
-      {
-        "name": "Laptop Sleeves 5",
-        "image": "/products/categories/laptop-sleeves/laptop-sleeves-5.webp",
-        "filename": "laptop-sleeves-5.webp"
-      },
-      {
-        "name": "Laptop Sleeves 6",
-        "image": "/products/categories/laptop-sleeves/laptop-sleeves-6.webp",
-        "filename": "laptop-sleeves-6.webp"
-      },
-      {
-        "name": "Laptop Sleeves 7",
-        "image": "/products/categories/laptop-sleeves/laptop-sleeves-7.webp",
-        "filename": "laptop-sleeves-7.webp"
-      },
-      {
-        "name": "Laptop Sleeves 8",
-        "image": "/products/categories/laptop-sleeves/laptop-sleeves-8.webp",
-        "filename": "laptop-sleeves-8.webp"
-      },
-      {
-        "name": "Laptop Sleeves 9",
-        "image": "/products/categories/laptop-sleeves/laptop-sleeves-9.webp",
-        "filename": "laptop-sleeves-9.webp"
-      },
-      {
-        "name": "Laptop Sleeves 10",
-        "image": "/products/categories/laptop-sleeves/laptop-sleeves-10.webp",
-        "filename": "laptop-sleeves-10.webp"
-      },
-      {
-        "name": "Laptop Sleeves 11",
-        "image": "/products/categories/laptop-sleeves/laptop-sleeves-11.webp",
-        "filename": "laptop-sleeves-11.webp"
-      },
-      {
-        "name": "Laptop Sleeves 12",
-        "image": "/products/categories/laptop-sleeves/laptop-sleeves-12.webp",
-        "filename": "laptop-sleeves-12.webp"
+        "name": "Tropical Laptop Sleeve",
+        "image": "/products/tropical-laptop-sleeve.webp",
+        "filename": "tropical-laptop-sleeve.webp"
       }
     ]
   }
