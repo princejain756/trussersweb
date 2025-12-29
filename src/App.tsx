@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { useEffect, useRef } from 'react';
-import Lenis from '@studio-freight/lenis';
+import { useEffect } from 'react';
 import { Home } from './pages/Home';
 import { Shop } from './pages/Shop';
 import { Cart } from './pages/Cart';
@@ -38,39 +37,9 @@ import { CartToast } from './components/UI/CartToast';
 
 function AppContent() {
   const location = useLocation();
-  const lenisRef = useRef<Lenis | null>(null);
-
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 0.6,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: true,
-      wheelMultiplier: 1.5,
-      touchMultiplier: 2,
-      infinite: false,
-    });
-
-    lenisRef.current = lenis;
-
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
-    return () => {
-      lenis.destroy();
-    };
-  }, []);
 
   // Scroll to top when route changes
   useEffect(() => {
-    if (lenisRef.current) {
-      lenisRef.current.scrollTo(0, { immediate: true });
-    }
     window.scrollTo(0, 0);
   }, [location.pathname]);
 

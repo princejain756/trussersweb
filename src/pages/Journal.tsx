@@ -209,7 +209,7 @@ export const Journal = () => {
                     HERO SECTION - Featured Article Spotlight
                 ═══════════════════════════════════════════════════════════════════════════ */}
                 {featuredArticle && (
-                    <section className="relative min-h-[80vh] lg:min-h-screen flex items-end overflow-hidden">
+                    <section className="relative min-h-[70vh] lg:min-h-screen flex items-end overflow-hidden pt-24 lg:pt-0">
                         {/* Background Image */}
                         <div className="absolute inset-0">
                             <img
@@ -221,31 +221,32 @@ export const Journal = () => {
                         </div>
 
                         {/* Content */}
-                        <div className="relative z-10 w-full mx-auto max-w-[1920px] px-6 lg:px-12 py-16 lg:py-24">
+                        <div className="relative z-10 w-full mx-auto max-w-[1920px] px-6 lg:px-12 py-12 lg:py-24">
                             <motion.div
                                 initial={{ opacity: 0, y: 40 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, delay: 0.3 }}
                                 className="max-w-4xl"
                             >
-                                {/* Featured Badge */}
-                                <div className="inline-flex items-center gap-2 bg-[#C1A17C] rounded-full px-4 py-2 mb-6">
-                                    <Sparkles className="w-4 h-4 text-[#1A3C27]" />
-                                    <span className="text-[#1A3C27] font-medium text-sm">Featured Article</span>
+                                {/* Featured Badge & Category Wrapper */}
+                                <div className="flex flex-col items-start gap-4 mb-6 lg:mb-8">
+                                    <div className="inline-flex items-center gap-2 bg-[#C1A17C] rounded-full px-4 py-2 shadow-lg">
+                                        <Sparkles className="w-4 h-4 text-[#1A3C27]" />
+                                        <span className="text-[#1A3C27] font-bold text-xs uppercase tracking-wider">Featured Article</span>
+                                    </div>
+
+                                    <span className="inline-block text-white/90 text-sm font-bold uppercase tracking-[0.2em] pl-1">
+                                        {featuredArticle.category}
+                                    </span>
                                 </div>
 
-                                {/* Category */}
-                                <span className="inline-block text-white/70 text-sm font-medium uppercase tracking-widest mb-4">
-                                    {featuredArticle.category}
-                                </span>
-
                                 {/* Title */}
-                                <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl text-white leading-tight mb-6">
+                                <h1 className="font-serif text-3xl md:text-5xl lg:text-7xl text-white leading-tight mb-4 lg:mb-6">
                                     {featuredArticle.title}
                                 </h1>
 
                                 {/* Excerpt */}
-                                <p className="text-lg md:text-xl text-white/80 max-w-2xl mb-8 leading-relaxed">
+                                <p className="text-base md:text-lg lg:text-xl text-white/80 max-w-2xl mb-6 lg:mb-8 leading-relaxed">
                                     {featuredArticle.excerpt}
                                 </p>
 
@@ -435,8 +436,8 @@ export const Journal = () => {
                                             }, 100);
                                         }}
                                         className={`px-5 py-2.5 rounded-full text-sm font-medium shadow-sm hover:shadow-md transition-all border ${activeCategory === topic
-                                                ? 'bg-[#C1A17C] text-white border-[#C1A17C]'
-                                                : 'bg-white text-[#1A3C27] border-[#E8DFD4] hover:bg-[#C1A17C] hover:text-white'
+                                            ? 'bg-[#C1A17C] text-white border-[#C1A17C]'
+                                            : 'bg-white text-[#1A3C27] border-[#E8DFD4] hover:bg-[#C1A17C] hover:text-white'
                                             }`}
                                     >
                                         {topic}
