@@ -222,14 +222,18 @@ const BlogPost: React.FC = () => {
 
                         {/* Content */}
                         <div
-                            className="prose prose-invert prose-lg max-w-none
-                prose-headings:font-['Playfair_Display'] prose-headings:text-[#F5F1E8]
-                prose-p:font-['Inter'] prose-p:text-[#E5E1D8] prose-p:leading-relaxed
-                prose-a:text-[#C1A17C] prose-a:no-underline hover:prose-a:text-[#D4B896]
-                prose-strong:text-[#F5F1E8]
-                prose-ul:text-[#E5E1D8] prose-ol:text-[#E5E1D8]
-                prose-blockquote:border-l-[#C1A17C] prose-blockquote:text-[#C1A17C] prose-blockquote:italic
-                prose-code:text-[#C1A17C] prose-code:bg-[#1A3C27]/50 prose-code:px-1 prose-code:rounded"
+                            className="prose prose-lg max-w-none
+                prose-headings:font-['Playfair_Display'] prose-headings:text-[#F5F1E8] prose-headings:font-bold
+                prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4 prose-h2:text-[#C1A17C]
+                prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3 prose-h3:text-[#D4B896]
+                prose-p:font-['Inter'] prose-p:text-[#F5F1E8] prose-p:leading-relaxed prose-p:mb-4
+                prose-a:text-[#C1A17C] prose-a:underline hover:prose-a:text-[#D4B896]
+                prose-strong:text-[#FFFFFF] prose-strong:font-semibold
+                prose-li:text-[#F5F1E8] prose-li:mb-2
+                prose-ul:text-[#F5F1E8] prose-ol:text-[#F5F1E8]
+                prose-blockquote:border-l-4 prose-blockquote:border-[#C1A17C] prose-blockquote:pl-4 prose-blockquote:text-[#D4B896] prose-blockquote:italic
+                prose-code:text-[#C1A17C] prose-code:bg-[#1A3C27]/50 prose-code:px-2 prose-code:py-1 prose-code:rounded
+                [&_h2]:text-[#C1A17C] [&_h3]:text-[#D4B896] [&_p]:text-[#F5F1E8] [&_li]:text-[#F5F1E8] [&_strong]:text-white [&_br]:mb-2"
                             dangerouslySetInnerHTML={{ __html: blog.content }}
                         />
 

@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Navbar } from '../components/Layout/Navbar';
 import { Footer } from '../components/Layout/Footer';
@@ -35,13 +35,13 @@ type Blog = {
     coverImage?: string;
 };
 
-// Article Categories
+// Article Categories - matching actual blog tags
 const categories = [
     { name: 'All', icon: Sparkles, count: 12 },
     { name: 'Sustainability', icon: Leaf, count: 5 },
-    { name: 'Behind the Craft', icon: Palette, count: 3 },
-    { name: 'Style Guide', icon: Bookmark, count: 2 },
-    { name: 'Company News', icon: Building2, count: 2 },
+    { name: 'Corporate Gifting', icon: Building2, count: 4 },
+    { name: 'Manufacturing', icon: Palette, count: 2 },
+    { name: 'Bangalore', icon: Bookmark, count: 4 },
 ];
 
 // Animated Section Component
@@ -64,6 +64,10 @@ const AnimatedSection = ({ children, className = '', delay = 0 }: { children: Re
 
 // Article Card Component
 const ArticleCard = ({ article, index, large = false }: { article: Blog; index: number; large?: boolean }) => {
+    // Use fallback values for missing fields
+    const imageUrl = article.coverImage || article.image || 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800';
+    const categoryName = article.category || (article.tags && article.tags[0]) || 'Sustainability';
+
     return (
         <AnimatedSection delay={index * 0.1}>
             <motion.article
@@ -74,7 +78,7 @@ const ArticleCard = ({ article, index, large = false }: { article: Blog; index: 
                 {/* Image */}
                 <div className={`relative overflow-hidden ${large ? 'md:w-1/2' : 'aspect-[4/3]'}`}>
                     <img
-                        src={article.image}
+                        src={imageUrl}
                         alt={article.title}
                         className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${large ? 'aspect-[4/3] md:aspect-auto md:absolute md:inset-0' : ''
                             }`}
@@ -83,7 +87,7 @@ const ArticleCard = ({ article, index, large = false }: { article: Blog; index: 
                     <div className="absolute top-4 left-4">
                         <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-medium text-[#1A3C27]">
                             <Leaf className="w-3 h-3" />
-                            {article.category}
+                            {categoryName}
                         </span>
                     </div>
                     {/* Hover Overlay */}
@@ -140,14 +144,6 @@ export const Journal = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [blogs, setBlogs] = useState<Blog[]>([]);
     const [loading, setLoading] = useState(true);
-    const heroRef = useRef(null);
-    const { scrollYProgress } = useScroll({
-        target: heroRef,
-        offset: ['start start', 'end start'],
-    });
-
-    const heroY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
-    const textY = useTransform(scrollYProgress, [0, 1], ['0%', '10%']);
 
     useEffect(() => {
         fetchBlogs();
@@ -155,7 +151,7 @@ export const Journal = () => {
 
     const fetchBlogs = async () => {
         try {
-            const response = await fetch('/api/blogs');
+            const response = await fetch('http://localhost:5174/api/blogs');
             const data = await response.json();
             setBlogs(data || []);
         } catch (error) {
@@ -204,25 +200,19 @@ export const Journal = () => {
                     HERO SECTION - Featured Article Spotlight
                 ═══════════════════════════════════════════════════════════════════════════ */}
                 {featuredArticle && (
-                    <section ref={heroRef} className="relative min-h-[80vh] lg:min-h-screen flex items-end overflow-hidden">
-                        {/* Background Image with Parallax */}
-                        <motion.div
-                            style={{ y: heroY }}
-                            className="absolute inset-0"
-                        >
+                    <section className="relative min-h-[80vh] lg:min-h-screen flex items-end overflow-hidden">
+                        {/* Background Image */}
+                        <div className="absolute inset-0">
                             <img
                                 src={featuredArticle.image}
                                 alt={featuredArticle.title}
-                                className="w-full h-[120%] object-cover"
+                                className="w-full h-full object-cover"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-[#1A3C27] via-[#1A3C27]/60 to-transparent" />
-                        </motion.div>
+                        </div>
 
                         {/* Content */}
-                        <motion.div
-                            style={{ y: textY }}
-                            className="relative z-10 w-full mx-auto max-w-[1920px] px-6 lg:px-12 py-16 lg:py-24"
-                        >
+                        <div className="relative z-10 w-full mx-auto max-w-[1920px] px-6 lg:px-12 py-16 lg:py-24">
                             <motion.div
                                 initial={{ opacity: 0, y: 40 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -277,23 +267,7 @@ export const Journal = () => {
                                     </Button>
                                 </Link>
                             </motion.div>
-                        </motion.div>
-
-                        {/* Scroll Indicator */}
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 1.5 }}
-                            className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:block"
-                        >
-                            <motion.div
-                                animate={{ y: [0, 8, 0] }}
-                                transition={{ duration: 1.5, repeat: Infinity }}
-                                className="w-6 h-10 rounded-full border-2 border-white/30 flex items-start justify-center p-2"
-                            >
-                                <motion.div className="w-1.5 h-3 bg-white/50 rounded-full" />
-                            </motion.div>
-                        </motion.div>
+                        </div>
                     </section>
                 )}
 

@@ -2057,18 +2057,63 @@ app.put('/api/admin/blogs/:id', requireAdmin, async (req, res) => {
         return res.status(404).json({ error: 'Blog not found' });
     }
 
-    const { title, content, excerpt, tags, seoKeywords, status } = req.body;
+    const { title, content, excerpt, tags, seoKeywords, status, author, featured, coverImage, slug } = req.body;
     const wordCount = content ? content.replace(/<[^>]*>/g, '').split(/\s+/).length : blogs[index].wordCount;
     const readingTime = Math.ceil(wordCount / 200);
 
     blogs[index] = {
         ...blogs[index],
-        ...(title && { title, slug: title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') }),
+        ...(title && { title }),
+        ...(slug && { slug }),
+        ...(title && !slug && { slug: title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') }),
         ...(content && { content, wordCount, readingTime }),
         ...(excerpt && { excerpt }),
         ...(tags && { tags }),
         ...(seoKeywords && { seoKeywords }),
         ...(status && { status }),
+        ...(author && { author }),
+        ...(typeof featured === 'boolean' && { featured }),
+        ...(coverImage !== undefined && { coverImage }),
+    };
+
+    await persistJsonFile(blogsPath, blogs);
+    return res.json(blogs[index]);
+});
+
+// PATCH endpoint for partial blog updates
+app.patch('/api/admin/blogs/:id', requireAdmin, async (req, res) => {
+    const index = blogs.findIndex(b => b.id === req.params.id);
+    if (index === -1) {
+        return res.status(404).json({ error: 'Blog not found' });
+    }
+
+    const { title, content, excerpt, tags, seoKeywords, status, author, featured, coverImage, slug } = req.body;
+
+    // Calculate word count and reading time if content is provided
+    let wordCount = blogs[index].wordCount;
+    let readingTime = blogs[index].readingTime;
+    if (content) {
+        wordCount = content.replace(/<[^>]*>/g, '').split(/\s+/).filter(Boolean).length;
+        readingTime = Math.max(1, Math.ceil(wordCount / 200));
+    }
+
+    // Update blog with provided fields
+    blogs[index] = {
+        ...blogs[index],
+        ...(title !== undefined && { title }),
+        ...(slug !== undefined && { slug }),
+        ...(title && !slug && { slug: title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') }),
+        ...(content !== undefined && { content, wordCount, readingTime }),
+        ...(excerpt !== undefined && { excerpt }),
+        ...(tags !== undefined && { tags }),
+        ...(seoKeywords !== undefined && { seoKeywords }),
+        ...(status !== undefined && { status }),
+        ...(author !== undefined && { author }),
+        ...(typeof featured === 'boolean' && { featured }),
+        ...(coverImage !== undefined && { coverImage }),
+        publishedDate: status === 'published' && blogs[index].status !== 'published'
+            ? new Date().toISOString()
+            : blogs[index].publishedDate,
     };
 
     await persistJsonFile(blogsPath, blogs);
