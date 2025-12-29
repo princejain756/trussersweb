@@ -18,7 +18,7 @@ export const HeroSection = () => {
     const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
     return (
-        <section ref={containerRef} className="relative flex w-full min-h-[90vh] lg:min-h-screen items-center justify-center overflow-hidden bg-[#E8DFD4]">
+        <section ref={containerRef} className="relative flex w-full min-h-[90vh] lg:min-h-0 lg:h-auto lg:aspect-video items-center justify-center overflow-hidden bg-[#E8DFD4]">
             {/* Premium Background with Subtle Gradient & Grain */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,_#F7F1E8_0%,_#E8DFD4_60%,_#DCCFB8_100%)]" />
 
@@ -46,7 +46,7 @@ export const HeroSection = () => {
                     {/* Hero Image Section */}
                     <motion.div
                         style={{ y: imageY, opacity }}
-                        className="relative flex shrink-0 items-center justify-center pt-24 lg:pt-32"
+                        className="relative flex shrink-0 items-center justify-center pt-24 lg:pt-20"
                     >
                         <motion.div
                             initial={{ scale: 0.9, opacity: 0, filter: "blur(10px)" }}
@@ -66,7 +66,7 @@ export const HeroSection = () => {
                                 <img
                                     src={content.hero.backgroundImage}
                                     alt={content.hero.heading}
-                                    className="h-auto w-full max-h-[585px] object-contain drop-shadow-2xl lg:max-h-[400px] xl:max-h-[450px]"
+                                    className="h-auto w-full max-h-[585px] object-contain drop-shadow-2xl lg:max-h-[350px] xl:max-h-[400px]"
                                 />
                             </motion.div>
                         </motion.div>
