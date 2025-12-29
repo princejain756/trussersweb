@@ -40,13 +40,13 @@ export const HeroSection = () => {
                 className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-[#C1A17C]/20 blur-[120px] rounded-full pointer-events-none"
             />
 
-            <div className="relative w-full max-w-[1920px] px-6 lg:px-12 z-10">
+            <div className="relative w-full max-w-[1920px] px-6 lg:px-12 z-0">
                 <div className="flex flex-col max-h-[1080px] w-full">
 
                     {/* Hero Image Section */}
                     <motion.div
                         style={{ y: imageY, opacity }}
-                        className="relative flex shrink-0 items-center justify-center pt-24 lg:pt-20"
+                        className="relative flex shrink-0 items-center justify-center pt-32 md:pt-36 lg:pt-32 xl:pt-36"
                     >
                         <motion.div
                             initial={{ scale: 0.9, opacity: 0, filter: "blur(10px)" }}
@@ -66,7 +66,7 @@ export const HeroSection = () => {
                                 <img
                                     src={content.hero.backgroundImage}
                                     alt={content.hero.heading}
-                                    className="h-auto w-full max-h-[585px] object-contain drop-shadow-2xl lg:max-h-[300px] xl:max-h-[350px]"
+                                    className="h-auto w-full max-h-[350px] object-contain drop-shadow-2xl md:max-h-[220px] lg:max-h-[200px] xl:max-h-[260px] 2xl:max-h-[350px]"
                                 />
                             </motion.div>
                         </motion.div>
@@ -85,7 +85,7 @@ export const HeroSection = () => {
                                     initial={{ y: 100, opacity: 0 }}
                                     animate={{ y: 0, opacity: 1 }}
                                     transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-                                    className="font-serif text-5xl font-bold leading-[1.1] tracking-tight text-[#1A3C27] sm:text-6xl lg:text-7xl xl:text-8xl"
+                                    className="font-serif text-5xl font-bold leading-[1.1] tracking-tight text-[#1A3C27] sm:text-6xl lg:text-6xl xl:text-7xl 2xl:text-8xl"
                                 >
                                     <span className="block">{content.hero.heading.split(' ').slice(0, 2).join(' ')}</span>
                                     <span className="block bg-gradient-to-r from-[#2D5F3F] to-[#4A8B60] bg-clip-text text-transparent">
