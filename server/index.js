@@ -7,6 +7,7 @@ import multer from 'multer';
 import nodemailer from 'nodemailer';
 import PDFDocument from 'pdfkit';
 import sharp from 'sharp';
+import { OAuth2Client } from 'google-auth-library';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 try {
@@ -25,12 +26,15 @@ const ordersPath = path.join(dataDir, 'orders.json');
 const usersPath = path.join(dataDir, 'users.json');
 const sessionsPath = path.join(dataDir, 'sessions.json');
 const discountsPath = path.join(dataDir, 'discounts.json');
+const blogsPath = path.join(dataDir, 'blogs.json');
 const sourceProductsPath = path.join(__dirname, '..', 'src', 'data', 'products.json');
 const sourceCategoriesPath = path.join(__dirname, '..', 'src', 'data', 'categories.json');
 const sourceWebsiteContentPath = path.join(__dirname, '..', 'public', 'websiteContent.json');
 const adminUser = process.env.ADMIN_USER?.trim() || 'trussers-admin';
 const adminPassword = process.env.ADMIN_PASSWORD?.trim() || 'Trussers-2024';
 const adminToken = process.env.ADMIN_TOKEN?.trim() || 'trussers-admin-token-2024';
+const googleClientId = process.env.GOOGLE_CLIENT_ID?.trim();
+const googleOAuthClient = googleClientId ? new OAuth2Client(googleClientId) : null;
 const businessDetails = {
     name: 'NAUTICREW ECO PRODUCTS PRIVATE LIMITED',
     addressLine1: 'No 5, 12th Cross Road, Cubbonpet',
@@ -62,6 +66,7 @@ let orders = [];
 let users = [];
 let sessions = [];
 let discounts = [];
+let blogs = [];
 let writeQueue = Promise.resolve();
 
 function stringifyAscii(value) {
@@ -197,6 +202,16 @@ async function ensureSeedData() {
         }
         discounts = [];
         await persistJsonFile(discountsPath, discounts);
+    }
+
+    try {
+        blogs = await readJsonFile(blogsPath);
+    } catch (error) {
+        if (error?.code !== 'ENOENT') {
+            throw error;
+        }
+        blogs = [];
+        await persistJsonFile(blogsPath, blogs);
     }
 }
 
@@ -355,7 +370,7 @@ function sanitizeUser(user) {
     if (!user) {
         return null;
     }
-    const { passwordHash, passwordSalt, ...safe } = user;
+    const { passwordHash, passwordSalt, googleSub, ...safe } = user;
     return safe;
 }
 
@@ -1340,6 +1355,76 @@ app.post('/api/auth/login', async (req, res) => {
     return res.json({ account: sanitizeUser(user) });
 });
 
+app.post('/api/auth/google', async (req, res) => {
+    const credential = normalizeString(req.body?.credential, 'credential', { required: true });
+    if (credential.error) {
+        return res.status(400).json({ error: 'Invalid payload', details: [credential.error] });
+    }
+
+    if (!googleClientId || !googleOAuthClient) {
+        return res.status(501).json({ error: 'Google sign-in is not configured on the server.' });
+    }
+
+    try {
+        const ticket = await googleOAuthClient.verifyIdToken({
+            idToken: credential.value,
+            audience: googleClientId,
+        });
+
+        const payload = ticket.getPayload();
+        const email = payload?.email?.toLowerCase();
+        const emailVerified = payload?.email_verified;
+        const subject = payload?.sub;
+
+        if (!email || !subject) {
+            return res.status(401).json({ error: 'Google sign-in failed.' });
+        }
+
+        if (emailVerified === false) {
+            return res.status(401).json({ error: 'Google account email is not verified.' });
+        }
+
+        const name = payload?.name?.trim() || payload?.given_name?.trim() || email.split('@')[0];
+
+        let user = users.find((entry) => entry.email.toLowerCase() === email);
+
+        if (!user) {
+            user = {
+                id: crypto.randomUUID(),
+                fullName: name,
+                username: email.split('@')[0],
+                email,
+                phone: '',
+                gstNumber: undefined,
+                createdAt: new Date().toISOString(),
+                addresses: [],
+                orders: [],
+                authProvider: 'google',
+                googleSub: subject,
+            };
+            users = [...users, user];
+            await persistJsonFile(usersPath, users);
+        } else if (!user.googleSub || user.googleSub !== subject || user.authProvider !== 'google') {
+            const updated = {
+                ...user,
+                authProvider: 'google',
+                googleSub: subject,
+                fullName: user.fullName || name,
+            };
+            users = users.map((entry) => (entry.id === user.id ? updated : entry));
+            await persistJsonFile(usersPath, users);
+            user = updated;
+        }
+
+        const session = await createSession(user.id);
+        setSessionCookie(res, session.token);
+
+        return res.json({ account: sanitizeUser(user) });
+    } catch {
+        return res.status(401).json({ error: 'Google sign-in failed.' });
+    }
+});
+
 app.post('/api/auth/logout', async (req, res) => {
     const token = getSessionToken(req);
     await clearSession(token);
@@ -1913,6 +1998,106 @@ app.post('/api/discounts/validate', (req, res) => {
             description: discount.description,
         },
     });
+});
+
+// Blog API endpoints
+app.get('/api/admin/blogs', requireAdmin, (req, res) => {
+    const stats = {
+        total: blogs.length,
+        published: blogs.filter(b => b.status === 'published').length,
+        draft: blogs.filter(b => b.status === 'draft').length,
+        totalWords: blogs.reduce((sum, b) => sum + (b.wordCount || 0), 0),
+    };
+    return res.json({ blogs, stats });
+});
+
+app.get('/api/admin/blogs/:id', requireAdmin, (req, res) => {
+    const blog = blogs.find(b => b.id === req.params.id);
+    if (!blog) {
+        return res.status(404).json({ error: 'Blog not found' });
+    }
+    return res.json(blog);
+});
+
+app.post('/api/admin/blogs', requireAdmin, async (req, res) => {
+    const { title, content, excerpt, tags, seoKeywords, status } = req.body;
+
+    if (!title || !content) {
+        return res.status(400).json({ error: 'Title and content are required' });
+    }
+
+    const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    const wordCount = content.replace(/<[^>]*>/g, '').split(/\s+/).length;
+    const readingTime = Math.ceil(wordCount / 200);
+
+    const newBlog = {
+        id: `blog-${Date.now()}`,
+        title,
+        slug,
+        content,
+        excerpt: excerpt || content.substring(0, 200).replace(/<[^>]*>/g, '') + '...',
+        author: 'Trussers Team',
+        publishedDate: new Date().toISOString(),
+        status: status || 'draft',
+        tags: tags || [],
+        seoKeywords: seoKeywords || [],
+        readingTime,
+        wordCount,
+        featured: false,
+    };
+
+    blogs.push(newBlog);
+    await persistJsonFile(blogsPath, blogs);
+    return res.json(newBlog);
+});
+
+app.put('/api/admin/blogs/:id', requireAdmin, async (req, res) => {
+    const index = blogs.findIndex(b => b.id === req.params.id);
+    if (index === -1) {
+        return res.status(404).json({ error: 'Blog not found' });
+    }
+
+    const { title, content, excerpt, tags, seoKeywords, status } = req.body;
+    const wordCount = content ? content.replace(/<[^>]*>/g, '').split(/\s+/).length : blogs[index].wordCount;
+    const readingTime = Math.ceil(wordCount / 200);
+
+    blogs[index] = {
+        ...blogs[index],
+        ...(title && { title, slug: title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') }),
+        ...(content && { content, wordCount, readingTime }),
+        ...(excerpt && { excerpt }),
+        ...(tags && { tags }),
+        ...(seoKeywords && { seoKeywords }),
+        ...(status && { status }),
+    };
+
+    await persistJsonFile(blogsPath, blogs);
+    return res.json(blogs[index]);
+});
+
+app.delete('/api/admin/blogs/:id', requireAdmin, async (req, res) => {
+    const index = blogs.findIndex(b => b.id === req.params.id);
+    if (index === -1) {
+        return res.status(404).json({ error: 'Blog not found' });
+    }
+
+    blogs.splice(index, 1);
+    await persistJsonFile(blogsPath, blogs);
+    return res.json({ success: true });
+});
+
+// Public blog endpoints
+app.get('/api/blogs', (req, res) => {
+    const publishedBlogs = blogs.filter(b => b.status === 'published');
+    return res.json(publishedBlogs);
+});
+
+app.get('/api/blogs/:slug', (req, res) => {
+    const blog = blogs.find(b => b.slug === req.params.slug && b.status === 'published');
+    if (!blog) {
+        return res.status(404).json({ error: 'Blog not found' });
+    }
+    return res.json(blog);
 });
 
 app.get('/api/products', (req, res) => {
