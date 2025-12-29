@@ -124,7 +124,7 @@ export const AdminLayout = ({ children, title, actions }: AdminLayoutProps) => {
                 {/* Logo */}
                 <div className="h-16 flex items-center px-5 border-b border-gray-100">
                     <Link to="/admin/home" className="flex items-center gap-2">
-                        <img src="/src/assets/TrusserLOGO.avif" alt="Trusser" className="h-8 w-auto" />
+                        <img src="/TrusserLOGO.avif" alt="Trusser" className="h-8 w-auto" />
                     </Link>
                 </div>
 
