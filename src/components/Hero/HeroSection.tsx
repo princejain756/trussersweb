@@ -46,7 +46,7 @@ export const HeroSection = () => {
                     {/* Hero Image Section */}
                     <motion.div
                         style={{ y: imageY, opacity }}
-                        className="relative flex shrink-0 items-center justify-center pt-24 lg:pt-24"
+                        className="relative flex shrink-0 items-center justify-center pt-24 lg:pt-20"
                     >
                         <motion.div
                             initial={{ scale: 0.9, opacity: 0, filter: "blur(10px)" }}
@@ -66,7 +66,7 @@ export const HeroSection = () => {
                                 <img
                                     src={content.hero.backgroundImage}
                                     alt={content.hero.heading}
-                                    className="h-auto w-full max-h-[585px] object-contain drop-shadow-2xl lg:max-h-[550px] xl:max-h-[600px]"
+                                    className="h-auto w-full max-h-[585px] object-contain drop-shadow-2xl lg:max-h-[300px] xl:max-h-[350px]"
                                 />
                             </motion.div>
                         </motion.div>
