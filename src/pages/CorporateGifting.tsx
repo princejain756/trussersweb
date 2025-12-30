@@ -49,9 +49,9 @@ const giftCategories = [
     {
         title: 'Custom Bundles',
         description: 'Fully personalized gift sets with your branding',
-        image: '/products/categories/kids-gifts-set/kids-gifts-set-1.webp',
+        image: '/products/categories/notebooks/notebooks-1.webp',
         accent: '#2D5F3F',
-        link: '/shop?category=kids-gifts-set',
+        link: '/shop?category=notebooks',
     },
 ];
 
@@ -90,7 +90,7 @@ const featuredProducts = [
     { image: '/products/categories/bottle-bags/bottle-bags-1.webp', name: 'Eco Starter Kit' },
     { image: '/products/categories/festive-bags/festive-bags-2.webp', name: 'Premium Hamper' },
     { image: '/products/categories/pouches/pouches-1.webp', name: 'Her Collection' },
-    { image: '/products/categories/tote-bags/tote-bags-1.webp', name: 'Festive Delight' },
+    { image: '/products/categories/tote-bags/tote-bags-3.webp', name: 'Festive Delight' },
 ];
 
 // Why Choose Us Features
