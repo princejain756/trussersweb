@@ -238,7 +238,12 @@ const OrderDetailModal = ({
 
             const result = await response.json();
             if (result.success) {
-                alert(`${result.message}\n\nInvoice URL: ${result.invoiceUrl}`);
+                // If email is not configured, just open the link without popup
+                if (result.message && result.message.includes('email not configured')) {
+                    window.open(result.invoiceUrl, '_blank');
+                } else {
+                    alert(`${result.message}\n\nInvoice URL: ${result.invoiceUrl}`);
+                }
             } else {
                 alert(result.error || 'Failed to send invoice');
             }

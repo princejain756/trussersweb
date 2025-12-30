@@ -39,14 +39,34 @@ const googleClientId = process.env.GOOGLE_CLIENT_ID?.trim();
 const googleOAuthClient = googleClientId ? new OAuth2Client(googleClientId) : null;
 const businessDetails = {
     name: 'NAUTICREW ECO PRODUCTS PRIVATE LIMITED',
-    addressLine1: 'No 5, 12th Cross Road, Cubbonpet',
-    addressLine2: 'Bengaluru - 560002, Karnataka, India',
+    addressLine1: 'D.NO: 4/7, Suriya Nagar 1st Street',
+    addressLine2: 'Lakshmi Nagar, Tiruppur - 641607, Tamil Nadu',
     gstin: '29AAJCN7013J1Z6',
-    placeOfSupply: 'Karnataka (29)',
-    contact: '+91 9008138404',
-    email: 'info@trusser.in',
+    placeOfSupply: 'Tamil Nadu (33)',
+    contact: '+91 9843226860',
+    email: 'infoi@trusser.in',
     hsnCode: '56021000',
 };
+
+let transporter = null;
+if (process.env.SMTP_HOST && process.env.SMTP_USER) {
+    try {
+        transporter = nodemailer.createTransport({
+            host: process.env.SMTP_HOST,
+            port: parseInt(process.env.SMTP_PORT || '587'),
+            secure: process.env.SMTP_SECURE === 'true',
+            auth: {
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASS,
+            },
+        });
+        console.log('Briefly initialized SMTP transporter');
+    } catch (error) {
+        console.error('Failed to initialize SMTP transporter:', error.message);
+    }
+} else {
+    console.log('SMTP configuration missing - email features will be disabled (transporter is null)');
+}
 
 const smtpConfig = {
     host: process.env.SMTP_HOST?.trim(),
@@ -2130,6 +2150,177 @@ app.post('/api/admin/orders/:id/fulfill', requireAdmin, async (req, res) => {
             trackingNumber,
         },
     });
+});
+
+// ============================================
+// PUBLIC INVOICE ENDPOINT (for customer access)
+// ============================================
+app.get('/api/orders/:id/invoice/pdf', (req, res) => {
+    const order = orders.find(o => o.id === req.params.id);
+    if (!order) {
+        return res.status(404).send('<h1>Invoice not found</h1>');
+    }
+
+    const invoiceNumber = order.invoice?.number || `INV-${order.sequence || order.id.slice(0, 8).toUpperCase()}`;
+    const orderDate = new Date(order.createdAt).toLocaleDateString('en-IN', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+    });
+
+    const formatCurrency = (amount) => `₹${(amount || 0).toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
+
+    // Generate items HTML
+    const itemsHtml = (order.items || []).map((item, idx) => `
+        <tr>
+            <td style="padding: 12px; border-bottom: 1px solid #eee;">${idx + 1}</td>
+            <td style="padding: 12px; border-bottom: 1px solid #eee;">
+                <strong>${item.name || item.title}</strong>
+                ${item.variant ? `<br><span style="color: #666; font-size: 12px;">${item.variant}</span>` : ''}
+            </td>
+            <td style="padding: 12px; border-bottom: 1px solid #eee; text-align: center;">${item.quantity || 1}</td>
+            <td style="padding: 12px; border-bottom: 1px solid #eee; text-align: right;">${formatCurrency(item.price)}</td>
+            <td style="padding: 12px; border-bottom: 1px solid #eee; text-align: right;">${formatCurrency((item.price || 0) * (item.quantity || 1))}</td>
+        </tr>
+    `).join('');
+
+    const html = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice ${invoiceNumber} - Trusser</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333; background: #f5f5f5; }
+        .invoice-container { max-width: 800px; margin: 20px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .header { background: #1A3C27; color: white; padding: 30px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 28px; font-weight: bold; letter-spacing: 2px; }
+        .invoice-title { text-align: right; }
+        .invoice-title h1 { font-size: 24px; margin-bottom: 5px; }
+        .invoice-title p { opacity: 0.8; font-size: 14px; }
+        .details { padding: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .detail-block h3 { color: #1A3C27; font-size: 14px; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
+        .detail-block p { margin: 5px 0; line-height: 1.6; }
+        .items-table { width: 100%; border-collapse: collapse; margin: 0 30px; width: calc(100% - 60px); }
+        .items-table th { background: #f8f8f8; padding: 12px; text-align: left; font-size: 12px; text-transform: uppercase; color: #666; border-bottom: 2px solid #1A3C27; }
+        .items-table th:nth-child(3), .items-table th:nth-child(4), .items-table th:nth-child(5) { text-align: right; }
+        .totals { padding: 30px; display: flex; justify-content: flex-end; }
+        .totals-table { width: 300px; }
+        .totals-table tr td { padding: 8px 0; }
+        .totals-table tr td:last-child { text-align: right; }
+        .totals-table .total-row { font-size: 18px; font-weight: bold; color: #1A3C27; border-top: 2px solid #1A3C27; padding-top: 12px; }
+        .footer { background: #f8f8f8; padding: 20px 30px; text-align: center; font-size: 12px; color: #666; border-top: 1px solid #eee; }
+        .payment-status { display: inline-block; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+        .status-paid { background: #d4edda; color: #155724; }
+        .status-pending { background: #fff3cd; color: #856404; }
+        @media print {
+            body { background: white; }
+            .invoice-container { box-shadow: none; margin: 0; }
+            .no-print { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-container">
+        <div class="header">
+            <div class="logo">TRUSSER</div>
+            <div class="invoice-title">
+                <h1>INVOICE</h1>
+                <p>${invoiceNumber}</p>
+            </div>
+        </div>
+        
+        <div class="details">
+            <div class="detail-block">
+                <h3>Bill To</h3>
+                <p><strong>${order.customer?.fullName || order.customer?.email?.split('@')[0] || 'Customer'}</strong></p>
+                ${order.shipping?.addressLine1 ? `<p>${order.shipping.addressLine1}</p>` : ''}
+                ${order.shipping?.addressLine2 ? `<p>${order.shipping.addressLine2}</p>` : ''}
+                ${order.shipping?.city ? `<p>${order.shipping.city}, ${order.shipping.state || ''} ${order.shipping.pincode || ''}</p>` : ''}
+                ${order.customer?.email ? `<p>${order.customer.email}</p>` : ''}
+                ${order.customer?.phone ? `<p>${order.customer.phone}</p>` : ''}
+            </div>
+            <div class="detail-block" style="text-align: right;">
+                <h3>Invoice Details</h3>
+                <p><strong>Invoice No:</strong> ${invoiceNumber}</p>
+                <p><strong>Order No:</strong> ${order.orderNumber || '#' + order.sequence}</p>
+                <p><strong>Date:</strong> ${orderDate}</p>
+                <p><strong>Status:</strong> 
+                    <span class="payment-status ${order.payment?.status === 'paid' ? 'status-paid' : 'status-pending'}">
+                        ${order.payment?.status === 'paid' ? 'PAID' : 'PENDING'}
+                    </span>
+                </p>
+            </div>
+        </div>
+        
+        <table class="items-table">
+            <thead>
+                <tr>
+                    <th style="width: 50px;">#</th>
+                    <th>Item</th>
+                    <th style="width: 80px; text-align: center;">Qty</th>
+                    <th style="width: 120px; text-align: right;">Price</th>
+                    <th style="width: 120px; text-align: right;">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${itemsHtml}
+            </tbody>
+        </table>
+        
+        <div class="totals">
+            <table class="totals-table">
+                <tr>
+                    <td>Subtotal</td>
+                    <td>${formatCurrency(order.pricing?.subtotal || order.pricing?.total)}</td>
+                </tr>
+                <tr>
+                    <td>Shipping</td>
+                    <td>${formatCurrency(order.pricing?.shipping || 0)}</td>
+                </tr>
+                ${order.pricing?.codCharges ? `
+                <tr>
+                    <td>COD Charges</td>
+                    <td>${formatCurrency(order.pricing.codCharges)}</td>
+                </tr>
+                ` : ''}
+                <tr>
+                    <td>Tax (IGST 12%)</td>
+                    <td>${formatCurrency(order.pricing?.tax || 0)}</td>
+                </tr>
+                ${order.pricing?.discount ? `
+                <tr>
+                    <td>Discount</td>
+                    <td>-${formatCurrency(order.pricing.discount)}</td>
+                </tr>
+                ` : ''}
+                <tr class="total-row">
+                    <td>Total</td>
+                    <td>${formatCurrency(order.pricing?.total || 0)}</td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="footer">
+            <p><strong>NAUTICREW ECO PRODUCTS PRIVATE LIMITED</strong></p>
+            <p>D.NO: 4/7, Suriya Nagar 1st Street, Lakshmi Nagar, Tiruppur - 641607, Tamil Nadu</p>
+            <p>Email: infoi@trusser.in | GSTIN: 29AAJCN7013J1Z6</p>
+        </div>
+        
+        <div class="no-print" style="padding: 20px; text-align: center; background: #f0f0f0;">
+            <button onclick="window.print()" style="background: #1A3C27; color: white; border: none; padding: 12px 30px; font-size: 16px; border-radius: 6px; cursor: pointer;">
+                🖨️ Print / Save as PDF
+            </button>
+        </div>
+    </div>
+</body>
+</html>
+    `;
+
+    res.setHeader('Content-Type', 'text/html');
+    return res.send(html);
 });
 
 app.get('/api/admin/customers', requireAdmin, (req, res) => {

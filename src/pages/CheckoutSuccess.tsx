@@ -10,6 +10,7 @@ import {
     ShieldCheck,
     Sparkles,
     Truck,
+    Download,
 } from 'lucide-react';
 import { Navbar } from '../components/Layout/Navbar';
 import { Footer } from '../components/Layout/Footer';
@@ -318,7 +319,7 @@ export const CheckoutSuccess = () => {
                                             <div className="flex items-center justify-between">
                                                 <div>
                                                     <p className="text-xs uppercase tracking-[0.2em] text-white/70">Payment</p>
-                                                    <h2 className="mt-2 font-serif text-2xl">{paymentLabel}</h2>
+                                                    <h2 className="mt-2 font-serif text-2xl text-white">{paymentLabel}</h2>
                                                 </div>
                                                 <Clock className="h-6 w-6 text-white/80" />
                                             </div>
@@ -337,6 +338,15 @@ export const CheckoutSuccess = () => {
                                                 >
                                                     View cart
                                                 </Link>
+                                                <a
+                                                    href={`${apiBaseUrl}/api/orders/${order.id}/invoice/pdf`}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="inline-flex items-center gap-2 rounded-full border border-white/50 px-5 py-2 text-sm font-semibold text-white hover:bg-white/10"
+                                                >
+                                                    <Download className="h-4 w-4" />
+                                                    Download Invoice
+                                                </a>
                                             </div>
                                         </div>
 
@@ -351,12 +361,12 @@ export const CheckoutSuccess = () => {
                                                 </div>
                                                 <div className="mt-4 text-sm text-[#5C5C5C] space-y-2">
                                                     <p className="font-semibold text-[#1A3C27]">NAUTICREW ECO PRODUCTS PRIVATE LIMITED</p>
-                                                    <p>No 5, 12th Cross Road, Cubbonpet</p>
-                                                    <p>Bengaluru - 560002, Karnataka, India</p>
+                                                    <p>D.NO: 4/7, Suriya Nagar 1st Street</p>
+                                                    <p>Lakshmi Nagar, Tiruppur - 641607, Tamil Nadu</p>
                                                     <p>GSTIN: 29AAJCN7013J1Z6</p>
-                                                    <p>Place of Supply: Karnataka (29)</p>
-                                                    <p>Contact: +91 9008138404</p>
-                                                    <p>Email: info@trusser.in</p>
+                                                    <p>Place of Supply: Tamil Nadu (33)</p>
+                                                    <p>Contact: +91 9843226860</p>
+                                                    <p>Email: infoi@trusser.in</p>
                                                     {order.invoice?.gstNumber && (
                                                         <p className="mt-2 text-xs text-[#9C8F84]">Customer GSTIN: {order.invoice.gstNumber}</p>
                                                     )}
