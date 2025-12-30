@@ -155,7 +155,7 @@ export const CheckoutSuccess = () => {
                     <div className="absolute bottom-0 left-0 w-[420px] h-[420px] rounded-full bg-[radial-gradient(circle_at_center,_rgba(26,60,39,0.45),_transparent_70%)] blur-3xl" />
                 </div>
 
-                <section className="relative py-16">
+                <section className="relative pt-32 pb-16">
                     <div className="container mx-auto px-6">
                         {isLoading && (
                             <div className="rounded-3xl border border-white/70 bg-white/80 p-10 text-center text-[#1A3C27] shadow-[0_20px_60px_rgba(26,60,39,0.15)]">
