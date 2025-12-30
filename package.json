@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prebuild": "node scripts/generate-seo-files.js",
+    "prebuild": "node scripts/generate-seo-files.js && node scripts/generate-hero-variants.js",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",

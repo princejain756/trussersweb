@@ -7,6 +7,8 @@ import { getWebsiteContent } from '../../utils/websiteContent';
 export const HeroSection = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const content = getWebsiteContent();
+    const heroImage = content.hero.backgroundImage;
+    const isDefaultHeroImage = heroImage === '/heroimage.webp';
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start start", "end start"]
@@ -63,16 +65,41 @@ export const HeroSection = () => {
                                     ease: "easeInOut"
                                 }}
                             >
-                                <img
-                                    src={content.hero.backgroundImage}
-                                    alt={content.hero.heading}
-                                    loading="eager"
-                                    fetchPriority="high"
-                                    decoding="async"
-                                    width={1200}
-                                    height={600}
-                                    className="h-auto w-full max-h-[350px] object-contain drop-shadow-2xl md:max-h-[220px] lg:max-h-[200px] xl:max-h-[260px] 2xl:max-h-[350px]"
-                                />
+                                {isDefaultHeroImage ? (
+                                    <picture>
+                                        <source
+                                            type="image/avif"
+                                            srcSet="/heroimage-640.avif 640w, /heroimage-960.avif 960w, /heroimage-1280.avif 1280w"
+                                            sizes="(max-width: 768px) 90vw, 1200px"
+                                        />
+                                        <source
+                                            type="image/webp"
+                                            srcSet="/heroimage-640.webp 640w, /heroimage-960.webp 960w, /heroimage-1280.webp 1280w"
+                                            sizes="(max-width: 768px) 90vw, 1200px"
+                                        />
+                                        <img
+                                            src="/heroimage-960.webp"
+                                            alt={content.hero.heading}
+                                            loading="eager"
+                                            fetchPriority="high"
+                                            decoding="async"
+                                            width={3040}
+                                            height={962}
+                                            className="h-auto w-full max-h-[350px] object-contain drop-shadow-2xl md:max-h-[220px] lg:max-h-[200px] xl:max-h-[260px] 2xl:max-h-[350px]"
+                                        />
+                                    </picture>
+                                ) : (
+                                    <img
+                                        src={heroImage}
+                                        alt={content.hero.heading}
+                                        loading="eager"
+                                        fetchPriority="high"
+                                        decoding="async"
+                                        width={3040}
+                                        height={962}
+                                        className="h-auto w-full max-h-[350px] object-contain drop-shadow-2xl md:max-h-[220px] lg:max-h-[200px] xl:max-h-[260px] 2xl:max-h-[350px]"
+                                    />
+                                )}
                             </motion.div>
                         </motion.div>
                     </motion.div>

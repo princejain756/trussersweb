@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Seo } from '../../seo/Seo';
@@ -22,11 +22,18 @@ import {
     Newspaper,
 } from 'lucide-react';
 
+interface NavItem {
+    name: string;
+    path: string;
+    icon: any;
+    badge?: number;
+}
+
 // Sidebar Navigation Items
-const navItems = [
+const navItems: NavItem[] = [
     { name: 'Home', path: '/admin/home', icon: Home },
     { name: 'Online Store', path: '/admin/online-store', icon: Store },
-    { name: 'Orders', path: '/admin/orders', icon: ShoppingBag, badge: 32 },
+    { name: 'Orders', path: '/admin/orders', icon: ShoppingBag },
     { name: 'Payments', path: '/admin/payments', icon: CreditCard },
     { name: 'Fraud', path: '/admin/fraud', icon: ShieldAlert },
     { name: 'Products', path: '/admin/products', icon: Package },
@@ -36,6 +43,8 @@ const navItems = [
     { name: 'Journal', path: '/admin/journal', icon: BookOpen },
     { name: 'Newsletter', path: '/admin/newsletter', icon: Newspaper },
 ];
+
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:5174';
 
 interface AdminLayoutProps {
     children: React.ReactNode;
@@ -47,6 +56,30 @@ export const AdminLayout = ({ children, title, actions }: AdminLayoutProps) => {
     const location = useLocation();
     const navigate = useNavigate();
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [ordersCount, setOrdersCount] = useState<number | null>(null);
+
+    useEffect(() => {
+        const fetchStats = async () => {
+            try {
+                const token = window.localStorage.getItem('adminToken');
+                if (!token) return;
+
+                const response = await fetch(`${apiBaseUrl}/api/admin/stats`, {
+                    headers: { 'X-Admin-Key': token }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.summary?.totalOrders !== undefined) {
+                        setOrdersCount(data.summary.totalOrders);
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to fetch stats:', error);
+            }
+        };
+        fetchStats();
+    }, []);
 
     const handleLogout = () => {
         if (typeof window !== 'undefined') {
@@ -57,6 +90,13 @@ export const AdminLayout = ({ children, title, actions }: AdminLayoutProps) => {
     };
 
     const isActive = (path: string) => location.pathname === path;
+
+    const sidebarItems = navItems.map(item => {
+        if (item.name === 'Orders' && ordersCount !== null) {
+            return { ...item, badge: ordersCount };
+        }
+        return item;
+    });
 
     return (
         <div className="min-h-screen bg-[#F7F7F7]">
@@ -99,14 +139,16 @@ export const AdminLayout = ({ children, title, actions }: AdminLayoutProps) => {
                                     <X className="w-5 h-5 text-gray-500" />
                                 </button>
                             </div>
-                            <nav className="p-4 space-y-1">
-                                {navItems.map((item) => (
+
+                            {/* Navigation */}
+                            <nav className="p-4 space-y-1 overflow-y-auto h-[calc(100%-4rem)]">
+                                {sidebarItems.map((item: NavItem) => (
                                     <Link
                                         key={item.path}
                                         to={item.path}
                                         onClick={() => setSidebarOpen(false)}
-                                        className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${isActive(item.path)
-                                            ? 'bg-gray-100 text-gray-900 font-medium'
+                                        className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors ${isActive(item.path)
+                                            ? 'bg-gray-100 text-gray-900'
                                             : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                                             }`}
                                     >
@@ -136,7 +178,7 @@ export const AdminLayout = ({ children, title, actions }: AdminLayoutProps) => {
 
                 {/* Navigation */}
                 <nav className="flex-1 p-3 space-y-1 overflow-y-auto">
-                    {navItems.map((item) => (
+                    {sidebarItems.map((item: NavItem) => (
                         <Link
                             key={item.path}
                             to={item.path}

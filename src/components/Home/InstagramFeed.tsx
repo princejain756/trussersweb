@@ -1,38 +1,6 @@
-import { useEffect } from 'react';
-import { getWebsiteContent } from '../../utils/websiteContent';
+// Imports removed as they are no longer used
 
 export const InstagramFeed = () => {
-    const content = getWebsiteContent();
-    const embeds = content.instagramEmbeds || [];
-
-    useEffect(() => {
-        // Load Instagram embed script
-        const script = document.createElement('script');
-        script.src = '//www.instagram.com/embed.js';
-        script.async = true;
-        document.body.appendChild(script);
-
-        // Process embeds if script already loaded
-        if ((window as any).instgrm) {
-            (window as any).instgrm.Embeds.process();
-        }
-
-        return () => {
-            // Cleanup script on unmount
-            const existingScript = document.querySelector('script[src="//www.instagram.com/embed.js"]');
-            if (existingScript) {
-                existingScript.remove();
-            }
-        };
-    }, [embeds]);
-
-    // Re-process embeds when content changes
-    useEffect(() => {
-        if ((window as any).instgrm) {
-            (window as any).instgrm.Embeds.process();
-        }
-    }, [embeds]);
-
     return (
         <section className="py-16 md:py-24 bg-gradient-to-b from-[#F4EFEC] to-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -57,46 +25,38 @@ export const InstagramFeed = () => {
                     </a>
                 </div>
 
-                {/* Instagram Posts Grid - Dynamic from Content */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
-                    {embeds.map((embed) => (
-                        <div key={embed.id} className="instagram-embed-wrapper flex justify-center">
-                            <blockquote
-                                className="instagram-media"
-                                data-instgrm-permalink={`${embed.url}?utm_source=ig_embed&utm_campaign=loading`}
-                                data-instgrm-version="14"
-                                style={{
-                                    background: '#FFF',
-                                    border: 0,
-                                    borderRadius: '3px',
-                                    boxShadow: '0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15)',
-                                    margin: '1px',
-                                    maxWidth: '540px',
-                                    minWidth: '326px',
-                                    padding: 0,
-                                    width: '99.375%'
-                                }}
-                            >
-                            </blockquote>
+                {/* iPhone Video Interface */}
+                <div className="flex flex-wrap justify-center gap-8 mb-12">
+                    {[1, 2].map((num) => (
+                        <div key={num} className="relative mx-auto border-gray-800 bg-gray-800 border-[14px] rounded-[2.5rem] h-[600px] w-[300px] shadow-xl">
+                            <div className="w-[148px] h-[18px] bg-gray-800 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute z-10"></div>
+                            <div className="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[124px] rounded-l-lg"></div>
+                            <div className="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[178px] rounded-l-lg"></div>
+                            <div className="h-[64px] w-[3px] bg-gray-800 absolute -right-[17px] top-[142px] rounded-r-lg"></div>
+                            <div className="rounded-[2rem] overflow-hidden w-full h-full bg-white relative">
+                                <video
+                                    src={`/Instagram/video${num}_small.mp4`}
+                                    className="w-full h-full object-cover"
+                                    autoPlay
+                                    loop
+                                    muted
+                                    playsInline
+                                />
+                                {/* Overlays removed as requested */}
+                            </div>
                         </div>
                     ))}
                 </div>
 
-                {embeds.length === 0 && (
-                    <p className="text-center text-gray-500 py-12">
-                        No Instagram embeds configured. Add them in the Online Store editor.
-                    </p>
-                )}
-
                 {/* Call to Action */}
-                <div className="text-center mt-12">
+                <div className="text-center">
                     <a
-                        href="https://www.instagram.com/trusser.in"
+                        href="https://www.instagram.com/trusser.in/#"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-block px-8 py-3 bg-[#C1A17C] text-white font-medium rounded-full hover:bg-[#A68763] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                        className="inline-flex items-center justify-center rounded-full bg-[#1A3C27] px-8 py-3 text-sm font-semibold text-white shadow-[0_10px_20px_rgba(26,60,39,0.2)] hover:bg-[#163022] hover:shadow-[0_15px_30px_rgba(26,60,39,0.3)] transition-all duration-300 transform hover:scale-105"
                     >
-                        View More on Instagram
+                        Load Instagram posts
                     </a>
                 </div>
             </div>

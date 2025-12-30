@@ -1,9 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
-import { useEffect, lazy, Suspense } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import { Home } from './pages/Home';
 import { ScrollToTop } from './components/UI/ScrollToTop';
-import { Chatbot } from './components/Chatbot/Chatbot';
-import { CartToast } from './components/UI/CartToast';
 
 // Lazy load all pages except Home (critical path)
 const Shop = lazy(() => import('./pages/Shop').then(m => ({ default: m.Shop })));
@@ -42,6 +40,10 @@ const Payments = lazy(() => import('./pages/admin/Payments').then(m => ({ defaul
 const Fraud = lazy(() => import('./pages/admin/Fraud').then(m => ({ default: m.Fraud })));
 const Newsletter = lazy(() => import('./pages/admin/Newsletter').then(m => ({ default: m.Newsletter })));
 
+// Non-critical UI (delay until user interacts)
+const Chatbot = lazy(() => import('./components/Chatbot/Chatbot').then((m) => ({ default: m.Chatbot })));
+const CartToast = lazy(() => import('./components/UI/CartToast').then((m) => ({ default: m.CartToast })));
+
 // Minimal loading fallback for best performance
 const PageLoader = () => (
   <div className="min-h-screen flex items-center justify-center bg-[#F4EFEC]">
@@ -51,11 +53,35 @@ const PageLoader = () => (
 
 function AppContent() {
   const location = useLocation();
+  const [enableNonCriticalUI, setEnableNonCriticalUI] = useState(false);
 
   // Scroll to top when route changes
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
+
+  useEffect(() => {
+    if (enableNonCriticalUI) return;
+
+    const enable = () => setEnableNonCriticalUI(true);
+
+    const onScroll = () => enable();
+    const onPointerDown = () => enable();
+    const onKeyDown = () => enable();
+
+    window.addEventListener('scroll', onScroll, { passive: true, once: true });
+    window.addEventListener('pointerdown', onPointerDown, { once: true });
+    window.addEventListener('keydown', onKeyDown, { once: true });
+
+    const fallbackTimer = window.setTimeout(enable, 8000);
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('pointerdown', onPointerDown);
+      window.removeEventListener('keydown', onKeyDown);
+      window.clearTimeout(fallbackTimer);
+    };
+  }, [enableNonCriticalUI]);
 
   return (
     <>
@@ -100,8 +126,12 @@ function AppContent() {
           <Route path="*" element={<Navigate to="/404.html" replace />} />
         </Routes>
       </Suspense>
-      <Chatbot />
-      <CartToast />
+      {enableNonCriticalUI && (
+        <Suspense fallback={null}>
+          <Chatbot />
+          <CartToast />
+        </Suspense>
+      )}
     </>
   );
 }

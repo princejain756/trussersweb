@@ -17,12 +17,21 @@ export const ProductShowcase = () => {
     const [width, setWidth] = useState(0);
     const [isMiniCartOpen, setIsMiniCartOpen] = useState(false);
     const [miniCartProduct, setMiniCartProduct] = useState<(typeof products)[number] | null>(null);
+    const [itemsToShow, setItemsToShow] = useState(10);
     const content = getWebsiteContent();
 
     useEffect(() => {
         if (sliderRef.current && containerRef.current) {
             setWidth(sliderRef.current.scrollWidth - containerRef.current.offsetWidth);
         }
+    }, []);
+
+    useEffect(() => {
+        const mq = window.matchMedia('(max-width: 768px)');
+        const update = () => setItemsToShow(mq.matches ? 4 : 10);
+        update();
+        mq.addEventListener('change', update);
+        return () => mq.removeEventListener('change', update);
     }, []);
 
     const { scrollYProgress } = useScroll({
@@ -77,7 +86,7 @@ export const ProductShowcase = () => {
                         drag="x"
                         dragConstraints={{ right: 0, left: -width }}
                     >
-                        {products.slice(0, 10).map((product, index) => (
+                        {products.slice(0, itemsToShow).map((product, index) => (
                             <motion.div
                                 key={product.id}
                                 initial={{ opacity: 0, scale: 0.9 }}
@@ -91,6 +100,11 @@ export const ProductShowcase = () => {
                                         <img
                                             src={product.image}
                                             alt={product.name}
+                                            loading="lazy"
+                                            decoding="async"
+                                            fetchPriority="low"
+                                            width={700}
+                                            height={875}
                                             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                                         />
                                         <div className="absolute top-4 left-4 z-10">
@@ -165,6 +179,9 @@ export const ProductShowcase = () => {
 	                                            <img
 	                                                src={miniCartProduct.image}
 	                                                alt={miniCartProduct.name}
+	                                                loading="lazy"
+	                                                decoding="async"
+	                                                fetchPriority="low"
 	                                                className="h-full w-full object-cover"
 	                                            />
 	                                        </div>

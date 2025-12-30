@@ -19,6 +19,8 @@ type CartAddedListener = (event: CartAddedEvent) => void;
 
 type StorageEventListener = (event: StorageEvent) => void;
 
+let lastCartAdded: { item: CartItem; at: number } | null = null;
+
 const toNumber = (value: unknown, fallback = 0) => {
     const numeric = typeof value === 'string' ? Number(value.replace(/[₹$,\s]/g, '')) : Number(value);
     return Number.isFinite(numeric) ? numeric : fallback;
@@ -77,8 +79,15 @@ const emitCartAdded = (item: CartItem) => {
     if (typeof window === 'undefined') {
         return;
     }
+    lastCartAdded = { item, at: Date.now() };
     const event = new CustomEvent<CartItem>('cart:item-added', { detail: item });
     window.dispatchEvent(event);
+};
+
+export const getLastCartAdded = () => lastCartAdded;
+
+export const clearLastCartAdded = () => {
+    lastCartAdded = null;
 };
 
 export const setCartItems = (items: CartItem[]) => {

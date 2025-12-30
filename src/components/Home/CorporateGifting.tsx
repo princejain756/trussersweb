@@ -47,6 +47,11 @@ export const CorporateGifting = () => {
                                 <img
                                     src={corporateGiftBox}
                                     alt="Corporate Gift Box"
+                                    loading="lazy"
+                                    decoding="async"
+                                    fetchPriority="low"
+                                    width={900}
+                                    height={900}
                                     className="w-full h-full object-cover rounded-xl"
                                 />
                             </div>

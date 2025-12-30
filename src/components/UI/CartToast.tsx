@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ShoppingBag, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { formatPriceSimple } from '../../utils/currency';
-import { subscribeToCartAdds } from '../../utils/cart';
+import { clearLastCartAdded, getLastCartAdded, subscribeToCartAdds } from '../../utils/cart';
 import type { CartItem } from '../../utils/cart';
 
 const AUTO_CLOSE_MS = 3000;
@@ -14,9 +14,17 @@ export const CartToast = () => {
     const timerRef = useRef<number | null>(null);
 
     useEffect(() => {
+        const cached = getLastCartAdded();
+        if (cached && Date.now() - cached.at < 2000) {
+            setItem(cached.item);
+            setIsVisible(true);
+            clearLastCartAdded();
+        }
+
         const unsubscribe = subscribeToCartAdds((nextItem) => {
             setItem(nextItem);
             setIsVisible(true);
+            clearLastCartAdded();
 
             if (timerRef.current) {
                 window.clearTimeout(timerRef.current);

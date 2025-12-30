@@ -7,16 +7,24 @@
   <link rel="canonical" href="https://trusser.in/" />
 
   <!-- Critical Resource Preloading -->
-  <link rel="preload" as="image" href="/heroimage.webp" fetchpriority="high" />
+  <link rel="preload" as="image" href="/heroimage-960.avif" type="image/avif"
+    imagesrcset="/heroimage-640.avif 640w, /heroimage-960.avif 960w, /heroimage-1280.avif 1280w"
+    imagesizes="(max-width: 768px) 90vw, 1200px" fetchpriority="high" />
 
   <!-- DNS Prefetch for external resources -->
   <link rel="dns-prefetch" href="//fonts.googleapis.com" />
   <link rel="dns-prefetch" href="//fonts.gstatic.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap">
+  <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
-    rel="stylesheet">
+    media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap">
+  </noscript>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
     content="Eco-friendly stationery & lifestyle products crafted from recycled bottles. Sustainable gifts, corporate gifting, and everyday essentials—made in Bengaluru, India." />

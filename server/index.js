@@ -1739,6 +1739,7 @@ app.get('/api/admin/stats', requireAdmin, (req, res) => {
     // Summary stats
     const totalCustomers = users.length;
     const totalProducts = products.length;
+    const totalOrders = orders.length; // Add total orders count (all time)
     const avgOrderValue = recentOrders.length > 0
         ? Math.round(totalSales / recentOrders.filter(o => o.payment?.status === 'paid').length) || 0
         : 0;
@@ -1766,6 +1767,7 @@ app.get('/api/admin/stats', requireAdmin, (req, res) => {
         recentOrders: recentOrdersList,
         topProducts,
         summary: {
+            totalOrders,
             totalCustomers,
             activeDiscounts: discounts.filter(d => {
                 const now = new Date();
