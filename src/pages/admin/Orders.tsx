@@ -2,9 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AdminLayout } from '../../components/Admin/AdminLayout';
-import { Button } from '../../components/UI/Button';
 import {
-    Plus,
     Search,
     Filter,
     Download,
@@ -16,6 +14,13 @@ import {
     CheckCircle2,
     Clock,
     Loader2,
+    X,
+    Mail,
+    Phone,
+    AlertCircle,
+    FileText,
+    User,
+    Copy,
 } from 'lucide-react';
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:5174';
@@ -42,6 +47,74 @@ interface Order {
     hasNote: boolean;
 }
 
+interface OrderItem {
+    id: string;
+    name: string;
+    variant?: string;
+    sku: string;
+    quantity: number;
+    price: number;
+    total: number;
+    image?: string;
+}
+
+interface OrderDetail {
+    id: string;
+    orderNumber: string;
+    sequence: number;
+    createdAt: string;
+    formattedDate: string;
+    customer: {
+        name: string;
+        email: string;
+        phone: string;
+        userId?: string;
+    };
+    shipping: {
+        addressLine1: string;
+        addressLine2: string;
+        city: string;
+        state: string;
+        pincode: string;
+        country: string;
+        method: string;
+    };
+    items: OrderItem[];
+    pricing: {
+        subtotal: number;
+        shipping: number;
+        codCharges: number;
+        tax: number;
+        taxRate: string;
+        discount: number;
+        total: number;
+    };
+    payment: {
+        method: string;
+        status: string;
+        providerOrderId?: string;
+        providerPaymentId?: string;
+        paidAt?: string;
+        refundId?: string;
+        refundAmount?: number;
+        refundedAt?: string;
+        approvedAt?: string;
+        rejectedAt?: string;
+        rejectionReason?: string;
+    };
+    fulfillmentStatus: string;
+    deliveryStatus: string;
+    clientInfo?: {
+        ip: string;
+        userAgent: string;
+        capturedAt?: string;
+    };
+    invoice?: { number: string };
+    notes?: string;
+    cancelledAt?: string;
+    timeline: { event: string; timestamp: string }[];
+}
+
 interface OrderStats {
     total: number;
     itemsOrdered: number;
@@ -50,59 +123,563 @@ interface OrderStats {
     delivered: number;
 }
 
+// Helper to format currency
+const formatInr = (amount: number) => `₹${amount.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
+
 // Status Badge Components
 const PaymentBadge = ({ status }: { status: PaymentStatus }) => {
     const styles = {
-        Paid: 'bg-green-100 text-green-700',
-        'Payment pending': 'bg-orange-100 text-orange-700',
-        Refunded: 'bg-blue-100 text-blue-700',
-        Voided: 'bg-gray-100 text-gray-600',
+        'Paid': 'bg-green-50 text-green-700',
+        'Payment pending': 'bg-orange-50 text-orange-700',
+        'Refunded': 'bg-gray-100 text-gray-600',
+        'Voided': 'bg-red-50 text-red-700',
     };
-
-    return (
-        <span className={`inline-flex items-center px-2 py-0.5 text-xs font-medium rounded ${styles[status] || 'bg-gray-100 text-gray-600'}`}>
-            {status}
-        </span>
-    );
+    return <span className={`px-2 py-1 text-xs font-medium rounded-full ${styles[status]}`}>{status}</span>;
 };
 
 const FulfillmentBadge = ({ status }: { status: FulfillmentStatus }) => {
     const styles = {
-        Fulfilled: 'bg-green-50 text-green-700 border-green-200',
-        Unfulfilled: 'bg-yellow-50 text-yellow-700 border-yellow-200',
-        'Partially fulfilled': 'bg-blue-50 text-blue-700 border-blue-200',
+        'Fulfilled': 'bg-green-50 text-green-700',
+        'Unfulfilled': 'bg-yellow-50 text-yellow-700',
+        'Partially fulfilled': 'bg-blue-50 text-blue-700',
     };
-
     const icons = {
-        Fulfilled: CheckCircle2,
-        Unfulfilled: Clock,
-        'Partially fulfilled': Package,
+        'Fulfilled': <CheckCircle2 className="w-3 h-3" />,
+        'Unfulfilled': <Clock className="w-3 h-3" />,
+        'Partially fulfilled': <Package className="w-3 h-3" />,
     };
-
-    const Icon = icons[status] || Clock;
-
     return (
-        <span className={`inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium rounded border ${styles[status] || 'bg-gray-50 text-gray-600 border-gray-200'}`}>
-            <Icon className="w-3 h-3" />
-            {status}
+        <span className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-medium rounded-full ${styles[status]}`}>
+            {icons[status]} {status}
         </span>
     );
 };
 
 const DeliveryBadge = ({ status }: { status: DeliveryStatus }) => {
     const styles = {
-        Delivered: 'bg-green-50 text-green-700',
+        'Delivered': 'bg-green-50 text-green-700',
         'In transit': 'bg-blue-50 text-blue-700',
         'Out for delivery': 'bg-purple-50 text-purple-700',
-        Pending: 'bg-gray-50 text-gray-600',
+        'Pending': 'bg-gray-100 text-gray-600',
+    };
+    const icons = {
+        'Delivered': <CheckCircle2 className="w-3 h-3" />,
+        'In transit': <Truck className="w-3 h-3" />,
+        'Out for delivery': <Truck className="w-3 h-3" />,
+        'Pending': <Clock className="w-3 h-3" />,
+    };
+    return (
+        <span className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-medium rounded-full ${styles[status]}`}>
+            {icons[status]}
+        </span>
+    );
+};
+
+// Order Detail Modal Component
+const OrderDetailModal = ({
+    orderId,
+    onClose,
+    getAdminToken,
+    onOrderUpdated,
+}: {
+    orderId: string;
+    onClose: () => void;
+    getAdminToken: () => string | null;
+    onOrderUpdated?: () => void;
+}) => {
+    const [order, setOrder] = useState<OrderDetail | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+    const [actionLoading, setActionLoading] = useState<string | null>(null);
+    const [showPrintMenu, setShowPrintMenu] = useState(false);
+
+    const fetchOrderDetail = async () => {
+        const token = getAdminToken();
+        if (!token) return;
+
+        try {
+            setLoading(true);
+            const response = await fetch(`${apiBaseUrl}/api/admin/orders/${orderId}`, {
+                headers: { 'X-Admin-Key': token },
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch order details');
+            }
+
+            const data = await response.json();
+            setOrder(data);
+        } catch (err) {
+            setError(err instanceof Error ? err.message : 'Failed to load order');
+        } finally {
+            setLoading(false);
+        }
     };
 
+    useEffect(() => {
+        fetchOrderDetail();
+    }, [orderId, getAdminToken]);
+
+    const copyToClipboard = (text: string) => {
+        navigator.clipboard.writeText(text);
+        alert('Copied to clipboard!');
+    };
+
+    const handleSendInvoice = async () => {
+        const token = getAdminToken();
+        if (!token || !order) return;
+
+        try {
+            setActionLoading('send-invoice');
+            const response = await fetch(`${apiBaseUrl}/api/admin/orders/${order.id}/send-invoice`, {
+                method: 'POST',
+                headers: { 'X-Admin-Key': token },
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                alert(`${result.message}\n\nInvoice URL: ${result.invoiceUrl}`);
+            } else {
+                alert(result.error || 'Failed to send invoice');
+            }
+        } catch (err) {
+            alert('Failed to send invoice');
+        } finally {
+            setActionLoading(null);
+        }
+    };
+
+    const handleMarkPaid = async () => {
+        const token = getAdminToken();
+        if (!token || !order) return;
+
+        if (!confirm('Mark this order as paid?')) return;
+
+        try {
+            setActionLoading('mark-paid');
+            const response = await fetch(`${apiBaseUrl}/api/admin/orders/${order.id}/mark-paid`, {
+                method: 'POST',
+                headers: { 'X-Admin-Key': token },
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                alert('Order marked as paid!');
+                await fetchOrderDetail();
+                onOrderUpdated?.();
+            } else {
+                alert(result.error || 'Failed to mark as paid');
+            }
+        } catch (err) {
+            alert('Failed to mark as paid');
+        } finally {
+            setActionLoading(null);
+        }
+    };
+
+    const handlePrintInvoice = async () => {
+        const token = getAdminToken();
+        if (!token || !order) return;
+
+        try {
+            setActionLoading('print');
+            const response = await fetch(`${apiBaseUrl}/api/admin/orders/${order.id}/invoice`, {
+                headers: { 'X-Admin-Key': token },
+            });
+
+            const result = await response.json();
+            if (result.invoiceUrl) {
+                window.open(result.invoiceUrl, '_blank');
+            } else {
+                alert('Invoice URL not available');
+            }
+        } catch (err) {
+            alert('Failed to get invoice');
+        } finally {
+            setActionLoading(null);
+            setShowPrintMenu(false);
+        }
+    };
+
+    const getPaymentStatusColor = (status: string) => {
+        switch (status) {
+            case 'paid': return 'bg-green-100 text-green-800';
+            case 'pending': return 'bg-orange-100 text-orange-800';
+            case 'refunded': return 'bg-gray-100 text-gray-600';
+            default: return 'bg-red-100 text-red-700';
+        }
+    };
+
+    if (loading) {
+        return (
+            <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center">
+                <div className="bg-white rounded-xl p-8">
+                    <Loader2 className="w-8 h-8 animate-spin text-[#1A3C27]" />
+                </div>
+            </div>
+        );
+    }
+
+    if (error || !order) {
+        return (
+            <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center">
+                <div className="bg-white rounded-xl p-8 max-w-md">
+                    <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
+                    <p className="text-center text-gray-600">{error || 'Order not found'}</p>
+                    <button onClick={onClose} className="mt-4 w-full py-2 bg-[#1A3C27] text-white rounded-lg">
+                        Close
+                    </button>
+                </div>
+            </div>
+        );
+    }
+
     return (
-        <span className={`inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium rounded ${styles[status] || 'bg-gray-50 text-gray-600'}`}>
-            {status === 'In transit' && <Truck className="w-3 h-3" />}
-            {status === 'Delivered' && <CheckCircle2 className="w-3 h-3" />}
-            {status}
-        </span>
+        <div className="fixed inset-0 z-50 flex">
+            {/* Backdrop */}
+            <div className="absolute inset-0 bg-black/50" onClick={onClose} />
+
+            {/* Modal Content */}
+            <motion.div
+                initial={{ x: '100%' }}
+                animate={{ x: 0 }}
+                exit={{ x: '100%' }}
+                transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                className="absolute right-0 top-0 bottom-0 w-full max-w-4xl bg-[#F9F9F9] overflow-y-auto"
+            >
+                {/* Header */}
+                <div className="sticky top-0 z-10 bg-white border-b border-gray-200 px-6 py-4">
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-4">
+                            <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-lg">
+                                <X className="w-5 h-5" />
+                            </button>
+                            <div>
+                                <h2 className="text-xl font-semibold text-gray-900 flex items-center gap-3">
+                                    {order.orderNumber}
+                                    <span className={`px-2 py-1 text-xs font-medium rounded-full ${getPaymentStatusColor(order.payment.status)}`}>
+                                        {order.payment.status === 'paid' ? 'Paid' : order.payment.status === 'pending' ? 'Payment pending' : order.payment.status}
+                                    </span>
+                                    <span className="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-700">
+                                        {order.fulfillmentStatus === 'fulfilled' ? 'Fulfilled' : order.fulfillmentStatus}
+                                    </span>
+                                </h2>
+                                <p className="text-sm text-gray-500 mt-1">
+                                    {order.formattedDate} from {order.customer.name}
+                                </p>
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <button
+                                onClick={() => alert('Restock feature coming soon')}
+                                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50"
+                            >
+                                Restock
+                            </button>
+                            <button
+                                onClick={() => alert('Return feature coming soon')}
+                                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50"
+                            >
+                                Return
+                            </button>
+                            <button
+                                onClick={() => alert('Edit feature coming soon')}
+                                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50"
+                            >
+                                Edit
+                            </button>
+                            <div className="relative">
+                                <button
+                                    onClick={() => setShowPrintMenu(!showPrintMenu)}
+                                    className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 flex items-center gap-1"
+                                >
+                                    {actionLoading === 'print' ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Print'}
+                                    <ChevronDown className="w-4 h-4" />
+                                </button>
+                                {showPrintMenu && (
+                                    <div className="absolute right-0 top-full mt-1 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-20">
+                                        <button
+                                            onClick={handlePrintInvoice}
+                                            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-50 flex items-center gap-2"
+                                        >
+                                            <FileText className="w-4 h-4" />
+                                            Print Invoice
+                                        </button>
+                                        <button
+                                            onClick={() => {
+                                                window.print();
+                                                setShowPrintMenu(false);
+                                            }}
+                                            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-50 flex items-center gap-2"
+                                        >
+                                            <FileText className="w-4 h-4" />
+                                            Print Order Details
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Main Content */}
+                <div className="p-6">
+                    <div className="grid grid-cols-3 gap-6">
+                        {/* Left Column - Main Info */}
+                        <div className="col-span-2 space-y-6">
+                            {/* Fulfillment Card */}
+                            <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+                                <div className="flex items-center justify-between px-4 py-3 bg-gray-50 border-b border-gray-100">
+                                    <div className="flex items-center gap-2">
+                                        <CheckCircle2 className="w-5 h-5 text-green-600" />
+                                        <span className="font-medium text-gray-900">
+                                            {order.fulfillmentStatus === 'fulfilled' ? 'Fulfilled' : 'Unfulfilled'}
+                                        </span>
+                                    </div>
+                                    <span className="text-sm text-gray-500">{order.orderNumber}-F1</span>
+                                </div>
+                                <div className="p-4">
+                                    <div className="flex items-center gap-2 mb-3">
+                                        <span className="px-2 py-1 text-xs font-medium bg-green-100 text-green-700 rounded">Confirmed</span>
+                                        <span className="text-sm text-gray-600 flex items-center gap-1">
+                                            <Calendar className="w-4 h-4" /> {order.formattedDate}
+                                        </span>
+                                    </div>
+
+                                    {/* Order Items */}
+                                    <div className="space-y-4 mt-4">
+                                        {order.items.map((item) => (
+                                            <div key={item.id} className="flex items-center gap-4">
+                                                <div className="w-12 h-12 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
+                                                    {item.image ? (
+                                                        <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                                                    ) : (
+                                                        <Package className="w-6 h-6 m-3 text-gray-400" />
+                                                    )}
+                                                </div>
+                                                <div className="flex-1 min-w-0">
+                                                    <p className="font-medium text-gray-900 truncate">{item.name}</p>
+                                                    <p className="text-sm text-gray-500">{item.variant} • {item.sku}</p>
+                                                </div>
+                                                <div className="text-right">
+                                                    <p className="font-medium text-gray-900">
+                                                        {formatInr(item.price)} × {item.quantity}
+                                                    </p>
+                                                    <p className="text-sm text-gray-500">{formatInr(item.total)}</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Payment Card */}
+                            <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+                                <div className="flex items-center justify-between px-4 py-3 bg-orange-50 border-b border-orange-100">
+                                    <div className="flex items-center gap-2">
+                                        <AlertCircle className="w-5 h-5 text-orange-600" />
+                                        <span className="font-medium text-orange-800">
+                                            {order.payment.status === 'pending' ? 'Payment pending' :
+                                                order.payment.status === 'paid' ? 'Payment received' : order.payment.status}
+                                        </span>
+                                    </div>
+                                </div>
+                                {order.payment.status === 'pending' && (
+                                    <div className="px-4 py-3 bg-orange-50/50 border-b border-orange-100">
+                                        <div className="flex items-start gap-2">
+                                            <AlertCircle className="w-4 h-4 text-orange-500 mt-0.5" />
+                                            <p className="text-sm text-orange-700">
+                                                Payment is still processing for this order. Make sure you get paid before fulfilling.
+                                            </p>
+                                        </div>
+                                    </div>
+                                )}
+                                <div className="p-4 space-y-3">
+                                    <div className="flex justify-between py-2 border-b border-gray-100">
+                                        <span className="text-gray-600">Subtotal</span>
+                                        <span className="text-gray-600">{order.items.length} item{order.items.length !== 1 ? 's' : ''}</span>
+                                        <span className="font-medium text-gray-900">{formatInr(order.pricing.subtotal)}</span>
+                                    </div>
+                                    <div className="flex justify-between py-2 border-b border-gray-100">
+                                        <span className="text-gray-600">Shipping</span>
+                                        <span className="text-gray-600">{order.shipping.method}</span>
+                                        <span className="font-medium text-gray-900">{formatInr(order.pricing.shipping)}</span>
+                                    </div>
+                                    {order.pricing.codCharges > 0 && (
+                                        <div className="flex justify-between py-2 border-b border-gray-100">
+                                            <span className="text-gray-600">COD Charges</span>
+                                            <span></span>
+                                            <span className="font-medium text-gray-900">{formatInr(order.pricing.codCharges)}</span>
+                                        </div>
+                                    )}
+                                    <div className="flex justify-between py-2 border-b border-gray-100">
+                                        <span className="text-gray-600">Taxes</span>
+                                        <span className="text-gray-600">IGST {order.pricing.taxRate} (Included)</span>
+                                        <span className="font-medium text-gray-900">{formatInr(order.pricing.tax)}</span>
+                                    </div>
+                                    <div className="flex justify-between py-3 font-semibold text-lg border-b border-gray-200">
+                                        <span className="text-gray-900">Total</span>
+                                        <span></span>
+                                        <span className="text-gray-900">{formatInr(order.pricing.total)}</span>
+                                    </div>
+                                    <div className="flex justify-between py-2">
+                                        <span className="text-gray-600">Paid</span>
+                                        <span></span>
+                                        <span className="font-medium text-gray-900">
+                                            {order.payment.status === 'paid' ? formatInr(order.pricing.total) : formatInr(0)}
+                                        </span>
+                                    </div>
+                                    <div className="flex justify-between py-2 font-semibold">
+                                        <span className="text-gray-900">Balance</span>
+                                        <span></span>
+                                        <span className="text-gray-900">
+                                            {order.payment.status === 'paid' ? formatInr(0) : formatInr(order.pricing.total)}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="px-4 py-3 bg-gray-50 border-t border-gray-100 flex justify-end gap-2">
+                                    <button
+                                        onClick={handleSendInvoice}
+                                        disabled={actionLoading === 'send-invoice'}
+                                        className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 disabled:opacity-50 flex items-center gap-2"
+                                    >
+                                        {actionLoading === 'send-invoice' ? <Loader2 className="w-4 h-4 animate-spin" /> : <Mail className="w-4 h-4" />}
+                                        Send invoice
+                                    </button>
+                                    {order.payment.status === 'pending' && (
+                                        <button
+                                            onClick={handleMarkPaid}
+                                            disabled={actionLoading === 'mark-paid'}
+                                            className="px-4 py-2 text-sm font-medium text-white bg-[#1A3C27] rounded-lg hover:bg-[#2D5F3F] disabled:opacity-50 flex items-center gap-2"
+                                        >
+                                            {actionLoading === 'mark-paid' && <Loader2 className="w-4 h-4 animate-spin" />}
+                                            Mark as paid
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* Timeline */}
+                            <div className="bg-white rounded-xl border border-gray-200 p-4">
+                                <h3 className="font-medium text-gray-900 mb-4">Timeline</h3>
+                                <div className="space-y-4">
+                                    {order.timeline.map((event, idx) => (
+                                        <div key={idx} className="flex items-start gap-3">
+                                            <div className="w-2 h-2 bg-[#1A3C27] rounded-full mt-2" />
+                                            <div>
+                                                <p className="text-sm font-medium text-gray-900">{event.event}</p>
+                                                <p className="text-xs text-gray-500">
+                                                    {new Date(event.timestamp).toLocaleString('en-IN', {
+                                                        dateStyle: 'medium',
+                                                        timeStyle: 'short',
+                                                    })}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Right Column - Sidebar */}
+                        <div className="space-y-6">
+                            {/* Notes */}
+                            <div className="bg-white rounded-xl border border-gray-200 p-4">
+                                <div className="flex items-center justify-between mb-3">
+                                    <h3 className="font-medium text-gray-900">Notes</h3>
+                                    <button className="text-gray-400 hover:text-gray-600">
+                                        <FileText className="w-4 h-4" />
+                                    </button>
+                                </div>
+                                <p className="text-sm text-gray-500">
+                                    {order.notes || 'No notes from customer'}
+                                </p>
+                            </div>
+
+                            {/* Customer */}
+                            <div className="bg-white rounded-xl border border-gray-200 p-4">
+                                <h3 className="font-medium text-gray-900 mb-4">Customer</h3>
+                                <div className="space-y-3">
+                                    <div className="flex items-center gap-2">
+                                        <User className="w-4 h-4 text-gray-400" />
+                                        <span className="text-sm text-[#1A3C27] font-medium">{order.customer.name}</span>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <Mail className="w-4 h-4 text-gray-400" />
+                                        <a href={`mailto:${order.customer.email}`} className="text-sm text-blue-600 hover:underline">
+                                            {order.customer.email}
+                                        </a>
+                                    </div>
+                                    {order.customer.phone && (
+                                        <div className="flex items-center gap-2">
+                                            <Phone className="w-4 h-4 text-gray-400" />
+                                            <a href={`tel:${order.customer.phone}`} className="text-sm text-gray-600">
+                                                {order.customer.phone}
+                                            </a>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* Shipping Address */}
+                            <div className="bg-white rounded-xl border border-gray-200 p-4">
+                                <h3 className="font-medium text-gray-900 mb-4">Shipping Address</h3>
+                                <div className="text-sm text-gray-600 space-y-1">
+                                    <p className="font-medium text-gray-900">{order.customer.name}</p>
+                                    <p>{order.shipping.addressLine1}</p>
+                                    {order.shipping.addressLine2 && <p>{order.shipping.addressLine2}</p>}
+                                    <p>{order.shipping.city}, {order.shipping.state} {order.shipping.pincode}</p>
+                                    <p>{order.shipping.country}</p>
+                                </div>
+                            </div>
+
+                            {/* Additional Details */}
+                            <div className="bg-white rounded-xl border border-gray-200 p-4">
+                                <div className="flex items-center justify-between mb-4">
+                                    <h3 className="font-medium text-gray-900">Additional details</h3>
+                                </div>
+                                <div className="space-y-4 text-sm">
+                                    <div>
+                                        <p className="text-gray-500 mb-1">payment_method</p>
+                                        <p className="text-gray-900 font-medium">{order.payment.method.toUpperCase()}</p>
+                                    </div>
+                                    {order.payment.providerOrderId && (
+                                        <div>
+                                            <p className="text-gray-500 mb-1">provider_order_id</p>
+                                            <div className="flex items-center gap-2">
+                                                <p className="text-gray-900 font-mono text-xs break-all">
+                                                    {order.payment.providerOrderId}
+                                                </p>
+                                                <button onClick={() => copyToClipboard(order.payment.providerOrderId || '')} className="text-gray-400 hover:text-gray-600">
+                                                    <Copy className="w-3.5 h-3.5" />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )}
+                                    {order.clientInfo && (
+                                        <>
+                                            <div>
+                                                <p className="text-gray-500 mb-1">user_agent</p>
+                                                <p className="text-gray-900 text-xs break-all">{order.clientInfo.userAgent}</p>
+                                            </div>
+                                            <div>
+                                                <p className="text-gray-500 mb-1">customer_ip</p>
+                                                <div className="flex items-center gap-2">
+                                                    <p className="text-gray-900 font-mono">{order.clientInfo.ip}</p>
+                                                    <button onClick={() => copyToClipboard(order.clientInfo?.ip || '')} className="text-gray-400 hover:text-gray-600">
+                                                        <Copy className="w-3.5 h-3.5" />
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </motion.div>
+        </div>
     );
 };
 
@@ -114,6 +691,7 @@ export const Orders = () => {
     const [activeTab, setActiveTab] = useState('All');
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [selectedOrderId, setSelectedOrderId] = useState<string | null>(null);
 
     const getAdminToken = useCallback(() => {
         return typeof window !== 'undefined' ? window.localStorage.getItem('adminToken') : null;
@@ -175,6 +753,34 @@ export const Orders = () => {
         return matchesSearch;
     });
 
+    const handleExport = () => {
+        const token = getAdminToken();
+        if (!token) return;
+
+        // Download via direct link with auth
+        const exportUrl = `${apiBaseUrl}/api/admin/orders/export`;
+
+        // Create a hidden form to submit with headers (or use fetch + blob)
+        fetch(exportUrl, {
+            headers: { 'X-Admin-Key': token },
+        })
+            .then(response => response.blob())
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `orders-export-${new Date().toISOString().split('T')[0]}.csv`;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+            })
+            .catch(err => {
+                console.error('Export failed:', err);
+                alert('Failed to export orders');
+            });
+    };
+
     // Stats
     const stats = [
         { label: 'Orders', value: orderStats?.total || 0, change: '—' },
@@ -199,11 +805,9 @@ export const Orders = () => {
         return (
             <AdminLayout title="Orders">
                 <div className="flex flex-col items-center justify-center min-h-[400px] gap-4">
+                    <AlertCircle className="w-12 h-12 text-red-500" />
                     <p className="text-red-600">{error}</p>
-                    <button
-                        onClick={fetchOrders}
-                        className="px-4 py-2 bg-[#1A3C27] text-white rounded-lg hover:bg-[#2D5F3F]"
-                    >
+                    <button onClick={fetchOrders} className="px-4 py-2 bg-[#1A3C27] text-white rounded-lg hover:bg-[#2D5F3F]">
                         Retry
                     </button>
                 </div>
@@ -215,66 +819,42 @@ export const Orders = () => {
         <AdminLayout
             title="Orders"
             actions={
-                <div className="flex items-center gap-2">
-                    <button className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                <div className="flex items-center gap-3">
+                    <button
+                        onClick={handleExport}
+                        className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50"
+                    >
                         <Download className="w-4 h-4" />
                         Export
                     </button>
-                    <button className="px-3 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-lg">
-                        More actions
-                        <ChevronDown className="w-4 h-4 inline ml-1" />
-                    </button>
-                    <Button className="bg-[#1A3C27] text-white hover:bg-[#2D5F3F] rounded-lg px-4 py-2 text-sm font-medium">
-                        <Plus className="w-4 h-4 mr-2" />
-                        Create order
-                    </Button>
                 </div>
             }
         >
             <div className="max-w-full mx-auto space-y-6">
-                {/* Date Filter */}
-                <div className="flex items-center gap-4">
-                    <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50">
-                        <Calendar className="w-4 h-4" />
-                        Today
-                        <ChevronDown className="w-4 h-4" />
-                    </button>
-                </div>
-
                 {/* Stats Row */}
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                    {stats.map((stat, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.05 }}
-                            className="bg-white rounded-lg p-4 border border-gray-100"
-                        >
+                <div className="grid grid-cols-6 gap-4">
+                    {stats.map((stat, i) => (
+                        <div key={i} className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
                             <p className="text-xs text-gray-500 mb-1">{stat.label}</p>
                             <p className="text-xl font-semibold text-gray-900">{stat.value}</p>
-                            <p className="text-xs text-gray-400">{stat.change}</p>
-                        </motion.div>
+                        </div>
                     ))}
                 </div>
 
                 {/* Tabs */}
-                <div className="flex items-center gap-1 border-b border-gray-200 overflow-x-auto">
+                <div className="flex items-center gap-1 border-b border-gray-200">
                     {tabs.map((tab) => (
                         <button
                             key={tab}
                             onClick={() => setActiveTab(tab)}
-                            className={`px-4 py-3 text-sm font-medium whitespace-nowrap border-b-2 transition-colors ${activeTab === tab
-                                ? 'border-gray-900 text-gray-900'
+                            className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors ${activeTab === tab
+                                ? 'border-[#1A3C27] text-[#1A3C27]'
                                 : 'border-transparent text-gray-500 hover:text-gray-700'
                                 }`}
                         >
                             {tab}
                         </button>
                     ))}
-                    <button className="px-3 py-3 text-gray-400 hover:text-gray-600">
-                        <Plus className="w-4 h-4" />
-                    </button>
                 </div>
 
                 {/* Table */}
@@ -330,14 +910,15 @@ export const Orders = () => {
                                         animate={{ opacity: 1 }}
                                         exit={{ opacity: 0 }}
                                         transition={{ delay: index * 0.02 }}
+                                        onClick={() => setSelectedOrderId(order.id)}
                                         className="grid grid-cols-12 gap-2 items-center px-4 py-3 hover:bg-gray-50 transition-colors cursor-pointer group"
                                     >
-                                        <div className="col-span-1 flex items-center gap-2">
+                                        <div className="col-span-1 flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
                                             <input type="checkbox" className="w-4 h-4 rounded border-gray-300" />
                                             {order.hasNote && <MessageSquare className="w-3.5 h-3.5 text-gray-400" />}
                                         </div>
                                         <div className="col-span-1">
-                                            <span className="text-sm font-medium text-gray-900">{order.orderNumber}</span>
+                                            <span className="text-sm font-medium text-gray-900 group-hover:text-[#1A3C27]">{order.orderNumber}</span>
                                         </div>
                                         <div className="col-span-2 text-sm text-gray-600">{order.date}</div>
                                         <div className="col-span-2 text-sm text-gray-900">{order.customer}</div>
@@ -382,6 +963,18 @@ export const Orders = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Order Detail Modal */}
+            <AnimatePresence>
+                {selectedOrderId && (
+                    <OrderDetailModal
+                        orderId={selectedOrderId}
+                        onClose={() => setSelectedOrderId(null)}
+                        getAdminToken={getAdminToken}
+                        onOrderUpdated={fetchOrders}
+                    />
+                )}
+            </AnimatePresence>
         </AdminLayout>
     );
 };

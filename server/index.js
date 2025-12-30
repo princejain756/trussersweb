@@ -1819,6 +1819,319 @@ app.get('/api/admin/orders', requireAdmin, (req, res) => {
     });
 });
 
+// Get single order full details for admin
+app.get('/api/admin/orders/:id', requireAdmin, (req, res) => {
+    const order = orders.find(o => o.id === req.params.id);
+    if (!order) {
+        return res.status(404).json({ error: 'Order not found' });
+    }
+
+    // Return full order with all details
+    return res.json({
+        id: order.id,
+        orderNumber: order.orderNumber || `#${order.sequence}`,
+        sequence: order.sequence,
+        createdAt: order.createdAt,
+        formattedDate: formatOrderDate(order.createdAt),
+        customer: {
+            name: order.customer?.fullName || `${order.customer?.firstName || ''} ${order.customer?.lastName || ''}`.trim() || 'Guest',
+            email: order.customer?.email || '',
+            phone: order.customer?.phone || '',
+            userId: order.customer?.userId,
+        },
+        shipping: {
+            addressLine1: order.shipping?.addressLine1 || order.shipping?.address || '',
+            addressLine2: order.shipping?.addressLine2 || '',
+            city: order.shipping?.city || '',
+            state: order.shipping?.state || '',
+            pincode: order.shipping?.pincode || order.shipping?.postalCode || '',
+            country: order.shipping?.country || 'India',
+            method: order.shipping?.method || 'Standard Shipping',
+        },
+        items: (order.items || []).map(item => ({
+            id: item.id,
+            name: item.name || item.title,
+            variant: item.variant || item.size,
+            sku: item.sku || item.productId || '',
+            quantity: item.quantity || 1,
+            price: item.price,
+            total: (item.price || 0) * (item.quantity || 1),
+            image: item.image,
+        })),
+        pricing: {
+            subtotal: order.pricing?.subtotal || order.pricing?.total || 0,
+            shipping: order.pricing?.shipping || 0,
+            codCharges: order.pricing?.codCharges || 0,
+            tax: order.pricing?.tax || 0,
+            taxRate: order.pricing?.taxRate || '12%',
+            discount: order.pricing?.discount || 0,
+            total: order.pricing?.total || 0,
+        },
+        payment: {
+            method: order.payment?.method || 'unknown',
+            status: order.payment?.status || 'pending',
+            providerOrderId: order.payment?.providerOrderId,
+            providerPaymentId: order.payment?.providerPaymentId,
+            paidAt: order.payment?.paidAt,
+            refundId: order.payment?.refundId,
+            refundAmount: order.payment?.refundAmount,
+            refundedAt: order.payment?.refundedAt,
+            approvedAt: order.payment?.approvedAt,
+            rejectedAt: order.payment?.rejectedAt,
+            rejectionReason: order.payment?.rejectionReason,
+        },
+        fulfillmentStatus: order.fulfillmentStatus || 'unfulfilled',
+        deliveryStatus: order.deliveryStatus || 'Pending',
+        clientInfo: order.clientInfo || null,
+        invoice: order.invoice || null,
+        notes: order.notes || null,
+        cancelledAt: order.cancelledAt,
+        timeline: [
+            { event: 'Order placed', timestamp: order.createdAt },
+            order.payment?.paidAt && { event: 'Payment received', timestamp: order.payment.paidAt },
+            order.payment?.approvedAt && { event: 'COD approved', timestamp: order.payment.approvedAt },
+            order.payment?.rejectedAt && { event: 'COD rejected', timestamp: order.payment.rejectedAt },
+            order.payment?.refundedAt && { event: 'Refund issued', timestamp: order.payment.refundedAt },
+            order.cancelledAt && { event: 'Order cancelled', timestamp: order.cancelledAt },
+        ].filter(Boolean),
+    });
+});
+
+// Export orders to CSV (Excel-compatible)
+app.get('/api/admin/orders/export', requireAdmin, (req, res) => {
+    const csvHeader = [
+        'Order Number',
+        'Date',
+        'Customer Name',
+        'Email',
+        'Phone',
+        'Payment Method',
+        'Payment Status',
+        'Fulfillment Status',
+        'Shipping Address',
+        'City',
+        'State',
+        'Pincode',
+        'Items',
+        'Subtotal',
+        'Shipping',
+        'Tax',
+        'Total',
+        'Notes',
+    ].join(',');
+
+    const csvRows = orders.map(o => {
+        const items = (o.items || []).map(i => `${i.name || i.title} x${i.quantity || 1}`).join('; ');
+        const address = [o.shipping?.addressLine1, o.shipping?.addressLine2].filter(Boolean).join(' ');
+
+        return [
+            `"${o.orderNumber || `#${o.sequence}`}"`,
+            `"${new Date(o.createdAt).toLocaleString('en-IN')}"`,
+            `"${o.customer?.fullName || o.customer?.email?.split('@')[0] || 'Guest'}"`,
+            `"${o.customer?.email || ''}"`,
+            `"${o.customer?.phone || ''}"`,
+            `"${o.payment?.method || 'unknown'}"`,
+            `"${o.payment?.status || 'pending'}"`,
+            `"${o.fulfillmentStatus || 'unfulfilled'}"`,
+            `"${address}"`,
+            `"${o.shipping?.city || ''}"`,
+            `"${o.shipping?.state || ''}"`,
+            `"${o.shipping?.pincode || ''}"`,
+            `"${items}"`,
+            o.pricing?.subtotal || 0,
+            o.pricing?.shipping || 0,
+            o.pricing?.tax || 0,
+            o.pricing?.total || 0,
+            `"${(o.notes || '').replace(/"/g, '""')}"`,
+        ].join(',');
+    });
+
+    const csv = csvHeader + '\n' + csvRows.join('\n');
+    const bom = '\ufeff'; // UTF-8 BOM for Excel compatibility
+
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+    res.setHeader('Content-Disposition', `attachment; filename="orders-export-${new Date().toISOString().split('T')[0]}.csv"`);
+    return res.send(bom + csv);
+});
+
+// Get invoice data for an order (returns URL to hosted PDF)
+app.get('/api/admin/orders/:id/invoice', requireAdmin, (req, res) => {
+    const order = orders.find(o => o.id === req.params.id);
+    if (!order) {
+        return res.status(404).json({ error: 'Order not found' });
+    }
+
+    // Generate invoice URL - this points to the invoice download endpoint
+    const invoiceUrl = `${req.protocol}://${req.get('host')}/api/orders/${order.id}/invoice/pdf`;
+
+    return res.json({
+        invoiceNumber: order.invoice?.number || `INV-${order.sequence || order.id.slice(0, 8).toUpperCase()}`,
+        orderNumber: order.orderNumber || `#${order.sequence}`,
+        invoiceUrl,
+        order: {
+            id: order.id,
+            date: order.createdAt,
+            customer: order.customer,
+            total: order.pricing?.total || 0,
+        },
+    });
+});
+
+// Send invoice email to customer
+app.post('/api/admin/orders/:id/send-invoice', requireAdmin, async (req, res) => {
+    const order = orders.find(o => o.id === req.params.id);
+    if (!order) {
+        return res.status(404).json({ error: 'Order not found' });
+    }
+
+    if (!order.customer?.email) {
+        return res.status(400).json({ error: 'Customer email not available' });
+    }
+
+    const invoiceNumber = order.invoice?.number || `INV-${order.sequence || order.id.slice(0, 8).toUpperCase()}`;
+    const invoiceUrl = `${req.protocol}://${req.get('host')}/api/orders/${order.id}/invoice/pdf`;
+
+    // Email content
+    const subject = `Invoice ${invoiceNumber} for your Trusser order ${order.orderNumber || '#' + order.sequence}`;
+    const emailHtml = `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+            <div style="background: #1A3C27; padding: 20px; text-align: center;">
+                <h1 style="color: #F4EFEC; margin: 0;">TRUSSER</h1>
+            </div>
+            <div style="padding: 30px; background: #F4EFEC;">
+                <h2 style="color: #1A3C27;">Your Invoice is Ready</h2>
+                <p>Dear ${order.customer?.fullName || 'Customer'},</p>
+                <p>Thank you for your order! Please find your invoice attached below.</p>
+                <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                    <p><strong>Invoice Number:</strong> ${invoiceNumber}</p>
+                    <p><strong>Order Number:</strong> ${order.orderNumber || '#' + order.sequence}</p>
+                    <p><strong>Amount:</strong> ₹${(order.pricing?.total || 0).toLocaleString('en-IN', { minimumFractionDigits: 2 })}</p>
+                </div>
+                <a href="${invoiceUrl}" style="display: inline-block; background: #1A3C27; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px;">
+                    Download Invoice PDF
+                </a>
+                <p style="margin-top: 30px; color: #666;">If you have any questions, please contact us at info@trusser.in</p>
+            </div>
+            <div style="padding: 20px; text-align: center; color: #666; font-size: 12px;">
+                <p>Trusser - Turning Waste Into Purpose</p>
+                <p>No. 18/1, 12th Cross, Cubbonpet, Bangalore-560002</p>
+            </div>
+        </div>
+    `;
+
+    // Check if SMTP is configured
+    if (!transporter) {
+        // Fallback: return the invoice URL for manual sending
+        return res.json({
+            success: true,
+            message: 'Invoice link generated (email not configured)',
+            invoiceUrl,
+            invoiceNumber,
+            emailContent: {
+                to: order.customer.email,
+                subject,
+            },
+        });
+    }
+
+    try {
+        await transporter.sendMail({
+            from: process.env.SMTP_FROM || 'orders@trusser.in',
+            to: order.customer.email,
+            subject,
+            html: emailHtml,
+        });
+
+        return res.json({
+            success: true,
+            message: `Invoice sent to ${order.customer.email}`,
+            invoiceUrl,
+            invoiceNumber,
+        });
+    } catch (error) {
+        console.error('Failed to send invoice email:', error);
+        return res.json({
+            success: true,
+            message: 'Invoice link generated (email delivery failed)',
+            invoiceUrl,
+            invoiceNumber,
+            emailError: error.message,
+        });
+    }
+});
+
+// Mark order as paid (for COD/manual payments)
+app.post('/api/admin/orders/:id/mark-paid', requireAdmin, async (req, res) => {
+    const orderIndex = orders.findIndex(o => o.id === req.params.id);
+    if (orderIndex === -1) {
+        return res.status(404).json({ error: 'Order not found' });
+    }
+
+    const order = orders[orderIndex];
+    if (order.payment?.status === 'paid') {
+        return res.status(400).json({ error: 'Order is already marked as paid' });
+    }
+
+    const updatedOrder = {
+        ...order,
+        payment: {
+            ...order.payment,
+            status: 'paid',
+            paidAt: new Date().toISOString(),
+            markedPaidBy: 'admin',
+        },
+    };
+
+    orders = [...orders.slice(0, orderIndex), updatedOrder, ...orders.slice(orderIndex + 1)];
+    await persistJsonFile(ordersPath, orders);
+
+    return res.json({
+        success: true,
+        message: 'Order marked as paid',
+        order: {
+            id: updatedOrder.id,
+            paymentStatus: 'paid',
+            paidAt: updatedOrder.payment.paidAt,
+        },
+    });
+});
+
+// Update fulfillment status
+app.post('/api/admin/orders/:id/fulfill', requireAdmin, async (req, res) => {
+    const orderIndex = orders.findIndex(o => o.id === req.params.id);
+    if (orderIndex === -1) {
+        return res.status(404).json({ error: 'Order not found' });
+    }
+
+    const order = orders[orderIndex];
+    const { trackingNumber, carrier } = req.body || {};
+
+    const updatedOrder = {
+        ...order,
+        fulfillmentStatus: 'fulfilled',
+        fulfilledAt: new Date().toISOString(),
+        deliveryStatus: 'In transit',
+        tracking: {
+            number: trackingNumber || null,
+            carrier: carrier || null,
+            updatedAt: new Date().toISOString(),
+        },
+    };
+
+    orders = [...orders.slice(0, orderIndex), updatedOrder, ...orders.slice(orderIndex + 1)];
+    await persistJsonFile(ordersPath, orders);
+
+    return res.json({
+        success: true,
+        message: 'Order marked as fulfilled',
+        order: {
+            id: updatedOrder.id,
+            fulfillmentStatus: 'fulfilled',
+            trackingNumber,
+        },
+    });
+});
+
 app.get('/api/admin/customers', requireAdmin, (req, res) => {
     // Build customer list from users with order data
     const customerList = users.map(user => {
