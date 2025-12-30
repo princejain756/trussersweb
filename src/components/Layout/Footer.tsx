@@ -1,9 +1,46 @@
-import { ArrowRight } from 'lucide-react';
+import { useState } from 'react';
+import { ArrowRight, Check, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { getWebsiteContent } from '../../utils/websiteContent';
 
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:5174';
+
 export const Footer = () => {
     const content = getWebsiteContent();
+    const [email, setEmail] = useState('');
+    const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+    const [message, setMessage] = useState('');
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!email.trim()) return;
+
+        try {
+            setStatus('loading');
+            const response = await fetch(`${apiBaseUrl}/api/newsletter/subscribe`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, source: 'footer' }),
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                setStatus('success');
+                setMessage(result.message || 'Successfully subscribed!');
+                setEmail('');
+                setTimeout(() => setStatus('idle'), 3000);
+            } else {
+                setStatus('error');
+                setMessage(result.error || 'Failed to subscribe');
+                setTimeout(() => setStatus('idle'), 3000);
+            }
+        } catch {
+            setStatus('error');
+            setMessage('Something went wrong. Please try again.');
+            setTimeout(() => setStatus('idle'), 3000);
+        }
+    };
 
     return (
         <footer className="bg-[#1A3C27] text-[#E8DFD4] overflow-hidden">
@@ -20,16 +57,34 @@ export const Footer = () => {
                             {content.footer.aboutText}
                         </p>
 
-                        <form className="flex max-w-md items-center border-b border-[#E8DFD4]/30 focus-within:border-[#C1A17C] transition-colors pb-4">
+                        <form onSubmit={handleSubmit} className="flex max-w-md items-center border-b border-[#E8DFD4]/30 focus-within:border-[#C1A17C] transition-colors pb-4">
                             <input
                                 type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 placeholder="Enter your email address"
                                 className="flex-1 bg-transparent text-lg placeholder:text-[#E8DFD4]/30 focus:outline-none"
+                                disabled={status === 'loading' || status === 'success'}
                             />
-                            <button className="text-[#C1A17C] hover:text-white transition-colors">
-                                <ArrowRight size={24} />
+                            <button
+                                type="submit"
+                                disabled={status === 'loading' || status === 'success'}
+                                className="text-[#C1A17C] hover:text-white transition-colors disabled:opacity-50"
+                            >
+                                {status === 'loading' ? (
+                                    <Loader2 size={24} className="animate-spin" />
+                                ) : status === 'success' ? (
+                                    <Check size={24} className="text-green-400" />
+                                ) : (
+                                    <ArrowRight size={24} />
+                                )}
                             </button>
                         </form>
+                        {message && (
+                            <p className={`mt-2 text-sm ${status === 'success' ? 'text-green-400' : 'text-red-400'}`}>
+                                {message}
+                            </p>
+                        )}
                     </div>
 
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-12 lg:pl-12">

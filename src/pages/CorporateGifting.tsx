@@ -181,6 +181,55 @@ export const CorporateGifting = () => {
     const heroY = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
     const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
+    // Quote form state
+    const [quoteForm, setQuoteForm] = useState({
+        name: '',
+        company: '',
+        email: '',
+        phone: '',
+        category: '',
+        quantity: '',
+        requirements: '',
+    });
+
+    const handleQuoteSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+
+        const subject = encodeURIComponent(`Corporate Gifting Quote Request from ${quoteForm.company || quoteForm.name}`);
+        const body = encodeURIComponent(
+            `Dear Trusser Team,
+
+I would like to request a quote for corporate gifting. Here are my details:
+
+CONTACT INFORMATION
+-------------------
+Name: ${quoteForm.name || 'Not provided'}
+Company: ${quoteForm.company || 'Not provided'}
+Email: ${quoteForm.email || 'Not provided'}
+Phone: ${quoteForm.phone || 'Not provided'}
+
+REQUIREMENTS
+------------
+Gift Category: ${quoteForm.category || 'Not specified'}
+Estimated Quantity: ${quoteForm.quantity || 'Not specified'}
+
+Additional Requirements:
+${quoteForm.requirements || 'No additional requirements specified.'}
+
+---
+Looking forward to hearing from you.
+
+Best regards,
+${quoteForm.name || 'Customer'}`
+        );
+
+        window.location.href = `mailto:info@trusser.in?subject=${subject}&body=${body}`;
+    };
+
+    const updateQuoteForm = (field: string, value: string) => {
+        setQuoteForm(prev => ({ ...prev, [field]: value }));
+    };
+
     return (
         <div className="min-h-screen bg-[#F4EFEC] selection:bg-[#C1A17C] selection:text-white">
             <Seo
@@ -550,10 +599,10 @@ export const CorporateGifting = () => {
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-6">
                             {featuredProducts.map((product, index) => (
                                 <AnimatedSection key={index} delay={index * 0.1}>
-	                                    <motion.div
-	                                        whileHover={{ scale: 1.03 }}
-	                                        className="group relative rounded-2xl overflow-hidden cursor-pointer aspect-square"
-	                                    >
+                                    <motion.div
+                                        whileHover={{ scale: 1.03 }}
+                                        className="group relative rounded-2xl overflow-hidden cursor-pointer aspect-square"
+                                    >
                                         <img
                                             src={product.image}
                                             alt={product.name}
@@ -634,8 +683,8 @@ export const CorporateGifting = () => {
                                         key={index}
                                         onClick={() => setActiveTestimonial(index)}
                                         className={`w-3 h-3 rounded-full transition-all duration-300 ${activeTestimonial === index
-                                                ? 'bg-[#C1A17C] w-8'
-                                                : 'bg-[#1A3C27]/20 hover:bg-[#1A3C27]/40'
+                                            ? 'bg-[#C1A17C] w-8'
+                                            : 'bg-[#1A3C27]/20 hover:bg-[#1A3C27]/40'
                                             }`}
                                     />
                                 ))}
@@ -690,16 +739,21 @@ export const CorporateGifting = () => {
                             <AnimatedSection delay={0.2}>
                                 <div className="bg-white rounded-3xl p-8 md:p-10 shadow-2xl">
                                     <h3 className="font-serif text-2xl text-[#1A3C27] mb-6">Request a Quote</h3>
-                                    <form className="space-y-4">
+                                    <form onSubmit={handleQuoteSubmit} className="space-y-4">
                                         <div className="grid md:grid-cols-2 gap-4">
                                             <input
                                                 type="text"
                                                 placeholder="Your Name"
+                                                value={quoteForm.name}
+                                                onChange={(e) => updateQuoteForm('name', e.target.value)}
+                                                required
                                                 className="w-full px-4 py-3 rounded-xl bg-[#F4EFEC] border-2 border-transparent focus:border-[#2D5F3F] focus:outline-none transition-colors placeholder:text-[#5C5C5C]/50"
                                             />
                                             <input
                                                 type="text"
                                                 placeholder="Company Name"
+                                                value={quoteForm.company}
+                                                onChange={(e) => updateQuoteForm('company', e.target.value)}
                                                 className="w-full px-4 py-3 rounded-xl bg-[#F4EFEC] border-2 border-transparent focus:border-[#2D5F3F] focus:outline-none transition-colors placeholder:text-[#5C5C5C]/50"
                                             />
                                         </div>
@@ -707,34 +761,45 @@ export const CorporateGifting = () => {
                                             <input
                                                 type="email"
                                                 placeholder="Email Address"
+                                                value={quoteForm.email}
+                                                onChange={(e) => updateQuoteForm('email', e.target.value)}
+                                                required
                                                 className="w-full px-4 py-3 rounded-xl bg-[#F4EFEC] border-2 border-transparent focus:border-[#2D5F3F] focus:outline-none transition-colors placeholder:text-[#5C5C5C]/50"
                                             />
                                             <input
                                                 type="tel"
                                                 placeholder="Phone Number"
+                                                value={quoteForm.phone}
+                                                onChange={(e) => updateQuoteForm('phone', e.target.value)}
                                                 className="w-full px-4 py-3 rounded-xl bg-[#F4EFEC] border-2 border-transparent focus:border-[#2D5F3F] focus:outline-none transition-colors placeholder:text-[#5C5C5C]/50"
                                             />
                                         </div>
                                         <select
+                                            value={quoteForm.category}
+                                            onChange={(e) => updateQuoteForm('category', e.target.value)}
                                             className="w-full px-4 py-3 rounded-xl bg-[#F4EFEC] border-2 border-transparent focus:border-[#2D5F3F] focus:outline-none transition-colors text-[#5C5C5C]"
                                         >
                                             <option value="">Select Gift Category</option>
-                                            <option value="welcome-kits">Welcome Kits</option>
-                                            <option value="event-hampers">Event Hampers</option>
-                                            <option value="festive">Festive Collections</option>
-                                            <option value="custom">Custom Bundles</option>
+                                            <option value="Welcome Kits">Welcome Kits</option>
+                                            <option value="Event Hampers">Event Hampers</option>
+                                            <option value="Festive Collections">Festive Collections</option>
+                                            <option value="Custom Bundles">Custom Bundles</option>
                                         </select>
                                         <input
                                             type="text"
                                             placeholder="Estimated Quantity (e.g., 100-500)"
+                                            value={quoteForm.quantity}
+                                            onChange={(e) => updateQuoteForm('quantity', e.target.value)}
                                             className="w-full px-4 py-3 rounded-xl bg-[#F4EFEC] border-2 border-transparent focus:border-[#2D5F3F] focus:outline-none transition-colors placeholder:text-[#5C5C5C]/50"
                                         />
                                         <textarea
                                             placeholder="Tell us about your requirements..."
                                             rows={4}
+                                            value={quoteForm.requirements}
+                                            onChange={(e) => updateQuoteForm('requirements', e.target.value)}
                                             className="w-full px-4 py-3 rounded-xl bg-[#F4EFEC] border-2 border-transparent focus:border-[#2D5F3F] focus:outline-none transition-colors resize-none placeholder:text-[#5C5C5C]/50"
                                         />
-                                        <Button className="w-full bg-[#1A3C27] text-white hover:bg-[#2D5F3F] rounded-xl py-4 text-base font-semibold group">
+                                        <Button type="submit" className="w-full bg-[#1A3C27] text-white hover:bg-[#2D5F3F] rounded-xl py-4 text-base font-semibold group">
                                             Submit Inquiry
                                             <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                                         </Button>

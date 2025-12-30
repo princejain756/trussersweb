@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Home } from './pages/Home';
 import { Shop } from './pages/Shop';
@@ -30,6 +30,9 @@ import { Settings } from './pages/admin/Settings';
 import { Journal as AdminJournal } from './pages/admin/Journal';
 import { OnlineStore } from './pages/admin/OnlineStore';
 import { ThemeEditor } from './pages/admin/ThemeEditor';
+import { Payments } from './pages/admin/Payments';
+import { Fraud } from './pages/admin/Fraud';
+import { Newsletter } from './pages/admin/Newsletter';
 import { ProductDetail } from './components/ProductDetail/ProductDetail';
 import { ScrollToTop } from './components/UI/ScrollToTop';
 import { Chatbot } from './components/Chatbot/Chatbot';
@@ -70,6 +73,8 @@ function AppContent() {
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/home" element={<AdminHome />} />
         <Route path="/admin/orders" element={<Orders />} />
+        <Route path="/admin/payments" element={<Payments />} />
+        <Route path="/admin/fraud" element={<Fraud />} />
         <Route path="/admin/products" element={<AdminDashboard />} />
         <Route path="/admin/customers" element={<Customers />} />
         <Route path="/admin/marketing" element={<Marketing />} />
@@ -79,6 +84,8 @@ function AppContent() {
         <Route path="/admin/online-store" element={<OnlineStore />} />
         <Route path="/admin/online-store/editor" element={<ThemeEditor />} />
         <Route path="/admin/journal" element={<AdminJournal />} />
+        <Route path="/admin/newsletter" element={<Newsletter />} />
+        <Route path="*" element={<Navigate to="/404.html" replace />} />
       </Routes>
       <Chatbot />
       <CartToast />

@@ -27,6 +27,8 @@ const usersPath = path.join(dataDir, 'users.json');
 const sessionsPath = path.join(dataDir, 'sessions.json');
 const discountsPath = path.join(dataDir, 'discounts.json');
 const blogsPath = path.join(dataDir, 'blogs.json');
+const bannedEntitiesPath = path.join(dataDir, 'bannedEntities.json');
+const newsletterSubscribersPath = path.join(dataDir, 'newsletterSubscribers.json');
 const sourceProductsPath = path.join(__dirname, '..', 'src', 'data', 'products.json');
 const sourceCategoriesPath = path.join(__dirname, '..', 'src', 'data', 'categories.json');
 const sourceWebsiteContentPath = path.join(__dirname, '..', 'public', 'websiteContent.json');
@@ -67,6 +69,8 @@ let users = [];
 let sessions = [];
 let discounts = [];
 let blogs = [];
+let bannedEntities = []; // Fraud detection: banned IPs, emails, phones, addresses
+let newsletterSubscribers = []; // Newsletter email subscribers
 let writeQueue = Promise.resolve();
 
 function stringifyAscii(value) {
@@ -213,6 +217,51 @@ async function ensureSeedData() {
         blogs = [];
         await persistJsonFile(blogsPath, blogs);
     }
+
+    try {
+        bannedEntities = await readJsonFile(bannedEntitiesPath);
+    } catch (error) {
+        if (error?.code !== 'ENOENT') {
+            throw error;
+        }
+        bannedEntities = [];
+        await persistJsonFile(bannedEntitiesPath, bannedEntities);
+    }
+
+    try {
+        newsletterSubscribers = await readJsonFile(newsletterSubscribersPath);
+    } catch (error) {
+        if (error?.code !== 'ENOENT') {
+            throw error;
+        }
+        newsletterSubscribers = [];
+        await persistJsonFile(newsletterSubscribersPath, newsletterSubscribers);
+    }
+}
+
+// Get client IP address from request (handles proxies)
+function getClientIp(req) {
+    // Check for forwarded headers (when behind proxy/load balancer)
+    const forwarded = req.headers['x-forwarded-for'];
+    if (forwarded) {
+        // x-forwarded-for can contain multiple IPs, take the first one (original client)
+        return forwarded.split(',')[0].trim();
+    }
+    const realIp = req.headers['x-real-ip'];
+    if (realIp) {
+        return realIp.trim();
+    }
+    // Fallback to direct connection
+    return req.socket?.remoteAddress || req.connection?.remoteAddress || null;
+}
+
+// Check if entity is banned (returns ban entry if found)
+function checkBannedEntity(type, value) {
+    if (!value) return null;
+    const normalizedValue = String(value).toLowerCase().trim();
+    return bannedEntities.find(
+        ban => ban.type === type && ban.value.toLowerCase() === normalizedValue && ban.active
+    );
 }
 
 function getAdminToken(req) {
@@ -2283,6 +2332,37 @@ app.post('/api/checkout', async (req, res) => {
         return res.status(400).json({ error: 'Order must include at least one item' });
     }
 
+    // Capture client info for fraud detection
+    const clientIp = getClientIp(req);
+    const userAgent = req.headers['user-agent'] || null;
+
+    // Check if IP is banned
+    const bannedIp = checkBannedEntity('ip', clientIp);
+    if (bannedIp) {
+        return res.status(403).json({
+            error: 'Order cannot be processed. Please contact support.',
+            code: 'BLOCKED'
+        });
+    }
+
+    // Check if email is banned
+    const bannedEmail = checkBannedEntity('email', result.value.customer?.email);
+    if (bannedEmail) {
+        return res.status(403).json({
+            error: 'Order cannot be processed. Please contact support.',
+            code: 'BLOCKED'
+        });
+    }
+
+    // Check if phone is banned
+    const bannedPhone = checkBannedEntity('phone', result.value.customer?.phone);
+    if (bannedPhone) {
+        return res.status(403).json({
+            error: 'Order cannot be processed. Please contact support.',
+            code: 'BLOCKED'
+        });
+    }
+
     const pricing = calculateOrderPricing(result.value.items);
     const sequence = getNextOrderSequence(orders);
     const orderId = crypto.randomUUID();
@@ -2332,6 +2412,11 @@ app.post('/api/checkout', async (req, res) => {
             method: result.value.paymentMethod,
             status: 'pending',
             providerOrderId,
+        },
+        clientInfo: {
+            ip: clientIp,
+            userAgent: userAgent,
+            capturedAt: new Date().toISOString(),
         },
     };
 
@@ -2526,6 +2611,685 @@ app.post('/api/checkout/razorpay/fail', async (req, res) => {
 
     return res.json(updated);
 });
+
+// ============================================
+// PAYMENT MANAGEMENT API ENDPOINTS
+// ============================================
+
+// Get payments overview for admin dashboard
+app.get('/api/admin/payments', requireAdmin, (req, res) => {
+    const codOrders = orders.filter(o => o.payment?.method === 'cod');
+    const razorpayOrders = orders.filter(o => o.payment?.method === 'razorpay');
+
+    const pendingCodOrders = codOrders.filter(o => o.payment?.status === 'pending');
+    const approvedCodOrders = codOrders.filter(o => o.payment?.status === 'approved');
+    const rejectedCodOrders = codOrders.filter(o => o.payment?.status === 'rejected');
+
+    const paidRazorpayOrders = razorpayOrders.filter(o => o.payment?.status === 'paid');
+    const refundedOrders = razorpayOrders.filter(o =>
+        o.payment?.status === 'refunded' || o.payment?.status === 'partially_refunded'
+    );
+
+    const codRevenue = approvedCodOrders.reduce((sum, o) => sum + (o.pricing?.total || 0), 0);
+    const razorpayRevenue = paidRazorpayOrders.reduce((sum, o) => sum + (o.pricing?.total || 0), 0);
+    const totalRefunded = refundedOrders.reduce((sum, o) => sum + (o.payment?.refundAmount || o.pricing?.total || 0), 0);
+
+    const formatOrder = (o) => ({
+        id: o.id,
+        orderNumber: o.orderNumber,
+        date: new Date(o.createdAt).toLocaleDateString('en-IN', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+        }),
+        customer: `${o.customer?.firstName || ''} ${o.customer?.lastName || ''}`.trim() || o.customer?.email || 'Guest',
+        email: o.customer?.email || '',
+        phone: o.customer?.phone || '',
+        total: `₹${(o.pricing?.total || 0).toLocaleString('en-IN')}`,
+        totalAmount: o.pricing?.total || 0,
+        items: o.items?.length || 0,
+        itemsList: (o.items || []).map(item => ({
+            name: item.name,
+            quantity: item.quantity,
+            price: item.price,
+        })),
+        paymentMethod: o.payment?.method,
+        paymentStatus: o.payment?.status,
+        providerPaymentId: o.payment?.providerPaymentId,
+        refundId: o.payment?.refundId,
+        refundAmount: o.payment?.refundAmount,
+        approvedAt: o.payment?.approvedAt,
+        rejectedAt: o.payment?.rejectedAt,
+        rejectionReason: o.payment?.rejectionReason,
+        refundedAt: o.payment?.refundedAt,
+        shipping: o.shipping,
+    });
+
+    return res.json({
+        stats: {
+            pendingCodCount: pendingCodOrders.length,
+            approvedCodCount: approvedCodOrders.length,
+            rejectedCodCount: rejectedCodOrders.length,
+            paidRazorpayCount: paidRazorpayOrders.length,
+            refundedCount: refundedOrders.length,
+            codRevenue: `₹${codRevenue.toLocaleString('en-IN')}`,
+            razorpayRevenue: `₹${razorpayRevenue.toLocaleString('en-IN')}`,
+            totalRefunded: `₹${totalRefunded.toLocaleString('en-IN')}`,
+        },
+        codOrders: {
+            pending: pendingCodOrders.map(formatOrder),
+            approved: approvedCodOrders.map(formatOrder),
+            rejected: rejectedCodOrders.map(formatOrder),
+        },
+        razorpayOrders: {
+            paid: paidRazorpayOrders.map(formatOrder),
+            refunded: refundedOrders.map(formatOrder),
+            failed: razorpayOrders.filter(o => o.payment?.status === 'failed').map(formatOrder),
+            pending: razorpayOrders.filter(o => o.payment?.status === 'pending').map(formatOrder),
+        },
+    });
+});
+
+// Approve a COD order
+app.post('/api/admin/orders/:id/cod/approve', requireAdmin, async (req, res) => {
+    const { id } = req.params;
+    const index = orders.findIndex(o => o.id === id);
+
+    if (index === -1) {
+        return res.status(404).json({ error: 'Order not found' });
+    }
+
+    const order = orders[index];
+
+    if (order.payment?.method !== 'cod') {
+        return res.status(400).json({ error: 'Order is not a COD payment' });
+    }
+
+    if (order.payment?.status !== 'pending') {
+        return res.status(400).json({ error: `Order cannot be approved. Current status: ${order.payment?.status}` });
+    }
+
+    const updated = {
+        ...order,
+        payment: {
+            ...order.payment,
+            status: 'approved',
+            approvedAt: new Date().toISOString(),
+        },
+        fulfillmentStatus: 'unfulfilled',
+    };
+
+    orders = [...orders.slice(0, index), updated, ...orders.slice(index + 1)];
+    await persistJsonFile(ordersPath, orders);
+
+    // Update user's order if logged in
+    if (updated.customer?.userId) {
+        const userIndex = users.findIndex(u => u.id === updated.customer.userId);
+        if (userIndex !== -1) {
+            const existingUser = users[userIndex];
+            const nextOrders = (existingUser.orders ?? []).map(entry =>
+                entry.id === updated.id ? { ...entry, paymentStatus: updated.payment.status } : entry
+            );
+            users = [...users.slice(0, userIndex), { ...existingUser, orders: nextOrders }, ...users.slice(userIndex + 1)];
+            await persistJsonFile(usersPath, users);
+        }
+    }
+
+    return res.json({ success: true, order: updated });
+});
+
+// Reject a COD order
+app.post('/api/admin/orders/:id/cod/reject', requireAdmin, async (req, res) => {
+    const { id } = req.params;
+    const reason = normalizeOptionalString(req.body?.reason, 'reason');
+    const index = orders.findIndex(o => o.id === id);
+
+    if (index === -1) {
+        return res.status(404).json({ error: 'Order not found' });
+    }
+
+    const order = orders[index];
+
+    if (order.payment?.method !== 'cod') {
+        return res.status(400).json({ error: 'Order is not a COD payment' });
+    }
+
+    if (order.payment?.status !== 'pending') {
+        return res.status(400).json({ error: `Order cannot be rejected. Current status: ${order.payment?.status}` });
+    }
+
+    const updated = {
+        ...order,
+        payment: {
+            ...order.payment,
+            status: 'rejected',
+            rejectedAt: new Date().toISOString(),
+            rejectionReason: reason.value || undefined,
+        },
+        fulfillmentStatus: 'cancelled',
+    };
+
+    orders = [...orders.slice(0, index), updated, ...orders.slice(index + 1)];
+    await persistJsonFile(ordersPath, orders);
+
+    // Update user's order if logged in
+    if (updated.customer?.userId) {
+        const userIndex = users.findIndex(u => u.id === updated.customer.userId);
+        if (userIndex !== -1) {
+            const existingUser = users[userIndex];
+            const nextOrders = (existingUser.orders ?? []).map(entry =>
+                entry.id === updated.id ? { ...entry, paymentStatus: updated.payment.status } : entry
+            );
+            users = [...users.slice(0, userIndex), { ...existingUser, orders: nextOrders }, ...users.slice(userIndex + 1)];
+            await persistJsonFile(usersPath, users);
+        }
+    }
+
+    return res.json({ success: true, order: updated });
+});
+
+// Issue a refund for a Razorpay payment
+app.post('/api/admin/orders/:id/refund', requireAdmin, async (req, res) => {
+    const { id } = req.params;
+    const amount = req.body?.amount; // Optional: if not provided, full refund
+    const index = orders.findIndex(o => o.id === id);
+
+    if (index === -1) {
+        return res.status(404).json({ error: 'Order not found' });
+    }
+
+    const order = orders[index];
+
+    if (order.payment?.method !== 'razorpay') {
+        return res.status(400).json({ error: 'Order is not a Razorpay payment' });
+    }
+
+    if (order.payment?.status !== 'paid') {
+        return res.status(400).json({ error: `Cannot refund. Payment status: ${order.payment?.status}` });
+    }
+
+    const providerPaymentId = order.payment?.providerPaymentId;
+    if (!providerPaymentId) {
+        return res.status(400).json({ error: 'No Razorpay payment ID found for this order' });
+    }
+
+    const keyId = process.env.RAZORPAY_KEY_ID?.trim();
+    const keySecret = process.env.RAZORPAY_KEY_SECRET?.trim();
+
+    if (!keyId || !keySecret) {
+        return res.status(503).json({ error: 'Razorpay is not configured' });
+    }
+
+    const totalAmountPaise = Math.round((order.pricing?.total || 0) * 100);
+    const refundAmountPaise = amount ? Math.round(Number(amount) * 100) : totalAmountPaise;
+
+    if (refundAmountPaise <= 0) {
+        return res.status(400).json({ error: 'Invalid refund amount' });
+    }
+
+    if (refundAmountPaise > totalAmountPaise) {
+        return res.status(400).json({ error: 'Refund amount exceeds payment amount' });
+    }
+
+    try {
+        const authHeader = Buffer.from(`${keyId}:${keySecret}`).toString('base64');
+        const response = await fetch(`https://api.razorpay.com/v1/payments/${providerPaymentId}/refund`, {
+            method: 'POST',
+            headers: {
+                Authorization: `Basic ${authHeader}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                amount: refundAmountPaise,
+                speed: 'normal',
+                notes: {
+                    order_id: order.id,
+                    order_number: order.orderNumber,
+                },
+            }),
+        });
+
+        const payload = await response.json().catch(() => ({}));
+
+        if (!response.ok || !payload?.id) {
+            const errorMsg = payload?.error?.description || payload?.message || 'Refund failed';
+            return res.status(400).json({ error: errorMsg, details: payload });
+        }
+
+        const isFullRefund = refundAmountPaise >= totalAmountPaise;
+        const updated = {
+            ...order,
+            payment: {
+                ...order.payment,
+                status: isFullRefund ? 'refunded' : 'partially_refunded',
+                refundId: payload.id,
+                refundAmount: refundAmountPaise / 100,
+                refundedAt: new Date().toISOString(),
+                refundStatus: payload.status,
+            },
+            fulfillmentStatus: isFullRefund ? 'cancelled' : order.fulfillmentStatus,
+        };
+
+        orders = [...orders.slice(0, index), updated, ...orders.slice(index + 1)];
+        await persistJsonFile(ordersPath, orders);
+
+        // Update user's order if logged in
+        if (updated.customer?.userId) {
+            const userIndex = users.findIndex(u => u.id === updated.customer.userId);
+            if (userIndex !== -1) {
+                const existingUser = users[userIndex];
+                const nextOrders = (existingUser.orders ?? []).map(entry =>
+                    entry.id === updated.id ? { ...entry, paymentStatus: updated.payment.status } : entry
+                );
+                users = [...users.slice(0, userIndex), { ...existingUser, orders: nextOrders }, ...users.slice(userIndex + 1)];
+                await persistJsonFile(usersPath, users);
+            }
+        }
+
+        return res.json({
+            success: true,
+            order: updated,
+            refund: {
+                id: payload.id,
+                amount: refundAmountPaise / 100,
+                status: payload.status,
+            },
+        });
+    } catch (error) {
+        console.error('Razorpay refund error:', error);
+        return res.status(500).json({ error: 'Failed to process refund' });
+    }
+});
+
+// Cancel an order (works for both COD and Razorpay)
+app.post('/api/admin/orders/:id/cancel', requireAdmin, async (req, res) => {
+    const { id } = req.params;
+    const reason = normalizeOptionalString(req.body?.reason, 'reason');
+    const index = orders.findIndex(o => o.id === id);
+
+    if (index === -1) {
+        return res.status(404).json({ error: 'Order not found' });
+    }
+
+    const order = orders[index];
+
+    // For Razorpay paid orders, initiate refund first
+    if (order.payment?.method === 'razorpay' && order.payment?.status === 'paid') {
+        // Redirect to refund endpoint logic
+        const providerPaymentId = order.payment?.providerPaymentId;
+        if (providerPaymentId) {
+            const keyId = process.env.RAZORPAY_KEY_ID?.trim();
+            const keySecret = process.env.RAZORPAY_KEY_SECRET?.trim();
+
+            if (keyId && keySecret) {
+                try {
+                    const authHeader = Buffer.from(`${keyId}:${keySecret}`).toString('base64');
+                    const totalAmountPaise = Math.round((order.pricing?.total || 0) * 100);
+
+                    const response = await fetch(`https://api.razorpay.com/v1/payments/${providerPaymentId}/refund`, {
+                        method: 'POST',
+                        headers: {
+                            Authorization: `Basic ${authHeader}`,
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            amount: totalAmountPaise,
+                            speed: 'normal',
+                            notes: {
+                                order_id: order.id,
+                                reason: 'Order cancelled',
+                            },
+                        }),
+                    });
+
+                    const payload = await response.json().catch(() => ({}));
+
+                    if (response.ok && payload?.id) {
+                        const updated = {
+                            ...order,
+                            payment: {
+                                ...order.payment,
+                                status: 'refunded',
+                                refundId: payload.id,
+                                refundAmount: totalAmountPaise / 100,
+                                refundedAt: new Date().toISOString(),
+                                refundStatus: payload.status,
+                                cancellationReason: reason.value || 'Order cancelled by admin',
+                            },
+                            fulfillmentStatus: 'cancelled',
+                            cancelledAt: new Date().toISOString(),
+                        };
+
+                        orders = [...orders.slice(0, index), updated, ...orders.slice(index + 1)];
+                        await persistJsonFile(ordersPath, orders);
+
+                        return res.json({ success: true, order: updated, refundIssued: true });
+                    }
+                } catch (error) {
+                    console.error('Refund during cancellation failed:', error);
+                }
+            }
+        }
+    }
+
+    // For COD or if refund wasn't needed/failed
+    const updated = {
+        ...order,
+        payment: {
+            ...order.payment,
+            status: order.payment?.method === 'cod' ? 'rejected' : order.payment?.status,
+            cancellationReason: reason.value || 'Order cancelled by admin',
+            cancelledAt: new Date().toISOString(),
+        },
+        fulfillmentStatus: 'cancelled',
+        cancelledAt: new Date().toISOString(),
+    };
+
+    orders = [...orders.slice(0, index), updated, ...orders.slice(index + 1)];
+    await persistJsonFile(ordersPath, orders);
+
+    // Update user's order if logged in
+    if (updated.customer?.userId) {
+        const userIndex = users.findIndex(u => u.id === updated.customer.userId);
+        if (userIndex !== -1) {
+            const existingUser = users[userIndex];
+            const nextOrders = (existingUser.orders ?? []).map(entry =>
+                entry.id === updated.id ? { ...entry, paymentStatus: updated.payment.status } : entry
+            );
+            users = [...users.slice(0, userIndex), { ...existingUser, orders: nextOrders }, ...users.slice(userIndex + 1)];
+            await persistJsonFile(usersPath, users);
+        }
+    }
+
+    return res.json({ success: true, order: updated, refundIssued: false });
+});
+
+// ============================================
+// END PAYMENT MANAGEMENT API ENDPOINTS
+// ============================================
+
+// ============================================
+// FRAUD DETECTION API ENDPOINTS
+// ============================================
+
+// Get fraud detection overview
+app.get('/api/admin/fraud', requireAdmin, (req, res) => {
+    // Get unique IPs from orders with client info
+    const ordersWithIp = orders.filter(o => o.clientInfo?.ip);
+    const uniqueIps = [...new Set(ordersWithIp.map(o => o.clientInfo.ip))];
+
+    // Group orders by IP
+    const ipStats = uniqueIps.map(ip => {
+        const ipOrders = ordersWithIp.filter(o => o.clientInfo.ip === ip);
+        const isBanned = checkBannedEntity('ip', ip);
+        return {
+            ip,
+            orderCount: ipOrders.length,
+            totalSpent: ipOrders.reduce((sum, o) => sum + (o.pricing?.total || 0), 0),
+            lastOrder: ipOrders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0]?.createdAt,
+            isBanned: !!isBanned,
+            orders: ipOrders.map(o => ({
+                id: o.id,
+                orderNumber: o.orderNumber,
+                date: new Date(o.createdAt).toLocaleDateString('en-IN'),
+                customer: `${o.customer?.firstName || ''} ${o.customer?.lastName || ''}`.trim() || o.customer?.email || 'Guest',
+                email: o.customer?.email,
+                phone: o.customer?.phone,
+                total: o.pricing?.total || 0,
+                paymentMethod: o.payment?.method,
+                paymentStatus: o.payment?.status,
+            })),
+        };
+    }).sort((a, b) => b.orderCount - a.orderCount);
+
+    // Get banned entities summary
+    const bannedByType = {
+        ip: bannedEntities.filter(b => b.type === 'ip' && b.active).length,
+        email: bannedEntities.filter(b => b.type === 'email' && b.active).length,
+        phone: bannedEntities.filter(b => b.type === 'phone' && b.active).length,
+        address: bannedEntities.filter(b => b.type === 'address' && b.active).length,
+    };
+
+    return res.json({
+        stats: {
+            totalOrdersWithIp: ordersWithIp.length,
+            uniqueIps: uniqueIps.length,
+            totalBanned: bannedEntities.filter(b => b.active).length,
+            bannedByType,
+        },
+        ipStats: ipStats.slice(0, 100), // Limit to top 100
+        bannedEntities: bannedEntities.filter(b => b.active).map(b => ({
+            id: b.id,
+            type: b.type,
+            value: b.value,
+            reason: b.reason,
+            bannedAt: b.bannedAt,
+            bannedBy: b.bannedBy,
+        })),
+    });
+});
+
+// Ban an entity (IP, email, phone, or address)
+app.post('/api/admin/fraud/ban', requireAdmin, async (req, res) => {
+    const { type, value, reason } = req.body;
+
+    if (!type || !value) {
+        return res.status(400).json({ error: 'Type and value are required' });
+    }
+
+    const validTypes = ['ip', 'email', 'phone', 'address'];
+    if (!validTypes.includes(type)) {
+        return res.status(400).json({ error: 'Invalid type. Must be: ip, email, phone, or address' });
+    }
+
+    // Check if already banned
+    const existing = checkBannedEntity(type, value);
+    if (existing) {
+        return res.status(400).json({ error: `This ${type} is already banned` });
+    }
+
+    const banEntry = {
+        id: crypto.randomUUID(),
+        type,
+        value: String(value).trim(),
+        reason: reason || `Banned by admin`,
+        active: true,
+        bannedAt: new Date().toISOString(),
+        bannedBy: 'admin',
+    };
+
+    bannedEntities = [...bannedEntities, banEntry];
+    await persistJsonFile(bannedEntitiesPath, bannedEntities);
+
+    return res.status(201).json({ success: true, ban: banEntry });
+});
+
+// Unban an entity
+app.post('/api/admin/fraud/unban/:id', requireAdmin, async (req, res) => {
+    const { id } = req.params;
+    const index = bannedEntities.findIndex(b => b.id === id);
+
+    if (index === -1) {
+        return res.status(404).json({ error: 'Ban entry not found' });
+    }
+
+    const updated = {
+        ...bannedEntities[index],
+        active: false,
+        unbannedAt: new Date().toISOString(),
+        unbannedBy: 'admin',
+    };
+
+    bannedEntities = [...bannedEntities.slice(0, index), updated, ...bannedEntities.slice(index + 1)];
+    await persistJsonFile(bannedEntitiesPath, bannedEntities);
+
+    return res.json({ success: true, ban: updated });
+});
+
+// Get order client info for a specific order
+app.get('/api/admin/orders/:id/client-info', requireAdmin, (req, res) => {
+    const order = orders.find(o => o.id === req.params.id);
+    if (!order) {
+        return res.status(404).json({ error: 'Order not found' });
+    }
+
+    const ip = order.clientInfo?.ip;
+    let ipBanned = null;
+    let emailBanned = null;
+    let phoneBanned = null;
+
+    if (ip) {
+        ipBanned = checkBannedEntity('ip', ip);
+    }
+    if (order.customer?.email) {
+        emailBanned = checkBannedEntity('email', order.customer.email);
+    }
+    if (order.customer?.phone) {
+        phoneBanned = checkBannedEntity('phone', order.customer.phone);
+    }
+
+    // Get all orders from same IP
+    const ordersFromSameIp = ip ? orders.filter(o => o.clientInfo?.ip === ip).map(o => ({
+        id: o.id,
+        orderNumber: o.orderNumber,
+        date: o.createdAt,
+        customer: `${o.customer?.firstName || ''} ${o.customer?.lastName || ''}`.trim(),
+        total: o.pricing?.total || 0,
+        paymentStatus: o.payment?.status,
+    })) : [];
+
+    return res.json({
+        clientInfo: order.clientInfo || null,
+        customer: {
+            email: order.customer?.email,
+            phone: order.customer?.phone,
+            name: `${order.customer?.firstName || ''} ${order.customer?.lastName || ''}`.trim(),
+        },
+        shipping: order.shipping,
+        banStatus: {
+            ipBanned: !!ipBanned,
+            emailBanned: !!emailBanned,
+            phoneBanned: !!phoneBanned,
+        },
+        ordersFromSameIp,
+    });
+});
+
+// ============================================
+// END FRAUD DETECTION API ENDPOINTS
+// ============================================
+
+// ============================================
+// NEWSLETTER API ENDPOINTS
+// ============================================
+
+// Public: Subscribe to newsletter
+app.post('/api/newsletter/subscribe', async (req, res) => {
+    const email = normalizeString(req.body?.email, 'email', { required: true });
+
+    if (email.error) {
+        return res.status(400).json({ error: 'Email is required' });
+    }
+
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.value)) {
+        return res.status(400).json({ error: 'Invalid email format' });
+    }
+
+    // Check if already subscribed
+    const existing = newsletterSubscribers.find(
+        s => s.email.toLowerCase() === email.value.toLowerCase() && s.status === 'active'
+    );
+    if (existing) {
+        return res.status(200).json({ success: true, message: 'Already subscribed!' });
+    }
+
+    // Capture client info for tracking
+    const clientIp = getClientIp(req);
+    const userAgent = req.headers['user-agent'] || null;
+
+    const subscriber = {
+        id: crypto.randomUUID(),
+        email: email.value.toLowerCase(),
+        status: 'active',
+        subscribedAt: new Date().toISOString(),
+        source: req.body?.source || 'footer',
+        clientInfo: {
+            ip: clientIp,
+            userAgent,
+        },
+    };
+
+    newsletterSubscribers = [...newsletterSubscribers, subscriber];
+    await persistJsonFile(newsletterSubscribersPath, newsletterSubscribers);
+
+    return res.status(201).json({ success: true, message: 'Successfully subscribed!' });
+});
+
+// Admin: Get all newsletter subscribers
+app.get('/api/admin/newsletter', requireAdmin, (req, res) => {
+    const activeSubscribers = newsletterSubscribers.filter(s => s.status === 'active');
+    const unsubscribed = newsletterSubscribers.filter(s => s.status === 'unsubscribed');
+
+    return res.json({
+        stats: {
+            total: newsletterSubscribers.length,
+            active: activeSubscribers.length,
+            unsubscribed: unsubscribed.length,
+        },
+        subscribers: newsletterSubscribers.map(s => ({
+            id: s.id,
+            email: s.email,
+            status: s.status,
+            subscribedAt: s.subscribedAt,
+            unsubscribedAt: s.unsubscribedAt,
+            source: s.source,
+            ip: s.clientInfo?.ip,
+        })).sort((a, b) => new Date(b.subscribedAt) - new Date(a.subscribedAt)),
+    });
+});
+
+// Admin: Delete/unsubscribe a subscriber
+app.delete('/api/admin/newsletter/:id', requireAdmin, async (req, res) => {
+    const { id } = req.params;
+    const index = newsletterSubscribers.findIndex(s => s.id === id);
+
+    if (index === -1) {
+        return res.status(404).json({ error: 'Subscriber not found' });
+    }
+
+    const updated = {
+        ...newsletterSubscribers[index],
+        status: 'unsubscribed',
+        unsubscribedAt: new Date().toISOString(),
+    };
+
+    newsletterSubscribers = [...newsletterSubscribers.slice(0, index), updated, ...newsletterSubscribers.slice(index + 1)];
+    await persistJsonFile(newsletterSubscribersPath, newsletterSubscribers);
+
+    return res.json({ success: true, subscriber: updated });
+});
+
+// Admin: Export subscribers as CSV
+app.get('/api/admin/newsletter/export', requireAdmin, (req, res) => {
+    const activeSubscribers = newsletterSubscribers.filter(s => s.status === 'active');
+
+    const csvHeader = 'Email,Subscribed At,Source,IP Address\n';
+    const csvRows = activeSubscribers.map(s =>
+        `${s.email},${s.subscribedAt},${s.source || 'footer'},${s.clientInfo?.ip || 'N/A'}`
+    ).join('\n');
+
+    res.setHeader('Content-Type', 'text/csv');
+    res.setHeader('Content-Disposition', 'attachment; filename="newsletter-subscribers.csv"');
+    return res.send(csvHeader + csvRows);
+});
+
+// ============================================
+// END NEWSLETTER API ENDPOINTS
+// ============================================
 
 app.post('/api/website-content', requireAdmin, async (req, res) => {
     const content = req.body;

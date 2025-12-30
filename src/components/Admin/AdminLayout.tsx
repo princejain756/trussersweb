@@ -17,6 +17,9 @@ import {
     Search,
     Store,
     BookOpen,
+    CreditCard,
+    ShieldAlert,
+    Newspaper,
 } from 'lucide-react';
 
 // Sidebar Navigation Items
@@ -24,11 +27,14 @@ const navItems = [
     { name: 'Home', path: '/admin/home', icon: Home },
     { name: 'Online Store', path: '/admin/online-store', icon: Store },
     { name: 'Orders', path: '/admin/orders', icon: ShoppingBag, badge: 32 },
+    { name: 'Payments', path: '/admin/payments', icon: CreditCard },
+    { name: 'Fraud', path: '/admin/fraud', icon: ShieldAlert },
     { name: 'Products', path: '/admin/products', icon: Package },
     { name: 'Customers', path: '/admin/customers', icon: Users },
     { name: 'Marketing', path: '/admin/marketing', icon: Megaphone },
     { name: 'Discounts', path: '/admin/discounts', icon: Percent },
     { name: 'Journal', path: '/admin/journal', icon: BookOpen },
+    { name: 'Newsletter', path: '/admin/newsletter', icon: Newspaper },
 ];
 
 interface AdminLayoutProps {
