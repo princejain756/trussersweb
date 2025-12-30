@@ -78,10 +78,10 @@ export const Navbar = () => {
                     category: product.category ?? 'Catalog',
                 }));
                 setCatalogProducts(normalized);
-	            } catch {
-	                if (!isActive) {
-	                    return;
-	                }
+            } catch {
+                if (!isActive) {
+                    return;
+                }
                 const fallback = (productsData as Array<{ id: number; name: string; image: string; category?: string }>).map(
                     (product) => ({
                         id: product.id,
@@ -115,10 +115,10 @@ export const Navbar = () => {
                     return;
                 }
                 setCategories(data ?? {});
-	            } catch {
-	                if (!isActive) {
-	                    return;
-	                }
+            } catch {
+                if (!isActive) {
+                    return;
+                }
                 setCategories(categoriesData as Record<string, CategoryData>);
             }
         };
@@ -190,6 +190,8 @@ export const Navbar = () => {
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'py-4' : 'py-8'
                     }`}
+                role="navigation"
+                aria-label="Main navigation"
             >
                 <div className="mx-auto max-w-[1920px] px-6 lg:px-12">
                     <div
@@ -203,8 +205,11 @@ export const Navbar = () => {
                             <button
                                 onClick={() => setIsMobileMenuOpen(true)}
                                 className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-md transition-colors"
+                                aria-label="Open menu"
+                                aria-expanded={isMobileMenuOpen}
+                                aria-controls="mobile-menu"
                             >
-                                <Menu className="text-[#2D5F3F]" />
+                                <Menu className="text-[#2D5F3F]" aria-hidden="true" />
                             </button>
                         </div>
 
@@ -262,8 +267,9 @@ export const Navbar = () => {
                                 <button
                                     onClick={handleSearchClick}
                                     className="group flex h-10 w-10 items-center justify-center rounded-full border border-transparent transition-all hover:bg-white/40 hover:backdrop-blur-sm"
+                                    aria-label="Search products"
                                 >
-                                    <Search size={20} className="text-[#2D5F3F] transition-transform group-hover:scale-110" />
+                                    <Search size={20} className="text-[#2D5F3F] transition-transform group-hover:scale-110" aria-hidden="true" />
                                 </button>
                                 <Link
                                     to={account ? '/account' : '/account/login'}
@@ -312,8 +318,9 @@ export const Navbar = () => {
                             <button
                                 onClick={() => setIsMobileMenuOpen(false)}
                                 className="flex h-10 w-10 items-center justify-center rounded-full bg-black/5 hover:bg-black/10"
+                                aria-label="Close menu"
                             >
-                                <X size={24} className="text-[#2D5F3F]" />
+                                <X size={24} className="text-[#2D5F3F]" aria-hidden="true" />
                             </button>
                         </div>
 
@@ -356,35 +363,35 @@ export const Navbar = () => {
                             })}
                         </div>
 
-	                        <div className="flex flex-col gap-4 p-8">
-	                            {account ? (
-	                                <Link to="/account" onClick={() => setIsMobileMenuOpen(false)} className="block">
-	                                    <Button size="lg" className="w-full justify-center rounded-full bg-[#2D5F3F] py-6 text-lg">
-	                                        My Account
-	                                    </Button>
-	                                </Link>
-	                            ) : (
-	                                <div className="grid grid-cols-2 gap-3">
-	                                    <Link to="/account/login" onClick={() => setIsMobileMenuOpen(false)} className="block">
-	                                        <Button size="lg" className="w-full justify-center rounded-full bg-[#2D5F3F] py-6 text-lg">
-	                                            Sign in
-	                                        </Button>
-	                                    </Link>
-	                                    <Link to="/account/register" onClick={() => setIsMobileMenuOpen(false)} className="block">
-	                                        <Button
-	                                            size="lg"
-	                                            variant="outline"
-	                                            className="w-full justify-center border-[#2D5F3F] text-[#2D5F3F] py-6 text-lg hover:bg-[#2D5F3F] hover:text-white"
-	                                        >
-	                                            Register
-	                                        </Button>
-	                                    </Link>
-	                                </div>
-	                            )}
-	                        </div>
-	                    </motion.div>
-	                )}
-	            </AnimatePresence>
+                        <div className="flex flex-col gap-4 p-8">
+                            {account ? (
+                                <Link to="/account" onClick={() => setIsMobileMenuOpen(false)} className="block">
+                                    <Button size="lg" className="w-full justify-center rounded-full bg-[#2D5F3F] py-6 text-lg">
+                                        My Account
+                                    </Button>
+                                </Link>
+                            ) : (
+                                <div className="grid grid-cols-2 gap-3">
+                                    <Link to="/account/login" onClick={() => setIsMobileMenuOpen(false)} className="block">
+                                        <Button size="lg" className="w-full justify-center rounded-full bg-[#2D5F3F] py-6 text-lg">
+                                            Sign in
+                                        </Button>
+                                    </Link>
+                                    <Link to="/account/register" onClick={() => setIsMobileMenuOpen(false)} className="block">
+                                        <Button
+                                            size="lg"
+                                            variant="outline"
+                                            className="w-full justify-center border-[#2D5F3F] text-[#2D5F3F] py-6 text-lg hover:bg-[#2D5F3F] hover:text-white"
+                                        >
+                                            Register
+                                        </Button>
+                                    </Link>
+                                </div>
+                            )}
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             {/* Search Modal */}
             <AnimatePresence>

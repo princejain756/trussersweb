@@ -480,17 +480,17 @@ function setSessionCookie(res, token) {
         `trusser_session=${encodeURIComponent(token)}`,
         'Path=/',
         'HttpOnly',
-        'SameSite=Lax',
-        'Max-Age=604800',
+        'SameSite=Strict',  // Strict for better CSRF protection
+        'Max-Age=604800',   // 7 days
     ];
     if (isProd) {
-        parts.push('Secure');
+        parts.push('Secure');  // Only send over HTTPS in production
     }
     res.setHeader('Set-Cookie', parts.join('; '));
 }
 
 function clearSessionCookie(res) {
-    res.setHeader('Set-Cookie', 'trusser_session=; Path=/; HttpOnly; Max-Age=0; SameSite=Lax');
+    res.setHeader('Set-Cookie', 'trusser_session=; Path=/; HttpOnly; Max-Age=0; SameSite=Strict');
 }
 
 async function getLogoBuffer() {
@@ -1314,6 +1314,53 @@ const upload = multer({
 const app = express();
 app.use(express.json({ limit: '1mb' }));
 app.use('/uploads', express.static(uploadsDir));
+
+// ============================================
+// SECURITY HEADERS MIDDLEWARE
+// ============================================
+app.use((req, res, next) => {
+    const isProd = process.env.NODE_ENV === 'production';
+
+    // HSTS - Force HTTPS for 1 year (only in production)
+    if (isProd) {
+        res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
+    }
+
+    // Content Security Policy - Strict but allows necessary resources
+    const cspDirectives = [
+        "default-src 'self'",
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://checkout.razorpay.com",
+        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+        "font-src 'self' https://fonts.gstatic.com data:",
+        "img-src 'self' data: blob: https: http:",
+        "connect-src 'self' https://api.razorpay.com https://www.google-analytics.com https://fonts.googleapis.com https://fonts.gstatic.com",
+        "frame-src 'self' https://api.razorpay.com https://checkout.razorpay.com https://www.google.com",
+        "object-src 'none'",
+        "base-uri 'self'",
+        "form-action 'self'",
+        "frame-ancestors 'self'",
+        "upgrade-insecure-requests",
+    ];
+    res.setHeader('Content-Security-Policy', cspDirectives.join('; '));
+
+    // Prevent clickjacking
+    res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+
+    // Prevent MIME type sniffing
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+
+    // XSS Protection (legacy but still useful)
+    res.setHeader('X-XSS-Protection', '1; mode=block');
+
+    // Referrer Policy - Send origin only for cross-origin requests
+    res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+
+    // Permissions Policy - Restrict browser features
+    res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=(self), payment=(self)');
+
+    next();
+});
+
 
 app.use((req, res, next) => {
     const origin = process.env.CORS_ORIGIN ?? req.headers.origin;

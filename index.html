@@ -5,6 +5,13 @@
   <meta charset="UTF-8" />
   <link rel="icon" href="/favicon.png" />
   <link rel="canonical" href="https://trusser.in/" />
+
+  <!-- Critical Resource Preloading -->
+  <link rel="preload" as="image" href="/heroimage.webp" fetchpriority="high" />
+
+  <!-- DNS Prefetch for external resources -->
+  <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="//fonts.gstatic.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -86,6 +93,8 @@
 </head>
 
 <body>
+  <!-- Skip to main content link for keyboard/screen reader users -->
+  <a href="#main-content" class="skip-to-content">Skip to main content</a>
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
 </body>

@@ -66,6 +66,11 @@ export const HeroSection = () => {
                                 <img
                                     src={content.hero.backgroundImage}
                                     alt={content.hero.heading}
+                                    loading="eager"
+                                    fetchPriority="high"
+                                    decoding="async"
+                                    width={1200}
+                                    height={600}
                                     className="h-auto w-full max-h-[350px] object-contain drop-shadow-2xl md:max-h-[220px] lg:max-h-[200px] xl:max-h-[260px] 2xl:max-h-[350px]"
                                 />
                             </motion.div>

@@ -14,7 +14,7 @@ export const Home = () => {
         <div className="min-h-screen bg-[#F4EFEC] text-[#1A1A1A] antialiased selection:bg-[#C1A17C] selection:text-white">
             <Seo canonicalPath="/" />
             <Navbar />
-            <main className="relative z-10 w-full overflow-hidden">
+            <main id="main-content" role="main" className="relative z-10 w-full overflow-hidden">
                 <HeroSection />
                 <WhyTrusser />
                 <ProductShowcase />
