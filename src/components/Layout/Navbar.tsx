@@ -179,7 +179,7 @@ export const Navbar = () => {
         navigate(`/product/${product.id}`);
     };
 
-    const navLinks = ['Home', 'About Us', 'Shop', 'Corporate Gifting', 'Journal'];
+    const navLinks = ['Home', 'About Us', 'Shop', 'Corporate Gifting', 'Contact'];
     const MotionLink = motion(Link);
 
     return (
@@ -232,7 +232,7 @@ export const Navbar = () => {
                                     'About Us': '/about',
                                     'Shop': '/shop',
                                     'Corporate Gifting': '/corporate-gifting',
-                                    'Journal': '/journal',
+                                    'Contact': '/contact',
                                 };
 
                                 if (routeMap[item]) {
@@ -340,7 +340,7 @@ export const Navbar = () => {
                                     'About Us': '/about',
                                     'Shop': '/shop',
                                     'Corporate Gifting': '/corporate-gifting',
-                                    'Journal': '/journal',
+                                    'Contact': '/contact',
                                 };
 
                                 if (routeMap[item]) {

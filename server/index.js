@@ -2157,7 +2157,7 @@ app.post('/api/admin/orders/:id/fulfill', requireAdmin, async (req, res) => {
 // ============================================
 // PUBLIC INVOICE ENDPOINT (for customer access)
 // ============================================
-app.get('/api/orders/:id/invoice/pdf', (req, res) => {
+app.get('/api/orders/:id/invoice/pdf', async (req, res) => {
     const order = orders.find(o => o.id === req.params.id);
     if (!order) {
         return res.status(404).send('<h1>Invoice not found</h1>');
@@ -2170,21 +2170,60 @@ app.get('/api/orders/:id/invoice/pdf', (req, res) => {
         day: 'numeric',
     });
 
+    // Read barcode image and convert to base64
+    let barcodeBase64 = '';
+    try {
+        const barcodePath = path.join(__dirname, '..', 'public', 'invoice', 'Barcode.png');
+        const barcodeBuffer = await fs.readFile(barcodePath);
+        barcodeBase64 = `data:image/png;base64,${barcodeBuffer.toString('base64')}`;
+    } catch (error) {
+        console.error('Error reading barcode image:', error);
+        // Fallback or empty string if failed
+    }
+
     const formatCurrency = (amount) => `₹${(amount || 0).toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
 
     // Generate items HTML
     const itemsHtml = (order.items || []).map((item, idx) => `
         <tr>
-            <td style="padding: 12px; border-bottom: 1px solid #eee;">${idx + 1}</td>
-            <td style="padding: 12px; border-bottom: 1px solid #eee;">
-                <strong>${item.name || item.title}</strong>
-                ${item.variant ? `<br><span style="color: #666; font-size: 12px;">${item.variant}</span>` : ''}
+            <td class="col-desc">
+                ${item.name || item.title}
+                ${item.variant ? `<br><span style="color: #666; font-size: 10px;">${item.variant}</span>` : ''}
             </td>
-            <td style="padding: 12px; border-bottom: 1px solid #eee; text-align: center;">${item.quantity || 1}</td>
-            <td style="padding: 12px; border-bottom: 1px solid #eee; text-align: right;">${formatCurrency(item.price)}</td>
-            <td style="padding: 12px; border-bottom: 1px solid #eee; text-align: right;">${formatCurrency((item.price || 0) * (item.quantity || 1))}</td>
+            <td class="col-price">${formatCurrency(item.price)}</td>
+            <td class="col-qty">${item.quantity || 1}</td>
+            <td class="col-total">${formatCurrency((item.price || 0) * (item.quantity || 1))}</td>
         </tr>
     `).join('');
+
+    // Fill empty rows to ensure consistent height if few items
+    const minRows = 5;
+    const filledRows = (order.items || []).length;
+    const emptyRowsHtml = filledRows < minRows
+        ? Array(minRows - filledRows).fill('<tr><td></td><td></td><td></td><td></td></tr>').join('')
+        : '';
+
+    // Calculate inclusive totals (User requested: price is inclusive of tax)
+    const itemTotal = (order.items || []).reduce((sum, item) => sum + ((item.price || 0) * (item.quantity || 1)), 0);
+    const shipping = order.pricing?.shipping || 0;
+    const discount = order.pricing?.discount || 0;
+    const codCharges = order.pricing?.codCharges || 0;
+
+    // Grand total is the sum of items + shipping + cod - discount (Tax is already inside item prices)
+    const finalTotal = itemTotal + shipping + codCharges - discount;
+
+    // Back-calculate included tax (assuming 12% IGST is included in the itemTotal)
+    // Formula: Tax = Amount - (Amount / 1.12)
+    const includedTax = itemTotal - (itemTotal / 1.12);
+
+    // Read logo image and convert to base64
+    let logoBase64 = '';
+    try {
+        const logoBuffer = await fs.readFile(logoPath);
+        logoBase64 = `data:image/avif;base64,${logoBuffer.toString('base64')}`;
+    } catch (error) {
+        console.error('Error reading logo image:', error);
+    }
 
     const html = `
 <!DOCTYPE html>
@@ -2194,32 +2233,170 @@ app.get('/api/orders/:id/invoice/pdf', (req, res) => {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice ${invoiceNumber} - Trusser</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333; background: #f5f5f5; }
-        .invoice-container { max-width: 800px; margin: 20px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .header { background: #1A3C27; color: white; padding: 30px; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 28px; font-weight: bold; letter-spacing: 2px; }
-        .invoice-title { text-align: right; }
-        .invoice-title h1 { font-size: 24px; margin-bottom: 5px; }
-        .invoice-title p { opacity: 0.8; font-size: 14px; }
-        .details { padding: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-        .detail-block h3 { color: #1A3C27; font-size: 14px; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
-        .detail-block p { margin: 5px 0; line-height: 1.6; }
-        .items-table { width: 100%; border-collapse: collapse; margin: 0 30px; width: calc(100% - 60px); }
-        .items-table th { background: #f8f8f8; padding: 12px; text-align: left; font-size: 12px; text-transform: uppercase; color: #666; border-bottom: 2px solid #1A3C27; }
-        .items-table th:nth-child(3), .items-table th:nth-child(4), .items-table th:nth-child(5) { text-align: right; }
-        .totals { padding: 30px; display: flex; justify-content: flex-end; }
-        .totals-table { width: 300px; }
-        .totals-table tr td { padding: 8px 0; }
-        .totals-table tr td:last-child { text-align: right; }
-        .totals-table .total-row { font-size: 18px; font-weight: bold; color: #1A3C27; border-top: 2px solid #1A3C27; padding-top: 12px; }
-        .footer { background: #f8f8f8; padding: 20px 30px; text-align: center; font-size: 12px; color: #666; border-top: 1px solid #eee; }
-        .payment-status { display: inline-block; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
-        .status-paid { background: #d4edda; color: #155724; }
-        .status-pending { background: #fff3cd; color: #856404; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@700&family=Dancing+Script:wght@700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #000;
+        }
+        .invoice-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #FFFFFF;
+            padding: 50px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .left-header {
+            width: 60%;
+        }
+        .right-header {
+            width: 35%;
+            text-align: center;
+        }
+        .invoice-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            margin: 0;
+            line-height: 1;
+        }
+        .company-name-large {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            margin: 5px 0 15px 0;
+            letter-spacing: 1px;
+        }
+        .company-details {
+            font-size: 12px;
+            line-height: 1.6;
+            color: #333;
+        }
+        .logo-section img {
+            max-width: 200px;
+            margin-bottom: 5px;
+        }
+        .tagline {
+            font-family: 'Dancing Script', cursive;
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .scan-to-pay {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+            border: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .qr-code img {
+            width: 100%;
+            height: auto;
+        }
+        .divider {
+            border-top: 2px solid #000;
+            margin: 30px 0;
+            width: 60%;
+        }
+        /* Added for Customer Details */
+        .customer-section {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            font-size: 13px;
+        }
+        .bill-to h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+        }
+        .invoice-meta p {
+            margin: 3px 0;
+            text-align: right;
+        }
+
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .invoice-table th {
+            background-color: #EAE7E4;
+            border: 1px solid #000;
+            padding: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: left;
+        }
+        .invoice-table td {
+            border: 1px solid #000;
+            padding: 12px;
+            font-size: 12px;
+        }
+        .col-desc { width: 55%; }
+        .col-price { width: 15%; text-align: center; } 
+        .col-price, .col-total { text-align: right !important; }
+        .col-qty { width: 15%; text-align: center; }
+
+        .footer-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            align-items: flex-end;
+        }
+        .thank-you {
+            font-family: 'Dancing Script', cursive;
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+        .social-info {
+            font-size: 12px;
+            line-height: 2;
+        }
+        .social-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .total-box-container {
+            width: 45%;
+        }
+        .total-box {
+            border: 2px solid #000;
+            background-color: #EAE7E4;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        .bottom-lines {
+            border-bottom: 2px solid #000;
+            margin-bottom: 10px;
+            width: 100%;
+        }
         @media print {
-            body { background: white; }
-            .invoice-container { box-shadow: none; margin: 0; }
+            body { background: white; padding: 0; }
+            .invoice-container { box-shadow: none; padding: 20px; }
             .no-print { display: none !important; }
         }
     </style>
@@ -2227,93 +2404,93 @@ app.get('/api/orders/:id/invoice/pdf', (req, res) => {
 <body>
     <div class="invoice-container">
         <div class="header">
-            <div class="logo">TRUSSER</div>
-            <div class="invoice-title">
-                <h1>INVOICE</h1>
-                <p>${invoiceNumber}</p>
+            <div class="left-header">
+                <h1 class="invoice-label">INVOICE</h1>
+                <h2 class="company-name-large">TRUSSER</h2>
+                <div class="company-details">
+                    #5, 12th Cross, Cubbonpet, Bangalore 560002<br>
+                    +91 9008138404, 9341901360<br>
+                    GST : 29AAJCN7013J1Z6
+                </div>
+                <div class="divider"></div>
+            </div>
+            <div class="right-header">
+                <div class="logo-section">
+                    <img src="${logoBase64}" alt="Trusser Logo" style="max-height: 60px; object-fit: contain;">
+                    <div class="tagline">Sustainable Stationery & Lifestyle Products</div>
+                </div>
+                <div class="scan-to-pay">SCAN to PAY</div>
+                <div class="qr-code">
+                    <!-- Embedded Base64 Image -->
+                    <img src="${barcodeBase64}" alt="QR Code for Payment">
+                </div>
             </div>
         </div>
-        
-        <div class="details">
-            <div class="detail-block">
+
+        <div class="customer-section">
+            <div class="bill-to">
                 <h3>Bill To</h3>
-                <p><strong>${order.customer?.fullName || order.customer?.email?.split('@')[0] || 'Customer'}</strong></p>
+                <p><strong>${order.customer?.fullName || 'Customer'}</strong></p>
                 ${order.shipping?.addressLine1 ? `<p>${order.shipping.addressLine1}</p>` : ''}
                 ${order.shipping?.addressLine2 ? `<p>${order.shipping.addressLine2}</p>` : ''}
                 ${order.shipping?.city ? `<p>${order.shipping.city}, ${order.shipping.state || ''} ${order.shipping.pincode || ''}</p>` : ''}
-                ${order.customer?.email ? `<p>${order.customer.email}</p>` : ''}
                 ${order.customer?.phone ? `<p>${order.customer.phone}</p>` : ''}
             </div>
-            <div class="detail-block" style="text-align: right;">
-                <h3>Invoice Details</h3>
+            <div class="invoice-meta">
                 <p><strong>Invoice No:</strong> ${invoiceNumber}</p>
                 <p><strong>Order No:</strong> ${order.orderNumber || '#' + order.sequence}</p>
                 <p><strong>Date:</strong> ${orderDate}</p>
-                <p><strong>Status:</strong> 
-                    <span class="payment-status ${order.payment?.status === 'paid' ? 'status-paid' : 'status-pending'}">
-                        ${order.payment?.status === 'paid' ? 'PAID' : 'PENDING'}
-                    </span>
-                </p>
             </div>
         </div>
-        
-        <table class="items-table">
+
+        <table class="invoice-table">
             <thead>
                 <tr>
-                    <th style="width: 50px;">#</th>
-                    <th>Item</th>
-                    <th style="width: 80px; text-align: center;">Qty</th>
-                    <th style="width: 120px; text-align: right;">Price</th>
-                    <th style="width: 120px; text-align: right;">Amount</th>
+                    <th class="col-desc">Item Description</th>
+                    <th class="col-price">Price</th>
+                    <th class="col-qty">Qty</th>
+                    <th class="col-total">Total</th>
                 </tr>
             </thead>
             <tbody>
                 ${itemsHtml}
+                ${emptyRowsHtml}
             </tbody>
         </table>
-        
-        <div class="totals">
-            <table class="totals-table">
-                <tr>
-                    <td>Subtotal</td>
-                    <td>${formatCurrency(order.pricing?.subtotal || order.pricing?.total)}</td>
-                </tr>
-                <tr>
-                    <td>Shipping</td>
-                    <td>${formatCurrency(order.pricing?.shipping || 0)}</td>
-                </tr>
-                ${order.pricing?.codCharges ? `
-                <tr>
-                    <td>COD Charges</td>
-                    <td>${formatCurrency(order.pricing.codCharges)}</td>
-                </tr>
-                ` : ''}
-                <tr>
-                    <td>Tax (IGST 12%)</td>
-                    <td>${formatCurrency(order.pricing?.tax || 0)}</td>
-                </tr>
-                ${order.pricing?.discount ? `
-                <tr>
-                    <td>Discount</td>
-                    <td>-${formatCurrency(order.pricing.discount)}</td>
-                </tr>
-                ` : ''}
-                <tr class="total-row">
-                    <td>Total</td>
-                    <td>${formatCurrency(order.pricing?.total || 0)}</td>
-                </tr>
-            </table>
+
+        <!-- Summary rows -->
+        <div style="margin-top: 10px; text-align: right; font-size: 12px; padding-right: 12px;">
+             ${shipping > 0 ? `<p>Shipping: ${formatCurrency(shipping)}</p>` : ''}
+             ${codCharges > 0 ? `<p>COD Charges: ${formatCurrency(codCharges)}</p>` : ''}
+             ${discount > 0 ? `<p>Discount: -${formatCurrency(discount)}</p>` : ''}
+             <p style="color: #666; margin-top: 5px;">(Includes IGST 12%: ${formatCurrency(includedTax)})</p>
         </div>
-        
-        <div class="footer">
-            <p><strong>NAUTICREW ECO PRODUCTS PRIVATE LIMITED</strong></p>
-            <p>D.NO: 4/7, Suriya Nagar 1st Street, Lakshmi Nagar, Tiruppur - 641607, Tamil Nadu</p>
-            <p>Email: infoi@trusser.in | GSTIN: 29AAJCN7013J1Z6</p>
+
+        <div class="footer-section">
+            <div class="left-footer">
+                <div class="thank-you">thank you!!!</div>
+                <div class="social-info">
+                    <div class="social-item">📸 trusser.in</div>
+                    <div class="social-item">✉️ info@trusser.in</div>
+                    <div class="social-item">🌐 www.trusser.in</div>
+                </div>
+            </div>
+            <div class="total-box-container">
+                <div class="total-box">
+                    <span>Total :</span>
+                    <span>${formatCurrency(finalTotal)}</span>
+                </div>
+                <!-- Amount in Words -->
+                <div style="font-family: 'Montserrat', sans-serif; font-size: 13px; line-height: 1.6; margin-top: 5px; color: #333;">
+                    <strong>Amount in Words:</strong><br>
+                    ${numberToWordsIndian(finalTotal)} Rupees Only
+                </div>
+            </div>
         </div>
-        
-        <div class="no-print" style="padding: 20px; text-align: center; background: #f0f0f0;">
-            <button onclick="window.print()" style="background: #1A3C27; color: white; border: none; padding: 12px 30px; font-size: 16px; border-radius: 6px; cursor: pointer;">
-                🖨️ Print / Save as PDF
+
+        <div class="no-print" style="padding: 20px; text-align: center; margin-top: 20px;">
+            <button onclick="window.print()" style="background: #000; color: white; border: none; padding: 12px 30px; font-size: 16px; border-radius: 0; cursor: pointer; text-transform: uppercase; font-family: 'Montserrat', sans-serif;">
+                Print Invoice
             </button>
         </div>
     </div>

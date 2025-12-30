@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Business Invoice</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@700&family=Dancing+Script:wght@700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 40px;
+            background-color: #f4f4f4;
+            color: #000;
+        }
+        .invoice-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #FFFFFF;
+            padding: 50px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+        .left-header {
+            width: 60%;
+        }
+        .right-header {
+            width: 35%;
+            text-align: center;
+        }
+        .invoice-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            margin: 0;
+            line-height: 1;
+        }
+        .company-name-large {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            margin: 5px 0 15px 0;
+            letter-spacing: 1px;
+        }
+        .company-details {
+            font-size: 12px;
+            line-height: 1.6;
+            color: #333;
+        }
+        .logo-section img {
+            max-width: 200px;
+            margin-bottom: 5px;
+        }
+        .tagline {
+            font-family: 'Dancing Script', cursive;
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .scan-to-pay {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+            border: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .qr-code img {
+            width: 100%;
+            height: auto;
+        }
+        .divider {
+            border-top: 2px solid #000;
+            margin: 30px 0;
+            width: 60%;
+        }
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .invoice-table th {
+            background-color: #EAE7E4;
+            border: 1px solid #000;
+            padding: 10px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .invoice-table td {
+            border: 1px solid #000;
+            padding: 12px;
+            height: 30px;
+        }
+        .col-desc { width: 55%; }
+        .col-price { width: 15%; text-align: center; }
+        .col-qty { width: 15%; text-align: center; }
+        .col-total { width: 15%; text-align: center; }
+
+        .footer-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            align-items: flex-end;
+        }
+        .thank-you {
+            font-family: 'Dancing Script', cursive;
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+        .social-info {
+            font-size: 12px;
+            line-height: 2;
+        }
+        .social-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .total-box-container {
+            width: 45%;
+        }
+        .total-box {
+            border: 2px solid #000;
+            background-color: #EAE7E4;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+        .bottom-lines {
+            border-bottom: 2px solid #000;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-container">
+        <div class="header">
+            <div class="left-header">
+                <h1 class="invoice-label">INVOICE</h1>
+                <h2 class="company-name-large">TRUSSER</h2>
+                <div class="company-details">
+                    #5, 12th Cross, Cubbonpet, Bangalore 560002<br>
+                    +91 9008138404, 9341901360<br>
+                    GST : 29AAJCN7013J1Z6
+                </div>
+                <div class="divider"></div>
+            </div>
+            <div class="right-header">
+                <div class="logo-section">
+                    <!-- Replace with actual logo if available -->
+                    <h2 style="font-family: 'Montserrat', sans-serif; margin: 0;">TRUSSER</h2>
+                    <div class="tagline">Sustainable Stationery & Lifestyle Products</div>
+                </div>
+                <div class="scan-to-pay">SCAN to PAY</div>
+                <div class="qr-code">
+                    <img src="barcode.png" alt="QR Code for Payment">
+                </div>
+            </div>
+        </div>
+
+        <table class="invoice-table">
+            <thead>
+                <tr>
+                    <th class="col-desc">Item Description</th>
+                    <th class="col-price">Price</th>
+                    <th class="col-qty">Qty</th>
+                    <th class="col-total">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Empty rows to match the template style -->
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td></tr>
+            </tbody>
+        </table>
+
+        <div class="footer-section">
+            <div class="left-footer">
+                <div class="thank-you">thank you!!!</div>
+                <div class="social-info">
+                    <div class="social-item">📸 trusser.in</div>
+                    <div class="social-item">✉️ info@trusser.in</div>
+                    <div class="social-item">🌐 www.trusser.in</div>
+                </div>
+            </div>
+            <div class="total-box-container">
+                <div class="total-box">
+                    <span>Total :</span>
+                    <span></span>
+                </div>
+                <div class="bottom-lines"></div>
+                <div class="bottom-lines"></div>
+                <div class="bottom-lines"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
