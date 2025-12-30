@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Button } from '../UI/Button';
 import { motion } from 'framer-motion';
 import corporateGiftBox from '../../assets/corporategiftbox.webp';
@@ -27,12 +28,16 @@ export const CorporateGifting = () => {
                                 Premium sustainable kits for your team. Customizable branding, eco-friendly packaging, and impactful messaging that resonates with your values.
                             </p>
                             <div className="flex flex-wrap gap-4">
-                                <Button className="bg-[#C1A17C] text-[#1A3C27] hover:bg-[#D4B995] rounded-full px-8 py-4 text-base font-semibold">
-                                    Download Catalog
-                                </Button>
-                                <Button variant="outline" className="border-white/30 text-white hover:bg-white hover:text-[#1A3C27] rounded-full px-8 py-4 text-base">
-                                    Contact Sales
-                                </Button>
+                                <Link to="/corporate-gifting">
+                                    <Button className="bg-[#C1A17C] text-[#1A3C27] hover:bg-[#D4B995] rounded-full px-8 py-4 text-base font-semibold">
+                                        Explore Catalog
+                                    </Button>
+                                </Link>
+                                <Link to="/corporate-gifting#contact">
+                                    <Button variant="outline" className="border-white/30 text-white hover:bg-white hover:text-[#1A3C27] rounded-full px-8 py-4 text-base">
+                                        Contact Sales
+                                    </Button>
+                                </Link>
                             </div>
                         </div>
 
