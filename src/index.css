@@ -71,9 +71,9 @@
 /* Mega dropdown container with glassmorphism */
 .nav-dropdown {
   position: absolute;
-  top: 100%;
+  top: calc(100% + 16px);
   left: 50%;
-  transform: translateX(-50%) translateY(10px);
+  transform: translateX(-50%) translateY(8px);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -110,6 +110,17 @@
   visibility: visible;
   pointer-events: auto;
   transform: translateX(-50%) translateY(0);
+}
+
+/* Invisible hover bridge to keep dropdown open when moving mouse */
+.nav-dropdown-trigger::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 24px;
+  background: transparent;
 }
 
 .nav-dropdown-trigger:hover .nav-dropdown::before {

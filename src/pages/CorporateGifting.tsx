@@ -28,25 +28,25 @@ const giftCategories = [
     {
         title: 'Welcome Kits',
         description: 'Curated onboarding essentials for new team members',
-        image: '/products/categories/corporate-gift-sets/corporate-gift-sets-3.webp',
+        image: '/products/categories/corporate-gift-sets/corporate-gift-sets-8.webp',
         accent: '#C1A17C',
     },
     {
         title: 'Event Hampers',
         description: 'Premium gift boxes for conferences & celebrations',
-        image: '/products/categories/corporate-gift-sets/corporate-gift-sets-4.webp',
+        image: '/products/categories/women-gift-sets/women-gift-sets-1.webp',
         accent: '#4A8B60',
     },
     {
         title: 'Festive Collections',
         description: 'Seasonal gifting for Diwali, Christmas & more',
-        image: '/products/categories/corporate-gift-sets/corporate-gift-sets-3.webp',
+        image: '/products/categories/festive-bags/festive-bags-1.webp',
         accent: '#D45D48',
     },
     {
         title: 'Custom Bundles',
         description: 'Fully personalized gift sets with your branding',
-        image: '/products/categories/corporate-gift-sets/corporate-gift-sets-4.webp',
+        image: '/products/categories/women-gift-sets/women-gift-sets-5.webp',
         accent: '#2D5F3F',
     },
 ];
@@ -82,11 +82,11 @@ const processSteps = [
 // Featured Products
 const featuredProducts = [
     { image: '/products/categories/corporate-gift-sets/corporate-gift-sets-3.webp', name: 'Executive Suite' },
-    { image: '/products/categories/corporate-gift-sets/corporate-gift-sets-4.webp', name: 'Wellness Box' },
-    { image: '/products/categories/corporate-gift-sets/corporate-gift-sets-8.webp', name: 'Eco Starter Kit' },
-    { image: '/products/categories/women-gift-sets/women-gift-sets-1.webp', name: 'Premium Hamper' },
-    { image: '/products/categories/women-gift-sets/women-gift-sets-2.webp', name: 'Her Collection' },
-    { image: '/products/categories/festive-bags/festive-bags-1.webp', name: 'Festive Delight' },
+    { image: '/products/categories/women-gift-sets/women-gift-sets-3.webp', name: 'Wellness Box' },
+    { image: '/products/categories/kids-gifts-set/kids-gifts-set-1.webp', name: 'Eco Starter Kit' },
+    { image: '/products/categories/women-gift-sets/women-gift-sets-8.webp', name: 'Premium Hamper' },
+    { image: '/products/categories/pouches/pouches-1.webp', name: 'Her Collection' },
+    { image: '/products/categories/festive-bags/festive-bags-5.webp', name: 'Festive Delight' },
 ];
 
 // Why Choose Us Features
