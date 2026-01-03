@@ -27,6 +27,8 @@ const usersPath = path.join(dataDir, 'users.json');
 const sessionsPath = path.join(dataDir, 'sessions.json');
 const discountsPath = path.join(dataDir, 'discounts.json');
 const blogsPath = path.join(dataDir, 'blogs.json');
+const bannedEntitiesPath = path.join(dataDir, 'bannedEntities.json');
+const newsletterSubscribersPath = path.join(dataDir, 'newsletterSubscribers.json');
 const sourceProductsPath = path.join(__dirname, '..', 'src', 'data', 'products.json');
 const sourceCategoriesPath = path.join(__dirname, '..', 'src', 'data', 'categories.json');
 const sourceWebsiteContentPath = path.join(__dirname, '..', 'public', 'websiteContent.json');
@@ -37,14 +39,34 @@ const googleClientId = process.env.GOOGLE_CLIENT_ID?.trim();
 const googleOAuthClient = googleClientId ? new OAuth2Client(googleClientId) : null;
 const businessDetails = {
     name: 'NAUTICREW ECO PRODUCTS PRIVATE LIMITED',
-    addressLine1: 'No 5, 12th Cross Road, Cubbonpet',
-    addressLine2: 'Bengaluru - 560002, Karnataka, India',
+    addressLine1: 'D.NO: 4/7, Suriya Nagar 1st Street',
+    addressLine2: 'Lakshmi Nagar, Tiruppur - 641607, Tamil Nadu',
     gstin: '29AAJCN7013J1Z6',
-    placeOfSupply: 'Karnataka (29)',
-    contact: '+91 9008138404',
-    email: 'info@trusser.in',
+    placeOfSupply: 'Tamil Nadu (33)',
+    contact: '+91 9843226860',
+    email: 'infoi@trusser.in',
     hsnCode: '56021000',
 };
+
+let transporter = null;
+if (process.env.SMTP_HOST && process.env.SMTP_USER) {
+    try {
+        transporter = nodemailer.createTransport({
+            host: process.env.SMTP_HOST,
+            port: parseInt(process.env.SMTP_PORT || '587'),
+            secure: process.env.SMTP_SECURE === 'true',
+            auth: {
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASS,
+            },
+        });
+        console.log('Briefly initialized SMTP transporter');
+    } catch (error) {
+        console.error('Failed to initialize SMTP transporter:', error.message);
+    }
+} else {
+    console.log('SMTP configuration missing - email features will be disabled (transporter is null)');
+}
 
 const smtpConfig = {
     host: process.env.SMTP_HOST?.trim(),
@@ -67,6 +89,8 @@ let users = [];
 let sessions = [];
 let discounts = [];
 let blogs = [];
+let bannedEntities = []; // Fraud detection: banned IPs, emails, phones, addresses
+let newsletterSubscribers = []; // Newsletter email subscribers
 let writeQueue = Promise.resolve();
 
 function stringifyAscii(value) {
@@ -213,6 +237,51 @@ async function ensureSeedData() {
         blogs = [];
         await persistJsonFile(blogsPath, blogs);
     }
+
+    try {
+        bannedEntities = await readJsonFile(bannedEntitiesPath);
+    } catch (error) {
+        if (error?.code !== 'ENOENT') {
+            throw error;
+        }
+        bannedEntities = [];
+        await persistJsonFile(bannedEntitiesPath, bannedEntities);
+    }
+
+    try {
+        newsletterSubscribers = await readJsonFile(newsletterSubscribersPath);
+    } catch (error) {
+        if (error?.code !== 'ENOENT') {
+            throw error;
+        }
+        newsletterSubscribers = [];
+        await persistJsonFile(newsletterSubscribersPath, newsletterSubscribers);
+    }
+}
+
+// Get client IP address from request (handles proxies)
+function getClientIp(req) {
+    // Check for forwarded headers (when behind proxy/load balancer)
+    const forwarded = req.headers['x-forwarded-for'];
+    if (forwarded) {
+        // x-forwarded-for can contain multiple IPs, take the first one (original client)
+        return forwarded.split(',')[0].trim();
+    }
+    const realIp = req.headers['x-real-ip'];
+    if (realIp) {
+        return realIp.trim();
+    }
+    // Fallback to direct connection
+    return req.socket?.remoteAddress || req.connection?.remoteAddress || null;
+}
+
+// Check if entity is banned (returns ban entry if found)
+function checkBannedEntity(type, value) {
+    if (!value) return null;
+    const normalizedValue = String(value).toLowerCase().trim();
+    return bannedEntities.find(
+        ban => ban.type === type && ban.value.toLowerCase() === normalizedValue && ban.active
+    );
 }
 
 function getAdminToken(req) {
@@ -431,17 +500,17 @@ function setSessionCookie(res, token) {
         `trusser_session=${encodeURIComponent(token)}`,
         'Path=/',
         'HttpOnly',
-        'SameSite=Lax',
-        'Max-Age=604800',
+        'SameSite=Strict',  // Strict for better CSRF protection
+        'Max-Age=604800',   // 7 days
     ];
     if (isProd) {
-        parts.push('Secure');
+        parts.push('Secure');  // Only send over HTTPS in production
     }
     res.setHeader('Set-Cookie', parts.join('; '));
 }
 
 function clearSessionCookie(res) {
-    res.setHeader('Set-Cookie', 'trusser_session=; Path=/; HttpOnly; Max-Age=0; SameSite=Lax');
+    res.setHeader('Set-Cookie', 'trusser_session=; Path=/; HttpOnly; Max-Age=0; SameSite=Strict');
 }
 
 async function getLogoBuffer() {
@@ -1266,6 +1335,53 @@ const app = express();
 app.use(express.json({ limit: '1mb' }));
 app.use('/uploads', express.static(uploadsDir));
 
+// ============================================
+// SECURITY HEADERS MIDDLEWARE
+// ============================================
+app.use((req, res, next) => {
+    const isProd = process.env.NODE_ENV === 'production';
+
+    // HSTS - Force HTTPS for 1 year (only in production)
+    if (isProd) {
+        res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
+    }
+
+    // Content Security Policy - Strict but allows necessary resources
+    const cspDirectives = [
+        "default-src 'self'",
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://checkout.razorpay.com",
+        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+        "font-src 'self' https://fonts.gstatic.com data:",
+        "img-src 'self' data: blob: https: http:",
+        "connect-src 'self' https://api.razorpay.com https://www.google-analytics.com https://fonts.googleapis.com https://fonts.gstatic.com",
+        "frame-src 'self' https://api.razorpay.com https://checkout.razorpay.com https://www.google.com",
+        "object-src 'none'",
+        "base-uri 'self'",
+        "form-action 'self'",
+        "frame-ancestors 'self'",
+        "upgrade-insecure-requests",
+    ];
+    res.setHeader('Content-Security-Policy', cspDirectives.join('; '));
+
+    // Prevent clickjacking
+    res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+
+    // Prevent MIME type sniffing
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+
+    // XSS Protection (legacy but still useful)
+    res.setHeader('X-XSS-Protection', '1; mode=block');
+
+    // Referrer Policy - Send origin only for cross-origin requests
+    res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+
+    // Permissions Policy - Restrict browser features
+    res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=(self), payment=(self)');
+
+    next();
+});
+
+
 app.use((req, res, next) => {
     const origin = process.env.CORS_ORIGIN ?? req.headers.origin;
     if (origin) {
@@ -1623,6 +1739,7 @@ app.get('/api/admin/stats', requireAdmin, (req, res) => {
     // Summary stats
     const totalCustomers = users.length;
     const totalProducts = products.length;
+    const totalOrders = orders.length; // Add total orders count (all time)
     const avgOrderValue = recentOrders.length > 0
         ? Math.round(totalSales / recentOrders.filter(o => o.payment?.status === 'paid').length) || 0
         : 0;
@@ -1650,6 +1767,7 @@ app.get('/api/admin/stats', requireAdmin, (req, res) => {
         recentOrders: recentOrdersList,
         topProducts,
         summary: {
+            totalOrders,
             totalCustomers,
             activeDiscounts: discounts.filter(d => {
                 const now = new Date();
@@ -1721,6 +1839,667 @@ app.get('/api/admin/orders', requireAdmin, (req, res) => {
             delivered: orders.filter(o => o.deliveryStatus === 'Delivered').length,
         },
     });
+});
+
+// Get single order full details for admin
+app.get('/api/admin/orders/:id', requireAdmin, (req, res) => {
+    const order = orders.find(o => o.id === req.params.id);
+    if (!order) {
+        return res.status(404).json({ error: 'Order not found' });
+    }
+
+    // Return full order with all details
+    return res.json({
+        id: order.id,
+        orderNumber: order.orderNumber || `#${order.sequence}`,
+        sequence: order.sequence,
+        createdAt: order.createdAt,
+        formattedDate: formatOrderDate(order.createdAt),
+        customer: {
+            name: order.customer?.fullName || `${order.customer?.firstName || ''} ${order.customer?.lastName || ''}`.trim() || 'Guest',
+            email: order.customer?.email || '',
+            phone: order.customer?.phone || '',
+            userId: order.customer?.userId,
+        },
+        shipping: {
+            addressLine1: order.shipping?.addressLine1 || order.shipping?.address || '',
+            addressLine2: order.shipping?.addressLine2 || '',
+            city: order.shipping?.city || '',
+            state: order.shipping?.state || '',
+            pincode: order.shipping?.pincode || order.shipping?.postalCode || '',
+            country: order.shipping?.country || 'India',
+            method: order.shipping?.method || 'Standard Shipping',
+        },
+        items: (order.items || []).map(item => ({
+            id: item.id,
+            name: item.name || item.title,
+            variant: item.variant || item.size,
+            sku: item.sku || item.productId || '',
+            quantity: item.quantity || 1,
+            price: item.price,
+            total: (item.price || 0) * (item.quantity || 1),
+            image: item.image,
+        })),
+        pricing: {
+            subtotal: order.pricing?.subtotal || order.pricing?.total || 0,
+            shipping: order.pricing?.shipping || 0,
+            codCharges: order.pricing?.codCharges || 0,
+            tax: order.pricing?.tax || 0,
+            taxRate: order.pricing?.taxRate || '12%',
+            discount: order.pricing?.discount || 0,
+            total: order.pricing?.total || 0,
+        },
+        payment: {
+            method: order.payment?.method || 'unknown',
+            status: order.payment?.status || 'pending',
+            providerOrderId: order.payment?.providerOrderId,
+            providerPaymentId: order.payment?.providerPaymentId,
+            paidAt: order.payment?.paidAt,
+            refundId: order.payment?.refundId,
+            refundAmount: order.payment?.refundAmount,
+            refundedAt: order.payment?.refundedAt,
+            approvedAt: order.payment?.approvedAt,
+            rejectedAt: order.payment?.rejectedAt,
+            rejectionReason: order.payment?.rejectionReason,
+        },
+        fulfillmentStatus: order.fulfillmentStatus || 'unfulfilled',
+        deliveryStatus: order.deliveryStatus || 'Pending',
+        clientInfo: order.clientInfo || null,
+        invoice: order.invoice || null,
+        notes: order.notes || null,
+        cancelledAt: order.cancelledAt,
+        timeline: [
+            { event: 'Order placed', timestamp: order.createdAt },
+            order.payment?.paidAt && { event: 'Payment received', timestamp: order.payment.paidAt },
+            order.payment?.approvedAt && { event: 'COD approved', timestamp: order.payment.approvedAt },
+            order.payment?.rejectedAt && { event: 'COD rejected', timestamp: order.payment.rejectedAt },
+            order.payment?.refundedAt && { event: 'Refund issued', timestamp: order.payment.refundedAt },
+            order.cancelledAt && { event: 'Order cancelled', timestamp: order.cancelledAt },
+        ].filter(Boolean),
+    });
+});
+
+// Export orders to CSV (Excel-compatible)
+app.get('/api/admin/orders/export', requireAdmin, (req, res) => {
+    const csvHeader = [
+        'Order Number',
+        'Date',
+        'Customer Name',
+        'Email',
+        'Phone',
+        'Payment Method',
+        'Payment Status',
+        'Fulfillment Status',
+        'Shipping Address',
+        'City',
+        'State',
+        'Pincode',
+        'Items',
+        'Subtotal',
+        'Shipping',
+        'Tax',
+        'Total',
+        'Notes',
+    ].join(',');
+
+    const csvRows = orders.map(o => {
+        const items = (o.items || []).map(i => `${i.name || i.title} x${i.quantity || 1}`).join('; ');
+        const address = [o.shipping?.addressLine1, o.shipping?.addressLine2].filter(Boolean).join(' ');
+
+        return [
+            `"${o.orderNumber || `#${o.sequence}`}"`,
+            `"${new Date(o.createdAt).toLocaleString('en-IN')}"`,
+            `"${o.customer?.fullName || o.customer?.email?.split('@')[0] || 'Guest'}"`,
+            `"${o.customer?.email || ''}"`,
+            `"${o.customer?.phone || ''}"`,
+            `"${o.payment?.method || 'unknown'}"`,
+            `"${o.payment?.status || 'pending'}"`,
+            `"${o.fulfillmentStatus || 'unfulfilled'}"`,
+            `"${address}"`,
+            `"${o.shipping?.city || ''}"`,
+            `"${o.shipping?.state || ''}"`,
+            `"${o.shipping?.pincode || ''}"`,
+            `"${items}"`,
+            o.pricing?.subtotal || 0,
+            o.pricing?.shipping || 0,
+            o.pricing?.tax || 0,
+            o.pricing?.total || 0,
+            `"${(o.notes || '').replace(/"/g, '""')}"`,
+        ].join(',');
+    });
+
+    const csv = csvHeader + '\n' + csvRows.join('\n');
+    const bom = '\ufeff'; // UTF-8 BOM for Excel compatibility
+
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+    res.setHeader('Content-Disposition', `attachment; filename="orders-export-${new Date().toISOString().split('T')[0]}.csv"`);
+    return res.send(bom + csv);
+});
+
+// Get invoice data for an order (returns URL to hosted PDF)
+app.get('/api/admin/orders/:id/invoice', requireAdmin, (req, res) => {
+    const order = orders.find(o => o.id === req.params.id);
+    if (!order) {
+        return res.status(404).json({ error: 'Order not found' });
+    }
+
+    // Generate invoice URL - this points to the invoice download endpoint
+    const invoiceUrl = `${req.protocol}://${req.get('host')}/api/orders/${order.id}/invoice/pdf`;
+
+    return res.json({
+        invoiceNumber: order.invoice?.number || `INV-${order.sequence || order.id.slice(0, 8).toUpperCase()}`,
+        orderNumber: order.orderNumber || `#${order.sequence}`,
+        invoiceUrl,
+        order: {
+            id: order.id,
+            date: order.createdAt,
+            customer: order.customer,
+            total: order.pricing?.total || 0,
+        },
+    });
+});
+
+// Send invoice email to customer
+app.post('/api/admin/orders/:id/send-invoice', requireAdmin, async (req, res) => {
+    const order = orders.find(o => o.id === req.params.id);
+    if (!order) {
+        return res.status(404).json({ error: 'Order not found' });
+    }
+
+    if (!order.customer?.email) {
+        return res.status(400).json({ error: 'Customer email not available' });
+    }
+
+    const invoiceNumber = order.invoice?.number || `INV-${order.sequence || order.id.slice(0, 8).toUpperCase()}`;
+    const invoiceUrl = `${req.protocol}://${req.get('host')}/api/orders/${order.id}/invoice/pdf`;
+
+    // Email content
+    const subject = `Invoice ${invoiceNumber} for your Trusser order ${order.orderNumber || '#' + order.sequence}`;
+    const emailHtml = `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+            <div style="background: #1A3C27; padding: 20px; text-align: center;">
+                <h1 style="color: #F4EFEC; margin: 0;">TRUSSER</h1>
+            </div>
+            <div style="padding: 30px; background: #F4EFEC;">
+                <h2 style="color: #1A3C27;">Your Invoice is Ready</h2>
+                <p>Dear ${order.customer?.fullName || 'Customer'},</p>
+                <p>Thank you for your order! Please find your invoice attached below.</p>
+                <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                    <p><strong>Invoice Number:</strong> ${invoiceNumber}</p>
+                    <p><strong>Order Number:</strong> ${order.orderNumber || '#' + order.sequence}</p>
+                    <p><strong>Amount:</strong> ₹${(order.pricing?.total || 0).toLocaleString('en-IN', { minimumFractionDigits: 2 })}</p>
+                </div>
+                <a href="${invoiceUrl}" style="display: inline-block; background: #1A3C27; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px;">
+                    Download Invoice PDF
+                </a>
+                <p style="margin-top: 30px; color: #666;">If you have any questions, please contact us at info@trusser.in</p>
+            </div>
+            <div style="padding: 20px; text-align: center; color: #666; font-size: 12px;">
+                <p>Trusser - Turning Waste Into Purpose</p>
+                <p>No. 18/1, 12th Cross, Cubbonpet, Bangalore-560002</p>
+            </div>
+        </div>
+    `;
+
+    // Check if SMTP is configured
+    if (!transporter) {
+        // Fallback: return the invoice URL for manual sending
+        return res.json({
+            success: true,
+            message: 'Invoice link generated (email not configured)',
+            invoiceUrl,
+            invoiceNumber,
+            emailContent: {
+                to: order.customer.email,
+                subject,
+            },
+        });
+    }
+
+    try {
+        await transporter.sendMail({
+            from: process.env.SMTP_FROM || 'orders@trusser.in',
+            to: order.customer.email,
+            subject,
+            html: emailHtml,
+        });
+
+        return res.json({
+            success: true,
+            message: `Invoice sent to ${order.customer.email}`,
+            invoiceUrl,
+            invoiceNumber,
+        });
+    } catch (error) {
+        console.error('Failed to send invoice email:', error);
+        return res.json({
+            success: true,
+            message: 'Invoice link generated (email delivery failed)',
+            invoiceUrl,
+            invoiceNumber,
+            emailError: error.message,
+        });
+    }
+});
+
+// Mark order as paid (for COD/manual payments)
+app.post('/api/admin/orders/:id/mark-paid', requireAdmin, async (req, res) => {
+    const orderIndex = orders.findIndex(o => o.id === req.params.id);
+    if (orderIndex === -1) {
+        return res.status(404).json({ error: 'Order not found' });
+    }
+
+    const order = orders[orderIndex];
+    if (order.payment?.status === 'paid') {
+        return res.status(400).json({ error: 'Order is already marked as paid' });
+    }
+
+    const updatedOrder = {
+        ...order,
+        payment: {
+            ...order.payment,
+            status: 'paid',
+            paidAt: new Date().toISOString(),
+            markedPaidBy: 'admin',
+        },
+    };
+
+    orders = [...orders.slice(0, orderIndex), updatedOrder, ...orders.slice(orderIndex + 1)];
+    await persistJsonFile(ordersPath, orders);
+
+    return res.json({
+        success: true,
+        message: 'Order marked as paid',
+        order: {
+            id: updatedOrder.id,
+            paymentStatus: 'paid',
+            paidAt: updatedOrder.payment.paidAt,
+        },
+    });
+});
+
+// Update fulfillment status
+app.post('/api/admin/orders/:id/fulfill', requireAdmin, async (req, res) => {
+    const orderIndex = orders.findIndex(o => o.id === req.params.id);
+    if (orderIndex === -1) {
+        return res.status(404).json({ error: 'Order not found' });
+    }
+
+    const order = orders[orderIndex];
+    const { trackingNumber, carrier } = req.body || {};
+
+    const updatedOrder = {
+        ...order,
+        fulfillmentStatus: 'fulfilled',
+        fulfilledAt: new Date().toISOString(),
+        deliveryStatus: 'In transit',
+        tracking: {
+            number: trackingNumber || null,
+            carrier: carrier || null,
+            updatedAt: new Date().toISOString(),
+        },
+    };
+
+    orders = [...orders.slice(0, orderIndex), updatedOrder, ...orders.slice(orderIndex + 1)];
+    await persistJsonFile(ordersPath, orders);
+
+    return res.json({
+        success: true,
+        message: 'Order marked as fulfilled',
+        order: {
+            id: updatedOrder.id,
+            fulfillmentStatus: 'fulfilled',
+            trackingNumber,
+        },
+    });
+});
+
+// ============================================
+// PUBLIC INVOICE ENDPOINT (for customer access)
+// ============================================
+app.get('/api/orders/:id/invoice/pdf', async (req, res) => {
+    const order = orders.find(o => o.id === req.params.id);
+    if (!order) {
+        return res.status(404).send('<h1>Invoice not found</h1>');
+    }
+
+    const invoiceNumber = order.invoice?.number || `INV-${order.sequence || order.id.slice(0, 8).toUpperCase()}`;
+    const orderDate = new Date(order.createdAt).toLocaleDateString('en-IN', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+    });
+
+    // Read barcode image and convert to base64
+    let barcodeBase64 = '';
+    try {
+        const barcodePath = path.join(__dirname, '..', 'public', 'invoice', 'Barcode.png');
+        const barcodeBuffer = await fs.readFile(barcodePath);
+        barcodeBase64 = `data:image/png;base64,${barcodeBuffer.toString('base64')}`;
+    } catch (error) {
+        console.error('Error reading barcode image:', error);
+        // Fallback or empty string if failed
+    }
+
+    const formatCurrency = (amount) => `₹${(amount || 0).toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
+
+    // Generate items HTML
+    const itemsHtml = (order.items || []).map((item, idx) => `
+        <tr>
+            <td class="col-desc">
+                ${item.name || item.title}
+                ${item.variant ? `<br><span style="color: #666; font-size: 10px;">${item.variant}</span>` : ''}
+            </td>
+            <td class="col-price">${formatCurrency(item.price)}</td>
+            <td class="col-qty">${item.quantity || 1}</td>
+            <td class="col-total">${formatCurrency((item.price || 0) * (item.quantity || 1))}</td>
+        </tr>
+    `).join('');
+
+    // Fill empty rows to ensure consistent height if few items
+    const minRows = 5;
+    const filledRows = (order.items || []).length;
+    const emptyRowsHtml = filledRows < minRows
+        ? Array(minRows - filledRows).fill('<tr><td></td><td></td><td></td><td></td></tr>').join('')
+        : '';
+
+    // Calculate inclusive totals (User requested: price is inclusive of tax)
+    const itemTotal = (order.items || []).reduce((sum, item) => sum + ((item.price || 0) * (item.quantity || 1)), 0);
+    const shipping = order.pricing?.shipping || 0;
+    const discount = order.pricing?.discount || 0;
+    const codCharges = order.pricing?.codCharges || 0;
+
+    // Grand total is the sum of items + shipping + cod - discount (Tax is already inside item prices)
+    const finalTotal = itemTotal + shipping + codCharges - discount;
+
+    // Back-calculate included tax (assuming 12% IGST is included in the itemTotal)
+    // Formula: Tax = Amount - (Amount / 1.12)
+    const includedTax = itemTotal - (itemTotal / 1.12);
+
+    // Read logo image and convert to base64
+    let logoBase64 = '';
+    try {
+        const logoBuffer = await fs.readFile(logoPath);
+        logoBase64 = `data:image/avif;base64,${logoBuffer.toString('base64')}`;
+    } catch (error) {
+        console.error('Error reading logo image:', error);
+    }
+
+    const html = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice ${invoiceNumber} - Trusser</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@700&family=Dancing+Script:wght@700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #000;
+        }
+        .invoice-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #FFFFFF;
+            padding: 50px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .left-header {
+            width: 60%;
+        }
+        .right-header {
+            width: 35%;
+            text-align: center;
+        }
+        .invoice-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            margin: 0;
+            line-height: 1;
+        }
+        .company-name-large {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            margin: 5px 0 15px 0;
+            letter-spacing: 1px;
+        }
+        .company-details {
+            font-size: 12px;
+            line-height: 1.6;
+            color: #333;
+        }
+        .logo-section img {
+            max-width: 200px;
+            margin-bottom: 5px;
+        }
+        .tagline {
+            font-family: 'Dancing Script', cursive;
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .scan-to-pay {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+            border: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .qr-code img {
+            width: 100%;
+            height: auto;
+        }
+        .divider {
+            border-top: 2px solid #000;
+            margin: 30px 0;
+            width: 60%;
+        }
+        /* Added for Customer Details */
+        .customer-section {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            font-size: 13px;
+        }
+        .bill-to h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+        }
+        .invoice-meta p {
+            margin: 3px 0;
+            text-align: right;
+        }
+
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .invoice-table th {
+            background-color: #EAE7E4;
+            border: 1px solid #000;
+            padding: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: left;
+        }
+        .invoice-table td {
+            border: 1px solid #000;
+            padding: 12px;
+            font-size: 12px;
+        }
+        .col-desc { width: 55%; }
+        .col-price { width: 15%; text-align: center; } 
+        .col-price, .col-total { text-align: right !important; }
+        .col-qty { width: 15%; text-align: center; }
+
+        .footer-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            align-items: flex-end;
+        }
+        .thank-you {
+            font-family: 'Dancing Script', cursive;
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+        .social-info {
+            font-size: 12px;
+            line-height: 2;
+        }
+        .social-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .total-box-container {
+            width: 45%;
+        }
+        .total-box {
+            border: 2px solid #000;
+            background-color: #EAE7E4;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        .bottom-lines {
+            border-bottom: 2px solid #000;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        @media print {
+            body { background: white; padding: 0; }
+            .invoice-container { box-shadow: none; padding: 20px; }
+            .no-print { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-container">
+        <div class="header">
+            <div class="left-header">
+                <h1 class="invoice-label">INVOICE</h1>
+                <h2 class="company-name-large">TRUSSER</h2>
+                <div class="company-details">
+                    #5, 12th Cross, Cubbonpet, Bangalore 560002<br>
+                    +91 9008138404, 9341901360<br>
+                    GST : 29AAJCN7013J1Z6
+                </div>
+                <div class="divider"></div>
+            </div>
+            <div class="right-header">
+                <div class="logo-section">
+                    <img src="${logoBase64}" alt="Trusser Logo" style="max-height: 60px; object-fit: contain;">
+                    <div class="tagline">Sustainable Stationery & Lifestyle Products</div>
+                </div>
+                <div class="scan-to-pay">SCAN to PAY</div>
+                <div class="qr-code">
+                    <!-- Embedded Base64 Image -->
+                    <img src="${barcodeBase64}" alt="QR Code for Payment">
+                </div>
+            </div>
+        </div>
+
+        <div class="customer-section">
+            <div class="bill-to">
+                <h3>Bill To</h3>
+                <p><strong>${order.customer?.fullName || 'Customer'}</strong></p>
+                ${order.shipping?.addressLine1 ? `<p>${order.shipping.addressLine1}</p>` : ''}
+                ${order.shipping?.addressLine2 ? `<p>${order.shipping.addressLine2}</p>` : ''}
+                ${order.shipping?.city ? `<p>${order.shipping.city}, ${order.shipping.state || ''} ${order.shipping.pincode || ''}</p>` : ''}
+                ${order.customer?.phone ? `<p>${order.customer.phone}</p>` : ''}
+            </div>
+            <div class="invoice-meta">
+                <p><strong>Invoice No:</strong> ${invoiceNumber}</p>
+                <p><strong>Order No:</strong> ${order.orderNumber || '#' + order.sequence}</p>
+                <p><strong>Date:</strong> ${orderDate}</p>
+            </div>
+        </div>
+
+        <table class="invoice-table">
+            <thead>
+                <tr>
+                    <th class="col-desc">Item Description</th>
+                    <th class="col-price">Price</th>
+                    <th class="col-qty">Qty</th>
+                    <th class="col-total">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${itemsHtml}
+                ${emptyRowsHtml}
+            </tbody>
+        </table>
+
+        <!-- Summary rows -->
+        <div style="margin-top: 10px; text-align: right; font-size: 12px; padding-right: 12px;">
+             ${shipping > 0 ? `<p>Shipping: ${formatCurrency(shipping)}</p>` : ''}
+             ${codCharges > 0 ? `<p>COD Charges: ${formatCurrency(codCharges)}</p>` : ''}
+             ${discount > 0 ? `<p>Discount: -${formatCurrency(discount)}</p>` : ''}
+             <p style="color: #666; margin-top: 5px;">(Includes IGST 12%: ${formatCurrency(includedTax)})</p>
+        </div>
+
+        <div class="footer-section">
+            <div class="left-footer">
+                <div class="thank-you">thank you!!!</div>
+                <div class="social-info">
+                    <div class="social-item">📸 trusser.in</div>
+                    <div class="social-item">✉️ info@trusser.in</div>
+                    <div class="social-item">🌐 www.trusser.in</div>
+                </div>
+            </div>
+            <div class="total-box-container">
+                <div class="total-box">
+                    <span>Total :</span>
+                    <span>${formatCurrency(finalTotal)}</span>
+                </div>
+                <!-- Amount in Words -->
+                <div style="font-family: 'Montserrat', sans-serif; font-size: 13px; line-height: 1.6; margin-top: 5px; color: #333;">
+                    <strong>Amount in Words:</strong><br>
+                    ${numberToWordsIndian(finalTotal)} Rupees Only
+                </div>
+            </div>
+        </div>
+
+        <div class="no-print" style="padding: 20px; text-align: center; margin-top: 20px;">
+            <button onclick="window.print()" style="background: #000; color: white; border: none; padding: 12px 30px; font-size: 16px; border-radius: 0; cursor: pointer; text-transform: uppercase; font-family: 'Montserrat', sans-serif;">
+                Print Invoice
+            </button>
+        </div>
+    </div>
+</body>
+</html>
+    `;
+
+    res.setHeader('Content-Type', 'text/html');
+    return res.send(html);
 });
 
 app.get('/api/admin/customers', requireAdmin, (req, res) => {
@@ -2283,6 +3062,37 @@ app.post('/api/checkout', async (req, res) => {
         return res.status(400).json({ error: 'Order must include at least one item' });
     }
 
+    // Capture client info for fraud detection
+    const clientIp = getClientIp(req);
+    const userAgent = req.headers['user-agent'] || null;
+
+    // Check if IP is banned
+    const bannedIp = checkBannedEntity('ip', clientIp);
+    if (bannedIp) {
+        return res.status(403).json({
+            error: 'Order cannot be processed. Please contact support.',
+            code: 'BLOCKED'
+        });
+    }
+
+    // Check if email is banned
+    const bannedEmail = checkBannedEntity('email', result.value.customer?.email);
+    if (bannedEmail) {
+        return res.status(403).json({
+            error: 'Order cannot be processed. Please contact support.',
+            code: 'BLOCKED'
+        });
+    }
+
+    // Check if phone is banned
+    const bannedPhone = checkBannedEntity('phone', result.value.customer?.phone);
+    if (bannedPhone) {
+        return res.status(403).json({
+            error: 'Order cannot be processed. Please contact support.',
+            code: 'BLOCKED'
+        });
+    }
+
     const pricing = calculateOrderPricing(result.value.items);
     const sequence = getNextOrderSequence(orders);
     const orderId = crypto.randomUUID();
@@ -2332,6 +3142,11 @@ app.post('/api/checkout', async (req, res) => {
             method: result.value.paymentMethod,
             status: 'pending',
             providerOrderId,
+        },
+        clientInfo: {
+            ip: clientIp,
+            userAgent: userAgent,
+            capturedAt: new Date().toISOString(),
         },
     };
 
@@ -2923,6 +3738,287 @@ app.post('/api/admin/orders/:id/cancel', requireAdmin, async (req, res) => {
 
 // ============================================
 // END PAYMENT MANAGEMENT API ENDPOINTS
+// ============================================
+
+// ============================================
+// FRAUD DETECTION API ENDPOINTS
+// ============================================
+
+// Get fraud detection overview
+app.get('/api/admin/fraud', requireAdmin, (req, res) => {
+    // Get unique IPs from orders with client info
+    const ordersWithIp = orders.filter(o => o.clientInfo?.ip);
+    const uniqueIps = [...new Set(ordersWithIp.map(o => o.clientInfo.ip))];
+
+    // Group orders by IP
+    const ipStats = uniqueIps.map(ip => {
+        const ipOrders = ordersWithIp.filter(o => o.clientInfo.ip === ip);
+        const isBanned = checkBannedEntity('ip', ip);
+        return {
+            ip,
+            orderCount: ipOrders.length,
+            totalSpent: ipOrders.reduce((sum, o) => sum + (o.pricing?.total || 0), 0),
+            lastOrder: ipOrders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0]?.createdAt,
+            isBanned: !!isBanned,
+            orders: ipOrders.map(o => ({
+                id: o.id,
+                orderNumber: o.orderNumber,
+                date: new Date(o.createdAt).toLocaleDateString('en-IN'),
+                customer: `${o.customer?.firstName || ''} ${o.customer?.lastName || ''}`.trim() || o.customer?.email || 'Guest',
+                email: o.customer?.email,
+                phone: o.customer?.phone,
+                total: o.pricing?.total || 0,
+                paymentMethod: o.payment?.method,
+                paymentStatus: o.payment?.status,
+            })),
+        };
+    }).sort((a, b) => b.orderCount - a.orderCount);
+
+    // Get banned entities summary
+    const bannedByType = {
+        ip: bannedEntities.filter(b => b.type === 'ip' && b.active).length,
+        email: bannedEntities.filter(b => b.type === 'email' && b.active).length,
+        phone: bannedEntities.filter(b => b.type === 'phone' && b.active).length,
+        address: bannedEntities.filter(b => b.type === 'address' && b.active).length,
+    };
+
+    return res.json({
+        stats: {
+            totalOrdersWithIp: ordersWithIp.length,
+            uniqueIps: uniqueIps.length,
+            totalBanned: bannedEntities.filter(b => b.active).length,
+            bannedByType,
+        },
+        ipStats: ipStats.slice(0, 100), // Limit to top 100
+        bannedEntities: bannedEntities.filter(b => b.active).map(b => ({
+            id: b.id,
+            type: b.type,
+            value: b.value,
+            reason: b.reason,
+            bannedAt: b.bannedAt,
+            bannedBy: b.bannedBy,
+        })),
+    });
+});
+
+// Ban an entity (IP, email, phone, or address)
+app.post('/api/admin/fraud/ban', requireAdmin, async (req, res) => {
+    const { type, value, reason } = req.body;
+
+    if (!type || !value) {
+        return res.status(400).json({ error: 'Type and value are required' });
+    }
+
+    const validTypes = ['ip', 'email', 'phone', 'address'];
+    if (!validTypes.includes(type)) {
+        return res.status(400).json({ error: 'Invalid type. Must be: ip, email, phone, or address' });
+    }
+
+    // Check if already banned
+    const existing = checkBannedEntity(type, value);
+    if (existing) {
+        return res.status(400).json({ error: `This ${type} is already banned` });
+    }
+
+    const banEntry = {
+        id: crypto.randomUUID(),
+        type,
+        value: String(value).trim(),
+        reason: reason || `Banned by admin`,
+        active: true,
+        bannedAt: new Date().toISOString(),
+        bannedBy: 'admin',
+    };
+
+    bannedEntities = [...bannedEntities, banEntry];
+    await persistJsonFile(bannedEntitiesPath, bannedEntities);
+
+    return res.status(201).json({ success: true, ban: banEntry });
+});
+
+// Unban an entity
+app.post('/api/admin/fraud/unban/:id', requireAdmin, async (req, res) => {
+    const { id } = req.params;
+    const index = bannedEntities.findIndex(b => b.id === id);
+
+    if (index === -1) {
+        return res.status(404).json({ error: 'Ban entry not found' });
+    }
+
+    const updated = {
+        ...bannedEntities[index],
+        active: false,
+        unbannedAt: new Date().toISOString(),
+        unbannedBy: 'admin',
+    };
+
+    bannedEntities = [...bannedEntities.slice(0, index), updated, ...bannedEntities.slice(index + 1)];
+    await persistJsonFile(bannedEntitiesPath, bannedEntities);
+
+    return res.json({ success: true, ban: updated });
+});
+
+// Get order client info for a specific order
+app.get('/api/admin/orders/:id/client-info', requireAdmin, (req, res) => {
+    const order = orders.find(o => o.id === req.params.id);
+    if (!order) {
+        return res.status(404).json({ error: 'Order not found' });
+    }
+
+    const ip = order.clientInfo?.ip;
+    let ipBanned = null;
+    let emailBanned = null;
+    let phoneBanned = null;
+
+    if (ip) {
+        ipBanned = checkBannedEntity('ip', ip);
+    }
+    if (order.customer?.email) {
+        emailBanned = checkBannedEntity('email', order.customer.email);
+    }
+    if (order.customer?.phone) {
+        phoneBanned = checkBannedEntity('phone', order.customer.phone);
+    }
+
+    // Get all orders from same IP
+    const ordersFromSameIp = ip ? orders.filter(o => o.clientInfo?.ip === ip).map(o => ({
+        id: o.id,
+        orderNumber: o.orderNumber,
+        date: o.createdAt,
+        customer: `${o.customer?.firstName || ''} ${o.customer?.lastName || ''}`.trim(),
+        total: o.pricing?.total || 0,
+        paymentStatus: o.payment?.status,
+    })) : [];
+
+    return res.json({
+        clientInfo: order.clientInfo || null,
+        customer: {
+            email: order.customer?.email,
+            phone: order.customer?.phone,
+            name: `${order.customer?.firstName || ''} ${order.customer?.lastName || ''}`.trim(),
+        },
+        shipping: order.shipping,
+        banStatus: {
+            ipBanned: !!ipBanned,
+            emailBanned: !!emailBanned,
+            phoneBanned: !!phoneBanned,
+        },
+        ordersFromSameIp,
+    });
+});
+
+// ============================================
+// END FRAUD DETECTION API ENDPOINTS
+// ============================================
+
+// ============================================
+// NEWSLETTER API ENDPOINTS
+// ============================================
+
+// Public: Subscribe to newsletter
+app.post('/api/newsletter/subscribe', async (req, res) => {
+    const email = normalizeString(req.body?.email, 'email', { required: true });
+
+    if (email.error) {
+        return res.status(400).json({ error: 'Email is required' });
+    }
+
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.value)) {
+        return res.status(400).json({ error: 'Invalid email format' });
+    }
+
+    // Check if already subscribed
+    const existing = newsletterSubscribers.find(
+        s => s.email.toLowerCase() === email.value.toLowerCase() && s.status === 'active'
+    );
+    if (existing) {
+        return res.status(200).json({ success: true, message: 'Already subscribed!' });
+    }
+
+    // Capture client info for tracking
+    const clientIp = getClientIp(req);
+    const userAgent = req.headers['user-agent'] || null;
+
+    const subscriber = {
+        id: crypto.randomUUID(),
+        email: email.value.toLowerCase(),
+        status: 'active',
+        subscribedAt: new Date().toISOString(),
+        source: req.body?.source || 'footer',
+        clientInfo: {
+            ip: clientIp,
+            userAgent,
+        },
+    };
+
+    newsletterSubscribers = [...newsletterSubscribers, subscriber];
+    await persistJsonFile(newsletterSubscribersPath, newsletterSubscribers);
+
+    return res.status(201).json({ success: true, message: 'Successfully subscribed!' });
+});
+
+// Admin: Get all newsletter subscribers
+app.get('/api/admin/newsletter', requireAdmin, (req, res) => {
+    const activeSubscribers = newsletterSubscribers.filter(s => s.status === 'active');
+    const unsubscribed = newsletterSubscribers.filter(s => s.status === 'unsubscribed');
+
+    return res.json({
+        stats: {
+            total: newsletterSubscribers.length,
+            active: activeSubscribers.length,
+            unsubscribed: unsubscribed.length,
+        },
+        subscribers: newsletterSubscribers.map(s => ({
+            id: s.id,
+            email: s.email,
+            status: s.status,
+            subscribedAt: s.subscribedAt,
+            unsubscribedAt: s.unsubscribedAt,
+            source: s.source,
+            ip: s.clientInfo?.ip,
+        })).sort((a, b) => new Date(b.subscribedAt) - new Date(a.subscribedAt)),
+    });
+});
+
+// Admin: Delete/unsubscribe a subscriber
+app.delete('/api/admin/newsletter/:id', requireAdmin, async (req, res) => {
+    const { id } = req.params;
+    const index = newsletterSubscribers.findIndex(s => s.id === id);
+
+    if (index === -1) {
+        return res.status(404).json({ error: 'Subscriber not found' });
+    }
+
+    const updated = {
+        ...newsletterSubscribers[index],
+        status: 'unsubscribed',
+        unsubscribedAt: new Date().toISOString(),
+    };
+
+    newsletterSubscribers = [...newsletterSubscribers.slice(0, index), updated, ...newsletterSubscribers.slice(index + 1)];
+    await persistJsonFile(newsletterSubscribersPath, newsletterSubscribers);
+
+    return res.json({ success: true, subscriber: updated });
+});
+
+// Admin: Export subscribers as CSV
+app.get('/api/admin/newsletter/export', requireAdmin, (req, res) => {
+    const activeSubscribers = newsletterSubscribers.filter(s => s.status === 'active');
+
+    const csvHeader = 'Email,Subscribed At,Source,IP Address\n';
+    const csvRows = activeSubscribers.map(s =>
+        `${s.email},${s.subscribedAt},${s.source || 'footer'},${s.clientInfo?.ip || 'N/A'}`
+    ).join('\n');
+
+    res.setHeader('Content-Type', 'text/csv');
+    res.setHeader('Content-Disposition', 'attachment; filename="newsletter-subscribers.csv"');
+    return res.send(csvHeader + csvRows);
+});
+
+// ============================================
+// END NEWSLETTER API ENDPOINTS
 // ============================================
 
 app.post('/api/website-content', requireAdmin, async (req, res) => {
