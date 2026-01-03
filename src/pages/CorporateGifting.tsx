@@ -82,8 +82,8 @@ const processSteps = [
 // Featured Products
 const featuredProducts = [
     { image: '/products/categories/corporate-gift-sets/corporate-gift-sets-3.webp', name: 'Executive Suite' },
-    { image: '/products/categories/women-gift-sets/women-gift-sets-3.webp', name: 'Wellness Box' },
-    { image: '/products/categories/kids-gifts-set/kids-gifts-set-1.webp', name: 'Eco Starter Kit' },
+    { image: '/products/categories/women-gift-sets/women-gift-sets-2.webp', name: 'Wellness Box' },
+    { image: '/products/categories/women-gift-sets/women-gift-sets-4.webp', name: 'Eco Starter Kit' },
     { image: '/products/categories/women-gift-sets/women-gift-sets-8.webp', name: 'Premium Hamper' },
     { image: '/products/categories/pouches/pouches-1.webp', name: 'Her Collection' },
     { image: '/products/categories/festive-bags/festive-bags-5.webp', name: 'Festive Delight' },
