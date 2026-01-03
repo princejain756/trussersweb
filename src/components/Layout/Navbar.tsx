@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import {
     ShoppingBag,
     Search,
@@ -78,7 +78,10 @@ export const Navbar = () => {
     const [account, setAccount] = useState(() => getCachedAccount());
     const [mobileDropdown, setMobileDropdown] = useState<string | null>(null);
     const navigate = useNavigate();
+    const location = useLocation();
 
+    // Pages with dark hero sections need white text when not scrolled
+    const hasDarkHero = ['/shop', '/corporate-gifting'].includes(location.pathname);
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 20);
@@ -474,12 +477,12 @@ export const Navbar = () => {
                         <div className="lg:hidden">
                             <button
                                 onClick={() => setIsMobileMenuOpen(true)}
-                                className={`flex h-10 w-10 items-center justify-center rounded-full backdrop-blur-md transition-colors ${isScrolled ? 'bg-white/20 hover:bg-white/40' : 'bg-white/10 hover:bg-white/20'}`}
+                                className={`flex h-10 w-10 items-center justify-center rounded-full backdrop-blur-md transition-colors ${isScrolled || !hasDarkHero ? 'bg-white/20 hover:bg-white/40' : 'bg-white/10 hover:bg-white/20'}`}
                                 aria-label="Open menu"
                                 aria-expanded={isMobileMenuOpen}
                                 aria-controls="mobile-menu"
                             >
-                                <Menu className={isScrolled ? 'text-[#2D5F3F]' : 'text-white'} aria-hidden="true" />
+                                <Menu className={isScrolled || !hasDarkHero ? 'text-[#2D5F3F]' : 'text-white'} aria-hidden="true" />
                             </button>
                         </div>
 
@@ -503,7 +506,7 @@ export const Navbar = () => {
                                         <div key={item.name} className="nav-dropdown-trigger relative">
                                             <Link
                                                 to={item.to!}
-                                                className={`group relative px-5 py-2 text-sm font-medium transition-colors flex items-center gap-1 ${isScrolled ? 'text-[#2D5F3F]/80 hover:text-[#2D5F3F]' : 'text-white/90 hover:text-white'}`}
+                                                className={`group relative px-5 py-2 text-sm font-medium transition-colors flex items-center gap-1 ${isScrolled || !hasDarkHero ? 'text-[#2D5F3F]/80 hover:text-[#2D5F3F]' : 'text-white/90 hover:text-white'}`}
                                             >
                                                 <span className="relative z-10">{item.name}</span>
                                                 <ChevronDown
@@ -522,7 +525,7 @@ export const Navbar = () => {
                                         <a
                                             key={item.name}
                                             href={item.href}
-                                            className={`group relative px-5 py-2 text-sm font-medium transition-colors ${isScrolled ? 'text-[#2D5F3F]/80 hover:text-[#2D5F3F]' : 'text-white/90 hover:text-white'}`}
+                                            className={`group relative px-5 py-2 text-sm font-medium transition-colors ${isScrolled || !hasDarkHero ? 'text-[#2D5F3F]/80 hover:text-[#2D5F3F]' : 'text-white/90 hover:text-white'}`}
                                         >
                                             <span className="relative z-10">{item.name}</span>
                                             <span className="absolute inset-0 z-0 scale-75 rounded-full bg-white/0 opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:bg-white/50 group-hover:opacity-100 group-hover:backdrop-blur-sm" />
@@ -534,7 +537,7 @@ export const Navbar = () => {
                                     <Link
                                         key={item.name}
                                         to={item.to!}
-                                        className={`group relative px-5 py-2 text-sm font-medium transition-colors ${isScrolled ? 'text-[#2D5F3F]/80 hover:text-[#2D5F3F]' : 'text-white/90 hover:text-white'}`}
+                                        className={`group relative px-5 py-2 text-sm font-medium transition-colors ${isScrolled || !hasDarkHero ? 'text-[#2D5F3F]/80 hover:text-[#2D5F3F]' : 'text-white/90 hover:text-white'}`}
                                     >
                                         <span className="relative z-10">{item.name}</span>
                                         <span className="absolute inset-0 z-0 scale-75 rounded-full bg-white/0 opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:bg-white/50 group-hover:opacity-100 group-hover:backdrop-blur-sm" />
@@ -551,14 +554,14 @@ export const Navbar = () => {
                                     className="group flex h-10 w-10 items-center justify-center rounded-full border border-transparent transition-all hover:bg-white/40 hover:backdrop-blur-sm"
                                     aria-label="Search products"
                                 >
-                                    <Search size={20} className={`transition-transform group-hover:scale-110 ${isScrolled ? 'text-[#2D5F3F]' : 'text-white'}`} aria-hidden="true" />
+                                    <Search size={20} className={`transition-transform group-hover:scale-110 ${isScrolled || !hasDarkHero ? 'text-[#2D5F3F]' : 'text-white'}`} aria-hidden="true" />
                                 </button>
                                 <Link
                                     to={account ? '/account' : '/account/login'}
                                     className="group flex h-10 w-10 items-center justify-center rounded-full border border-transparent transition-all hover:bg-white/40 hover:backdrop-blur-sm"
                                     aria-label={account ? 'Account' : 'Sign in'}
                                 >
-                                    <User size={20} className={`transition-transform group-hover:scale-110 ${isScrolled ? 'text-[#2D5F3F]' : 'text-white'}`} />
+                                    <User size={20} className={`transition-transform group-hover:scale-110 ${isScrolled || !hasDarkHero ? 'text-[#2D5F3F]' : 'text-white'}`} />
                                 </Link>
                             </div>
 
