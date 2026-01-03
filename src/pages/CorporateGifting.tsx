@@ -30,28 +30,24 @@ const giftCategories = [
         description: 'Curated onboarding essentials for new team members',
         image: '/products/categories/corporate-gift-sets/corporate-gift-sets-3.webp',
         accent: '#C1A17C',
-        link: '/shop?category=corporate-gift-sets',
     },
     {
         title: 'Event Hampers',
         description: 'Premium gift boxes for conferences & celebrations',
-        image: '/products/categories/festive-bags/festive-bags-1.webp',
+        image: '/products/categories/corporate-gift-sets/corporate-gift-sets-4.webp',
         accent: '#4A8B60',
-        link: '/shop?category=festive-bags',
     },
     {
         title: 'Festive Collections',
         description: 'Seasonal gifting for Diwali, Christmas & more',
-        image: '/products/categories/women-gift-sets/women-gift-sets-1.webp',
+        image: '/products/categories/corporate-gift-sets/corporate-gift-sets-3.webp',
         accent: '#D45D48',
-        link: '/shop?category=women-gift-sets',
     },
     {
         title: 'Custom Bundles',
         description: 'Fully personalized gift sets with your branding',
-        image: '/products/categories/notebooks/notebooks-1.webp',
+        image: '/products/categories/corporate-gift-sets/corporate-gift-sets-4.webp',
         accent: '#2D5F3F',
-        link: '/shop?category=notebooks',
     },
 ];
 
@@ -86,11 +82,11 @@ const processSteps = [
 // Featured Products
 const featuredProducts = [
     { image: '/products/categories/corporate-gift-sets/corporate-gift-sets-3.webp', name: 'Executive Suite' },
-    { image: '/products/categories/women-gift-sets/women-gift-sets-2.webp', name: 'Wellness Box' },
-    { image: '/products/categories/bottle-bags/bottle-bags-1.webp', name: 'Eco Starter Kit' },
-    { image: '/products/categories/festive-bags/festive-bags-2.webp', name: 'Premium Hamper' },
-    { image: '/products/categories/pouches/pouches-1.webp', name: 'Her Collection' },
-    { image: '/products/categories/tote-bags/tote-bags-3.webp', name: 'Festive Delight' },
+    { image: '/products/categories/corporate-gift-sets/corporate-gift-sets-4.webp', name: 'Wellness Box' },
+    { image: '/products/categories/corporate-gift-sets/corporate-gift-sets-8.webp', name: 'Eco Starter Kit' },
+    { image: '/products/categories/women-gift-sets/women-gift-sets-1.webp', name: 'Premium Hamper' },
+    { image: '/products/categories/women-gift-sets/women-gift-sets-2.webp', name: 'Her Collection' },
+    { image: '/products/categories/festive-bags/festive-bags-1.webp', name: 'Festive Delight' },
 ];
 
 // Why Choose Us Features
@@ -488,47 +484,44 @@ ${quoteForm.name || 'Customer'}`
                         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                             {giftCategories.map((category, index) => (
                                 <AnimatedSection key={index} delay={index * 0.15}>
-                                    <Link to={category.link}>
-                                        <motion.div
-                                            whileHover={{ y: -12 }}
-                                            className="group relative rounded-3xl overflow-hidden cursor-pointer aspect-[3/4]"
-                                        >
-                                            {/* Background Image */}
-                                            <img
-                                                src={category.image}
-                                                alt={category.title}
-                                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                            />
+                                    <motion.div
+                                        whileHover={{ y: -12 }}
+                                        className="group relative rounded-3xl overflow-hidden cursor-pointer aspect-[3/4]"
+                                    >
+                                        {/* Background Image */}
+                                        <img
+                                            src={category.image}
+                                            alt={category.title}
+                                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                        />
 
-                                            {/* Gradient Overlay */}
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+                                        {/* Gradient Overlay */}
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
 
-                                            {/* Accent Border on Hover */}
-                                            <div
-                                                className="absolute inset-0 border-4 border-transparent group-hover:border-[#C1A17C] rounded-3xl transition-all duration-500"
-                                            />
+                                        {/* Accent Border on Hover */}
+                                        <div
+                                            className="absolute inset-0 border-4 border-transparent group-hover:border-[#C1A17C] rounded-3xl transition-all duration-500"
+                                        />
 
-                                            {/* Content */}
-                                            <div className="absolute bottom-0 left-0 right-0 p-6">
-                                                <motion.div
-                                                    initial={{ y: 20, opacity: 0 }}
-                                                    whileInView={{ y: 0, opacity: 1 }}
-                                                    transition={{ delay: 0.2 + index * 0.1 }}
-                                                >
-                                                    <h3 className="font-serif text-2xl text-white mb-2">{category.title}</h3>
-                                                    <p className="text-white/70 text-sm mb-4">{category.description}</p>
-                                                    <div className="flex items-center gap-2 text-[#C1A17C] font-medium text-sm group-hover:underline">
-                                                        Explore Collection
-                                                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                                    </div>
-                                                </motion.div>
-                                            </div>
-                                        </motion.div>
-                                    </Link>
+                                        {/* Content */}
+                                        <div className="absolute bottom-0 left-0 right-0 p-6">
+                                            <motion.div
+                                                initial={{ y: 20, opacity: 0 }}
+                                                whileInView={{ y: 0, opacity: 1 }}
+                                                transition={{ delay: 0.2 + index * 0.1 }}
+                                            >
+                                                <h3 className="font-serif text-2xl text-white mb-2">{category.title}</h3>
+                                                <p className="text-white/70 text-sm mb-4">{category.description}</p>
+                                                <div className="flex items-center gap-2 text-[#C1A17C] font-medium text-sm group-hover:underline">
+                                                    Explore Collection
+                                                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                                </div>
+                                            </motion.div>
+                                        </div>
+                                    </motion.div>
                                 </AnimatedSection>
                             ))}
                         </div>
-
                     </div>
                 </section>
 

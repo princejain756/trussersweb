@@ -1,7 +1,28 @@
 import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
-import { ShoppingBag, Search, Menu, X, User } from 'lucide-react';
+import {
+    ShoppingBag,
+    Search,
+    Menu,
+    X,
+    User,
+    ChevronDown,
+    Gift,
+    Heart,
+    Sparkles,
+    Calendar,
+    MapPin,
+    Mail,
+    MessageCircle,
+    Clock,
+    BookOpen,
+    Leaf,
+    Users,
+    ArrowRight,
+    Package,
+    Star
+} from 'lucide-react';
 import { Button } from '../UI/Button';
 import TrusserLogo from '../../assets/TrusserLOGO.avif';
 import categoriesData from '../../data/categories.json';
@@ -26,6 +47,23 @@ type CategoryData = {
     }>;
 };
 
+// Featured categories for the mega menu
+const featuredCategories = [
+    { name: 'Gift Sets', slug: 'women-gift-sets', icon: Gift, image: '/products/categories/women-gift-sets/women-gift-sets-1.webp' },
+    { name: 'Tote Bags', slug: 'tote-bags', icon: Package, image: '/products/carry-bag-korean.webp' },
+    { name: 'Pouches', slug: 'pouches', icon: Sparkles, image: '/products/abstract-art-pouch.webp' },
+    { name: 'Festive Bags', slug: 'festive-bags', icon: Star, image: '/products/gift-bag-cherry-blossom.webp' },
+    { name: 'Kids Gifts', slug: 'kids-gifts-set', icon: Heart, image: '/products/unicorn-notebook.webp' },
+    { name: 'Bottles', slug: 'bottles', icon: Package, image: '/products/colorful-stripes-bottle-holder.webp' },
+];
+
+// Corporate gifting categories
+const corporateCategories = [
+    { name: 'Wedding Gifts', description: 'Elegant celebration pieces', icon: Heart, link: '/corporate-gifting#wedding' },
+    { name: 'Festive Hampers', description: 'Seasonal gift collections', icon: Calendar, link: '/corporate-gifting#festive' },
+    { name: 'Custom Branding', description: 'Personalized solutions', icon: Sparkles, link: '/corporate-gifting#custom' },
+];
+
 export const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -38,6 +76,7 @@ export const Navbar = () => {
     );
     const [cartCount, setCartCount] = useState(() => getCartCount(getCartItems()));
     const [account, setAccount] = useState(() => getCachedAccount());
+    const [mobileDropdown, setMobileDropdown] = useState<string | null>(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -179,8 +218,239 @@ export const Navbar = () => {
         navigate(`/product/${product.id}`);
     };
 
-    const navLinks = ['Home', 'About Us', 'Shop', 'Corporate Gifting', 'Contact'];
+    const toggleMobileDropdown = (item: string) => {
+        setMobileDropdown(mobileDropdown === item ? null : item);
+    };
+
     const MotionLink = motion(Link);
+
+    // Shop Mega Dropdown Component
+    const ShopDropdown = () => (
+        <div className="nav-dropdown mega-dropdown">
+            {/* Decorative brush strokes */}
+            <div className="brush-stroke" style={{ top: '-10px', right: '20%', transform: 'rotate(-5deg)' }} />
+            <div className="brush-stroke" style={{ bottom: '10px', left: '10%', transform: 'rotate(3deg)' }} />
+
+            <div className="grid grid-cols-3 gap-6">
+                {/* Categories Grid */}
+                <div className="col-span-2">
+                    <div className="dropdown-header">
+                        <Sparkles size={14} />
+                        Browse Collections
+                    </div>
+                    <div className="grid grid-cols-3 gap-3">
+                        {featuredCategories.map((cat, index) => (
+                            <Link
+                                key={cat.slug}
+                                to={`/shop?category=${cat.slug}`}
+                                className="nav-dropdown-item category-card group"
+                                style={{ transitionDelay: `${index * 0.05}s` }}
+                            >
+                                <div className="overflow-hidden rounded-lg mb-2">
+                                    <img
+                                        src={cat.image}
+                                        alt={cat.name}
+                                        className="category-image"
+                                    />
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <cat.icon size={14} className="text-[#C1A17C]" />
+                                    <span className="text-sm font-medium text-[#1A3C27] group-hover:text-[#2D5F3F]">
+                                        {cat.name}
+                                    </span>
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Quick Actions */}
+                <div className="border-l border-[#C1A17C]/20 pl-6">
+                    <div className="dropdown-header">
+                        <Star size={14} />
+                        Quick Links
+                    </div>
+                    <div className="space-y-1">
+                        <Link to="/shop" className="quick-link nav-dropdown-item">
+                            <span className="quick-link-icon">
+                                <Package size={18} />
+                            </span>
+                            <span>All Products</span>
+                        </Link>
+                        <Link to="/shop?sort=newest" className="quick-link nav-dropdown-item">
+                            <span className="quick-link-icon">
+                                <Sparkles size={18} />
+                            </span>
+                            <span>New Arrivals</span>
+                        </Link>
+                        <Link to="/shop?availability=in-stock" className="quick-link nav-dropdown-item">
+                            <span className="quick-link-icon">
+                                <Star size={18} />
+                            </span>
+                            <span>Best Sellers</span>
+                        </Link>
+                    </div>
+
+                    <div className="dropdown-divider mt-4" />
+
+                    <Link to="/shop" className="dropdown-cta mt-4 w-full justify-center">
+                        Explore All
+                        <ArrowRight size={16} />
+                    </Link>
+                </div>
+            </div>
+        </div>
+    );
+
+    // Corporate Gifting Dropdown
+    const CorporateDropdown = () => (
+        <div className="nav-dropdown" style={{ width: '420px', padding: '1.5rem' }}>
+            <div className="dropdown-header">
+                <Gift size={14} />
+                Gift Solutions
+            </div>
+
+            <div className="space-y-2">
+                {corporateCategories.map((cat, index) => (
+                    <Link
+                        key={cat.name}
+                        to={cat.link}
+                        className="nav-dropdown-item quick-link"
+                        style={{ transitionDelay: `${index * 0.05}s` }}
+                    >
+                        <span className="quick-link-icon">
+                            <cat.icon size={18} />
+                        </span>
+                        <div>
+                            <div className="font-medium">{cat.name}</div>
+                            <div className="text-xs text-[#5C5C5C]">{cat.description}</div>
+                        </div>
+                    </Link>
+                ))}
+            </div>
+
+            <div className="dropdown-divider" />
+
+            <Link to="/corporate-gifting" className="dropdown-cta w-full justify-center">
+                View All Options
+                <ArrowRight size={16} />
+            </Link>
+        </div>
+    );
+
+    // About Dropdown
+    const AboutDropdown = () => (
+        <div className="nav-dropdown" style={{ width: '380px', padding: '1.5rem' }}>
+            <div className="dropdown-header">
+                <Heart size={14} />
+                Our Story
+            </div>
+
+            <div className="space-y-1">
+                <Link to="/about" className="nav-dropdown-item quick-link">
+                    <span className="quick-link-icon">
+                        <Users size={18} />
+                    </span>
+                    <div>
+                        <div className="font-medium">About Trusser</div>
+                        <div className="text-xs text-[#5C5C5C]">Our journey & mission</div>
+                    </div>
+                </Link>
+                <Link to="/sustainability" className="nav-dropdown-item quick-link">
+                    <span className="quick-link-icon">
+                        <Leaf size={18} />
+                    </span>
+                    <div>
+                        <div className="font-medium">Sustainability</div>
+                        <div className="text-xs text-[#5C5C5C]">Eco-friendly practices</div>
+                    </div>
+                </Link>
+                <Link to="/journal" className="nav-dropdown-item quick-link">
+                    <span className="quick-link-icon">
+                        <BookOpen size={18} />
+                    </span>
+                    <div>
+                        <div className="font-medium">Journal</div>
+                        <div className="text-xs text-[#5C5C5C]">Stories & inspiration</div>
+                    </div>
+                </Link>
+            </div>
+        </div>
+    );
+
+    // Contact Dropdown
+    const ContactDropdown = () => (
+        <div className="nav-dropdown" style={{ width: '340px', padding: '1.5rem' }}>
+            <div className="dropdown-header">
+                <MessageCircle size={14} />
+                Get in Touch
+            </div>
+
+            <div className="space-y-1">
+                <a
+                    href="https://wa.me/919876543210"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="nav-dropdown-item quick-link"
+                >
+                    <span className="quick-link-icon">
+                        <MessageCircle size={18} />
+                    </span>
+                    <div>
+                        <div className="font-medium">WhatsApp</div>
+                        <div className="text-xs text-[#5C5C5C]">Quick chat with us</div>
+                    </div>
+                </a>
+                <a
+                    href="mailto:info@trusser.in"
+                    className="nav-dropdown-item quick-link"
+                >
+                    <span className="quick-link-icon">
+                        <Mail size={18} />
+                    </span>
+                    <div>
+                        <div className="font-medium">Email Us</div>
+                        <div className="text-xs text-[#5C5C5C]">info@trusser.in</div>
+                    </div>
+                </a>
+                <a
+                    href="https://maps.google.com/?q=Chickpet+Bangalore"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="nav-dropdown-item quick-link"
+                >
+                    <span className="quick-link-icon">
+                        <MapPin size={18} />
+                    </span>
+                    <div>
+                        <div className="font-medium">Visit Studio</div>
+                        <div className="text-xs text-[#5C5C5C]">Chickpet, Bangalore</div>
+                    </div>
+                </a>
+            </div>
+
+            <div className="dropdown-divider" />
+
+            <div className="flex items-center gap-2 text-sm text-[#5C5C5C] px-2">
+                <Clock size={14} />
+                <span>Mon - Sat: 10AM - 7PM</span>
+            </div>
+
+            <Link to="/contact" className="dropdown-cta w-full justify-center mt-4">
+                Contact Page
+                <ArrowRight size={16} />
+            </Link>
+        </div>
+    );
+
+    // Navigation items with dropdowns
+    const navItems = [
+        { name: 'Home', href: '/', hasDropdown: false },
+        { name: 'Shop', to: '/shop', hasDropdown: true, dropdown: ShopDropdown },
+        { name: 'Corporate Gifting', to: '/corporate-gifting', hasDropdown: true, dropdown: CorporateDropdown },
+        { name: 'About Us', to: '/about', hasDropdown: true, dropdown: AboutDropdown },
+        { name: 'Contact', to: '/contact', hasDropdown: true, dropdown: ContactDropdown },
+    ];
 
     return (
         <>
@@ -224,39 +494,51 @@ export const Navbar = () => {
                             </Link>
                         </div>
 
-                        {/* Desktop Navigation */}
+                        {/* Desktop Navigation with Dropdowns */}
                         <div className="hidden lg:flex items-center gap-1">
-                            {navLinks.map((item) => {
-                                // Pages that need React Router Links
-                                const routeMap: Record<string, string> = {
-                                    'About Us': '/about',
-                                    'Shop': '/shop',
-                                    'Corporate Gifting': '/corporate-gifting',
-                                    'Contact': '/contact',
-                                };
-
-                                if (routeMap[item]) {
+                            {navItems.map((item) => {
+                                if (item.hasDropdown && item.dropdown) {
+                                    const DropdownComponent = item.dropdown;
                                     return (
-                                        <Link
-                                            key={item}
-                                            to={routeMap[item]}
+                                        <div key={item.name} className="nav-dropdown-trigger relative">
+                                            <Link
+                                                to={item.to!}
+                                                className="group relative px-5 py-2 text-sm font-medium text-[#2D5F3F]/80 transition-colors hover:text-[#2D5F3F] flex items-center gap-1"
+                                            >
+                                                <span className="relative z-10">{item.name}</span>
+                                                <ChevronDown
+                                                    size={14}
+                                                    className="transition-transform duration-200 group-hover:rotate-180"
+                                                />
+                                                <span className="absolute inset-0 z-0 scale-75 rounded-full bg-white/0 opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:bg-white/50 group-hover:opacity-100 group-hover:backdrop-blur-sm" />
+                                            </Link>
+                                            <DropdownComponent />
+                                        </div>
+                                    );
+                                }
+
+                                if (item.href) {
+                                    return (
+                                        <a
+                                            key={item.name}
+                                            href={item.href}
                                             className="group relative px-5 py-2 text-sm font-medium text-[#2D5F3F]/80 transition-colors hover:text-[#2D5F3F]"
                                         >
-                                            <span className="relative z-10">{item}</span>
+                                            <span className="relative z-10">{item.name}</span>
                                             <span className="absolute inset-0 z-0 scale-75 rounded-full bg-white/0 opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:bg-white/50 group-hover:opacity-100 group-hover:backdrop-blur-sm" />
-                                        </Link>
+                                        </a>
                                     );
                                 }
 
                                 return (
-                                    <a
-                                        key={item}
-                                        href={`/#${item.toLowerCase().replace(' ', '-')}`}
+                                    <Link
+                                        key={item.name}
+                                        to={item.to!}
                                         className="group relative px-5 py-2 text-sm font-medium text-[#2D5F3F]/80 transition-colors hover:text-[#2D5F3F]"
                                     >
-                                        <span className="relative z-10">{item}</span>
+                                        <span className="relative z-10">{item.name}</span>
                                         <span className="absolute inset-0 z-0 scale-75 rounded-full bg-white/0 opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:bg-white/50 group-hover:opacity-100 group-hover:backdrop-blur-sm" />
-                                    </a>
+                                    </Link>
                                 );
                             })}
                         </div>
@@ -305,7 +587,7 @@ export const Navbar = () => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="fixed inset-0 z-[60] flex flex-col bg-[#F4EFEC]/95 backdrop-blur-xl lg:hidden"
+                        className="fixed inset-0 z-[60] flex flex-col bg-[#F4EFEC]/95 backdrop-blur-xl lg:hidden overflow-y-auto"
                     >
                         <div className="flex items-center justify-between p-6">
                             <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="block">
@@ -324,43 +606,159 @@ export const Navbar = () => {
                             </button>
                         </div>
 
-                        <div className="flex flex-1 flex-col items-center justify-center gap-8 p-6">
-                            {navLinks.map((item, i) => {
-                                const sharedProps = {
-                                    initial: { y: 20, opacity: 0 },
-                                    animate: { y: 0, opacity: 1 },
-                                    transition: { delay: i * 0.1 },
-                                    className:
-                                        'font-serif text-4xl font-medium text-[#2D5F3F] transition-opacity hover:opacity-70',
-                                    onClick: () => setIsMobileMenuOpen(false),
-                                };
-
-                                // Pages that need React Router Links
-                                const routeMap: Record<string, string> = {
-                                    'About Us': '/about',
-                                    'Shop': '/shop',
-                                    'Corporate Gifting': '/corporate-gifting',
-                                    'Contact': '/contact',
-                                };
-
-                                if (routeMap[item]) {
-                                    return (
-                                        <MotionLink key={item} to={routeMap[item]} {...sharedProps}>
-                                            {item}
+                        <div className="flex flex-1 flex-col items-center justify-start gap-4 p-6 pt-8">
+                            {navItems.map((item, i) => (
+                                <motion.div
+                                    key={item.name}
+                                    initial={{ y: 20, opacity: 0 }}
+                                    animate={{ y: 0, opacity: 1 }}
+                                    transition={{ delay: i * 0.1 }}
+                                    className="w-full max-w-sm"
+                                >
+                                    {item.hasDropdown ? (
+                                        <div>
+                                            <button
+                                                onClick={() => toggleMobileDropdown(item.name)}
+                                                className="w-full flex items-center justify-between font-serif text-2xl font-medium text-[#2D5F3F] py-3 px-4 rounded-xl hover:bg-white/50 transition-colors"
+                                            >
+                                                {item.name}
+                                                <ChevronDown
+                                                    size={20}
+                                                    className={`transition-transform duration-200 ${mobileDropdown === item.name ? 'rotate-180' : ''}`}
+                                                />
+                                            </button>
+                                            <AnimatePresence>
+                                                {mobileDropdown === item.name && (
+                                                    <motion.div
+                                                        initial={{ height: 0, opacity: 0 }}
+                                                        animate={{ height: 'auto', opacity: 1 }}
+                                                        exit={{ height: 0, opacity: 0 }}
+                                                        transition={{ duration: 0.2 }}
+                                                        className="overflow-hidden"
+                                                    >
+                                                        <div className="py-2 px-4 space-y-2">
+                                                            {item.name === 'Shop' && (
+                                                                <>
+                                                                    {featuredCategories.map((cat) => (
+                                                                        <Link
+                                                                            key={cat.slug}
+                                                                            to={`/shop?category=${cat.slug}`}
+                                                                            onClick={() => setIsMobileMenuOpen(false)}
+                                                                            className="flex items-center gap-3 py-2 px-3 rounded-lg bg-white/50 text-[#1A3C27] hover:bg-white/80 transition-colors"
+                                                                        >
+                                                                            <cat.icon size={18} className="text-[#C1A17C]" />
+                                                                            <span>{cat.name}</span>
+                                                                        </Link>
+                                                                    ))}
+                                                                    <Link
+                                                                        to="/shop"
+                                                                        onClick={() => setIsMobileMenuOpen(false)}
+                                                                        className="flex items-center gap-3 py-2 px-3 rounded-lg bg-[#2D5F3F] text-white"
+                                                                    >
+                                                                        <Package size={18} />
+                                                                        <span>View All Products</span>
+                                                                    </Link>
+                                                                </>
+                                                            )}
+                                                            {item.name === 'Corporate Gifting' && (
+                                                                <>
+                                                                    {corporateCategories.map((cat) => (
+                                                                        <Link
+                                                                            key={cat.name}
+                                                                            to={cat.link}
+                                                                            onClick={() => setIsMobileMenuOpen(false)}
+                                                                            className="flex items-center gap-3 py-2 px-3 rounded-lg bg-white/50 text-[#1A3C27] hover:bg-white/80 transition-colors"
+                                                                        >
+                                                                            <cat.icon size={18} className="text-[#C1A17C]" />
+                                                                            <span>{cat.name}</span>
+                                                                        </Link>
+                                                                    ))}
+                                                                </>
+                                                            )}
+                                                            {item.name === 'About Us' && (
+                                                                <>
+                                                                    <Link
+                                                                        to="/about"
+                                                                        onClick={() => setIsMobileMenuOpen(false)}
+                                                                        className="flex items-center gap-3 py-2 px-3 rounded-lg bg-white/50 text-[#1A3C27] hover:bg-white/80 transition-colors"
+                                                                    >
+                                                                        <Users size={18} className="text-[#C1A17C]" />
+                                                                        <span>About Trusser</span>
+                                                                    </Link>
+                                                                    <Link
+                                                                        to="/sustainability"
+                                                                        onClick={() => setIsMobileMenuOpen(false)}
+                                                                        className="flex items-center gap-3 py-2 px-3 rounded-lg bg-white/50 text-[#1A3C27] hover:bg-white/80 transition-colors"
+                                                                    >
+                                                                        <Leaf size={18} className="text-[#C1A17C]" />
+                                                                        <span>Sustainability</span>
+                                                                    </Link>
+                                                                    <Link
+                                                                        to="/journal"
+                                                                        onClick={() => setIsMobileMenuOpen(false)}
+                                                                        className="flex items-center gap-3 py-2 px-3 rounded-lg bg-white/50 text-[#1A3C27] hover:bg-white/80 transition-colors"
+                                                                    >
+                                                                        <BookOpen size={18} className="text-[#C1A17C]" />
+                                                                        <span>Journal</span>
+                                                                    </Link>
+                                                                </>
+                                                            )}
+                                                            {item.name === 'Contact' && (
+                                                                <>
+                                                                    <a
+                                                                        href="https://wa.me/919876543210"
+                                                                        target="_blank"
+                                                                        rel="noopener noreferrer"
+                                                                        onClick={() => setIsMobileMenuOpen(false)}
+                                                                        className="flex items-center gap-3 py-2 px-3 rounded-lg bg-white/50 text-[#1A3C27] hover:bg-white/80 transition-colors"
+                                                                    >
+                                                                        <MessageCircle size={18} className="text-[#C1A17C]" />
+                                                                        <span>WhatsApp</span>
+                                                                    </a>
+                                                                    <a
+                                                                        href="mailto:info@trusser.in"
+                                                                        onClick={() => setIsMobileMenuOpen(false)}
+                                                                        className="flex items-center gap-3 py-2 px-3 rounded-lg bg-white/50 text-[#1A3C27] hover:bg-white/80 transition-colors"
+                                                                    >
+                                                                        <Mail size={18} className="text-[#C1A17C]" />
+                                                                        <span>Email Us</span>
+                                                                    </a>
+                                                                    <a
+                                                                        href="https://maps.google.com/?q=Chickpet+Bangalore"
+                                                                        target="_blank"
+                                                                        rel="noopener noreferrer"
+                                                                        onClick={() => setIsMobileMenuOpen(false)}
+                                                                        className="flex items-center gap-3 py-2 px-3 rounded-lg bg-white/50 text-[#1A3C27] hover:bg-white/80 transition-colors"
+                                                                    >
+                                                                        <MapPin size={18} className="text-[#C1A17C]" />
+                                                                        <span>Visit Studio</span>
+                                                                    </a>
+                                                                    <Link
+                                                                        to="/contact"
+                                                                        onClick={() => setIsMobileMenuOpen(false)}
+                                                                        className="flex items-center gap-3 py-2 px-3 rounded-lg bg-[#2D5F3F] text-white"
+                                                                    >
+                                                                        <ArrowRight size={18} />
+                                                                        <span>Contact Page</span>
+                                                                    </Link>
+                                                                </>
+                                                            )}
+                                                        </div>
+                                                    </motion.div>
+                                                )}
+                                            </AnimatePresence>
+                                        </div>
+                                    ) : (
+                                        <MotionLink
+                                            to={item.to || item.href || '/'}
+                                            onClick={() => setIsMobileMenuOpen(false)}
+                                            className="block font-serif text-2xl font-medium text-[#2D5F3F] py-3 px-4 rounded-xl hover:bg-white/50 transition-colors text-center"
+                                        >
+                                            {item.name}
                                         </MotionLink>
-                                    );
-                                }
-
-                                return (
-                                    <motion.a
-                                        key={item}
-                                        href={`/#${item.toLowerCase().replace(' ', '-')}`}
-                                        {...sharedProps}
-                                    >
-                                        {item}
-                                    </motion.a>
-                                );
-                            })}
+                                    )}
+                                </motion.div>
+                            ))}
                         </div>
 
                         <div className="flex flex-col gap-4 p-8">

@@ -64,6 +64,284 @@
   }
 }
 
+/* ========================================
+   CREATIVE NAVIGATION DROPDOWNS
+   ======================================== */
+
+/* Mega dropdown container with glassmorphism */
+.nav-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 24px;
+  box-shadow:
+    0 25px 50px -12px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.2) inset,
+    0 0 40px rgba(193, 161, 124, 0.1);
+  overflow: hidden;
+}
+
+.nav-dropdown::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg,
+      rgba(45, 95, 63, 0.3) 0%,
+      rgba(193, 161, 124, 0.3) 50%,
+      rgba(45, 95, 63, 0.3) 100%);
+  border-radius: 26px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.nav-dropdown-trigger:hover .nav-dropdown,
+.nav-dropdown-trigger:focus-within .nav-dropdown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.nav-dropdown-trigger:hover .nav-dropdown::before {
+  opacity: 1;
+  animation: gradient-rotate 4s linear infinite;
+}
+
+@keyframes gradient-rotate {
+  0% {
+    background: linear-gradient(135deg, rgba(45, 95, 63, 0.3), rgba(193, 161, 124, 0.3), rgba(45, 95, 63, 0.3));
+  }
+
+  25% {
+    background: linear-gradient(225deg, rgba(45, 95, 63, 0.3), rgba(193, 161, 124, 0.3), rgba(45, 95, 63, 0.3));
+  }
+
+  50% {
+    background: linear-gradient(315deg, rgba(45, 95, 63, 0.3), rgba(193, 161, 124, 0.3), rgba(45, 95, 63, 0.3));
+  }
+
+  75% {
+    background: linear-gradient(45deg, rgba(45, 95, 63, 0.3), rgba(193, 161, 124, 0.3), rgba(45, 95, 63, 0.3));
+  }
+
+  100% {
+    background: linear-gradient(135deg, rgba(45, 95, 63, 0.3), rgba(193, 161, 124, 0.3), rgba(45, 95, 63, 0.3));
+  }
+}
+
+/* Mega menu for Shop - full width */
+.mega-dropdown {
+  width: max(600px, 50vw);
+  max-width: 800px;
+  padding: 2rem;
+}
+
+/* Dropdown items with stagger animation */
+.nav-dropdown-item {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.2s ease-out;
+}
+
+.nav-dropdown-trigger:hover .nav-dropdown-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered delays for items */
+.nav-dropdown-item:nth-child(1) {
+  transition-delay: 0.05s;
+}
+
+.nav-dropdown-item:nth-child(2) {
+  transition-delay: 0.1s;
+}
+
+.nav-dropdown-item:nth-child(3) {
+  transition-delay: 0.15s;
+}
+
+.nav-dropdown-item:nth-child(4) {
+  transition-delay: 0.2s;
+}
+
+.nav-dropdown-item:nth-child(5) {
+  transition-delay: 0.25s;
+}
+
+.nav-dropdown-item:nth-child(6) {
+  transition-delay: 0.3s;
+}
+
+.nav-dropdown-item:nth-child(7) {
+  transition-delay: 0.35s;
+}
+
+.nav-dropdown-item:nth-child(8) {
+  transition-delay: 0.4s;
+}
+
+/* Category card styling */
+.category-card {
+  position: relative;
+  padding: 1rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.category-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(45, 95, 63, 0.05) 0%, rgba(193, 161, 124, 0.1) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow:
+    0 20px 40px -12px rgba(45, 95, 63, 0.2),
+    0 0 0 1px rgba(45, 95, 63, 0.1);
+}
+
+.category-card:hover::before {
+  opacity: 1;
+}
+
+/* Category image with artistic frame */
+.category-image {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.category-card:hover .category-image {
+  transform: scale(1.08);
+}
+
+/* Artistic brush stroke decoration */
+.brush-stroke {
+  position: absolute;
+  width: 120px;
+  height: 40px;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(193, 161, 124, 0.3) 20%,
+      rgba(193, 161, 124, 0.5) 50%,
+      rgba(193, 161, 124, 0.3) 80%,
+      transparent 100%);
+  border-radius: 50%;
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+/* Quick link styling */
+.quick-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1.25rem;
+  border-radius: 12px;
+  color: #1A3C27;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  background: transparent;
+}
+
+.quick-link:hover {
+  background: rgba(45, 95, 63, 0.08);
+  color: #2D5F3F;
+  transform: translateX(4px);
+}
+
+.quick-link-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(45, 95, 63, 0.1), rgba(193, 161, 124, 0.1));
+  color: #2D5F3F;
+  transition: all 0.2s ease;
+}
+
+.quick-link:hover .quick-link-icon {
+  background: linear-gradient(135deg, #2D5F3F, #3d7a52);
+  color: white;
+  transform: scale(1.1);
+}
+
+/* Floating CTA button */
+.dropdown-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  background: linear-gradient(135deg, #2D5F3F 0%, #3d7a52 100%);
+  color: white;
+  font-weight: 600;
+  border-radius: 50px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(45, 95, 63, 0.3);
+}
+
+.dropdown-cta:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(45, 95, 63, 0.4);
+  background: linear-gradient(135deg, #3d7a52 0%, #4d9a62 100%);
+}
+
+/* Section divider with artistic flair */
+.dropdown-divider {
+  height: 1px;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(193, 161, 124, 0.4) 20%,
+      rgba(193, 161, 124, 0.6) 50%,
+      rgba(193, 161, 124, 0.4) 80%,
+      transparent 100%);
+  margin: 1rem 0;
+}
+
+/* Dropdown header styling */
+.dropdown-header {
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #5C5C5C;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dropdown-header::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(193, 161, 124, 0.4), transparent);
+}
+
 @keyframes float {
 
   0%,
