@@ -500,20 +500,17 @@ function setSessionCookie(res, token) {
         `trusser_session=${encodeURIComponent(token)}`,
         'Path=/',
         'HttpOnly',
+        'SameSite=Strict',  // Strict for better CSRF protection
         'Max-Age=604800',   // 7 days
     ];
-    // Use SameSite=None for cross-origin with Secure, or Lax for development
     if (isProd) {
         parts.push('Secure');  // Only send over HTTPS in production
-        parts.push('SameSite=None');  // Allow cross-origin with credentials
-    } else {
-        parts.push('SameSite=Lax');  // Less restrictive for development
     }
     res.setHeader('Set-Cookie', parts.join('; '));
 }
 
 function clearSessionCookie(res) {
-    res.setHeader('Set-Cookie', 'trusser_session=; Path=/; HttpOnly; Max-Age=0; SameSite=Lax');
+    res.setHeader('Set-Cookie', 'trusser_session=; Path=/; HttpOnly; Max-Age=0; SameSite=Strict');
 }
 
 async function getLogoBuffer() {

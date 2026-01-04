@@ -31,29 +31,49 @@ const emptyAddress: Omit<AccountAddress, 'id'> = {
 export const Account = () => {
     const navigate = useNavigate();
     const [account, setAccount] = useState<AccountProfile | null>(() => getCachedAccount());
+    const [isLoading, setIsLoading] = useState(true);
     const [addressForm, setAddressForm] = useState(emptyAddress);
     const [showAddressForm, setShowAddressForm] = useState(false);
     const [profileForm, setProfileForm] = useState({ phone: '', gstNumber: '' });
 
     useEffect(() => {
-        fetchAccount().then((next) => setAccount(next));
+        // Only fetch if we don't have a cached account, or refresh in background
+        const initialAccount = getCachedAccount();
+        if (initialAccount) {
+            setIsLoading(false);
+            // Refresh in background without clearing current state
+            fetchAccount().then((next) => {
+                if (next) {
+                    setAccount(next);
+                }
+            });
+        } else {
+            // No cached account, need to fetch
+            fetchAccount().then((next) => {
+                setAccount(next);
+                setIsLoading(false);
+            });
+        }
         return subscribeToAccount((next) => setAccount(next));
     }, []);
 
     useEffect(() => {
-        if (!account) {
+        // Only redirect if we're done loading and still have no account
+        if (!isLoading && !account) {
             navigate('/account/login');
             return;
         }
-        setProfileForm({
-            phone: account.phone ?? '',
-            gstNumber: account.gstNumber ?? '',
-        });
-    }, [account, navigate]);
+        if (account) {
+            setProfileForm({
+                phone: account.phone ?? '',
+                gstNumber: account.gstNumber ?? '',
+            });
+        }
+    }, [account, isLoading, navigate]);
 
     const latestAddress = useMemo(() => account?.addresses?.[0], [account]);
 
-    if (!account) {
+    if (isLoading || !account) {
         return null;
     }
 
