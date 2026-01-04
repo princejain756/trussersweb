@@ -21,5 +21,28 @@
     },
     "usedCount": 0,
     "createdAt": "2025-12-29T08:25:01.570Z"
+  },
+  {
+    "id": "dd1ae800-aa3e-48b2-b09c-d610137653c0",
+    "title": "96XCE7T2",
+    "description": "\u20b91 off entire order",
+    "type": "Amount off order",
+    "method": "Code",
+    "code": "96XCE7T2",
+    "valueType": "fixed",
+    "value": "\u20b91",
+    "rawValue": 1,
+    "minRequirement": "none",
+    "customerEligibility": "all",
+    "onePerCustomer": false,
+    "startDate": "2026-01-03",
+    "startTime": "12:00",
+    "combinations": {
+      "products": false,
+      "orders": false,
+      "shipping": false
+    },
+    "usedCount": 0,
+    "createdAt": "2026-01-03T17:52:05.877Z"
   }
 ]

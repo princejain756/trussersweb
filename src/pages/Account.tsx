@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { BadgeCheck, LogOut, Mail, MapPin, Phone, Sparkles } from 'lucide-react';
+import { BadgeCheck, ChevronRight, LogOut, Mail, MapPin, Phone, Sparkles } from 'lucide-react';
 import { Navbar } from '../components/Layout/Navbar';
 import { Footer } from '../components/Layout/Footer';
 import { Button } from '../components/UI/Button';
@@ -291,17 +291,24 @@ export const Account = () => {
                                 ) : (
                                     <div className="mt-4 space-y-4">
                                         {account.orders.map((order) => (
-                                            <div key={order.id} className="rounded-2xl border border-[#E8DFD4] bg-[#FBF8F4] p-4">
+                                            <Link
+                                                key={order.id}
+                                                to={`/account/orders/${order.id}`}
+                                                className="block rounded-2xl border border-[#E8DFD4] bg-[#FBF8F4] p-4 transition-all hover:border-[#C1A17C] hover:shadow-[0_8px_24px_rgba(193,161,124,0.15)] hover:scale-[1.01] group"
+                                            >
                                                 <div className="flex items-center justify-between text-sm">
                                                     <span className="font-semibold text-[#1A3C27]">{order.orderNumber}</span>
-                                                    <span className="text-[#5C5C5C]">{new Date(order.createdAt).toLocaleDateString()}</span>
+                                                    <div className="flex items-center gap-2">
+                                                        <span className="text-[#5C5C5C]">{new Date(order.createdAt).toLocaleDateString()}</span>
+                                                        <ChevronRight className="h-4 w-4 text-[#C1A17C] opacity-0 group-hover:opacity-100 transition-opacity" />
+                                                    </div>
                                                 </div>
                                                 <p className="mt-2 text-xs text-[#5C5C5C]">{order.items.length} items · {formatPriceSimple(order.total)}</p>
                                                 <p className="mt-1 text-xs text-[#5C5C5C]">Payment: {order.paymentMethod}</p>
                                                 {order.invoice?.requested && order.invoice.gstNumber && (
                                                     <p className="mt-1 text-xs text-[#5C5C5C]">GSTIN: {order.invoice.gstNumber}</p>
                                                 )}
-                                            </div>
+                                            </Link>
                                         ))}
                                     </div>
                                 )}

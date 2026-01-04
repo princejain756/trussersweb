@@ -23,6 +23,7 @@ const AdminDashboard = lazy(() => import('./pages/AdminDashboard').then(m => ({ 
 const AccountLogin = lazy(() => import('./pages/AccountLogin').then(m => ({ default: m.AccountLogin })));
 const AccountRegister = lazy(() => import('./pages/AccountRegister').then(m => ({ default: m.AccountRegister })));
 const Account = lazy(() => import('./pages/Account').then(m => ({ default: m.Account })));
+const OrderDetail = lazy(() => import('./pages/OrderDetail').then(m => ({ default: m.OrderDetail })));
 const ProductDetail = lazy(() => import('./components/ProductDetail/ProductDetail').then(m => ({ default: m.ProductDetail })));
 
 // Admin pages - lazy loaded separately
@@ -106,6 +107,7 @@ function AppContent() {
           <Route path="/account" element={<Account />} />
           <Route path="/account/login" element={<AccountLogin />} />
           <Route path="/account/register" element={<AccountRegister />} />
+          <Route path="/account/orders/:orderId" element={<OrderDetail />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/admin" element={<AdminLogin />} />
           <Route path="/admin/login" element={<AdminLogin />} />
