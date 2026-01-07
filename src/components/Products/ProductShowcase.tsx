@@ -91,7 +91,7 @@ export const ProductShowcase = () => {
                     image: validProduct.image!,
                     category: catData.name ?? categorySlug,
                     categorySlug,
-                    price: validProduct.price || 299,
+                    price: validProduct.price ?? 0,
                     tag: validProduct.tag,
                 });
             }
@@ -125,8 +125,15 @@ export const ProductShowcase = () => {
     });
 
     const x = useTransform(scrollYProgress, (value) => `${-15 * value}%`);
-    const formatPrice = (price: string | number) =>
-        formatPriceSimple(price);
+    const formatPrice = (price: string | number) => {
+        const numericPrice = typeof price === 'number'
+            ? price
+            : parseFloat(String(price).replace(/[₹$,\s]/g, ''));
+        if (!numericPrice || numericPrice <= 0) {
+            return 'Price on request';
+        }
+        return formatPriceSimple(price);
+    };
 
     const handleQuickAdd = (product: ShopProduct) => {
         const price =

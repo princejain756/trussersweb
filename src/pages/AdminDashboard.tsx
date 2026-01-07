@@ -334,60 +334,25 @@ export const AdminDashboard = () => {
     }, []);
 
     useEffect(() => {
-        let isActive = true;
+        // Derive category gallery from the categories state (which comes from the API)
+        const entries = Object.entries(categories).map(([slug, category]) => ({
+            slug,
+            name: category.name ?? slug,
+            count: category.products?.length ?? 0,
+            images: (category.products ?? [])
+                .map((product) => product.image)
+                .filter((image): image is string => typeof image === 'string' && image.length > 0)
+                .slice(0, 6),
+        }));
+        entries.sort((a, b) => a.name.localeCompare(b.name));
+        setCategoryGallery(entries);
 
-        const loadCategoryGallery = async () => {
-            try {
-                const response = await fetch('/products/categories/image-mapping.json');
-                if (!response.ok) {
-                    throw new Error('Failed to load category images');
-                }
-                const data = (await response.json()) as {
-                    categorized?: Record<string, { name?: string; slug?: string; products?: Array<{ image?: string }> }>;
-                    uncategorized?: string[];
-                };
-                if (!isActive) {
-                    return;
-                }
-                const categorized = data.categorized ?? {};
-                const entries = Object.entries(categorized).map(([slug, category]) => ({
-                    slug,
-                    name: category.name ?? slug,
-                    count: category.products?.length ?? 0,
-                    images: (category.products ?? [])
-                        .map((product) => product.image)
-                        .filter((image): image is string => typeof image === 'string' && image.length > 0)
-                        .slice(0, 6),
-                }));
-                entries.sort((a, b) => a.name.localeCompare(b.name));
-                setCategoryGallery(entries);
-                setUncategorizedCount(Array.isArray(data.uncategorized) ? data.uncategorized.length : 0);
-
-            } catch (error) {
-                if (!isActive) {
-                    return;
-                }
-                const fallbackEntries = Object.entries(categoriesData as Record<string, { name?: string; products?: Array<{ image?: string }> }>)
-                    .map(([slug, category]) => ({
-                        slug,
-                        name: category.name ?? slug,
-                        count: category.products?.length ?? 0,
-                        images: (category.products ?? [])
-                            .map((product) => product.image)
-                            .filter((image): image is string => typeof image === 'string' && image.length > 0)
-                            .slice(0, 6),
-                    }))
-                    .sort((a, b) => a.name.localeCompare(b.name));
-                setCategoryGallery(fallbackEntries);
-            }
-        };
-
-        loadCategoryGallery();
-
-        return () => {
-            isActive = false;
-        };
-    }, []);
+        // Count catalog products that have no category as "uncategorized"
+        const uncatCount = catalogProducts.filter(
+            (p) => !p.category || p.category.trim() === ''
+        ).length;
+        setUncategorizedCount(uncatCount);
+    }, [categories, catalogProducts]);
 
     useEffect(() => {
         const categoryNames = Object.values(categories)
