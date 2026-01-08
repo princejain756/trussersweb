@@ -213,7 +213,14 @@
       {
         "name": "Animal Water Bottle Bag",
         "image": "/products/animal-water-bottle-bag.webp",
-        "filename": "animal-water-bottle-bag.webp"
+        "filename": "animal-water-bottle-bag.webp",
+        "description": "Handcrafted with sustainable materials, this Animal Water Bottle Bag combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+        "features": [
+          "Made from 100% recycled materials",
+          "Handcrafted by local artisans",
+          "Eco-friendly and sustainable",
+          "Unique design, no two pieces are identical"
+        ]
       },
       {
         "name": "Breathe Water Bottle Bag",

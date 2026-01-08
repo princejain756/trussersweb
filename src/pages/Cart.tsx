@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Navbar } from '../components/Layout/Navbar';
@@ -24,38 +24,28 @@ import {
 import { formatPriceSimple, getCurrency } from '../utils/currency';
 import { addToCart, getCartItems, removeCartItem, subscribeToCart, updateCartQuantity } from '../utils/cart';
 import type { CartItem as CartLineItem } from '../utils/cart';
+import categoriesData from '../data/categories.json';
 
-// Frequently bought together products
-const frequentlyBoughtTogether = [
-    {
-        id: 101,
-        name: 'Women Gift Set Collection',
-        image: '/products/categories/women-gift-sets/women-gift-sets-1.webp',
-        price: 1299,
-        originalPrice: 1599,
-    },
-    {
-        id: 102,
-        name: 'Kids Delight Gift Set',
-        image: '/products/categories/kids-gifts-set/kids-gifts-set-1.webp',
-        price: 999,
-        originalPrice: 1299,
-    },
-    {
-        id: 103,
-        name: 'Passport Holder Premium',
-        image: '/products/categories/passport-holders/passport-holders-1.webp',
-        price: 599,
-        originalPrice: 799,
-    },
-    {
-        id: 104,
-        name: 'Table Mat Coasters Set',
-        image: '/products/categories/table-mat-coasters/table-mat-coasters-1.webp',
-        price: 449,
-        originalPrice: 599,
-    },
-];
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:5174';
+
+type CategoryData = {
+    name?: string;
+    products?: Array<{
+        name?: string;
+        image?: string;
+        price?: string | number;
+        tag?: string;
+    }>;
+};
+
+type SuggestedProduct = {
+    id: string;
+    name: string;
+    image: string;
+    price: number;
+    originalPrice: number;
+    categorySlug: string;
+};
 
 // Coupon validation will be done via backend API
 
@@ -126,6 +116,11 @@ const CartItem = ({
                         <h3 className="font-serif text-lg md:text-xl text-[#1A3C27] mt-1 truncate">
                             {item.name}
                         </h3>
+                        {item.size && (
+                            <span className="inline-block mt-1 px-2 py-0.5 text-xs font-medium text-[#5C5C5C] bg-[#E8DFD4] rounded-full">
+                                Size: {item.size}
+                            </span>
+                        )}
                     </div>
 
                     <div className="flex flex-wrap items-end justify-between gap-4 mt-4">
@@ -183,8 +178,11 @@ const CartItem = ({
 };
 
 // Frequently Bought Together Card
-const ProductSuggestionCard = ({ product, index }: { product: typeof frequentlyBoughtTogether[0]; index: number }) => {
+const ProductSuggestionCard = ({ product, index }: { product: SuggestedProduct; index: number }) => {
     const [isAdded, setIsAdded] = useState(false);
+    const discountPercent = product.originalPrice > product.price
+        ? Math.round((1 - product.price / product.originalPrice) * 100)
+        : 0;
     const handleAdd = () => {
         addToCart({
             id: String(product.id),
@@ -204,32 +202,40 @@ const ProductSuggestionCard = ({ product, index }: { product: typeof frequentlyB
             whileHover={{ y: -5 }}
             className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-[#E8DFD4]"
         >
-            {/* Discount Badge */}
-            <div className="absolute top-3 left-3 z-10">
-                <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-[#D45D48] text-white text-xs font-bold rounded-full">
-                    <Tag className="w-3 h-3" />
-                    {Math.round((1 - product.price / product.originalPrice) * 100)}% OFF
-                </span>
-            </div>
+            {/* Discount Badge - only show if there's a discount */}
+            {discountPercent > 0 && (
+                <div className="absolute top-3 left-3 z-10">
+                    <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-[#D45D48] text-white text-xs font-bold rounded-full">
+                        <Tag className="w-3 h-3" />
+                        {discountPercent}% OFF
+                    </span>
+                </div>
+            )}
 
-            {/* Image */}
-            <div className="relative aspect-square overflow-hidden">
-                <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-            </div>
+            {/* Image - Clickable to PDP */}
+            <Link to={`/product/${product.id}`} className="block">
+                <div className="relative aspect-square overflow-hidden">
+                    <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+            </Link>
 
             {/* Content */}
             <div className="p-4">
-                <h4 className="font-serif text-[#1A3C27] text-sm md:text-base line-clamp-2 mb-2">
-                    {product.name}
-                </h4>
+                <Link to={`/product/${product.id}`}>
+                    <h4 className="font-serif text-[#1A3C27] text-sm md:text-base line-clamp-2 mb-2 hover:text-[#C1A17C] transition-colors">
+                        {product.name}
+                    </h4>
+                </Link>
                 <div className="flex items-center gap-2 mb-3">
                     <span className="font-semibold text-[#1A3C27]">{formatPriceSimple(product.price)}</span>
-                    <span className="text-sm text-[#5C5C5C] line-through">{formatPriceSimple(product.originalPrice)}</span>
+                    {discountPercent > 0 && (
+                        <span className="text-sm text-[#5C5C5C] line-through">{formatPriceSimple(product.originalPrice)}</span>
+                    )}
                 </div>
                 <motion.button
                     whileHover={{ scale: 1.02 }}
@@ -262,10 +268,83 @@ export const Cart = () => {
     const [couponError, setCouponError] = useState('');
     const [couponSuccess, setCouponSuccess] = useState('');
     const [isValidatingCoupon, setIsValidatingCoupon] = useState(false);
+    const [categoryData, setCategoryData] = useState<Record<string, CategoryData>>(
+        categoriesData as Record<string, CategoryData>
+    );
 
     useEffect(() => {
         return subscribeToCart((items) => setCartItems(items));
     }, []);
+
+    // Fetch real products from the API
+    useEffect(() => {
+        let isActive = true;
+        const loadCategories = async () => {
+            try {
+                const response = await fetch(`${apiBaseUrl}/api/categories`);
+                if (!response.ok) throw new Error('Failed to load categories');
+                const data = (await response.json()) as Record<string, CategoryData>;
+                if (!isActive) return;
+                setCategoryData(data ?? {});
+            } catch {
+                if (!isActive) return;
+                setCategoryData(categoriesData as Record<string, CategoryData>);
+            }
+        };
+        loadCategories();
+        return () => { isActive = false; };
+    }, []);
+
+    // Generate suggested products from real category data
+    const suggestedProducts = useMemo<SuggestedProduct[]>(() => {
+        const products: SuggestedProduct[] = [];
+        const cartItemIds = new Set(cartItems.map(item => item.id));
+
+        Object.entries(categoryData).forEach(([categorySlug, catData]) => {
+            const items = catData.products ?? [];
+
+            // Find products with valid images that are NOT in cart
+            items.forEach((product, productIndex) => {
+                const img = product.image ?? '';
+                if (!img) return;
+
+                // Must start with /products/ and end with proper extension
+                const isValidPath = img.startsWith('/products/') &&
+                    (img.endsWith('.webp') || img.endsWith('.jpg') || img.endsWith('.png'));
+
+                // Exclude known placeholders
+                const isNotPlaceholder = !img.includes('placeholder') &&
+                    !img.includes('heroimage');
+
+                if (!isValidPath || !isNotPlaceholder) return;
+
+                const productId = `${categorySlug}-${productIndex}`;
+
+                // Skip products already in cart
+                if (cartItemIds.has(productId)) return;
+
+                // Parse price if available, otherwise use default
+                const rawPrice = product.price;
+                const price = typeof rawPrice === 'number' && rawPrice > 0
+                    ? rawPrice
+                    : typeof rawPrice === 'string' && rawPrice
+                        ? Number(String(rawPrice).replace(/[₹$,\s]/g, '')) || 499
+                        : 499; // Default price for display
+
+                products.push({
+                    id: productId,
+                    name: product.name ?? catData.name ?? categorySlug,
+                    image: product.image!,
+                    price,
+                    originalPrice: price,
+                    categorySlug,
+                });
+            });
+        });
+
+        // Return first 4 random products for variety
+        return products.sort(() => Math.random() - 0.5).slice(0, 4);
+    }, [categoryData, cartItems]);
 
     // Calculate totals
     const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -614,11 +693,15 @@ export const Cart = () => {
                                 </div>
                             </AnimatedSection>
 
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
-                                {frequentlyBoughtTogether.map((product, index) => (
-                                    <ProductSuggestionCard key={product.id} product={product} index={index} />
-                                ))}
-                            </div>
+                            {suggestedProducts.length > 0 ? (
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
+                                    {suggestedProducts.map((product, index) => (
+                                        <ProductSuggestionCard key={product.id} product={product} index={index} />
+                                    ))}
+                                </div>
+                            ) : (
+                                <p className="text-center text-[#5C5C5C] py-8">No product suggestions available</p>
+                            )}
 
                             {/* Bundle Deal Banner */}
                             <AnimatedSection delay={0.4} className="mt-12">

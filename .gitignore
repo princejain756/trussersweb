@@ -30,6 +30,3 @@ dist-ssr
 server/uploads
 
 # Runtime data
-server/data/orders.json
-server/data/users.json
-server/data/sessions.json

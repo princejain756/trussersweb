@@ -18,7 +18,7 @@ export type AccountOrder = {
     total: number;
     paymentMethod: 'razorpay' | 'cod';
     paymentStatus: string;
-    items: Array<{ id: string; name: string; quantity: number; price: number; image?: string }>;
+    items: Array<{ id: string; name: string; quantity: number; price: number; image?: string; size?: string }>;
     shipping: AccountAddress;
     invoice?: { requested: boolean; gstNumber?: string };
 };

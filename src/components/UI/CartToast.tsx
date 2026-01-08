@@ -64,6 +64,7 @@ export const CartToast = () => {
                             <p className="text-xs uppercase tracking-[0.3em] text-[#C1A17C]">Added to cart</p>
                             <p className="mt-1 text-sm font-semibold text-[#1A3C27] line-clamp-2">{item.name}</p>
                             <p className="mt-1 text-xs text-[#5C5C5C]">
+                                {item.size && <span className="text-[#C1A17C]">{item.size} • </span>}
                                 {item.quantity} × {formatPriceSimple(item.price)}
                             </p>
                         </div>

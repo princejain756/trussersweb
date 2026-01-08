@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Seo } from '../../seo/Seo';
@@ -20,7 +20,21 @@ import {
     CreditCard,
     ShieldAlert,
     Newspaper,
+    AlertCircle,
+    Truck,
 } from 'lucide-react';
+
+interface Notification {
+    id: string;
+    type: 'new_order' | 'pending_payment' | 'unfulfilled';
+    title: string;
+    message: string;
+    amount?: number;
+    timestamp: string;
+    read: boolean;
+    link: string;
+    orderId: string;
+}
 
 interface NavItem {
     name: string;
@@ -57,29 +71,87 @@ export const AdminLayout = ({ children, title, actions }: AdminLayoutProps) => {
     const navigate = useNavigate();
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [ordersCount, setOrdersCount] = useState<number | null>(null);
+    const [notifications, setNotifications] = useState<Notification[]>([]);
+    const [notificationsOpen, setNotificationsOpen] = useState(false);
+    const [unreadCount, setUnreadCount] = useState(0);
+    const notificationRef = useRef<HTMLDivElement>(null);
 
+    // Close dropdown when clicking outside
     useEffect(() => {
-        const fetchStats = async () => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (notificationRef.current && !notificationRef.current.contains(event.target as Node)) {
+                setNotificationsOpen(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
+    // Fetch stats and notifications
+    useEffect(() => {
+        const fetchData = async () => {
             try {
                 const token = window.localStorage.getItem('adminToken');
                 if (!token) return;
 
-                const response = await fetch(`${apiBaseUrl}/api/admin/stats`, {
+                // Fetch stats
+                const statsResponse = await fetch(`${apiBaseUrl}/api/admin/stats`, {
                     headers: { 'X-Admin-Key': token }
                 });
-
-                if (response.ok) {
-                    const data = await response.json();
+                if (statsResponse.ok) {
+                    const data = await statsResponse.json();
                     if (data.summary?.totalOrders !== undefined) {
                         setOrdersCount(data.summary.totalOrders);
                     }
                 }
+
+                // Fetch notifications
+                const notifResponse = await fetch(`${apiBaseUrl}/api/admin/notifications`, {
+                    headers: { 'X-Admin-Key': token }
+                });
+                if (notifResponse.ok) {
+                    const notifData = await notifResponse.json();
+                    setNotifications(notifData.notifications || []);
+                    setUnreadCount(notifData.unreadCount || 0);
+                }
             } catch (error) {
-                console.error('Failed to fetch stats:', error);
+                console.error('Failed to fetch data:', error);
             }
         };
-        fetchStats();
+        fetchData();
+
+        // Refresh notifications every 30 seconds
+        const interval = setInterval(fetchData, 30000);
+        return () => clearInterval(interval);
     }, []);
+
+    const getNotificationIcon = (type: Notification['type']) => {
+        switch (type) {
+            case 'new_order': return <ShoppingBag className="w-4 h-4 text-green-600" />;
+            case 'pending_payment': return <AlertCircle className="w-4 h-4 text-orange-600" />;
+            case 'unfulfilled': return <Truck className="w-4 h-4 text-blue-600" />;
+            default: return <Bell className="w-4 h-4 text-gray-600" />;
+        }
+    };
+
+    const formatTimeAgo = (timestamp: string) => {
+        const now = new Date();
+        const date = new Date(timestamp);
+        const diffMs = now.getTime() - date.getTime();
+        const diffMins = Math.floor(diffMs / 60000);
+        const diffHours = Math.floor(diffMins / 60);
+        const diffDays = Math.floor(diffHours / 24);
+
+        if (diffMins < 1) return 'Just now';
+        if (diffMins < 60) return `${diffMins}m ago`;
+        if (diffHours < 24) return `${diffHours}h ago`;
+        return `${diffDays}d ago`;
+    };
+
+    const handleNotificationClick = (notification: Notification) => {
+        setNotificationsOpen(false);
+        navigate(notification.link);
+    };
 
     const handleLogout = () => {
         if (typeof window !== 'undefined') {
@@ -237,10 +309,87 @@ export const AdminLayout = ({ children, title, actions }: AdminLayoutProps) => {
                             />
                         </div>
                         {/* Notifications */}
-                        <button className="relative p-2 rounded-lg hover:bg-gray-100 transition-colors">
-                            <Bell className="w-5 h-5 text-gray-600" />
-                            <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full" />
-                        </button>
+                        <div className="relative" ref={notificationRef}>
+                            <button
+                                onClick={() => setNotificationsOpen(!notificationsOpen)}
+                                className="relative p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                            >
+                                <Bell className="w-5 h-5 text-gray-600" />
+                                {unreadCount > 0 && (
+                                    <span className="absolute top-1 right-1 min-w-[18px] h-[18px] flex items-center justify-center px-1 text-[10px] font-bold text-white bg-red-500 rounded-full">
+                                        {unreadCount > 9 ? '9+' : unreadCount}
+                                    </span>
+                                )}
+                            </button>
+
+                            <AnimatePresence>
+                                {notificationsOpen && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: -10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -10 }}
+                                        transition={{ duration: 0.15 }}
+                                        className="absolute right-0 top-full mt-2 w-80 bg-white border border-gray-200 rounded-xl shadow-lg z-50 overflow-hidden"
+                                    >
+                                        <div className="px-4 py-3 border-b border-gray-100 bg-gray-50">
+                                            <h3 className="font-semibold text-gray-900">Notifications</h3>
+                                            {unreadCount > 0 && (
+                                                <p className="text-xs text-gray-500">{unreadCount} new notifications</p>
+                                            )}
+                                        </div>
+
+                                        <div className="max-h-80 overflow-y-auto">
+                                            {notifications.length === 0 ? (
+                                                <div className="px-4 py-8 text-center text-gray-500">
+                                                    <Bell className="w-8 h-8 mx-auto mb-2 text-gray-300" />
+                                                    <p className="text-sm">No new notifications</p>
+                                                </div>
+                                            ) : (
+                                                notifications.map((notification) => (
+                                                    <button
+                                                        key={notification.id}
+                                                        onClick={() => handleNotificationClick(notification)}
+                                                        className="w-full px-4 py-3 flex items-start gap-3 hover:bg-gray-50 transition-colors text-left border-b border-gray-50 last:border-0"
+                                                    >
+                                                        <div className="p-2 rounded-lg bg-gray-100">
+                                                            {getNotificationIcon(notification.type)}
+                                                        </div>
+                                                        <div className="flex-1 min-w-0">
+                                                            <p className="text-sm font-medium text-gray-900 truncate">
+                                                                {notification.title}
+                                                            </p>
+                                                            <p className="text-xs text-gray-500 truncate">
+                                                                {notification.message}
+                                                            </p>
+                                                            {notification.amount && (
+                                                                <p className="text-xs font-medium text-green-600">
+                                                                    ₹{notification.amount.toLocaleString('en-IN')}
+                                                                </p>
+                                                            )}
+                                                        </div>
+                                                        <span className="text-xs text-gray-400 whitespace-nowrap">
+                                                            {formatTimeAgo(notification.timestamp)}
+                                                        </span>
+                                                    </button>
+                                                ))
+                                            )}
+                                        </div>
+
+                                        <div className="px-4 py-2 border-t border-gray-100 bg-gray-50">
+                                            <button
+                                                onClick={() => {
+                                                    setNotificationsOpen(false);
+                                                    navigate('/admin/orders');
+                                                }}
+                                                className="w-full text-center text-sm text-[#1A3C27] font-medium hover:underline"
+                                            >
+                                                View all orders →
+                                            </button>
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
                         {/* Actions */}
                         {actions}
                     </div>

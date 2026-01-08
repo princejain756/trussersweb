@@ -26,6 +26,7 @@ type OrderItem = {
     price: number;
     quantity: number;
     image?: string;
+    size?: string;
 };
 
 type OrderPayload = {
@@ -261,6 +262,9 @@ export const CheckoutSuccess = () => {
                                                     </div>
                                                     <div className="flex-1">
                                                         <p className="text-sm font-medium text-[#1A3C27]">{item.name}</p>
+                                                        {item.size && (
+                                                            <p className="text-xs text-[#C1A17C]">Size: {item.size}</p>
+                                                        )}
                                                         <p className="text-xs text-[#9C8F84]">Qty {item.quantity}</p>
                                                     </div>
                                                     <div className="text-sm font-semibold text-[#1A3C27]">

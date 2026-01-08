@@ -1,0 +1,201 @@
+[
+  {
+    "id": "cd1e813a-f1af-4a4d-8ad9-c517fc464b3f",
+    "fullName": "Prince Jain",
+    "username": "princejain756",
+    "email": "princejain756@gmail.com",
+    "phone": "8005634678",
+    "createdAt": "2025-12-30T04:12:10.479Z",
+    "addresses": [
+      {
+        "id": "1cfc630b-6e7b-4ddd-96d9-1d59752c705b",
+        "label": "Home",
+        "address1": "D-602,VAISHNAVI TERRACES JP NAGAR 4TH PHASE DOLLARS COLONY 560078",
+        "address2": "Saroj Jain boutique",
+        "city": "Bangalore",
+        "state": "Karnataka",
+        "pincode": "560078",
+        "country": "India",
+        "lastUsedAt": "2026-01-04T22:08:51.275Z"
+      },
+      {
+        "id": "8d124647-2580-4ba9-a497-b61e9a0331e4",
+        "label": "Recent delivery",
+        "address1": "Vaishnavi Terraces",
+        "address2": "Vaishnavi Terraces",
+        "city": "Bangalore",
+        "state": "Karnataka",
+        "pincode": "560078",
+        "country": "India",
+        "lastUsedAt": "2025-12-30T12:08:09.577Z"
+      },
+      {
+        "id": "fa543303-c7d3-4807-8f3c-2608926327cb",
+        "label": "Recent delivery",
+        "address1": "Vaishnavi Terraces",
+        "address2": "Vaishnavi Terraces",
+        "city": "Bangalore",
+        "state": "Karnataka",
+        "pincode": "560078",
+        "country": "India",
+        "lastUsedAt": "2025-12-30T06:20:26.256Z"
+      },
+      {
+        "id": "375d7c9c-218d-4323-b2e4-0f8e22f61af8",
+        "label": "Office",
+        "address1": "Vaishnavi Terraces",
+        "address2": "Vaishnavi Terraces",
+        "city": "Bangalore",
+        "state": "Karnataka",
+        "pincode": "560078",
+        "country": "India",
+        "lastUsedAt": "2025-12-30T04:13:50.334Z"
+      }
+    ],
+    "orders": [
+      {
+        "id": "9c3e2c50-d8e8-44da-a354-04c48db42e7a",
+        "orderNumber": "#1004",
+        "createdAt": "2025-12-30T12:08:09.575Z",
+        "total": 702,
+        "paymentMethod": "cod",
+        "paymentStatus": "rejected",
+        "items": [
+          {
+            "id": "3",
+            "name": "Birdsong Revival Tote",
+            "image": "/products/gift-bag-34.webp",
+            "price": 449,
+            "quantity": 1
+          }
+        ],
+        "shipping": {
+          "id": "8d124647-2580-4ba9-a497-b61e9a0331e4",
+          "label": "Recent delivery",
+          "address1": "Vaishnavi Terraces",
+          "address2": "Vaishnavi Terraces",
+          "city": "Bangalore",
+          "state": "Karnataka",
+          "pincode": "560078",
+          "country": "India",
+          "lastUsedAt": "2025-12-30T12:08:09.577Z"
+        },
+        "invoice": {
+          "requested": false
+        }
+      },
+      {
+        "id": "599441a9-f647-4117-858b-ea6d47a4efab",
+        "orderNumber": "#1003",
+        "createdAt": "2025-12-30T06:20:26.254Z",
+        "total": 702,
+        "paymentMethod": "razorpay",
+        "paymentStatus": "failed",
+        "items": [
+          {
+            "id": "3",
+            "name": "Birdsong Revival Tote",
+            "image": "/products/gift-bag-34.webp",
+            "price": 449,
+            "quantity": 1
+          }
+        ],
+        "shipping": {
+          "id": "fa543303-c7d3-4807-8f3c-2608926327cb",
+          "label": "Recent delivery",
+          "address1": "Vaishnavi Terraces",
+          "address2": "Vaishnavi Terraces",
+          "city": "Bangalore",
+          "state": "Karnataka",
+          "pincode": "560078",
+          "country": "India",
+          "lastUsedAt": "2025-12-30T06:20:26.256Z"
+        },
+        "invoice": {
+          "requested": false
+        }
+      }
+    ],
+    "authProvider": "google",
+    "googleSub": "104878779455462158937"
+  },
+  {
+    "id": "35faf03a-bd80-49bb-860c-afaf1ed2f4e1",
+    "fullName": "Prince Jain",
+    "username": "princejain756",
+    "email": "princejain757@gmail.com",
+    "phone": "+918005634678",
+    "createdAt": "2026-01-04T20:20:40.848Z",
+    "addresses": [
+      {
+        "id": "bcb3c5ab-38a3-4f88-8307-367ecc621157",
+        "label": "Recent delivery",
+        "address1": "D-602,VAISHNAVI TERRACES JP NAGAR 4TH PHASE DOLLARS COLONY 560078",
+        "address2": "--",
+        "city": "Bangalore",
+        "state": "Karnataka",
+        "pincode": "560078",
+        "country": "India",
+        "lastUsedAt": "2026-01-08T07:56:24.510Z"
+      },
+      {
+        "id": "666ca321-559e-4f3d-aad6-5faff99b154d",
+        "label": "Recent delivery",
+        "address1": "D-602,VAISHNAVI TERRACES JP NAGAR 4TH PHASE DOLLARS COLONY 560078",
+        "address2": "--",
+        "city": "Bangalore",
+        "state": "Karnataka",
+        "pincode": "560078",
+        "country": "India",
+        "lastUsedAt": "2026-01-08T06:30:58.162Z"
+      },
+      {
+        "id": "e413602a-637f-4110-bb9d-cb18d37010c7",
+        "label": "Recent delivery",
+        "address1": "D-602,VAISHNAVI TERRACES JP NAGAR 4TH PHASE DOLLARS COLONY 560078",
+        "address2": "--",
+        "city": "Bangalore",
+        "state": "Karnataka",
+        "pincode": "560078",
+        "country": "India",
+        "lastUsedAt": "2026-01-07T16:30:18.964Z"
+      }
+    ],
+    "orders": [
+      {
+        "id": "4570d381-ebba-43cf-9aac-7f12b3d6b57f",
+        "orderNumber": "#1006",
+        "createdAt": "2026-01-07T16:30:18.957Z",
+        "total": 534,
+        "paymentMethod": "razorpay",
+        "paymentStatus": "failed",
+        "items": [
+          {
+            "id": "1",
+            "name": "Heliophile Bloom Set",
+            "image": "/products/categories/women-gift-sets/women-gift-sets-1.webp",
+            "price": 299,
+            "quantity": 1
+          }
+        ],
+        "shipping": {
+          "id": "e413602a-637f-4110-bb9d-cb18d37010c7",
+          "label": "Recent delivery",
+          "address1": "D-602,VAISHNAVI TERRACES JP NAGAR 4TH PHASE DOLLARS COLONY 560078",
+          "address2": "--",
+          "city": "Bangalore",
+          "state": "Karnataka",
+          "pincode": "560078",
+          "country": "India",
+          "lastUsedAt": "2026-01-07T16:30:18.964Z"
+        },
+        "invoice": {
+          "requested": false
+        }
+      }
+    ],
+    "passwordSalt": "5c0cefb8a556bc14b03c12ad65d27603",
+    "passwordHash": "a98587bcce13bea58a47be69fefffe742785d89615d56aa1401c80eaee9d10fa113a95250dcb89514ca88c292db8278ff8a8327a8c1fa4d38e52b4122d0956f6",
+    "gstNumber": "29ADXPJ3352J1ZX"
+  }
+]

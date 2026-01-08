@@ -274,6 +274,9 @@ export const OrderDetail = () => {
                                                     </div>
                                                     <div className="flex-1 min-w-0">
                                                         <p className="font-medium text-[#1A3C27] truncate">{item.name}</p>
+                                                        {item.size && (
+                                                            <p className="text-sm text-[#C1A17C] mt-0.5">Size: {item.size}</p>
+                                                        )}
                                                         <p className="mt-1 text-sm text-[#9C8F84]">
                                                             Qty: {item.quantity} × {formatPriceSimple(item.price)}
                                                         </p>

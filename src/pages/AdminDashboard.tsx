@@ -31,6 +31,7 @@ type Product = {
     tag?: string;
     description?: string;
     features?: string[];
+    sizes?: string[];
     category?: string;
     categorySlug?: string;
     categoryIndex?: number;
@@ -48,6 +49,7 @@ type CategoryData = {
         tag?: string;
         description?: string;
         features?: string[];
+        sizes?: string[];
     }>;
 };
 
@@ -58,6 +60,7 @@ type ProductDraft = {
     tag: string;
     description: string;
     features: string[];
+    sizes: string[];
     category: string;
 };
 
@@ -135,6 +138,7 @@ export const AdminDashboard = () => {
         tag: 'New',
         description: '',
         features: [...defaultFeatures],
+        sizes: [],
         category: '',
     });
 
@@ -255,7 +259,19 @@ export const AdminDashboard = () => {
             return allProducts;
         }
         const query = searchQuery.trim().toLowerCase();
+        // Normalize query for numeric search (remove commas, spaces)
+        const numericQuery = query.replace(/[,\s]/g, '');
+        const isNumericSearch = /^\d+\.?\d*$/.test(numericQuery);
+
         return allProducts.filter((product) => {
+            // For numeric searches, also match against normalized price
+            if (isNumericSearch) {
+                const normalizedPrice = product.price.replace(/[₹$,\s]/g, '').toLowerCase();
+                if (normalizedPrice.includes(numericQuery)) {
+                    return true;
+                }
+            }
+
             return (
                 product.name.toLowerCase().includes(query) ||
                 product.price.toLowerCase().includes(query) ||
@@ -291,6 +307,7 @@ export const AdminDashboard = () => {
                     tag?: string;
                     description?: string;
                     features?: string[];
+                    sizes?: string[];
                     category?: string;
                 }>;
                 const normalized = (Array.isArray(data) ? data : []).map((product) => ({
@@ -302,6 +319,7 @@ export const AdminDashboard = () => {
                     tag: product.tag,
                     description: product.description,
                     features: product.features,
+                    sizes: product.sizes ?? [],
                     category: product.category,
                     categorySlug: product.category ? slugify(product.category) : 'catalog',
                 }));
@@ -400,6 +418,7 @@ export const AdminDashboard = () => {
                 tag: product.tag ?? '',
                 description: product.description?.trim() || fallbackDescription,
                 features: [...fallbackFeatures],
+                sizes: [...(product.sizes ?? [])],
                 category: product.category ?? '',
             },
         }));
@@ -522,6 +541,7 @@ export const AdminDashboard = () => {
                 tag: draft.tag.trim(),
                 description: draft.description.trim(),
                 features: normalizeFeatureList(draft.features),
+                sizes: draft.sizes.map(s => s.trim()).filter(Boolean),
                 category: draft.category.trim(),
             };
             if (product.source === 'category') {
@@ -685,6 +705,7 @@ export const AdminDashboard = () => {
                 tag: newProduct.tag.trim(),
                 description: newProduct.description.trim(),
                 features: normalizeFeatureList(newProduct.features),
+                sizes: newProduct.sizes.map(s => s.trim()).filter(Boolean),
                 category: newProduct.category.trim(),
             };
 
@@ -715,6 +736,7 @@ export const AdminDashboard = () => {
                 tag: data?.tag,
                 description: data?.description,
                 features: Array.isArray(data?.features) ? data.features : payload.features,
+                sizes: Array.isArray(data?.sizes) ? data.sizes : payload.sizes,
                 category: data?.category ?? payload.category,
                 categorySlug: data?.category ? slugify(data.category) : 'catalog',
             };
@@ -727,6 +749,7 @@ export const AdminDashboard = () => {
                 tag: 'New',
                 description: '',
                 features: [...defaultFeatures],
+                sizes: [],
                 category: '',
             });
         } catch (err) {
@@ -987,6 +1010,30 @@ export const AdminDashboard = () => {
                                         </div>
                                     </div>
 
+                                    <div>
+                                        <div className="flex flex-wrap items-center justify-between gap-3">
+                                            <label className="text-xs font-semibold uppercase tracking-[0.18em] text-[#2D5F3F]">
+                                                Available Sizes
+                                            </label>
+                                        </div>
+                                        <div className="mt-2">
+                                            <input
+                                                type="text"
+                                                defaultValue=""
+                                                onBlur={(event) => {
+                                                    const value = event.target.value;
+                                                    const sizes = value.split(',').map(s => s.trim()).filter(Boolean);
+                                                    setNewProduct((prev) => ({ ...prev, sizes }));
+                                                }}
+                                                className="w-full rounded-2xl border border-[#E2D6C8] bg-white px-4 py-3 text-sm text-[#1A1A1A] focus:border-[#2D5F3F] focus:outline-none focus:ring-2 focus:ring-[#2D5F3F]/20"
+                                                placeholder="S, M, L, XL, XXL (comma-separated)"
+                                            />
+                                            <p className="mt-2 text-xs text-[#9C8F84]">
+                                                Optional. Enter sizes like S, M, L or 6, 7, 8, 9
+                                            </p>
+                                        </div>
+                                    </div>
+
                                     <Button
                                         type="submit"
                                         size="lg"
@@ -1135,6 +1182,7 @@ export const AdminDashboard = () => {
                                         tag: product.tag ?? '',
                                         description: product.description ?? '',
                                         features: product.features ?? [],
+                                        sizes: product.sizes ?? [],
                                         category: product.category ?? '',
                                     };
                                     const displayPrice = display.price.trim() ? display.price : 'Price on request';
@@ -1367,6 +1415,31 @@ export const AdminDashboard = () => {
                                                                             </button>
                                                                         </div>
                                                                     ))}
+                                                                </div>
+                                                            </div>
+
+                                                            <div>
+                                                                <div className="flex flex-wrap items-center justify-between gap-3">
+                                                                    <label className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#2D5F3F]">
+                                                                        Available Sizes
+                                                                    </label>
+                                                                </div>
+                                                                <div className="mt-2">
+                                                                    <input
+                                                                        type="text"
+                                                                        key={`sizes-input-${product.id}-${display.sizes.join(',')}`}
+                                                                        defaultValue={display.sizes.join(', ')}
+                                                                        onBlur={(event) => {
+                                                                            const value = event.target.value;
+                                                                            const sizes = value.split(',').map(s => s.trim()).filter(Boolean);
+                                                                            updateDraft(product.id, 'sizes', sizes);
+                                                                        }}
+                                                                        className="w-full rounded-2xl border border-[#E2D6C8] bg-white px-3 py-2 text-sm text-[#1A1A1A] focus:border-[#2D5F3F] focus:outline-none focus:ring-2 focus:ring-[#2D5F3F]/20"
+                                                                        placeholder="S, M, L, XL, XXL"
+                                                                    />
+                                                                    <p className="mt-1.5 text-[10px] text-[#9C8F84]">
+                                                                        Comma-separated: S, M, L or 6, 7, 8
+                                                                    </p>
                                                                 </div>
                                                             </div>
                                                         </div>

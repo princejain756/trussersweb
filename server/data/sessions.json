@@ -1,0 +1,37 @@
+[
+  {
+    "token": "8f36fa79-fad4-44d9-afd0-d29596430c21",
+    "userId": "cd1e813a-f1af-4a4d-8ad9-c517fc464b3f",
+    "createdAt": "2025-12-30T04:12:10.482Z"
+  },
+  {
+    "token": "3ddf82fe-a177-4623-8b27-5a98fe046a53",
+    "userId": "cd1e813a-f1af-4a4d-8ad9-c517fc464b3f",
+    "createdAt": "2026-01-04T20:20:03.038Z"
+  },
+  {
+    "token": "7c22ba0b-18b1-44c2-a26f-b293ada4c0d4",
+    "userId": "cd1e813a-f1af-4a4d-8ad9-c517fc464b3f",
+    "createdAt": "2026-01-04T20:20:08.278Z"
+  },
+  {
+    "token": "4ff3d528-5616-4522-9bab-c4b868d55e2b",
+    "userId": "35faf03a-bd80-49bb-860c-afaf1ed2f4e1",
+    "createdAt": "2026-01-04T20:20:40.851Z"
+  },
+  {
+    "token": "73f1254d-7401-4b1b-afbe-7c258877f30c",
+    "userId": "35faf03a-bd80-49bb-860c-afaf1ed2f4e1",
+    "createdAt": "2026-01-04T20:20:51.562Z"
+  },
+  {
+    "token": "7e0b231f-a590-43d3-a7b1-761bb7f4f2d6",
+    "userId": "35faf03a-bd80-49bb-860c-afaf1ed2f4e1",
+    "createdAt": "2026-01-04T20:24:17.729Z"
+  },
+  {
+    "token": "40909908-e47c-415f-bc3f-63652c5fc5c0",
+    "userId": "35faf03a-bd80-49bb-860c-afaf1ed2f4e1",
+    "createdAt": "2026-01-06T21:16:54.716Z"
+  }
+]

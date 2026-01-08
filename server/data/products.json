@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name": "Breathe Water Bottle Bag",
-    "price": "\u20b9194.00",
+    "price": "\u20b9179.00",
     "image": "/products/breathe-water-bottle-bag.webp",
     "tag": "New",
     "description": "Handcrafted with sustainable materials, this Breathe Water Bottle Bag combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
@@ -12,7 +12,12 @@
       "Eco-friendly and sustainable",
       "Unique design, no two pieces are identical"
     ],
-    "category": "Bottle Bags"
+    "category": "Bottle Bags",
+    "sizes": [
+      "M",
+      "S",
+      "7"
+    ]
   },
   {
     "id": 2,
@@ -23,52 +28,108 @@
   },
   {
     "id": 3,
-    "name": "Birdsong Revival Tote",
-    "price": "\u20b9449.00",
+    "name": "Birdsong Revival Gift Bag",
+    "price": "\u20b999.00",
     "image": "/products/gift-bag-34.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Birdsong Revival Gift Bag combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Unique design, no two pieces are identical"
+    ]
   },
   {
     "id": 4,
     "name": "Carry Bag Planet",
-    "price": "\u20b9171.00",
+    "price": "\u20b9149.00",
     "image": "/products/carry-bag-planet.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Carry Bag Planet combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Unique design, no two pieces are identical"
+    ]
   },
   {
     "id": 5,
     "name": "Elephant Bloom Bag",
-    "price": "\u20b9499.00",
+    "price": "\u20b999.00",
     "image": "/products/gift-bag-29.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Elephant Bloom Bag combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Unique design, no two pieces are identical"
+    ]
   },
   {
     "id": 6,
-    "name": "Floral Bloom Pouch",
-    "price": "\u20b9449.00",
+    "name": "Floral Bloom Bag",
+    "price": "\u20b999.00",
     "image": "/products/gift-bag-23.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Floral Bloom Pouch combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Unique design, no two pieces are identical"
+    ],
+    "category": "Festive Bags"
   },
   {
     "id": 7,
-    "name": "Zade Stripes ",
-    "price": "\u20b9171.00",
+    "name": "Zade Stripes",
+    "price": "\u20b9149.00",
     "image": "/products/yellow-zig-zag-art-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Zade Stripes  combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Unique design, no two pieces are identical"
+    ]
   },
   {
     "id": 8,
-    "name": "PRISM FLOW",
+    "name": "PRISM FLOW Set of 3",
     "price": "\u20b9449.00",
     "image": "/products/prism-flow.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this PRISM FLOW combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Unique design, no two pieces are identical"
+    ]
   },
   {
     "id": 9,
     "name": "Sunny Pine",
-    "price": "\u20b9228.00",
+    "price": "\u20b9199.00",
     "image": "/products/pineapple-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Sunny Pine combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Unique design, no two pieces are identical"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "6",
+      "7"
+    ]
   },
   {
     "id": 10,
@@ -509,7 +570,17 @@
     "name": "Animal Water Bottle Bag",
     "price": "\u20b9194.00",
     "image": "/products/animal-water-bottle-bag.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Animal Water Bottle Bag combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Unique design, no two pieces are identical"
+    ],
+    "sizes": [
+      "S"
+    ]
   },
   {
     "id": 73,

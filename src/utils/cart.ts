@@ -5,6 +5,7 @@ export type CartItem = {
     price: number;
     quantity: number;
     category?: string;
+    size?: string;
 };
 
 const CART_STORAGE_KEY = 'trusser_cart_v1';
@@ -34,6 +35,7 @@ const normalizeCartItem = (item: Partial<CartItem>, fallbackId: string): CartIte
     const price = toNumber(item.price, 0);
     const quantity = Math.max(1, Math.floor(toNumber(item.quantity, 1)));
     const category = typeof item.category === 'string' ? item.category : undefined;
+    const size = typeof item.size === 'string' ? item.size : undefined;
 
     return {
         id: id || fallbackId,
@@ -42,6 +44,7 @@ const normalizeCartItem = (item: Partial<CartItem>, fallbackId: string): CartIte
         price,
         quantity,
         category,
+        size,
     };
 };
 

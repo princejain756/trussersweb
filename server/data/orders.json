@@ -1,0 +1,376 @@
+[
+  {
+    "id": "cd1bc174-2e00-41a0-8734-6229a3f2a595",
+    "sequence": 1001,
+    "orderNumber": "#1001",
+    "createdAt": "2025-12-29T10:06:40.858Z",
+    "customer": {
+      "fullName": "Prince Jain",
+      "username": "princejain756",
+      "email": "princejain756@gmail.com",
+      "phone": "+918005634678"
+    },
+    "shipping": {
+      "address1": "D-602,Vaishnavi Terraces JP NAGAR 4TH PHASE DOLLARS COLONY",
+      "city": "BANGALORE",
+      "state": "Karnataka",
+      "pincode": "560078",
+      "country": "India"
+    },
+    "items": [
+      {
+        "id": "1",
+        "name": "Breathe Water Bottle Bag",
+        "image": "/products/breathe-water-bottle-bag.webp",
+        "price": 194,
+        "quantity": 1
+      }
+    ],
+    "pricing": {
+      "subtotal": 194,
+      "shipping": 199,
+      "taxes": 23,
+      "total": 416
+    },
+    "invoice": {
+      "requested": false
+    },
+    "payment": {
+      "method": "razorpay",
+      "status": "failed",
+      "providerOrderId": "order_RxO8R0zI7bEfc0",
+      "failureReason": "cancelled",
+      "failedAt": "2025-12-29T10:06:49.474Z",
+      "cancellationReason": "Bulk cancellation",
+      "cancelledAt": "2026-01-08T19:46:51.199Z"
+    },
+    "fulfillmentStatus": "cancelled",
+    "returnedAt": "2026-01-08T15:06:58.144Z",
+    "returnReason": "Customer return",
+    "cancelledAt": "2026-01-08T19:46:51.199Z"
+  },
+  {
+    "id": "cd196daa-c2d7-44d8-815e-a9c84f740b2c",
+    "sequence": 1002,
+    "orderNumber": "#1002",
+    "createdAt": "2025-12-30T05:34:12.786Z",
+    "customer": {
+      "fullName": "ganesh pamar",
+      "username": "gautam",
+      "email": "ganeshpamar337@gmail.com",
+      "phone": "+918657924197"
+    },
+    "shipping": {
+      "address1": "ajshfjksbhfjk",
+      "address2": "dkgfsjdkljv",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "pincode": "400049",
+      "country": "India"
+    },
+    "items": [
+      {
+        "id": "4",
+        "name": "Carry Bag Planet",
+        "image": "/products/carry-bag-planet.webp",
+        "price": 171,
+        "quantity": 1
+      }
+    ],
+    "pricing": {
+      "subtotal": 171,
+      "shipping": 199,
+      "taxes": 21,
+      "total": 391
+    },
+    "invoice": {
+      "requested": true,
+      "gstNumber": "27ABCDE1234F1Z5"
+    },
+    "payment": {
+      "method": "razorpay",
+      "status": "pending",
+      "providerOrderId": "order_Rxi1jleGVowzp1",
+      "cancellationReason": "Bulk cancellation",
+      "cancelledAt": "2026-01-08T19:46:50.932Z"
+    },
+    "clientInfo": {
+      "ip": "43.250.134.109",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+      "capturedAt": "2025-12-30T05:34:12.786Z"
+    },
+    "fulfillmentStatus": "cancelled",
+    "cancelledAt": "2026-01-08T19:46:50.932Z"
+  },
+  {
+    "id": "599441a9-f647-4117-858b-ea6d47a4efab",
+    "sequence": 1003,
+    "orderNumber": "#1003",
+    "createdAt": "2025-12-30T06:20:26.254Z",
+    "customer": {
+      "fullName": "Prince Jain",
+      "username": "princejain756",
+      "email": "princejain756@gmail.com",
+      "phone": "8005634678",
+      "userId": "cd1e813a-f1af-4a4d-8ad9-c517fc464b3f"
+    },
+    "shipping": {
+      "address1": "Vaishnavi Terraces",
+      "address2": "Vaishnavi Terraces",
+      "city": "Bangalore",
+      "state": "Karnataka",
+      "pincode": "560078",
+      "country": "India"
+    },
+    "items": [
+      {
+        "id": "3",
+        "name": "Birdsong Revival Tote",
+        "image": "/products/gift-bag-34.webp",
+        "price": 449,
+        "quantity": 1
+      }
+    ],
+    "pricing": {
+      "subtotal": 449,
+      "shipping": 199,
+      "taxes": 54,
+      "total": 702
+    },
+    "invoice": {
+      "requested": false
+    },
+    "payment": {
+      "method": "razorpay",
+      "status": "failed",
+      "providerOrderId": "order_RxioZEeRwUXAsV",
+      "failureReason": "cancelled",
+      "failedAt": "2025-12-30T06:20:32.791Z",
+      "cancellationReason": "Bulk cancellation",
+      "cancelledAt": "2026-01-08T19:46:50.799Z"
+    },
+    "clientInfo": {
+      "ip": "122.171.20.245",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+      "capturedAt": "2025-12-30T06:20:26.254Z"
+    },
+    "fulfillmentStatus": "cancelled",
+    "cancelledAt": "2026-01-08T19:46:50.799Z"
+  },
+  {
+    "id": "9c3e2c50-d8e8-44da-a354-04c48db42e7a",
+    "sequence": 1004,
+    "orderNumber": "#1004",
+    "createdAt": "2025-12-30T12:08:09.575Z",
+    "customer": {
+      "fullName": "Prince Jain",
+      "username": "princejain756",
+      "email": "princejain756@gmail.com",
+      "phone": "8005634678",
+      "userId": "cd1e813a-f1af-4a4d-8ad9-c517fc464b3f"
+    },
+    "shipping": {
+      "address1": "Vaishnavi Terraces",
+      "address2": "Vaishnavi Terraces",
+      "city": "Bangalore",
+      "state": "Karnataka",
+      "pincode": "560078",
+      "country": "India"
+    },
+    "items": [
+      {
+        "id": "3",
+        "name": "Birdsong Revival Tote",
+        "image": "/products/gift-bag-34.webp",
+        "price": 449,
+        "quantity": 1
+      }
+    ],
+    "pricing": {
+      "subtotal": 449,
+      "shipping": 199,
+      "taxes": 54,
+      "total": 702
+    },
+    "invoice": {
+      "requested": false
+    },
+    "payment": {
+      "method": "cod",
+      "status": "rejected",
+      "rejectedAt": "2026-01-05T10:39:54.042Z",
+      "cancellationReason": "Bulk cancellation",
+      "cancelledAt": "2026-01-08T19:46:50.599Z"
+    },
+    "clientInfo": {
+      "ip": "122.171.20.245",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+      "capturedAt": "2025-12-30T12:08:09.575Z"
+    },
+    "fulfillmentStatus": "cancelled",
+    "restockedAt": "2026-01-08T15:07:22.245Z",
+    "restockedBy": "admin",
+    "cancelledAt": "2026-01-08T19:46:50.599Z"
+  },
+  {
+    "id": "f5a64b18-e01e-42ee-870e-671012f6cc3f",
+    "sequence": 1005,
+    "orderNumber": "#1005",
+    "createdAt": "2025-12-30T12:22:29.067Z",
+    "customer": {
+      "fullName": "Maitri",
+      "username": "maitriwadher",
+      "email": "wadhermaitri94@gmail.com",
+      "phone": "+919008138404"
+    },
+    "shipping": {
+      "address1": "Dipika Plastic Industries, 12th Cross, Cubbonpet, Bangalore",
+      "city": "Bangalore",
+      "state": "Karnataka",
+      "pincode": "560002",
+      "country": "India"
+    },
+    "items": [
+      {
+        "id": "3",
+        "name": "Birdsong Revival Tote",
+        "image": "/products/gift-bag-34.webp",
+        "price": 449,
+        "quantity": 1
+      }
+    ],
+    "pricing": {
+      "subtotal": 449,
+      "shipping": 199,
+      "taxes": 54,
+      "total": 702
+    },
+    "invoice": {
+      "requested": false
+    },
+    "payment": {
+      "method": "razorpay",
+      "status": "failed",
+      "providerOrderId": "order_Rxoz0ePxY6ElXc",
+      "failureReason": "cancelled",
+      "failedAt": "2025-12-30T12:22:53.127Z",
+      "cancellationReason": "Bulk cancellation",
+      "cancelledAt": "2026-01-08T19:46:50.399Z"
+    },
+    "clientInfo": {
+      "ip": "122.172.86.160",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36",
+      "capturedAt": "2025-12-30T12:22:29.067Z"
+    },
+    "fulfillmentStatus": "cancelled",
+    "cancelledAt": "2026-01-08T19:46:50.399Z"
+  },
+  {
+    "id": "4570d381-ebba-43cf-9aac-7f12b3d6b57f",
+    "sequence": 1006,
+    "orderNumber": "#1006",
+    "createdAt": "2026-01-07T16:30:18.957Z",
+    "customer": {
+      "fullName": "Prince Jain",
+      "username": "princejain756",
+      "email": "princejain757@gmail.com",
+      "phone": "+918005634678",
+      "userId": "35faf03a-bd80-49bb-860c-afaf1ed2f4e1"
+    },
+    "shipping": {
+      "address1": "D-602,VAISHNAVI TERRACES JP NAGAR 4TH PHASE DOLLARS COLONY 560078",
+      "address2": "--",
+      "city": "Bangalore",
+      "state": "Karnataka",
+      "pincode": "560078",
+      "country": "India"
+    },
+    "items": [
+      {
+        "id": "1",
+        "name": "Heliophile Bloom Set",
+        "image": "/products/categories/women-gift-sets/women-gift-sets-1.webp",
+        "price": 299,
+        "quantity": 1
+      }
+    ],
+    "pricing": {
+      "subtotal": 299,
+      "shipping": 199,
+      "taxes": 36,
+      "total": 534
+    },
+    "invoice": {
+      "requested": false
+    },
+    "payment": {
+      "method": "razorpay",
+      "status": "failed",
+      "providerOrderId": "order_S13TlOeAqdBhFJ",
+      "failureReason": "cancelled",
+      "failedAt": "2026-01-07T16:30:30.719Z",
+      "cancellationReason": "Bulk cancellation",
+      "cancelledAt": "2026-01-08T19:46:50.199Z"
+    },
+    "clientInfo": {
+      "ip": "122.171.19.132",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+      "capturedAt": "2026-01-07T16:30:18.957Z"
+    },
+    "fulfillmentStatus": "cancelled",
+    "cancelledAt": "2026-01-08T19:46:50.199Z"
+  },
+  {
+    "id": "ae6132fc-24de-4056-a541-b6039019ea90",
+    "sequence": 1007,
+    "orderNumber": "#1007",
+    "createdAt": "2026-01-08T19:59:29.887Z",
+    "customer": {
+      "fullName": "Prince Jain",
+      "username": "princejain756",
+      "email": "princejain756@gmail.com",
+      "phone": "+918005634678"
+    },
+    "shipping": {
+      "address1": "D-602,VAISHNAVI TERRACES JP NAGAR 4TH PHASE DOLLARS COLONY 560078",
+      "address2": "--",
+      "city": "Bangalore",
+      "state": "Karnataka",
+      "pincode": "560078",
+      "country": "India"
+    },
+    "items": [
+      {
+        "id": "9",
+        "name": "Sunny Pine",
+        "image": "/products/pineapple-pouch.webp",
+        "price": 199,
+        "quantity": 1,
+        "size": "M"
+      }
+    ],
+    "pricing": {
+      "subtotal": 199,
+      "shipping": 199,
+      "taxes": 24,
+      "total": 422
+    },
+    "invoice": {
+      "requested": true,
+      "gstNumber": "29ADXPJ3352J1ZX"
+    },
+    "payment": {
+      "method": "cod",
+      "status": "rejected",
+      "cancellationReason": "Bulk cancellation",
+      "cancelledAt": "2026-01-08T20:00:02.833Z"
+    },
+    "clientInfo": {
+      "ip": "122.171.18.70",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+      "capturedAt": "2026-01-08T19:59:29.887Z"
+    },
+    "fulfillmentStatus": "cancelled",
+    "cancelledAt": "2026-01-08T20:00:02.833Z"
+  }
+]

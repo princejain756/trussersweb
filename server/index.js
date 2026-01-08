@@ -1040,13 +1040,18 @@ function buildCheckoutPayload(payload) {
             });
 
             if (!name.error && !price.error && !quantity.error) {
-                normalizedItems.push({
+                const normalizedItem = {
                     id,
                     name: name.value,
                     image: image.value,
                     price: price.value,
                     quantity: quantity.value,
-                });
+                };
+                // Include size if provided
+                if (typeof item?.size === 'string' && item.size.trim()) {
+                    normalizedItem.size = item.size.trim();
+                }
+                normalizedItems.push(normalizedItem);
             }
         });
     }
@@ -1096,8 +1101,9 @@ function buildCreatePayload(payload) {
     const description = normalizeString(payload?.description, 'description', { required: true });
     const features = normalizeStringArray(payload?.features, 'features', { required: true });
     const category = normalizeOptionalString(payload?.category, 'category');
+    const sizes = normalizeStringArray(payload?.sizes, 'sizes', { required: false });
 
-    [name, price, image, tag, description, features, category].forEach((field) => {
+    [name, price, image, tag, description, features, category, sizes].forEach((field) => {
         if (field.error) {
             errors.push(field.error);
         }
@@ -1107,17 +1113,21 @@ function buildCreatePayload(payload) {
         return { errors };
     }
 
-    return {
-        value: {
-            name: name.value,
-            price: price.value,
-            image: image.value,
-            tag: tag.value ?? 'New',
-            description: description.value,
-            features: features.value,
-            category: category.value,
-        },
+    const result = {
+        name: name.value,
+        price: price.value,
+        image: image.value,
+        tag: tag.value ?? 'New',
+        description: description.value,
+        features: features.value,
+        category: category.value,
     };
+    // Only include sizes if provided
+    if (sizes.value && sizes.value.length > 0) {
+        result.sizes = sizes.value;
+    }
+
+    return { value: result };
 }
 
 function buildUpdatePayload(payload) {
@@ -1196,6 +1206,15 @@ function buildUpdatePayload(payload) {
             updates.category = undefined;
         } else {
             updates.category = field.value;
+        }
+    }
+
+    if (Object.prototype.hasOwnProperty.call(payload, 'sizes')) {
+        const field = normalizeStringArray(payload.sizes, 'sizes', { required: false });
+        if (field.error) {
+            errors.push(field.error);
+        } else {
+            updates.sizes = field.value ?? [];
         }
     }
 
@@ -1337,6 +1356,8 @@ const upload = multer({
 const app = express();
 app.use(express.json({ limit: '1mb' }));
 app.use('/uploads', express.static(uploadsDir));
+// Serve static blog assets - supports legacy /src/assets/blogs paths in database
+app.use('/src/assets/blogs', express.static(path.join(__dirname, '..', 'src', 'assets', 'blogs')));
 
 // ============================================
 // SECURITY HEADERS MIDDLEWARE
@@ -1642,9 +1663,9 @@ app.post('/api/uploads', requireAdmin, upload.single('image'), (req, res) => {
     if (!req.file) {
         return res.status(400).json({ error: 'Image file is required' });
     }
-    const baseUrl = `${req.protocol}://${req.get('host')}`;
+    // Return relative URL path - works in any environment (dev or production)
     return res.json({
-        url: `${baseUrl}/uploads/${req.file.filename}`,
+        url: `/uploads/${req.file.filename}`,
         filename: req.file.filename,
         size: req.file.size,
     });
@@ -2158,8 +2179,301 @@ app.post('/api/admin/orders/:id/fulfill', requireAdmin, async (req, res) => {
 });
 
 // ============================================
+// ADMIN NOTIFICATIONS API
+// ============================================
+
+// Get admin notifications (recent activity feed)
+app.get('/api/admin/notifications', requireAdmin, (req, res) => {
+    const now = new Date();
+    const oneDayAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+    const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+
+    const notifications = [];
+
+    // New orders in last 24 hours
+    const recentOrders = orders.filter(o => new Date(o.createdAt) > oneDayAgo);
+    recentOrders.forEach(order => {
+        notifications.push({
+            id: `order-${order.id}`,
+            type: 'new_order',
+            title: 'New Order',
+            message: `Order ${order.orderNumber} from ${order.customer?.fullName || order.customer?.email || 'Guest'}`,
+            amount: order.pricing?.total,
+            timestamp: order.createdAt,
+            read: false,
+            link: '/admin/orders',
+            orderId: order.id,
+        });
+    });
+
+    // Pending payments (COD awaiting approval)
+    const pendingCodOrders = orders.filter(o =>
+        o.payment?.method === 'cod' && o.payment?.status === 'pending'
+    );
+    pendingCodOrders.forEach(order => {
+        notifications.push({
+            id: `pending-cod-${order.id}`,
+            type: 'pending_payment',
+            title: 'COD Approval Required',
+            message: `Order ${order.orderNumber} needs approval`,
+            amount: order.pricing?.total,
+            timestamp: order.createdAt,
+            read: false,
+            link: '/admin/payments',
+            orderId: order.id,
+        });
+    });
+
+    // Unfulfilled orders older than 1 day
+    const unfulfilledOrders = orders.filter(o =>
+        o.fulfillmentStatus !== 'fulfilled' &&
+        o.fulfillmentStatus !== 'cancelled' &&
+        o.payment?.status === 'paid' &&
+        new Date(o.createdAt) < oneDayAgo &&
+        new Date(o.createdAt) > sevenDaysAgo
+    );
+    unfulfilledOrders.forEach(order => {
+        notifications.push({
+            id: `unfulfilled-${order.id}`,
+            type: 'unfulfilled',
+            title: 'Awaiting Fulfillment',
+            message: `Order ${order.orderNumber} needs to be shipped`,
+            amount: order.pricing?.total,
+            timestamp: order.createdAt,
+            read: false,
+            link: '/admin/orders',
+            orderId: order.id,
+        });
+    });
+
+    // Sort by timestamp descending
+    notifications.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+    // Return top 20 notifications
+    return res.json({
+        notifications: notifications.slice(0, 20),
+        unreadCount: notifications.length,
+        stats: {
+            newOrders: recentOrders.length,
+            pendingApprovals: pendingCodOrders.length,
+            awaitingFulfillment: unfulfilledOrders.length,
+        },
+    });
+});
+
+// ============================================
+// UPDATE ORDER API
+// ============================================
+
+// Update order details (customer info, shipping, notes)
+app.put('/api/admin/orders/:id', requireAdmin, async (req, res) => {
+    const orderIndex = orders.findIndex(o => o.id === req.params.id);
+    if (orderIndex === -1) {
+        return res.status(404).json({ error: 'Order not found' });
+    }
+
+    const order = orders[orderIndex];
+    const { customer, shipping, notes } = req.body || {};
+
+    const updatedOrder = {
+        ...order,
+        customer: {
+            ...order.customer,
+            ...(customer?.fullName && { fullName: customer.fullName }),
+            ...(customer?.firstName && { firstName: customer.firstName }),
+            ...(customer?.lastName && { lastName: customer.lastName }),
+            ...(customer?.email && { email: customer.email }),
+            ...(customer?.phone && { phone: customer.phone }),
+        },
+        shipping: {
+            ...order.shipping,
+            ...(shipping?.addressLine1 && { addressLine1: shipping.addressLine1 }),
+            ...(shipping?.addressLine2 !== undefined && { addressLine2: shipping.addressLine2 }),
+            ...(shipping?.city && { city: shipping.city }),
+            ...(shipping?.state && { state: shipping.state }),
+            ...(shipping?.pincode && { pincode: shipping.pincode }),
+            ...(shipping?.country && { country: shipping.country }),
+        },
+        ...(notes !== undefined && { notes }),
+        updatedAt: new Date().toISOString(),
+    };
+
+    orders = [...orders.slice(0, orderIndex), updatedOrder, ...orders.slice(orderIndex + 1)];
+    await persistJsonFile(ordersPath, orders);
+
+    // Update user's order if logged in
+    if (updatedOrder.customer?.userId) {
+        const userIndex = users.findIndex(u => u.id === updatedOrder.customer.userId);
+        if (userIndex !== -1) {
+            const existingUser = users[userIndex];
+            const nextOrders = (existingUser.orders ?? []).map(entry =>
+                entry.id === updatedOrder.id ? { ...entry, ...updatedOrder } : entry
+            );
+            users = [...users.slice(0, userIndex), { ...existingUser, orders: nextOrders }, ...users.slice(userIndex + 1)];
+            await persistJsonFile(usersPath, users);
+        }
+    }
+
+    return res.json({
+        success: true,
+        message: 'Order updated successfully',
+        order: updatedOrder,
+    });
+});
+
+// ============================================
+// RETURN ORDER API
+// ============================================
+
+// Process return (triggers refund for paid orders)
+app.post('/api/admin/orders/:id/return', requireAdmin, async (req, res) => {
+    const orderIndex = orders.findIndex(o => o.id === req.params.id);
+    if (orderIndex === -1) {
+        return res.status(404).json({ error: 'Order not found' });
+    }
+
+    const order = orders[orderIndex];
+    const reason = req.body?.reason || 'Customer return';
+
+    // Check if order can be returned
+    if (order.fulfillmentStatus === 'cancelled') {
+        return res.status(400).json({ error: 'Order is already cancelled' });
+    }
+    if (order.returnedAt) {
+        return res.status(400).json({ error: 'Order has already been returned' });
+    }
+
+    let refundResult = null;
+
+    // If paid with Razorpay, initiate refund
+    if (order.payment?.method === 'razorpay' && order.payment?.status === 'paid') {
+        const providerPaymentId = order.payment?.providerPaymentId;
+        const keyId = process.env.RAZORPAY_KEY_ID?.trim();
+        const keySecret = process.env.RAZORPAY_KEY_SECRET?.trim();
+
+        if (providerPaymentId && keyId && keySecret) {
+            try {
+                const authHeader = Buffer.from(`${keyId}:${keySecret}`).toString('base64');
+                const totalAmountPaise = Math.round((order.pricing?.total || 0) * 100);
+
+                const response = await fetch(`https://api.razorpay.com/v1/payments/${providerPaymentId}/refund`, {
+                    method: 'POST',
+                    headers: {
+                        Authorization: `Basic ${authHeader}`,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        amount: totalAmountPaise,
+                        speed: 'normal',
+                        notes: {
+                            order_id: order.id,
+                            reason: reason,
+                        },
+                    }),
+                });
+
+                const payload = await response.json().catch(() => ({}));
+
+                if (response.ok && payload?.id) {
+                    refundResult = {
+                        id: payload.id,
+                        amount: totalAmountPaise / 100,
+                        status: payload.status,
+                    };
+                }
+            } catch (error) {
+                console.error('Refund during return failed:', error);
+            }
+        }
+    }
+
+    const updatedOrder = {
+        ...order,
+        fulfillmentStatus: 'returned',
+        returnedAt: new Date().toISOString(),
+        returnReason: reason,
+        payment: {
+            ...order.payment,
+            ...(refundResult && {
+                status: 'refunded',
+                refundId: refundResult.id,
+                refundAmount: refundResult.amount,
+                refundedAt: new Date().toISOString(),
+                refundStatus: refundResult.status,
+            }),
+        },
+    };
+
+    orders = [...orders.slice(0, orderIndex), updatedOrder, ...orders.slice(orderIndex + 1)];
+    await persistJsonFile(ordersPath, orders);
+
+    // Update user's order if logged in
+    if (updatedOrder.customer?.userId) {
+        const userIndex = users.findIndex(u => u.id === updatedOrder.customer.userId);
+        if (userIndex !== -1) {
+            const existingUser = users[userIndex];
+            const nextOrders = (existingUser.orders ?? []).map(entry =>
+                entry.id === updatedOrder.id ? { ...entry, fulfillmentStatus: 'returned', paymentStatus: updatedOrder.payment?.status } : entry
+            );
+            users = [...users.slice(0, userIndex), { ...existingUser, orders: nextOrders }, ...users.slice(userIndex + 1)];
+            await persistJsonFile(usersPath, users);
+        }
+    }
+
+    return res.json({
+        success: true,
+        message: refundResult ? 'Order returned and refund issued' : 'Order marked as returned',
+        order: updatedOrder,
+        refund: refundResult,
+    });
+});
+
+// ============================================
+// RESTOCK ORDER API
+// ============================================
+
+// Mark order items as restocked (for inventory tracking purposes)
+app.post('/api/admin/orders/:id/restock', requireAdmin, async (req, res) => {
+    const orderIndex = orders.findIndex(o => o.id === req.params.id);
+    if (orderIndex === -1) {
+        return res.status(404).json({ error: 'Order not found' });
+    }
+
+    const order = orders[orderIndex];
+
+    // Check if order can be restocked
+    if (!['cancelled', 'returned'].includes(order.fulfillmentStatus) && !order.cancelledAt && !order.returnedAt) {
+        return res.status(400).json({ error: 'Only cancelled or returned orders can be restocked' });
+    }
+    if (order.restockedAt) {
+        return res.status(400).json({ error: 'Order has already been restocked' });
+    }
+
+    const updatedOrder = {
+        ...order,
+        restockedAt: new Date().toISOString(),
+        restockedBy: 'admin',
+    };
+
+    orders = [...orders.slice(0, orderIndex), updatedOrder, ...orders.slice(orderIndex + 1)];
+    await persistJsonFile(ordersPath, orders);
+
+    return res.json({
+        success: true,
+        message: 'Order items marked as restocked',
+        order: {
+            id: updatedOrder.id,
+            orderNumber: updatedOrder.orderNumber,
+            restockedAt: updatedOrder.restockedAt,
+            items: updatedOrder.items?.map(i => ({ name: i.name, quantity: i.quantity })),
+        },
+    });
+});
+
+// ============================================
 // PUBLIC INVOICE ENDPOINT (for customer access)
 // ============================================
+
 app.get('/api/orders/:id/invoice/pdf', async (req, res) => {
     const order = orders.find(o => o.id === req.params.id);
     if (!order) {
@@ -2191,6 +2505,7 @@ app.get('/api/orders/:id/invoice/pdf', async (req, res) => {
         <tr>
             <td class="col-desc">
                 ${item.name || item.title}
+                ${item.size ? `<br><span style="color: #C1A17C; font-size: 10px;">Size: ${item.size}</span>` : ''}
                 ${item.variant ? `<br><span style="color: #666; font-size: 10px;">${item.variant}</span>` : ''}
             </td>
             <td class="col-price">${formatCurrency(item.price)}</td>
@@ -2438,6 +2753,7 @@ app.get('/api/orders/:id/invoice/pdf', async (req, res) => {
                 ${order.shipping?.addressLine2 ? `<p>${order.shipping.addressLine2}</p>` : ''}
                 ${order.shipping?.city ? `<p>${order.shipping.city}, ${order.shipping.state || ''} ${order.shipping.pincode || ''}</p>` : ''}
                 ${order.customer?.phone ? `<p>${order.customer.phone}</p>` : ''}
+                ${order.invoice?.gstNumber ? `<p><strong>GSTIN:</strong> ${order.invoice.gstNumber}</p>` : ''}
             </div>
             <div class="invoice-meta">
                 <p><strong>Invoice No:</strong> ${invoiceNumber}</p>
@@ -3737,6 +4053,42 @@ app.post('/api/admin/orders/:id/cancel', requireAdmin, async (req, res) => {
     }
 
     return res.json({ success: true, order: updated, refundIssued: false });
+});
+
+// Delete order permanently
+app.delete('/api/admin/orders/:id', requireAdmin, async (req, res) => {
+    const { id } = req.params;
+    const index = orders.findIndex(o => o.id === id);
+
+    if (index === -1) {
+        return res.status(404).json({ error: 'Order not found' });
+    }
+
+    const order = orders[index];
+
+    // Don't allow deleting orders that haven't been cancelled and have payment status paid
+    if (order.payment?.status === 'paid' && order.fulfillmentStatus !== 'cancelled') {
+        return res.status(400).json({
+            error: 'Cannot delete a paid order that has not been cancelled. Please cancel and refund first.'
+        });
+    }
+
+    // Remove order from list
+    orders = [...orders.slice(0, index), ...orders.slice(index + 1)];
+    await persistJsonFile(ordersPath, orders);
+
+    // Remove from user's orders if logged in
+    if (order.customer?.userId) {
+        const userIndex = users.findIndex(u => u.id === order.customer.userId);
+        if (userIndex !== -1) {
+            const existingUser = users[userIndex];
+            const nextOrders = (existingUser.orders ?? []).filter(entry => entry.id !== id);
+            users = [...users.slice(0, userIndex), { ...existingUser, orders: nextOrders }, ...users.slice(userIndex + 1)];
+            await persistJsonFile(usersPath, users);
+        }
+    }
+
+    return res.json({ success: true, message: 'Order deleted permanently' });
 });
 
 // ============================================

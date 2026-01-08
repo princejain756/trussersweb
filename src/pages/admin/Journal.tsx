@@ -80,6 +80,29 @@ const slugify = (value: string) =>
         .replace(/\s+/g, '-')
         .replace(/-+/g, '-');
 
+// Helper to resolve image URLs properly for display
+const resolveImageUrl = (imageUrl: string | undefined): string => {
+    if (!imageUrl) return '';
+    // Already a full URL - pass through
+    if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
+        // Strip localhost prefix and reconstruct with current apiBaseUrl
+        const localhostMatch = imageUrl.match(/^https?:\/\/localhost:\d+(\/.+)$/);
+        if (localhostMatch) {
+            return `${apiBaseUrl}${localhostMatch[1]}`;
+        }
+        return imageUrl;
+    }
+    // Relative paths starting with /src/assets or /uploads - prepend apiBaseUrl
+    if (imageUrl.startsWith('/src/assets') || imageUrl.startsWith('/uploads')) {
+        return `${apiBaseUrl}${imageUrl}`;
+    }
+    // Any other path - assume it's relative to API
+    if (imageUrl.startsWith('/')) {
+        return `${apiBaseUrl}${imageUrl}`;
+    }
+    return imageUrl;
+};
+
 const defaultBlogDraft: BlogDraft = {
     title: '',
     slug: '',
@@ -116,10 +139,14 @@ export const Journal = () => {
         setIsLoading(true);
         setError('');
         try {
-            const response = await fetch(`${apiBaseUrl}/api/blogs`);
+            const response = await fetch(`${apiBaseUrl}/api/admin/blogs`, {
+                headers: buildAuthHeaders(),
+            });
             if (!response.ok) throw new Error('Failed to fetch blogs');
             const data = await response.json();
-            setBlogs(Array.isArray(data) ? data : []);
+            // API returns { blogs: [...], stats: {...} }
+            const blogsList = Array.isArray(data) ? data : (data.blogs || []);
+            setBlogs(blogsList);
         } catch (err) {
             const message = err instanceof Error ? err.message : 'Failed to fetch blogs';
             setError(message);
@@ -415,7 +442,7 @@ export const Journal = () => {
                                                 {blogDraft.coverImage ? (
                                                     <>
                                                         <img
-                                                            src={blogDraft.coverImage.startsWith('/') ? blogDraft.coverImage : `${apiBaseUrl}${blogDraft.coverImage}`}
+                                                            src={resolveImageUrl(blogDraft.coverImage)}
                                                             alt="Cover"
                                                             className="w-full h-full object-cover"
                                                         />
@@ -814,7 +841,7 @@ export const Journal = () => {
                                                         <div className="w-20 h-20 rounded-xl overflow-hidden bg-[#F4EFEC] flex-shrink-0">
                                                             {blog.coverImage ? (
                                                                 <img
-                                                                    src={blog.coverImage.startsWith('/src') || blog.coverImage.startsWith('http') ? blog.coverImage : `${apiBaseUrl}${blog.coverImage}`}
+                                                                    src={resolveImageUrl(blog.coverImage)}
                                                                     alt={blog.title}
                                                                     className="w-full h-full object-cover"
                                                                 />

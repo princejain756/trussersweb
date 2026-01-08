@@ -27,6 +27,7 @@ interface OrderItem {
     name: string;
     quantity: number;
     price: number;
+    size?: string;
 }
 
 interface PaymentOrder {
@@ -213,6 +214,7 @@ const OrderDetailsModal = ({
                             {order.itemsList.map((item, index) => (
                                 <div key={index} className="flex justify-between text-sm">
                                     <span className="text-gray-700">
+                                        {item.size && <span className="text-[#C1A17C]">[{item.size}] </span>}
                                         {item.name} × {item.quantity}
                                     </span>
                                     <span className="text-gray-900 font-medium">

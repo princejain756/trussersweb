@@ -38,6 +38,29 @@ interface Blog {
     wordCount: number;
 }
 
+// Helper to resolve image URLs properly for display
+const resolveImageUrl = (imageUrl: string | undefined): string => {
+    if (!imageUrl) return 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=1920';
+    // Already a full URL - pass through
+    if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
+        // Strip localhost prefix and reconstruct with current apiBaseUrl
+        const localhostMatch = imageUrl.match(/^https?:\/\/localhost:\d+(\/.+)$/);
+        if (localhostMatch) {
+            return `${apiBaseUrl}${localhostMatch[1]}`;
+        }
+        return imageUrl;
+    }
+    // Relative paths starting with /src/assets or /uploads - prepend apiBaseUrl
+    if (imageUrl.startsWith('/src/assets') || imageUrl.startsWith('/uploads')) {
+        return `${apiBaseUrl}${imageUrl}`;
+    }
+    // Any other path - assume it's relative to API
+    if (imageUrl.startsWith('/')) {
+        return `${apiBaseUrl}${imageUrl}`;
+    }
+    return imageUrl;
+};
+
 const BlogPost: React.FC = () => {
     const { slug } = useParams<{ slug: string }>();
     const [blog, setBlog] = useState<Blog | null>(null);
@@ -142,14 +165,14 @@ const BlogPost: React.FC = () => {
                 description={blog.excerpt}
                 canonicalPath={`/journal/${blog.slug}`}
                 ogType="article"
-                ogImage={blog.coverImage}
+                ogImage={resolveImageUrl(blog.coverImage)}
                 keywords={blog.seoKeywords}
                 jsonLd={{
                     '@context': 'https://schema.org',
                     '@type': 'BlogPosting',
                     headline: blog.title,
                     description: blog.excerpt,
-                    image: blog.coverImage,
+                    image: resolveImageUrl(blog.coverImage),
                     datePublished: blog.publishedDate,
                     author: {
                         '@type': 'Person',
@@ -168,7 +191,7 @@ const BlogPost: React.FC = () => {
                     {/* Background Image */}
                     <div
                         className="absolute inset-0 bg-cover bg-center"
-                        style={{ backgroundImage: `url(${blog.coverImage})` }}
+                        style={{ backgroundImage: `url(${resolveImageUrl(blog.coverImage)})` }}
                     >
                         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#0A0F0D]"></div>
                     </div>

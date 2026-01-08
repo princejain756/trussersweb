@@ -56,6 +56,7 @@ interface OrderItem {
     price: number;
     total: number;
     image?: string;
+    size?: string;
 }
 
 interface OrderDetail {
@@ -192,6 +193,18 @@ const OrderDetailModal = ({
     const [error, setError] = useState<string | null>(null);
     const [actionLoading, setActionLoading] = useState<string | null>(null);
     const [showPrintMenu, setShowPrintMenu] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
+    const [editForm, setEditForm] = useState({
+        fullName: '',
+        email: '',
+        phone: '',
+        addressLine1: '',
+        addressLine2: '',
+        city: '',
+        state: '',
+        pincode: '',
+        notes: '',
+    });
 
     const fetchOrderDetail = async () => {
         const token = getAdminToken();
@@ -315,6 +328,133 @@ const OrderDetailModal = ({
         }
     };
 
+    // Handle Edit Order
+    const handleEdit = () => {
+        if (!order) return;
+        setEditForm({
+            fullName: order.customer.name || '',
+            email: order.customer.email || '',
+            phone: order.customer.phone || '',
+            addressLine1: order.shipping.addressLine1 || '',
+            addressLine2: order.shipping.addressLine2 || '',
+            city: order.shipping.city || '',
+            state: order.shipping.state || '',
+            pincode: order.shipping.pincode || '',
+            notes: order.notes || '',
+        });
+        setShowEditModal(true);
+    };
+
+    const handleSaveEdit = async () => {
+        const token = getAdminToken();
+        if (!token || !order) return;
+
+        try {
+            setActionLoading('edit');
+            const response = await fetch(`${apiBaseUrl}/api/admin/orders/${order.id}`, {
+                method: 'PUT',
+                headers: {
+                    'X-Admin-Key': token,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    customer: {
+                        fullName: editForm.fullName,
+                        email: editForm.email,
+                        phone: editForm.phone,
+                    },
+                    shipping: {
+                        addressLine1: editForm.addressLine1,
+                        addressLine2: editForm.addressLine2,
+                        city: editForm.city,
+                        state: editForm.state,
+                        pincode: editForm.pincode,
+                    },
+                    notes: editForm.notes,
+                }),
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                alert('Order updated successfully!');
+                setShowEditModal(false);
+                await fetchOrderDetail();
+                onOrderUpdated?.();
+            } else {
+                alert(result.error || 'Failed to update order');
+            }
+        } catch (err) {
+            alert('Failed to update order');
+        } finally {
+            setActionLoading(null);
+        }
+    };
+
+    // Handle Return Order
+    const handleReturn = async () => {
+        const token = getAdminToken();
+        if (!token || !order) return;
+
+        const reason = prompt('Enter return reason (optional):') || 'Customer return';
+
+        try {
+            setActionLoading('return');
+            const response = await fetch(`${apiBaseUrl}/api/admin/orders/${order.id}/return`, {
+                method: 'POST',
+                headers: {
+                    'X-Admin-Key': token,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ reason }),
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                const refundMsg = result.refund
+                    ? `\nRefund of ₹${result.refund.amount.toLocaleString('en-IN')} initiated.`
+                    : '';
+                alert(`Order marked as returned!${refundMsg}`);
+                await fetchOrderDetail();
+                onOrderUpdated?.();
+            } else {
+                alert(result.error || 'Failed to process return');
+            }
+        } catch (err) {
+            alert('Failed to process return');
+        } finally {
+            setActionLoading(null);
+        }
+    };
+
+    // Handle Restock
+    const handleRestock = async () => {
+        const token = getAdminToken();
+        if (!token || !order) return;
+
+        if (!confirm('Mark items from this order as restocked?')) return;
+
+        try {
+            setActionLoading('restock');
+            const response = await fetch(`${apiBaseUrl}/api/admin/orders/${order.id}/restock`, {
+                method: 'POST',
+                headers: { 'X-Admin-Key': token },
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                alert('Order items marked as restocked!');
+                await fetchOrderDetail();
+                onOrderUpdated?.();
+            } else {
+                alert(result.error || 'Failed to restock order');
+            }
+        } catch (err) {
+            alert('Failed to restock order');
+        } finally {
+            setActionLoading(null);
+        }
+    };
+
     if (loading) {
         return (
             <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center">
@@ -376,19 +516,23 @@ const OrderDetailModal = ({
                         </div>
                         <div className="flex items-center gap-2">
                             <button
-                                onClick={() => alert('Restock feature coming soon')}
-                                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50"
+                                onClick={handleRestock}
+                                disabled={actionLoading === 'restock'}
+                                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 disabled:opacity-50 flex items-center gap-1"
                             >
+                                {actionLoading === 'restock' && <Loader2 className="w-4 h-4 animate-spin" />}
                                 Restock
                             </button>
                             <button
-                                onClick={() => alert('Return feature coming soon')}
-                                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50"
+                                onClick={handleReturn}
+                                disabled={actionLoading === 'return'}
+                                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 disabled:opacity-50 flex items-center gap-1"
                             >
+                                {actionLoading === 'return' && <Loader2 className="w-4 h-4 animate-spin" />}
                                 Return
                             </button>
                             <button
-                                onClick={() => alert('Edit feature coming soon')}
+                                onClick={handleEdit}
                                 className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50"
                             >
                                 Edit
@@ -464,7 +608,10 @@ const OrderDetailModal = ({
                                                 </div>
                                                 <div className="flex-1 min-w-0">
                                                     <p className="font-medium text-gray-900 truncate">{item.name}</p>
-                                                    <p className="text-sm text-gray-500">{item.variant} • {item.sku}</p>
+                                                    <p className="text-sm text-gray-500">
+                                                        {item.size && <span className="text-[#C1A17C]">Size: {item.size} • </span>}
+                                                        {item.variant} • {item.sku}
+                                                    </p>
                                                 </div>
                                                 <div className="text-right">
                                                     <p className="font-medium text-gray-900">
@@ -684,6 +831,119 @@ const OrderDetailModal = ({
                     </div>
                 </div>
             </motion.div>
+
+            {/* Edit Order Modal */}
+            {showEditModal && (
+                <div className="fixed inset-0 z-[60] flex items-center justify-center">
+                    <div className="absolute inset-0 bg-black/50" onClick={() => setShowEditModal(false)} />
+                    <div className="relative bg-white rounded-xl w-full max-w-lg max-h-[90vh] overflow-y-auto m-4">
+                        <div className="sticky top-0 z-10 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+                            <h3 className="text-lg font-semibold text-gray-900">Edit Order</h3>
+                            <button onClick={() => setShowEditModal(false)} className="p-2 hover:bg-gray-100 rounded-lg">
+                                <X className="w-5 h-5" />
+                            </button>
+                        </div>
+                        <div className="p-6 space-y-4">
+                            <div>
+                                <h4 className="font-medium text-gray-700 mb-3">Customer Information</h4>
+                                <div className="space-y-3">
+                                    <input
+                                        type="text"
+                                        placeholder="Full Name"
+                                        value={editForm.fullName}
+                                        onChange={(e) => setEditForm(prev => ({ ...prev, fullName: e.target.value }))}
+                                        className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1A3C27]/20"
+                                    />
+                                    <input
+                                        type="email"
+                                        placeholder="Email"
+                                        value={editForm.email}
+                                        onChange={(e) => setEditForm(prev => ({ ...prev, email: e.target.value }))}
+                                        className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1A3C27]/20"
+                                    />
+                                    <input
+                                        type="tel"
+                                        placeholder="Phone"
+                                        value={editForm.phone}
+                                        onChange={(e) => setEditForm(prev => ({ ...prev, phone: e.target.value }))}
+                                        className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1A3C27]/20"
+                                    />
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 className="font-medium text-gray-700 mb-3">Shipping Address</h4>
+                                <div className="space-y-3">
+                                    <input
+                                        type="text"
+                                        placeholder="Address Line 1"
+                                        value={editForm.addressLine1}
+                                        onChange={(e) => setEditForm(prev => ({ ...prev, addressLine1: e.target.value }))}
+                                        className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1A3C27]/20"
+                                    />
+                                    <input
+                                        type="text"
+                                        placeholder="Address Line 2 (optional)"
+                                        value={editForm.addressLine2}
+                                        onChange={(e) => setEditForm(prev => ({ ...prev, addressLine2: e.target.value }))}
+                                        className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1A3C27]/20"
+                                    />
+                                    <div className="grid grid-cols-2 gap-3">
+                                        <input
+                                            type="text"
+                                            placeholder="City"
+                                            value={editForm.city}
+                                            onChange={(e) => setEditForm(prev => ({ ...prev, city: e.target.value }))}
+                                            className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1A3C27]/20"
+                                        />
+                                        <input
+                                            type="text"
+                                            placeholder="State"
+                                            value={editForm.state}
+                                            onChange={(e) => setEditForm(prev => ({ ...prev, state: e.target.value }))}
+                                            className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1A3C27]/20"
+                                        />
+                                    </div>
+                                    <input
+                                        type="text"
+                                        placeholder="Pincode"
+                                        value={editForm.pincode}
+                                        onChange={(e) => setEditForm(prev => ({ ...prev, pincode: e.target.value }))}
+                                        className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1A3C27]/20"
+                                    />
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 className="font-medium text-gray-700 mb-3">Order Notes</h4>
+                                <textarea
+                                    placeholder="Add notes about this order..."
+                                    value={editForm.notes}
+                                    onChange={(e) => setEditForm(prev => ({ ...prev, notes: e.target.value }))}
+                                    rows={3}
+                                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1A3C27]/20 resize-none"
+                                />
+                            </div>
+                        </div>
+                        <div className="sticky bottom-0 bg-gray-50 border-t border-gray-200 px-6 py-4 flex justify-end gap-3">
+                            <button
+                                onClick={() => setShowEditModal(false)}
+                                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={handleSaveEdit}
+                                disabled={actionLoading === 'edit'}
+                                className="px-4 py-2 text-sm font-medium text-white bg-[#1A3C27] rounded-lg hover:bg-[#2D5F3F] disabled:opacity-50 flex items-center gap-2"
+                            >
+                                {actionLoading === 'edit' && <Loader2 className="w-4 h-4 animate-spin" />}
+                                Save Changes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
@@ -697,6 +957,8 @@ export const Orders = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [selectedOrderId, setSelectedOrderId] = useState<string | null>(null);
+    const [selectedOrders, setSelectedOrders] = useState<Set<string>>(new Set());
+    const [bulkActionLoading, setBulkActionLoading] = useState<string | null>(null);
 
     const getAdminToken = useCallback(() => {
         return typeof window !== 'undefined' ? window.localStorage.getItem('adminToken') : null;
@@ -784,6 +1046,129 @@ export const Orders = () => {
                 console.error('Export failed:', err);
                 alert('Failed to export orders');
             });
+    };
+
+    // Bulk selection handlers
+    const toggleSelectOrder = (orderId: string) => {
+        setSelectedOrders(prev => {
+            const next = new Set(prev);
+            if (next.has(orderId)) {
+                next.delete(orderId);
+            } else {
+                next.add(orderId);
+            }
+            return next;
+        });
+    };
+
+    const toggleSelectAll = () => {
+        if (selectedOrders.size === filteredOrders.length) {
+            setSelectedOrders(new Set());
+        } else {
+            setSelectedOrders(new Set(filteredOrders.map(o => o.id)));
+        }
+    };
+
+    const clearSelection = () => setSelectedOrders(new Set());
+
+    // Bulk action handlers
+    const handleBulkMarkFulfilled = async () => {
+        const token = getAdminToken();
+        if (!token) return;
+        if (!confirm(`Mark ${selectedOrders.size} order(s) as fulfilled?`)) return;
+
+        setBulkActionLoading('fulfill');
+        let successCount = 0;
+        for (const orderId of selectedOrders) {
+            try {
+                const res = await fetch(`${apiBaseUrl}/api/admin/orders/${orderId}/fulfill`, {
+                    method: 'POST',
+                    headers: { 'X-Admin-Key': token },
+                });
+                if (res.ok) successCount++;
+            } catch { /* ignore */ }
+        }
+        setBulkActionLoading(null);
+        alert(`${successCount} order(s) marked as fulfilled`);
+        clearSelection();
+        fetchOrders();
+    };
+
+    const handleBulkMarkPaid = async () => {
+        const token = getAdminToken();
+        if (!token) return;
+        if (!confirm(`Mark ${selectedOrders.size} order(s) as paid?`)) return;
+
+        setBulkActionLoading('paid');
+        let successCount = 0;
+        for (const orderId of selectedOrders) {
+            try {
+                const res = await fetch(`${apiBaseUrl}/api/admin/orders/${orderId}/mark-paid`, {
+                    method: 'POST',
+                    headers: { 'X-Admin-Key': token },
+                });
+                if (res.ok) successCount++;
+            } catch { /* ignore */ }
+        }
+        setBulkActionLoading(null);
+        alert(`${successCount} order(s) marked as paid`);
+        clearSelection();
+        fetchOrders();
+    };
+
+    const handleBulkCancel = async () => {
+        const token = getAdminToken();
+        if (!token) return;
+        if (!confirm(`Cancel ${selectedOrders.size} order(s)? This may trigger refunds for paid orders.`)) return;
+
+        setBulkActionLoading('cancel');
+        let successCount = 0;
+        for (const orderId of selectedOrders) {
+            try {
+                const res = await fetch(`${apiBaseUrl}/api/admin/orders/${orderId}/cancel`, {
+                    method: 'POST',
+                    headers: { 'X-Admin-Key': token, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ reason: 'Bulk cancellation' }),
+                });
+                if (res.ok) successCount++;
+            } catch { /* ignore */ }
+        }
+        setBulkActionLoading(null);
+        alert(`${successCount} order(s) cancelled`);
+        clearSelection();
+        fetchOrders();
+    };
+
+    const handleBulkDelete = async () => {
+        const token = getAdminToken();
+        if (!token) return;
+        if (!confirm(`PERMANENTLY DELETE ${selectedOrders.size} order(s)? This cannot be undone!`)) return;
+
+        setBulkActionLoading('delete');
+        let successCount = 0;
+        let errorMessages: string[] = [];
+        for (const orderId of selectedOrders) {
+            try {
+                const res = await fetch(`${apiBaseUrl}/api/admin/orders/${orderId}`, {
+                    method: 'DELETE',
+                    headers: { 'X-Admin-Key': token },
+                });
+                if (res.ok) {
+                    successCount++;
+                } else {
+                    const data = await res.json().catch(() => ({}));
+                    if (data.error) errorMessages.push(data.error);
+                }
+            } catch { /* ignore */ }
+        }
+        setBulkActionLoading(null);
+        if (errorMessages.length > 0) {
+            alert(`${successCount} order(s) deleted. Errors: ${errorMessages.join(', ')}`);
+        } else {
+            alert(`${successCount} order(s) deleted permanently`);
+        }
+        clearSelection();
+        fetchOrders();
     };
 
     // Stats
@@ -882,12 +1267,59 @@ export const Orders = () => {
                                 Filter
                             </button>
                         </div>
+                        {/* Bulk Actions */}
+                        {selectedOrders.size > 0 && (
+                            <div className="flex items-center gap-2">
+                                <span className="text-sm text-gray-600">
+                                    {selectedOrders.size} selected
+                                </span>
+                                <button
+                                    onClick={handleBulkMarkFulfilled}
+                                    disabled={bulkActionLoading !== null}
+                                    className="px-3 py-1.5 text-xs font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 disabled:opacity-50"
+                                >
+                                    {bulkActionLoading === 'fulfill' ? 'Processing...' : 'Mark Fulfilled'}
+                                </button>
+                                <button
+                                    onClick={handleBulkMarkPaid}
+                                    disabled={bulkActionLoading !== null}
+                                    className="px-3 py-1.5 text-xs font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 disabled:opacity-50"
+                                >
+                                    {bulkActionLoading === 'paid' ? 'Processing...' : 'Mark Paid'}
+                                </button>
+                                <button
+                                    onClick={handleBulkCancel}
+                                    disabled={bulkActionLoading !== null}
+                                    className="px-3 py-1.5 text-xs font-medium text-white bg-orange-600 rounded-lg hover:bg-orange-700 disabled:opacity-50"
+                                >
+                                    {bulkActionLoading === 'cancel' ? 'Cancelling...' : 'Cancel Orders'}
+                                </button>
+                                <button
+                                    onClick={handleBulkDelete}
+                                    disabled={bulkActionLoading !== null}
+                                    className="px-3 py-1.5 text-xs font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 disabled:opacity-50"
+                                >
+                                    {bulkActionLoading === 'delete' ? 'Deleting...' : 'Delete Orders'}
+                                </button>
+                                <button
+                                    onClick={clearSelection}
+                                    className="px-3 py-1.5 text-xs font-medium text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200"
+                                >
+                                    Clear
+                                </button>
+                            </div>
+                        )}
                     </div>
 
                     {/* Table Header */}
                     <div className="grid grid-cols-12 gap-2 items-center px-4 py-3 bg-gray-50 border-b border-gray-100 text-xs font-medium text-gray-500 uppercase tracking-wide">
                         <div className="col-span-1">
-                            <input type="checkbox" className="w-4 h-4 rounded border-gray-300" />
+                            <input
+                                type="checkbox"
+                                checked={selectedOrders.size === filteredOrders.length && filteredOrders.length > 0}
+                                onChange={toggleSelectAll}
+                                className="w-4 h-4 rounded border-gray-300 text-[#1A3C27] focus:ring-[#1A3C27]"
+                            />
                         </div>
                         <div className="col-span-1">Order</div>
                         <div className="col-span-2">Date</div>
@@ -919,7 +1351,12 @@ export const Orders = () => {
                                         className="grid grid-cols-12 gap-2 items-center px-4 py-3 hover:bg-gray-50 transition-colors cursor-pointer group"
                                     >
                                         <div className="col-span-1 flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
-                                            <input type="checkbox" className="w-4 h-4 rounded border-gray-300" />
+                                            <input
+                                                type="checkbox"
+                                                checked={selectedOrders.has(order.id)}
+                                                onChange={() => toggleSelectOrder(order.id)}
+                                                className="w-4 h-4 rounded border-gray-300 text-[#1A3C27] focus:ring-[#1A3C27]"
+                                            />
                                             {order.hasNote && <MessageSquare className="w-3.5 h-3.5 text-gray-400" />}
                                         </div>
                                         <div className="col-span-1">

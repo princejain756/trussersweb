@@ -38,6 +38,7 @@ type LineItem = {
     image: string;
     price: number;
     quantity: number;
+    size?: string;
 };
 
 type CheckoutFormValues = {
@@ -209,6 +210,7 @@ export const Checkout = () => {
                     image: item.image ?? '',
                     price: Number.isFinite(rawPrice) ? rawPrice : 0,
                     quantity: Number.isFinite(rawQuantity) ? rawQuantity : 1,
+                    size: item.size,
                 };
             })
             .filter((item) => Number.isFinite(item.price) && Number.isFinite(item.quantity) && item.quantity > 0);
@@ -234,6 +236,7 @@ export const Checkout = () => {
         }
 
         const primaryAddress = account.addresses?.[0];
+        const savedGst = account.gstNumber || '';
         setFormValues((prev) => ({
             ...prev,
             fullName: prev.fullName || account.fullName,
@@ -247,7 +250,9 @@ export const Checkout = () => {
             pincode: prev.pincode || primaryAddress?.pincode || '',
             country: prev.country || primaryAddress?.country || 'India',
             instructions: prev.instructions || primaryAddress?.instructions || '',
-            gstNumber: prev.gstNumber || account.gstNumber || '',
+            gstNumber: prev.gstNumber || savedGst,
+            // Auto-enable GST invoice if user has saved GSTIN
+            wantInvoice: prev.wantInvoice || Boolean(savedGst),
         }));
         setHasPrefilled(true);
     }, [account, hasPrefilled, useGuestCheckout]);
@@ -495,18 +500,18 @@ export const Checkout = () => {
                     }
                 };
 
-	                const options: RazorpayOptions = {
-	                    key: paymentAction.keyId!,
-	                    amount: paymentAction.amount ?? 0,
-	                    currency: paymentAction.currency ?? 'INR',
-	                    name: 'Trusser',
-	                    description: `Order ${order?.orderNumber ?? ''}`.trim(),
-	                    order_id: paymentAction.orderId!,
-	                    prefill: {
-	                        name: formValues.fullName,
-	                        email: formValues.email,
-	                        contact: formValues.phone,
-	                    },
+                const options: RazorpayOptions = {
+                    key: paymentAction.keyId!,
+                    amount: paymentAction.amount ?? 0,
+                    currency: paymentAction.currency ?? 'INR',
+                    name: 'Trusser',
+                    description: `Order ${order?.orderNumber ?? ''}`.trim(),
+                    order_id: paymentAction.orderId!,
+                    prefill: {
+                        name: formValues.fullName,
+                        email: formValues.email,
+                        contact: formValues.phone,
+                    },
                     notes: {
                         internal_order_id: orderId,
                     },
@@ -579,12 +584,12 @@ export const Checkout = () => {
                     <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[420px] bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.8),_transparent_70%)]" />
                 </div>
 
-	                <section className="relative pt-28 sm:pt-32 lg:pt-36 pb-12">
-	                    <div className="container mx-auto px-6">
-	                        <AnimatedSection>
-	                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/70 backdrop-blur border border-white/60 shadow-sm text-sm text-[#1A3C27]">
-	                                <Sparkles className="w-4 h-4 text-[#C1A17C]" />
-	                                Secure checkout with verified payments
+                <section className="relative pt-28 sm:pt-32 lg:pt-36 pb-12">
+                    <div className="container mx-auto px-6">
+                        <AnimatedSection>
+                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/70 backdrop-blur border border-white/60 shadow-sm text-sm text-[#1A3C27]">
+                                <Sparkles className="w-4 h-4 text-[#C1A17C]" />
+                                Secure checkout with verified payments
                             </div>
                         </AnimatedSection>
                         <AnimatedSection delay={0.1}>
@@ -927,7 +932,14 @@ export const Checkout = () => {
                                                         </span>
                                                     </div>
                                                     <div className="flex-1">
-                                                        <p className="text-sm text-[#1A3C27] font-medium">{item.name}</p>
+                                                        <p className="text-sm text-[#1A3C27] font-medium">
+                                                            {item.name}
+                                                            {item.size && (
+                                                                <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full bg-[#E8DFD4] text-xs text-[#5C5C5C]">
+                                                                    Size: {item.size}
+                                                                </span>
+                                                            )}
+                                                        </p>
                                                         <p className="text-xs text-[#9C8F84]">{formatPriceSimple(item.price)}</p>
                                                     </div>
                                                     <div className="text-sm text-[#1A3C27] font-semibold">

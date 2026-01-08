@@ -65,10 +65,33 @@ const AnimatedSection = ({ children, className = '', delay = 0 }: { children: Re
     );
 };
 
+// Helper to resolve image URLs properly for display
+const resolveImageUrl = (imageUrl: string | undefined): string => {
+    if (!imageUrl) return 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800';
+    // Already a full URL - pass through
+    if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
+        // Strip localhost prefix and reconstruct with current apiBaseUrl
+        const localhostMatch = imageUrl.match(/^https?:\/\/localhost:\d+(\/.+)$/);
+        if (localhostMatch) {
+            return `${apiBaseUrl}${localhostMatch[1]}`;
+        }
+        return imageUrl;
+    }
+    // Relative paths starting with /src/assets or /uploads - prepend apiBaseUrl
+    if (imageUrl.startsWith('/src/assets') || imageUrl.startsWith('/uploads')) {
+        return `${apiBaseUrl}${imageUrl}`;
+    }
+    // Any other path - assume it's relative to API
+    if (imageUrl.startsWith('/')) {
+        return `${apiBaseUrl}${imageUrl}`;
+    }
+    return imageUrl;
+};
+
 // Article Card Component
 const ArticleCard = ({ article, index, large = false }: { article: Blog; index: number; large?: boolean }) => {
     // Use fallback values for missing fields
-    const imageUrl = article.coverImage || article.image || 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800';
+    const imageUrl = resolveImageUrl(article.coverImage || article.image);
     const categoryName = article.category || (article.tags && article.tags[0]) || 'Sustainability';
 
     return (
@@ -169,7 +192,7 @@ export const Journal = () => {
 
     // Map blog data to featured article format for hero section
     const featuredArticle = featuredBlog ? {
-        image: featuredBlog.coverImage || featuredBlog.image || 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=1920',
+        image: resolveImageUrl(featuredBlog.coverImage || featuredBlog.image),
         title: featuredBlog.title,
         excerpt: featuredBlog.excerpt,
         category: featuredBlog.category || 'Sustainability',

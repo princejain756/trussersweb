@@ -32,6 +32,7 @@ type ProductDetailData = {
     price: number | string;
     description?: string;
     features?: string[];
+    sizes?: string[];
     rating: number;
     reviews: number;
 };
@@ -44,6 +45,7 @@ export const ProductDetail = () => {
     const [wasAdded, setWasAdded] = useState(false);
     const resetTimerRef = useRef<number | null>(null);
     const [quantity, setQuantity] = useState(1);
+    const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
     useEffect(() => {
         let isActive = true;
@@ -61,6 +63,7 @@ export const ProductDetail = () => {
                         }
                         const features = Array.isArray(data?.features) ? data.features : undefined;
                         const description = typeof data?.description === 'string' ? data.description : undefined;
+                        const sizes = Array.isArray(data?.sizes) ? data.sizes : undefined;
                         setProduct({
                             id: data?.id ?? id,
                             name: data?.name ?? 'Product',
@@ -68,6 +71,7 @@ export const ProductDetail = () => {
                             price: data?.price ?? '',
                             description,
                             features,
+                            sizes,
                             category: data?.category,
                             rating: 4.8,
                             reviews: 39,
@@ -182,6 +186,7 @@ export const ProductDetail = () => {
 
     useEffect(() => {
         setQuantity(1);
+        setSelectedSize(null);
     }, [product?.id]);
 
     if (isLoading) {
@@ -238,6 +243,7 @@ export const ProductDetail = () => {
         price: cartPrice,
         quantity,
         category: product.category,
+        size: selectedSize ?? undefined,
     };
 
     const incrementQuantity = () => setQuantity((prev) => Math.min(99, prev + 1));
@@ -384,6 +390,35 @@ export const ProductDetail = () => {
                                     ))}
                                 </div>
 
+                                {/* Size Selector */}
+                                {product.sizes && product.sizes.length > 0 && (
+                                    <div className="mb-10">
+                                        <h3 className="font-serif text-xl text-[#1A3C27] mb-4">Select Size</h3>
+                                        <div className="flex flex-wrap gap-3">
+                                            {product.sizes.map((size) => (
+                                                <button
+                                                    key={size}
+                                                    type="button"
+                                                    onClick={() => setSelectedSize(size)}
+                                                    className={`
+                                                        min-w-[3rem] px-5 py-3 rounded-full text-sm font-semibold
+                                                        transition-all duration-200 ease-out
+                                                        ${selectedSize === size
+                                                            ? 'bg-[#1A3C27] text-white shadow-lg scale-105'
+                                                            : 'bg-white/80 text-[#1A3C27] border border-[#E8DFD4] hover:border-[#1A3C27] hover:bg-[#1A3C27]/5'
+                                                        }
+                                                    `}
+                                                >
+                                                    {size}
+                                                </button>
+                                            ))}
+                                        </div>
+                                        {!selectedSize && (
+                                            <p className="mt-2 text-sm text-[#9C8F84]">Please select a size</p>
+                                        )}
+                                    </div>
+                                )}
+
                                 {/* Quantity + Action Buttons */}
                                 <div className="flex flex-col gap-6 mb-12">
                                     <div className="flex flex-wrap items-center gap-4">
@@ -407,20 +442,20 @@ export const ProductDetail = () => {
                                         </div>
                                     </div>
                                     <div className="flex flex-col sm:flex-row gap-4">
-                                    <Button
-                                        onClick={handleAddToCart}
-                                        className="flex-1 py-6 text-lg bg-[#2D5F3F] hover:bg-[#1A3C27] text-white shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1"
-                                    >
-                                        <ShoppingBag className="mr-3" size={20} />
-                                        {wasAdded ? 'Added to Cart' : 'Add to Cart'}
-                                    </Button>
-                                    <Button
-                                        variant="outline"
-                                        onClick={handleBuyNow}
-                                        className="flex-1 py-6 text-lg border-[#1A3C27] text-[#1A3C27] hover:bg-[#1A3C27] hover:text-white transition-all"
-                                    >
-                                        Buy Now
-                                    </Button>
+                                        <Button
+                                            onClick={handleAddToCart}
+                                            className="flex-1 py-6 text-lg bg-[#2D5F3F] hover:bg-[#1A3C27] text-white shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1"
+                                        >
+                                            <ShoppingBag className="mr-3" size={20} />
+                                            {wasAdded ? 'Added to Cart' : 'Add to Cart'}
+                                        </Button>
+                                        <Button
+                                            variant="outline"
+                                            onClick={handleBuyNow}
+                                            className="flex-1 py-6 text-lg border-[#1A3C27] text-[#1A3C27] hover:bg-[#1A3C27] hover:text-white transition-all"
+                                        >
+                                            Buy Now
+                                        </Button>
                                     </div>
                                 </div>
 
