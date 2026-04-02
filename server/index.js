@@ -29,11 +29,12 @@ const discountsPath = path.join(dataDir, 'discounts.json');
 const blogsPath = path.join(dataDir, 'blogs.json');
 const bannedEntitiesPath = path.join(dataDir, 'bannedEntities.json');
 const newsletterSubscribersPath = path.join(dataDir, 'newsletterSubscribers.json');
+const reviewsPath = path.join(dataDir, 'reviews.json');
 const sourceProductsPath = path.join(__dirname, '..', 'src', 'data', 'products.json');
 const sourceCategoriesPath = path.join(__dirname, '..', 'src', 'data', 'categories.json');
 const sourceWebsiteContentPath = path.join(__dirname, '..', 'public', 'websiteContent.json');
 const adminUser = process.env.ADMIN_USER?.trim() || 'trusser-admin';
-const adminPassword = process.env.ADMIN_PASSWORD?.trim() || 'Trusser-2024';
+const adminPassword = process.env.ADMIN_PASSWORD?.trim() || 'Trusaerasd1242asd132rasc$#34123!s—12easdc';
 const adminToken = process.env.ADMIN_TOKEN?.trim() || 'trusser-admin-token-2024';
 const googleClientId = process.env.GOOGLE_CLIENT_ID?.trim();
 const googleOAuthClient = googleClientId ? new OAuth2Client(googleClientId) : null;
@@ -76,6 +77,8 @@ const smtpConfig = {
     secure: process.env.SMTP_SECURE === 'true',
     from: process.env.SMTP_FROM?.trim() || businessDetails.email,
 };
+// Admin email recipients for order notifications
+const ADMIN_EMAIL_RECIPIENTS = ['princejain756@gmail.com', 'info@trusser.in'];
 let mailTransporter = null;
 let mailerChecked = false;
 const logoPath = path.join(__dirname, '..', 'src', 'assets', 'TrusserLOGO.avif');
@@ -91,6 +94,7 @@ let discounts = [];
 let blogs = [];
 let bannedEntities = []; // Fraud detection: banned IPs, emails, phones, addresses
 let newsletterSubscribers = []; // Newsletter email subscribers
+let reviews = []; // Product reviews
 let writeQueue = Promise.resolve();
 
 function stringifyAscii(value) {
@@ -257,6 +261,16 @@ async function ensureSeedData() {
         newsletterSubscribers = [];
         await persistJsonFile(newsletterSubscribersPath, newsletterSubscribers);
     }
+
+    try {
+        reviews = await readJsonFile(reviewsPath);
+    } catch (error) {
+        if (error?.code !== 'ENOENT') {
+            throw error;
+        }
+        reviews = [];
+        await persistJsonFile(reviewsPath, reviews);
+    }
 }
 
 // Get client IP address from request (handles proxies)
@@ -357,6 +371,39 @@ function normalizeStringArray(value, field, { required }) {
         .filter((item) => typeof item === 'string')
         .map((item) => item.trim())
         .filter(Boolean);
+
+    if (required && normalized.length === 0) {
+        return { error: `${field} cannot be empty` };
+    }
+
+    return { value: normalized };
+}
+
+// Normalize sizes: accepts either string[] (legacy) or {size: string, price: string}[] (new)
+function normalizeSizesArray(value, field, { required }) {
+    if (value === undefined || value === null) {
+        return required ? { error: `${field} is required` } : { value: undefined };
+    }
+
+    if (!Array.isArray(value)) {
+        return { error: `${field} must be an array` };
+    }
+
+    const normalized = value
+        .map((item) => {
+            if (typeof item === 'string') {
+                // Legacy format: just a size string
+                return { size: item.trim(), price: '' };
+            } else if (typeof item === 'object' && item !== null) {
+                // New format: {size, price}
+                return {
+                    size: String(item.size ?? '').trim(),
+                    price: String(item.price ?? '').trim()
+                };
+            }
+            return null;
+        })
+        .filter((item) => item && item.size);
 
     if (required && normalized.length === 0) {
         return { error: `${field} cannot be empty` };
@@ -845,34 +892,32 @@ async function buildInvoicePdf(order) {
         const sgst = isIntraState ? taxes / 2 : 0;
         const igst = isIntraState ? 0 : taxes;
 
-        const summaryX = left + col.sno + col.desc + col.hsn + col.qty + col.rate - 10;
-        const summaryWidth = col.amount + 80;
+        // Summary section - positioned on the right side with proper spacing
+        const summaryLabelWidth = 120;
+        const summaryValueWidth = 100;
+        const summaryTotalWidth = summaryLabelWidth + summaryValueWidth;
+        const summaryStartX = right - summaryTotalWidth;
         let summaryY = y + 10;
 
-        doc.fillColor('#000000').fontSize(10).font('Helvetica-Bold');
-        doc.text('Taxable Value', summaryX, summaryY, { width: summaryWidth, align: 'right' });
-        doc.font('Helvetica').fillColor(muted).text(formatInr(taxable), right - col.amount, summaryY, { width: col.amount, align: 'right' });
-        summaryY += 16;
+        // Draw summary rows with label on left, value on right
+        const drawSummaryRow = (label, value, isBold = false, color = '#000000') => {
+            doc.font(isBold ? 'Helvetica-Bold' : 'Helvetica').fillColor(color).fontSize(10);
+            doc.text(label, summaryStartX, summaryY, { width: summaryLabelWidth, align: 'left' });
+            doc.text(value, summaryStartX + summaryLabelWidth, summaryY, { width: summaryValueWidth, align: 'right' });
+            summaryY += 16;
+        };
 
-        doc.font('Helvetica-Bold').fillColor('#000000').text('Shipping', summaryX, summaryY, { width: summaryWidth, align: 'right' });
-        doc.font('Helvetica').fillColor(muted).text(formatInr(shipping), right - col.amount, summaryY, { width: col.amount, align: 'right' });
-        summaryY += 16;
+        drawSummaryRow('Taxable Value', formatInr(taxable), true);
+        drawSummaryRow('Shipping', formatInr(shipping), true);
 
         if (isIntraState) {
-            doc.font('Helvetica-Bold').fillColor('#000000').text(`CGST (${(taxRate / 2).toFixed(2)}%)`, summaryX, summaryY, { width: summaryWidth, align: 'right' });
-            doc.font('Helvetica').fillColor(muted).text(formatInr(cgst), right - col.amount, summaryY, { width: col.amount, align: 'right' });
-            summaryY += 16;
-            doc.font('Helvetica-Bold').fillColor('#000000').text(`SGST (${(taxRate / 2).toFixed(2)}%)`, summaryX, summaryY, { width: summaryWidth, align: 'right' });
-            doc.font('Helvetica').fillColor(muted).text(formatInr(sgst), right - col.amount, summaryY, { width: col.amount, align: 'right' });
-            summaryY += 16;
+            drawSummaryRow(`CGST (${(taxRate / 2).toFixed(2)}%)`, formatInr(cgst), true);
+            drawSummaryRow(`SGST (${(taxRate / 2).toFixed(2)}%)`, formatInr(sgst), true);
         } else {
-            doc.font('Helvetica-Bold').fillColor('#000000').text(`IGST (${taxRate.toFixed(2)}%)`, summaryX, summaryY, { width: summaryWidth, align: 'right' });
-            doc.font('Helvetica').fillColor(muted).text(formatInr(igst), right - col.amount, summaryY, { width: col.amount, align: 'right' });
-            summaryY += 16;
+            drawSummaryRow(`IGST (${taxRate.toFixed(2)}%)`, formatInr(igst), true);
         }
 
-        doc.font('Helvetica-Bold').fillColor(accent).text('Total Amount', summaryX, summaryY, { width: summaryWidth, align: 'right' });
-        doc.font('Helvetica-Bold').fillColor(accent).text(formatInr(total), right - col.amount, summaryY, { width: col.amount, align: 'right' });
+        drawSummaryRow('Total Amount', formatInr(total), true, accent);
 
         const words = `${numberToWordsIndian(total)} Rupees Only`;
         doc.fillColor('#000000').fontSize(9).font('Helvetica-Oblique');
@@ -917,6 +962,179 @@ async function sendOrderReceiptEmail(order) {
         html,
         attachments,
     });
+}
+
+function buildAdminOrderNotificationHtml(order) {
+    const rows = order.items
+        .map(
+            (item) =>
+                `<tr>
+                    <td style="padding:8px; border:1px solid #E8DFD4;">${item.name}${item.size ? ` (${item.size})` : ''}</td>
+                    <td style="padding:8px; border:1px solid #E8DFD4; text-align:center;">${item.quantity}</td>
+                    <td style="padding:8px; border:1px solid #E8DFD4; text-align:right;">${formatInr(item.price)}</td>
+                    <td style="padding:8px; border:1px solid #E8DFD4; text-align:right;">${formatInr(item.price * item.quantity)}</td>
+                </tr>`
+        )
+        .join('');
+
+    const paymentStatus = order.payment?.status === 'paid' ? '✅ Paid' : order.payment?.method === 'cod' ? '📦 COD' : '⏳ Pending';
+
+    return `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+            <div style="background: linear-gradient(135deg, #1A3C27 0%, #2D5A3D 100%); color: white; padding: 20px; border-radius: 8px 8px 0 0;">
+                <h1 style="margin:0; font-size: 24px;">🛒 New Order Received!</h1>
+                <p style="margin: 10px 0 0; opacity: 0.9;">Order ${order.orderNumber} • ${new Date(order.createdAt).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}</p>
+            </div>
+            
+            <div style="border: 1px solid #E8DFD4; border-top: none; padding: 20px; background: #FAFAF8;">
+                <div style="display: flex; gap: 20px; margin-bottom: 20px;">
+                    <div style="flex: 1; background: white; padding: 15px; border-radius: 8px; border: 1px solid #E8DFD4;">
+                        <h3 style="margin: 0 0 10px; color: #1A3C27; font-size: 14px;">💰 Order Total</h3>
+                        <p style="margin: 0; font-size: 28px; font-weight: bold; color: #1A3C27;">${formatInr(order.pricing.total)}</p>
+                        <p style="margin: 5px 0 0; color: #666; font-size: 12px;">${paymentStatus}</p>
+                    </div>
+                </div>
+                
+                <h3 style="margin: 0 0 10px; color: #1A3C27;">👤 Customer Details</h3>
+                <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #E8DFD4; margin-bottom: 20px;">
+                    <p style="margin: 0 0 5px;"><strong>Name:</strong> ${order.customer?.fullName || 'N/A'}</p>
+                    <p style="margin: 0 0 5px;"><strong>Email:</strong> ${order.customer?.email || 'N/A'}</p>
+                    <p style="margin: 0 0 5px;"><strong>Phone:</strong> ${order.customer?.phone || 'N/A'}</p>
+                </div>
+                
+                <h3 style="margin: 0 0 10px; color: #1A3C27;">📦 Shipping Address</h3>
+                <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #E8DFD4; margin-bottom: 20px;">
+                    <p style="margin: 0;">${order.shipping?.address1 || ''}</p>
+                    ${order.shipping?.address2 ? `<p style="margin: 5px 0 0;">${order.shipping.address2}</p>` : ''}
+                    <p style="margin: 5px 0 0;">${order.shipping?.city || ''}, ${order.shipping?.state || ''} ${order.shipping?.pincode || ''}</p>
+                    <p style="margin: 5px 0 0;">${order.shipping?.country || ''}</p>
+                    ${order.shipping?.instructions ? `<p style="margin: 10px 0 0; color: #666;"><strong>Instructions:</strong> ${order.shipping.instructions}</p>` : ''}
+                </div>
+                
+                <h3 style="margin: 0 0 10px; color: #1A3C27;">🛍️ Order Items</h3>
+                <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden;">
+                    <thead>
+                        <tr style="background: #1A3C27; color: white;">
+                            <th style="padding: 12px 8px; text-align: left;">Item</th>
+                            <th style="padding: 12px 8px; text-align: center;">Qty</th>
+                            <th style="padding: 12px 8px; text-align: right;">Price</th>
+                            <th style="padding: 12px 8px; text-align: right;">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${rows}
+                    </tbody>
+                </table>
+                
+                <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #E8DFD4; margin-top: 15px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span>Subtotal:</span>
+                        <span>${formatInr(order.pricing.subtotal)}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span>Shipping:</span>
+                        <span>${formatInr(order.pricing.shipping)}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span>Taxes (GST):</span>
+                        <span>${formatInr(order.pricing.taxes)}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 18px; padding-top: 10px; border-top: 2px solid #1A3C27;">
+                        <span>Total:</span>
+                        <span style="color: #1A3C27;">${formatInr(order.pricing.total)}</span>
+                    </div>
+                </div>
+                
+                ${order.invoice?.requested ? `
+                <div style="background: #FFF3CD; padding: 15px; border-radius: 8px; margin-top: 15px; border: 1px solid #FFE69C;">
+                    <p style="margin: 0; color: #856404;"><strong>📄 GST Invoice Requested</strong></p>
+                    <p style="margin: 5px 0 0; color: #856404;">Customer GSTIN: ${order.invoice.gstNumber || 'N/A'}</p>
+                </div>
+                ` : ''}
+            </div>
+            
+            <div style="background: #f5f5f5; padding: 15px; border-radius: 0 0 8px 8px; text-align: center; color: #666; font-size: 12px;">
+                <p style="margin: 0;">This is an automated notification from Trusser</p>
+                <p style="margin: 5px 0 0;"><a href="https://trusser.in/admin" style="color: #1A3C27;">View in Admin Dashboard →</a></p>
+            </div>
+        </div>
+    `;
+}
+
+function buildAdminOrderNotificationText(order) {
+    const paymentStatus = order.payment?.status === 'paid' ? 'Paid' : order.payment?.method === 'cod' ? 'COD' : 'Pending';
+    const lines = [
+        `🛒 NEW ORDER RECEIVED`,
+        `━━━━━━━━━━━━━━━━━━━━━`,
+        ``,
+        `Order: ${order.orderNumber}`,
+        `Date: ${new Date(order.createdAt).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}`,
+        `Total: ${formatInr(order.pricing.total)} (${paymentStatus})`,
+        ``,
+        `👤 CUSTOMER`,
+        `Name: ${order.customer?.fullName || 'N/A'}`,
+        `Email: ${order.customer?.email || 'N/A'}`,
+        `Phone: ${order.customer?.phone || 'N/A'}`,
+        ``,
+        `📦 SHIPPING ADDRESS`,
+        order.shipping?.address1 || '',
+        order.shipping?.address2 || '',
+        `${order.shipping?.city || ''}, ${order.shipping?.state || ''} ${order.shipping?.pincode || ''}`,
+        order.shipping?.country || '',
+    ];
+
+    if (order.shipping?.instructions) {
+        lines.push(`Instructions: ${order.shipping.instructions}`);
+    }
+
+    lines.push('');
+    lines.push('🛍️ ORDER ITEMS');
+    order.items.forEach((item, index) => {
+        lines.push(`${index + 1}. ${item.name}${item.size ? ` (${item.size})` : ''} x${item.quantity} - ${formatInr(item.price * item.quantity)}`);
+    });
+
+    lines.push('');
+    lines.push(`Subtotal: ${formatInr(order.pricing.subtotal)}`);
+    lines.push(`Shipping: ${formatInr(order.pricing.shipping)}`);
+    lines.push(`Taxes: ${formatInr(order.pricing.taxes)}`);
+    lines.push(`TOTAL: ${formatInr(order.pricing.total)}`);
+
+    if (order.invoice?.requested) {
+        lines.push('');
+        lines.push(`📄 GST Invoice requested - GSTIN: ${order.invoice.gstNumber || 'N/A'}`);
+    }
+
+    lines.push('');
+    lines.push('View in admin: https://trusser.in/admin');
+
+    return lines.filter(line => line !== undefined).join('\n');
+}
+
+async function sendAdminOrderNotificationEmail(order) {
+    const transporter = getMailTransporter();
+    if (!transporter) {
+        console.log('Skipping admin notification - no mail transporter configured');
+        return;
+    }
+
+    const subject = `🛒 New Order ${order.orderNumber} - ${formatInr(order.pricing.total)}`;
+    const html = buildAdminOrderNotificationHtml(order);
+    const text = buildAdminOrderNotificationText(order);
+
+    for (const recipient of ADMIN_EMAIL_RECIPIENTS) {
+        try {
+            await transporter.sendMail({
+                from: smtpConfig.from,
+                to: recipient,
+                subject,
+                text,
+                html,
+            });
+            console.log(`Admin order notification sent to ${recipient} for order ${order.orderNumber}`);
+        } catch (error) {
+            console.error(`Failed to send admin notification to ${recipient}:`, error.message);
+        }
+    }
 }
 
 function normalizeBoolean(value, field, { defaultValue = false } = {}) {
@@ -1101,9 +1319,15 @@ function buildCreatePayload(payload) {
     const description = normalizeString(payload?.description, 'description', { required: true });
     const features = normalizeStringArray(payload?.features, 'features', { required: true });
     const category = normalizeOptionalString(payload?.category, 'category');
-    const sizes = normalizeStringArray(payload?.sizes, 'sizes', { required: false });
+    const sizes = normalizeSizesArray(payload?.sizes, 'sizes', { required: false });
+    // New Ecomsh-style fields
+    const images = normalizeStringArray(payload?.images, 'images', { required: false });
+    const status = normalizeOptionalString(payload?.status, 'status');
+    const vendor = normalizeOptionalString(payload?.vendor, 'vendor');
+    const collections = normalizeStringArray(payload?.collections, 'collections', { required: false });
+    const tags = normalizeStringArray(payload?.tags, 'tags', { required: false });
 
-    [name, price, image, tag, description, features, category, sizes].forEach((field) => {
+    [name, price, image, tag, description, features, category, sizes, images, status, vendor, collections, tags].forEach((field) => {
         if (field.error) {
             errors.push(field.error);
         }
@@ -1121,6 +1345,18 @@ function buildCreatePayload(payload) {
         description: description.value,
         features: features.value,
         category: category.value,
+        // New Ecomsh-style fields with defaults
+        images: images.value ?? [],
+        status: status.value ?? 'active',
+        vendor: vendor.value ?? '',
+        collections: collections.value ?? [],
+        tags: tags.value ?? [],
+        metafields: payload?.metafields && typeof payload.metafields === 'object' ? payload.metafields : {},
+        seo: payload?.seo && typeof payload.seo === 'object' ? {
+            title: String(payload.seo.title ?? '').trim(),
+            description: String(payload.seo.description ?? '').trim(),
+            urlHandle: String(payload.seo.urlHandle ?? '').trim(),
+        } : {},
     };
     // Only include sizes if provided
     if (sizes.value && sizes.value.length > 0) {
@@ -1210,11 +1446,73 @@ function buildUpdatePayload(payload) {
     }
 
     if (Object.prototype.hasOwnProperty.call(payload, 'sizes')) {
-        const field = normalizeStringArray(payload.sizes, 'sizes', { required: false });
+        const field = normalizeSizesArray(payload.sizes, 'sizes', { required: false });
         if (field.error) {
             errors.push(field.error);
         } else {
             updates.sizes = field.value ?? [];
+        }
+    }
+
+    // New Ecomsh-style fields
+    if (Object.prototype.hasOwnProperty.call(payload, 'images')) {
+        const field = normalizeStringArray(payload.images, 'images', { required: false });
+        if (field.error) {
+            errors.push(field.error);
+        } else {
+            updates.images = field.value ?? [];
+        }
+    }
+
+    if (Object.prototype.hasOwnProperty.call(payload, 'status')) {
+        const field = normalizeOptionalString(payload.status, 'status');
+        if (field.error) {
+            errors.push(field.error);
+        } else {
+            updates.status = field.value ?? 'active';
+        }
+    }
+
+    if (Object.prototype.hasOwnProperty.call(payload, 'vendor')) {
+        const field = normalizeOptionalString(payload.vendor, 'vendor');
+        if (field.error) {
+            errors.push(field.error);
+        } else {
+            updates.vendor = field.value ?? '';
+        }
+    }
+
+    if (Object.prototype.hasOwnProperty.call(payload, 'collections')) {
+        const field = normalizeStringArray(payload.collections, 'collections', { required: false });
+        if (field.error) {
+            errors.push(field.error);
+        } else {
+            updates.collections = field.value ?? [];
+        }
+    }
+
+    if (Object.prototype.hasOwnProperty.call(payload, 'tags')) {
+        const field = normalizeStringArray(payload.tags, 'tags', { required: false });
+        if (field.error) {
+            errors.push(field.error);
+        } else {
+            updates.tags = field.value ?? [];
+        }
+    }
+
+    if (Object.prototype.hasOwnProperty.call(payload, 'metafields')) {
+        if (payload.metafields && typeof payload.metafields === 'object') {
+            updates.metafields = payload.metafields;
+        }
+    }
+
+    if (Object.prototype.hasOwnProperty.call(payload, 'seo')) {
+        if (payload.seo && typeof payload.seo === 'object') {
+            updates.seo = {
+                title: String(payload.seo.title ?? '').trim(),
+                description: String(payload.seo.description ?? '').trim(),
+                urlHandle: String(payload.seo.urlHandle ?? '').trim(),
+            };
         }
     }
 
@@ -1659,15 +1957,42 @@ app.post('/api/account/addresses', async (req, res) => {
     return res.json(sanitizeUser(updated));
 });
 
-app.post('/api/uploads', requireAdmin, upload.single('image'), (req, res) => {
-    if (!req.file) {
-        return res.status(400).json({ error: 'Image file is required' });
-    }
-    // Return relative URL path - works in any environment (dev or production)
-    return res.json({
-        url: `/uploads/${req.file.filename}`,
-        filename: req.file.filename,
-        size: req.file.size,
+app.post('/api/uploads', requireAdmin, (req, res) => {
+    upload.single('image')(req, res, async (err) => {
+        if (err) {
+            console.error('[Upload Error]', err.message || err, { code: err.code, field: err.field });
+            // Handle multer errors with proper JSON response
+            if (err instanceof multer.MulterError) {
+                if (err.code === 'LIMIT_FILE_SIZE') {
+                    return res.status(400).json({ error: 'Image file is too large. Maximum size is 8MB.' });
+                }
+                return res.status(400).json({ error: err.message });
+            }
+            // Handle custom errors (like file type rejection)
+            if (err instanceof Error) {
+                return res.status(400).json({ error: err.message });
+            }
+            return res.status(500).json({ error: 'Image upload failed' });
+        }
+        if (!req.file) {
+            console.error('[Upload Error] No file received in request');
+            return res.status(400).json({ error: 'Image file is required. Please select an image to upload.' });
+        }
+
+        // Store original file as-is (no optimization during upload for faster response)
+        // Optimization can be triggered later from the Image Library
+        const filename = req.file.filename;
+        const ext = path.extname(filename).toLowerCase();
+        const isOptimized = ext === '.webp';
+
+        console.log(`[Upload] ${filename} (${(req.file.size / 1024).toFixed(1)}KB) - Optimization: ${isOptimized ? 'Already WebP' : 'Pending'}`);
+
+        return res.json({
+            url: `/uploads/${filename}`,
+            filename,
+            size: req.file.size,
+            isOptimized,
+        });
     });
 });
 
@@ -1688,6 +2013,389 @@ app.post('/api/admin/login', (req, res) => {
 
     return res.json({ token: adminToken, user: adminUser });
 });
+
+// ===========================================
+// IMAGE LIBRARY API ENDPOINTS
+// ===========================================
+
+// Helper function to find image usage across products, blogs, and website content
+async function findImageUsage(filename) {
+    const usedIn = [];
+    const imagePath = `/uploads/${filename}`;
+
+    // Check products
+    for (const product of products) {
+        if (product.image === imagePath || (product.images && product.images.includes(imagePath))) {
+            usedIn.push({ type: 'product', name: product.name, id: product.id });
+        }
+    }
+
+    // Check blogs
+    for (const blog of blogs) {
+        if (blog.coverImage === imagePath) {
+            usedIn.push({ type: 'blog', name: blog.title, id: blog.id });
+        }
+        // Check content for embedded images
+        if (blog.content && blog.content.includes(imagePath)) {
+            usedIn.push({ type: 'blog-content', name: blog.title, id: blog.id });
+        }
+    }
+
+    // Check website content
+    try {
+        const websiteContent = await readJsonFile(sourceWebsiteContentPath);
+        const checkContent = (obj, parentKey = 'website') => {
+            if (typeof obj === 'string' && obj === imagePath) {
+                usedIn.push({ type: 'website', name: parentKey, id: parentKey });
+            } else if (typeof obj === 'object' && obj !== null) {
+                for (const [key, value] of Object.entries(obj)) {
+                    checkContent(value, key);
+                }
+            }
+        };
+        checkContent(websiteContent);
+    } catch { /* ignore if no website content */ }
+
+    return usedIn;
+}
+
+// Helper function to optimize a single image
+async function optimizeImage(filename) {
+    const originalPath = path.join(uploadsDir, filename);
+    const ext = path.extname(filename).toLowerCase();
+
+    // Skip if already WebP
+    if (ext === '.webp') {
+        const stats = await fs.stat(originalPath);
+        return { filename, alreadyOptimized: true, size: stats.size };
+    }
+
+    const originalStats = await fs.stat(originalPath);
+    const originalSize = originalStats.size;
+
+    // Generate new WebP filename
+    const baseName = path.basename(filename, ext);
+    const optimizedFilename = `${baseName}.webp`;
+    const optimizedPath = path.join(uploadsDir, optimizedFilename);
+
+    // Optimize with Sharp
+    const targetSize = 500 * 1024; // 500KB target
+    const maxSize = 1024 * 1024; // 1MB max fallback
+
+    const metadata = await sharp(originalPath).metadata();
+    const maxWidth = 1920;
+    const maxHeight = 1920;
+
+    let resizeOptions = {};
+    if (metadata.width > maxWidth || metadata.height > maxHeight) {
+        resizeOptions = {
+            width: maxWidth,
+            height: maxHeight,
+            fit: 'inside',
+            withoutEnlargement: true,
+        };
+    }
+
+    let quality = 85;
+    let optimizedBuffer;
+    let finalSize;
+
+    while (quality >= 60) {
+        const pipeline = sharp(originalPath);
+        if (Object.keys(resizeOptions).length > 0) {
+            pipeline.resize(resizeOptions);
+        }
+        optimizedBuffer = await pipeline.webp({ quality, effort: 4 }).toBuffer();
+        finalSize = optimizedBuffer.length;
+        if (finalSize <= targetSize) break;
+        quality -= 10;
+    }
+
+    // If still over 1MB, resize more aggressively
+    if (finalSize > maxSize) {
+        const pipeline = sharp(originalPath)
+            .resize({ width: 1280, height: 1280, fit: 'inside', withoutEnlargement: true })
+            .webp({ quality: 60, effort: 6 });
+        optimizedBuffer = await pipeline.toBuffer();
+        finalSize = optimizedBuffer.length;
+    }
+
+    // Write optimized file
+    await fs.writeFile(optimizedPath, optimizedBuffer);
+
+    // Delete original if different filename
+    if (filename !== optimizedFilename) {
+        await fs.unlink(originalPath).catch(() => { });
+    }
+
+    const savedBytes = originalSize - finalSize;
+    const compressionPercent = Math.round((savedBytes / originalSize) * 100);
+
+    return {
+        originalFilename: filename,
+        optimizedFilename,
+        originalSize,
+        optimizedSize: finalSize,
+        savedBytes,
+        compressionPercent,
+    };
+}
+
+// Helper function to update image references in data files
+async function updateImageReferences(oldPath, newPath) {
+    let updated = false;
+
+    // Update products
+    const updatedProducts = products.map(product => {
+        let changed = false;
+        const newProduct = { ...product };
+        if (newProduct.image === oldPath) {
+            newProduct.image = newPath;
+            changed = true;
+        }
+        if (newProduct.images && Array.isArray(newProduct.images)) {
+            const newImages = newProduct.images.map(img => img === oldPath ? newPath : img);
+            if (JSON.stringify(newImages) !== JSON.stringify(newProduct.images)) {
+                newProduct.images = newImages;
+                changed = true;
+            }
+        }
+        if (changed) updated = true;
+        return changed ? newProduct : product;
+    });
+    if (updated) {
+        products.length = 0;
+        products.push(...updatedProducts);
+        await persistJsonFile(productsPath, products);
+    }
+
+    // Update blogs
+    let blogsUpdated = false;
+    const updatedBlogs = blogs.map(blog => {
+        let changed = false;
+        const newBlog = { ...blog };
+        if (newBlog.coverImage === oldPath) {
+            newBlog.coverImage = newPath;
+            changed = true;
+        }
+        if (newBlog.content && newBlog.content.includes(oldPath)) {
+            newBlog.content = newBlog.content.split(oldPath).join(newPath);
+            changed = true;
+        }
+        if (changed) blogsUpdated = true;
+        return changed ? newBlog : blog;
+    });
+    if (blogsUpdated) {
+        blogs.length = 0;
+        blogs.push(...updatedBlogs);
+        await persistJsonFile(blogsPath, blogs);
+        updated = true;
+    }
+
+    // Update website content
+    try {
+        const websiteContent = await readJsonFile(sourceWebsiteContentPath);
+        const updatedContent = JSON.parse(JSON.stringify(websiteContent).split(oldPath).join(newPath));
+        if (JSON.stringify(updatedContent) !== JSON.stringify(websiteContent)) {
+            await persistJsonFile(sourceWebsiteContentPath, updatedContent);
+            updated = true;
+        }
+    } catch { /* ignore */ }
+
+    return updated;
+}
+
+// GET /api/admin/images - List all images with usage mapping
+app.get('/api/admin/images', requireAdmin, async (req, res) => {
+    try {
+        const files = await fs.readdir(uploadsDir);
+        const imageExtensions = ['.jpg', '.jpeg', '.png', '.webp', '.avif', '.gif'];
+
+        const images = await Promise.all(
+            files
+                .filter(file => imageExtensions.includes(path.extname(file).toLowerCase()))
+                .map(async (filename) => {
+                    const filePath = path.join(uploadsDir, filename);
+                    const stats = await fs.stat(filePath);
+                    const ext = path.extname(filename).toLowerCase();
+                    const usedIn = await findImageUsage(filename);
+
+                    return {
+                        filename,
+                        path: `/uploads/${filename}`,
+                        size: stats.size,
+                        uploadedAt: stats.mtime.toISOString(),
+                        isOptimized: ext === '.webp',
+                        usedIn,
+                    };
+                })
+        );
+
+        // Sort by upload date (newest first)
+        images.sort((a, b) => new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime());
+
+        // Calculate stats
+        const totalSize = images.reduce((sum, img) => sum + img.size, 0);
+        const optimizedCount = images.filter(img => img.isOptimized).length;
+        const unusedCount = images.filter(img => img.usedIn.length === 0).length;
+
+        return res.json({
+            images,
+            stats: {
+                total: images.length,
+                optimized: optimizedCount,
+                unoptimized: images.length - optimizedCount,
+                unused: unusedCount,
+                totalSize,
+            },
+        });
+    } catch (error) {
+        console.error('[Image Library Error]', error.message);
+        return res.status(500).json({ error: 'Failed to load image library' });
+    }
+});
+
+// POST /api/admin/images/optimize - Bulk optimize images
+app.post('/api/admin/images/optimize', requireAdmin, async (req, res) => {
+    try {
+        const { filenames } = req.body || {};
+        const files = await fs.readdir(uploadsDir);
+        const imageExtensions = ['.jpg', '.jpeg', '.png', '.avif', '.gif']; // Non-WebP formats
+
+        // Filter to unoptimized images
+        let toOptimize = files.filter(file => {
+            const ext = path.extname(file).toLowerCase();
+            return imageExtensions.includes(ext);
+        });
+
+        // If specific filenames provided, filter to those
+        if (Array.isArray(filenames) && filenames.length > 0) {
+            toOptimize = toOptimize.filter(file => filenames.includes(file));
+        }
+
+        if (toOptimize.length === 0) {
+            return res.json({ message: 'No images to optimize', results: [], totalSaved: 0 });
+        }
+
+        const results = [];
+        let totalSaved = 0;
+
+        for (const filename of toOptimize) {
+            try {
+                const result = await optimizeImage(filename);
+
+                // Update references if filename changed
+                if (!result.alreadyOptimized && result.originalFilename !== result.optimizedFilename) {
+                    const oldPath = `/uploads/${result.originalFilename}`;
+                    const newPath = `/uploads/${result.optimizedFilename}`;
+                    await updateImageReferences(oldPath, newPath);
+                }
+
+                results.push(result);
+                totalSaved += result.savedBytes || 0;
+            } catch (err) {
+                results.push({ filename, error: err.message });
+            }
+        }
+
+        console.log(`[Image Optimize] Bulk optimized ${results.length} images, saved ${(totalSaved / 1024 / 1024).toFixed(2)}MB`);
+
+        return res.json({
+            message: `Optimized ${results.filter(r => !r.error && !r.alreadyOptimized).length} images`,
+            results,
+            totalSaved,
+        });
+    } catch (error) {
+        console.error('[Image Optimize Error]', error.message);
+        return res.status(500).json({ error: 'Failed to optimize images' });
+    }
+});
+
+// POST /api/admin/images/:filename/optimize - Optimize single image
+app.post('/api/admin/images/:filename/optimize', requireAdmin, async (req, res) => {
+    try {
+        const { filename } = req.params;
+        const filePath = path.join(uploadsDir, filename);
+
+        // Check if file exists
+        try {
+            await fs.access(filePath);
+        } catch {
+            return res.status(404).json({ error: 'Image not found' });
+        }
+
+        const result = await optimizeImage(filename);
+
+        // Update references if filename changed
+        if (!result.alreadyOptimized && result.originalFilename !== result.optimizedFilename) {
+            const oldPath = `/uploads/${result.originalFilename}`;
+            const newPath = `/uploads/${result.optimizedFilename}`;
+            await updateImageReferences(oldPath, newPath);
+        }
+
+        console.log(`[Image Optimize] Optimized ${filename} -> ${result.optimizedFilename || filename}, saved ${result.savedBytes || 0} bytes`);
+
+        return res.json(result);
+    } catch (error) {
+        console.error('[Image Optimize Error]', error.message);
+        return res.status(500).json({ error: 'Failed to optimize image' });
+    }
+});
+
+// DELETE /api/admin/images - Bulk delete images
+app.delete('/api/admin/images', requireAdmin, async (req, res) => {
+    try {
+        const { filenames } = req.body || {};
+
+        if (!Array.isArray(filenames) || filenames.length === 0) {
+            return res.status(400).json({ error: 'No filenames provided' });
+        }
+
+        const results = [];
+        let deletedCount = 0;
+
+        for (const filename of filenames) {
+            try {
+                // Prevent directory traversal
+                const safeFilename = path.basename(filename);
+                if (safeFilename !== filename) {
+                    results.push({ filename, error: 'Invalid filename' });
+                    continue;
+                }
+
+                const filePath = path.join(uploadsDir, filename);
+
+                // Check if file exists
+                try {
+                    await fs.access(filePath);
+                } catch {
+                    // If file doesn't exist, we can consider it "deleted" or report error
+                    // Let's report it but count as success if the goal is "gone"
+                    results.push({ filename, status: 'already_gone' });
+                    continue;
+                }
+
+                // Delete file
+                await fs.unlink(filePath);
+                results.push({ filename, status: 'deleted' });
+                deletedCount++;
+            } catch (err) {
+                results.push({ filename, error: err.message });
+            }
+        }
+
+        console.log(`[Image Delete] Deleted ${deletedCount} images`);
+        return res.json({
+            message: `Deleted ${deletedCount} images`,
+            results,
+            deletedCount
+        });
+    } catch (error) {
+        console.error('[Image Delete Error]', error.message);
+        return res.status(500).json({ error: 'Failed to delete images' });
+    }
+});
+
 
 // Admin Dashboard API Endpoints
 app.get('/api/admin/stats', requireAdmin, (req, res) => {
@@ -3248,15 +3956,76 @@ app.get('/api/products', (req, res) => {
 });
 
 app.get('/api/products/:id', (req, res) => {
-    const id = Number(req.params.id);
-    if (!Number.isFinite(id)) {
-        return res.status(400).json({ error: 'Invalid product id' });
+    const param = req.params.id;
+    const numericId = Number(param);
+
+    let product;
+
+    // Try numeric ID first
+    if (Number.isFinite(numericId)) {
+        product = products.find((item) => Number(item.id) === numericId);
     }
-    const product = products.find((item) => Number(item.id) === id);
+
+    // If not found by ID, try finding by slug (urlHandle)
+    if (!product) {
+        const slug = param.toLowerCase();
+        product = products.find((item) => {
+            // Check seo.urlHandle
+            if (item.seo?.urlHandle?.toLowerCase() === slug) {
+                return true;
+            }
+            // Also generate slug from name and check
+            const generatedSlug = (item.name || '')
+                .toLowerCase()
+                .trim()
+                .replace(/[^\w\s-]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-');
+            return generatedSlug === slug;
+        });
+    }
+
     if (!product) {
         return res.status(404).json({ error: 'Product not found' });
     }
     return res.json(product);
+});
+
+// Bulk update a metafield across all products
+app.post('/api/products/bulk-update-metafield', requireAdmin, async (req, res) => {
+    const { metafieldKey, metafieldValue } = req.body;
+
+    if (!metafieldKey || typeof metafieldKey !== 'string') {
+        return res.status(400).json({ error: 'Missing or invalid metafieldKey' });
+    }
+    if (metafieldValue === undefined || metafieldValue === null) {
+        return res.status(400).json({ error: 'Missing metafieldValue' });
+    }
+
+    let updatedCount = 0;
+
+    for (const product of products) {
+        if (!product.metafields) {
+            product.metafields = {};
+        }
+        product.metafields[metafieldKey] = String(metafieldValue);
+        updatedCount++;
+    }
+
+    // Persist to file
+    try {
+        fs.writeFileSync(productsPath, JSON.stringify(products, null, 2));
+    } catch (err) {
+        console.error('Failed to save bulk metafield update:', err);
+        return res.status(500).json({ error: 'Failed to persist changes' });
+    }
+
+    return res.json({
+        success: true,
+        updated: updatedCount,
+        metafieldKey,
+        metafieldValue
+    });
 });
 
 app.post('/api/products', requireAdmin, async (req, res) => {
@@ -3509,6 +4278,12 @@ app.post('/api/checkout', async (req, res) => {
         } catch (error) {
             console.error('Order receipt email failed', error);
         }
+        // Send admin notification for COD orders
+        try {
+            await sendAdminOrderNotificationEmail(order);
+        } catch (error) {
+            console.error('Admin notification email failed', error);
+        }
     }
 
     return res.status(201).json({ order, paymentAction });
@@ -3600,6 +4375,13 @@ app.post('/api/checkout/razorpay/confirm', async (req, res) => {
         await sendOrderReceiptEmail(updated);
     } catch (error) {
         console.error('Order receipt email failed', error);
+    }
+
+    // Send admin notification for paid Razorpay orders
+    try {
+        await sendAdminOrderNotificationEmail(updated);
+    } catch (error) {
+        console.error('Admin notification email failed', error);
     }
 
     return res.json(updated);
@@ -4374,6 +5156,243 @@ app.get('/api/admin/newsletter/export', requireAdmin, (req, res) => {
 
 // ============================================
 // END NEWSLETTER API ENDPOINTS
+// ============================================
+
+// ============================================
+// PRODUCT REVIEWS API ENDPOINTS
+// ============================================
+
+// Public: Get approved reviews for a product
+app.get('/api/products/:productId/reviews', (req, res) => {
+    const { productId } = req.params;
+
+    const productReviews = reviews
+        .filter(r => r.productId === productId && r.status === 'approved')
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+    // Calculate average rating
+    const totalRating = productReviews.reduce((sum, r) => sum + r.rating, 0);
+    const averageRating = productReviews.length > 0 ? totalRating / productReviews.length : 0;
+
+    return res.json({
+        reviews: productReviews.map(r => ({
+            id: r.id,
+            userName: r.userName,
+            rating: r.rating,
+            title: r.title,
+            content: r.content,
+            createdAt: r.createdAt,
+        })),
+        stats: {
+            total: productReviews.length,
+            averageRating: Math.round(averageRating * 10) / 10,
+        },
+    });
+});
+
+// Public: Submit a new review
+app.post('/api/products/:productId/reviews', async (req, res) => {
+    const { productId } = req.params;
+
+    const userName = normalizeString(req.body?.userName, 'userName', { required: true });
+    const email = normalizeEmail(req.body?.email, 'email', { required: true });
+    const rating = normalizeNumber(req.body?.rating, 'rating', { required: true, min: 1 });
+    const title = normalizeString(req.body?.title, 'title', { required: true });
+    const content = normalizeString(req.body?.content, 'content', { required: true });
+
+    if (userName.error) {
+        return res.status(400).json({ error: userName.error });
+    }
+    if (email.error) {
+        return res.status(400).json({ error: email.error });
+    }
+    if (rating.error) {
+        return res.status(400).json({ error: rating.error });
+    }
+    if (rating.value > 5) {
+        return res.status(400).json({ error: 'Rating must be between 1 and 5' });
+    }
+    if (title.error) {
+        return res.status(400).json({ error: title.error });
+    }
+    if (content.error) {
+        return res.status(400).json({ error: content.error });
+    }
+
+    // Check for banned email
+    const emailBanned = checkBannedEntity('email', email.value);
+    if (emailBanned) {
+        return res.status(403).json({ error: 'Unable to submit review' });
+    }
+
+    // Get client IP for fraud detection
+    const clientIp = getClientIp(req);
+    const ipBanned = checkBannedEntity('ip', clientIp);
+    if (ipBanned) {
+        return res.status(403).json({ error: 'Unable to submit review' });
+    }
+
+    const review = {
+        id: crypto.randomUUID(),
+        productId,
+        userName: userName.value,
+        email: email.value.toLowerCase(),
+        rating: rating.value,
+        title: title.value,
+        content: content.value,
+        createdAt: new Date().toISOString(),
+        status: 'approved', // Auto-approve for now, can change to 'pending' if moderation needed
+        clientInfo: {
+            ip: clientIp,
+            userAgent: req.headers['user-agent'] || null,
+        },
+    };
+
+    reviews = [...reviews, review];
+    await persistJsonFile(reviewsPath, reviews);
+
+    return res.status(201).json({
+        success: true,
+        message: 'Review submitted successfully!',
+        review: {
+            id: review.id,
+            userName: review.userName,
+            rating: review.rating,
+            title: review.title,
+            content: review.content,
+            createdAt: review.createdAt,
+        },
+    });
+});
+
+// Admin: Get all reviews with filtering
+app.get('/api/admin/reviews', requireAdmin, (req, res) => {
+    const { status, productId, sortBy } = req.query;
+
+    let filteredReviews = [...reviews];
+
+    // Filter by status
+    if (status && ['pending', 'approved', 'rejected'].includes(status)) {
+        filteredReviews = filteredReviews.filter(r => r.status === status);
+    }
+
+    // Filter by product
+    if (productId) {
+        filteredReviews = filteredReviews.filter(r => r.productId === productId);
+    }
+
+    // Sort
+    if (sortBy === 'rating') {
+        filteredReviews.sort((a, b) => b.rating - a.rating);
+    } else if (sortBy === 'oldest') {
+        filteredReviews.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+    } else {
+        // Default: newest first
+        filteredReviews.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    }
+
+    // Stats
+    const stats = {
+        total: reviews.length,
+        pending: reviews.filter(r => r.status === 'pending').length,
+        approved: reviews.filter(r => r.status === 'approved').length,
+        rejected: reviews.filter(r => r.status === 'rejected').length,
+    };
+
+    return res.json({
+        stats,
+        reviews: filteredReviews.map(r => ({
+            id: r.id,
+            productId: r.productId,
+            userName: r.userName,
+            email: r.email,
+            rating: r.rating,
+            title: r.title,
+            content: r.content,
+            status: r.status,
+            createdAt: r.createdAt,
+            clientInfo: r.clientInfo,
+        })),
+    });
+});
+
+// Admin: Delete a review
+app.delete('/api/admin/reviews/:id', requireAdmin, async (req, res) => {
+    const { id } = req.params;
+    const index = reviews.findIndex(r => r.id === id);
+
+    if (index === -1) {
+        return res.status(404).json({ error: 'Review not found' });
+    }
+
+    const deleted = reviews[index];
+    reviews = [...reviews.slice(0, index), ...reviews.slice(index + 1)];
+    await persistJsonFile(reviewsPath, reviews);
+
+    return res.json({ success: true, message: 'Review deleted', review: deleted });
+});
+
+// Admin: Bulk delete reviews
+app.post('/api/admin/reviews/bulk-delete', requireAdmin, async (req, res) => {
+    const { ids } = req.body;
+
+    if (!Array.isArray(ids) || ids.length === 0) {
+        return res.status(400).json({ error: 'Please provide an array of review IDs' });
+    }
+
+    const deletedCount = ids.filter(id => reviews.some(r => r.id === id)).length;
+    reviews = reviews.filter(r => !ids.includes(r.id));
+    await persistJsonFile(reviewsPath, reviews);
+
+    return res.json({ success: true, message: `${deletedCount} reviews deleted` });
+});
+
+// Admin: Approve a review
+app.patch('/api/admin/reviews/:id/approve', requireAdmin, async (req, res) => {
+    const { id } = req.params;
+    const index = reviews.findIndex(r => r.id === id);
+
+    if (index === -1) {
+        return res.status(404).json({ error: 'Review not found' });
+    }
+
+    const updated = {
+        ...reviews[index],
+        status: 'approved',
+        approvedAt: new Date().toISOString(),
+    };
+
+    reviews = [...reviews.slice(0, index), updated, ...reviews.slice(index + 1)];
+    await persistJsonFile(reviewsPath, reviews);
+
+    return res.json({ success: true, review: updated });
+});
+
+// Admin: Reject a review
+app.patch('/api/admin/reviews/:id/reject', requireAdmin, async (req, res) => {
+    const { id } = req.params;
+    const reason = normalizeOptionalString(req.body?.reason, 'reason');
+    const index = reviews.findIndex(r => r.id === id);
+
+    if (index === -1) {
+        return res.status(404).json({ error: 'Review not found' });
+    }
+
+    const updated = {
+        ...reviews[index],
+        status: 'rejected',
+        rejectedAt: new Date().toISOString(),
+        rejectionReason: reason.value || undefined,
+    };
+
+    reviews = [...reviews.slice(0, index), updated, ...reviews.slice(index + 1)];
+    await persistJsonFile(reviewsPath, reviews);
+
+    return res.json({ success: true, review: updated });
+});
+
+// ============================================
+// END PRODUCT REVIEWS API ENDPOINTS
 // ============================================
 
 app.post('/api/website-content', requireAdmin, async (req, res) => {

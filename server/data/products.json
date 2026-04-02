@@ -3,28 +3,60 @@
     "id": 1,
     "name": "Breathe Water Bottle Bag",
     "price": "\u20b9179.00",
-    "image": "/products/breathe-water-bottle-bag.webp",
+    "image": "/uploads/1769167578342-3dc710ac-51e2-4762-8614-ca8628b26430.webp",
     "tag": "New",
     "description": "Handcrafted with sustainable materials, this Breathe Water Bottle Bag combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
     "features": [
       "Made from 100% recycled materials",
       "Handcrafted by local artisans",
       "Eco-friendly and sustainable",
-      "Unique design, no two pieces are identical"
+      "Unique design, no two pieces are identical",
+      "11 inches H x 5 inches W x 5 inches B"
     ],
     "category": "Bottle Bags",
-    "sizes": [
-      "M",
-      "S",
-      "7"
-    ]
+    "metafields": {
+      "ecoCertification": "GRS",
+      "handleType": ""
+    },
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Breathe Water Bottle Bag",
+      "description": "Handcrafted with sustainable materials, this Breathe Water Bottle Bag combines traditional craftsmanship with modern design. Made from upcycled waste materia...",
+      "urlHandle": "breathe-water-bottle-bag"
+    }
   },
   {
     "id": 2,
     "name": "Blue Wedding Bag - 100 Pieces",
     "price": "\u20b96,000.00",
     "image": "/products/blue-wedding-bag.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Blue Wedding Bag - 100 Pieces combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Tear resistant, washable and durable",
+      "14.5 inches H  x 11 inches W x 4 inches B"
+    ],
+    "category": "Festive Bags",
+    "images": [],
+    "status": "active",
+    "vendor": "",
+    "collections": [],
+    "tags": [],
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "seo": {
+      "title": "",
+      "description": "",
+      "urlHandle": ""
+    }
   },
   {
     "id": 3,
@@ -37,8 +69,13 @@
       "Made from 100% recycled materials",
       "Handcrafted by local artisans",
       "Eco-friendly and sustainable",
-      "Unique design, no two pieces are identical"
-    ]
+      "Tear resistant, washable and durable",
+      "8.8 x 6.6 x 3"
+    ],
+    "category": "Festive Bags",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 4,
@@ -51,8 +88,13 @@
       "Made from 100% recycled materials",
       "Handcrafted by local artisans",
       "Eco-friendly and sustainable",
-      "Unique design, no two pieces are identical"
-    ]
+      "Tear resistant, washable and durable",
+      "11 x 14.5 x 4"
+    ],
+    "category": "Festive Bags",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 5,
@@ -60,13 +102,18 @@
     "price": "\u20b999.00",
     "image": "/products/gift-bag-29.webp",
     "tag": "New",
-    "description": "Handcrafted with sustainable materials, this Elephant Bloom Bag combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "description": "Crafted with sustainable materials, this Elephant Bloom Bag combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
     "features": [
       "Made from 100% recycled materials",
       "Handcrafted by local artisans",
       "Eco-friendly and sustainable",
-      "Unique design, no two pieces are identical"
-    ]
+      "Tear resistant, washable and durable",
+      "7.7 x 8.8 x 3 inches"
+    ],
+    "category": "Festive Bags",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 6,
@@ -74,14 +121,18 @@
     "price": "\u20b999.00",
     "image": "/products/gift-bag-23.webp",
     "tag": "New",
-    "description": "Handcrafted with sustainable materials, this Floral Bloom Pouch combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "description": "Crafted with sustainable materials, this Floral Bloom Pouch combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
     "features": [
       "Made from 100% recycled materials",
       "Handcrafted by local artisans",
       "Eco-friendly and sustainable",
-      "Unique design, no two pieces are identical"
+      "Tear resistant, washable and durable",
+      "6.6 x 11 x 3 inches"
     ],
-    "category": "Festive Bags"
+    "category": "Festive Bags",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 7,
@@ -89,13 +140,42 @@
     "price": "\u20b9149.00",
     "image": "/products/yellow-zig-zag-art-pouch.webp",
     "tag": "New",
-    "description": "Handcrafted with sustainable materials, this Zade Stripes  combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "description": "Crafted with sustainable materials, this Zade Stripes  pouch combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
     "features": [
       "Made from 100% recycled materials",
       "Handcrafted by local artisans",
       "Eco-friendly and sustainable",
-      "Unique design, no two pieces are identical"
-    ]
+      "Tear resistant, washable and durable",
+      "7.7 x 8.8 inches"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129.00"
+      },
+      {
+        "size": "M",
+        "price": "149.00"
+      },
+      {
+        "size": "L",
+        "price": "199.00"
+      }
+    ],
+    "category": "Pouches",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Zade Stripes",
+      "description": "Crafted with sustainable materials, this Zade Stripes  pouch combines traditional craftsmanship with modern design. Made from upcycled waste materials, each...",
+      "urlHandle": "zade-stripes"
+    }
   },
   {
     "id": 8,
@@ -103,467 +183,1625 @@
     "price": "\u20b9449.00",
     "image": "/products/prism-flow.webp",
     "tag": "New",
-    "description": "Handcrafted with sustainable materials, this PRISM FLOW combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "description": "Crafted with sustainable materials, this PRISM FLOW combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
     "features": [
       "Made from 100% recycled materials",
       "Handcrafted by local artisans",
       "Eco-friendly and sustainable",
-      "Unique design, no two pieces are identical"
-    ]
+      "Tear resistant, washable, durable",
+      "S - 9 x 4.5 inches, M - 7.5 x 8.5 inches , L - 10 x 8 inches"
+    ],
+    "sizes": [],
+    "category": "Pouches",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "PRISM FLOW Set of 3",
+      "description": "Crafted with sustainable materials, this PRISM FLOW combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece con...",
+      "urlHandle": "prism-flow-set-of-3"
+    }
   },
   {
     "id": 9,
     "name": "Sunny Pine",
-    "price": "\u20b9199.00",
+    "price": "\u20b9149.00",
     "image": "/products/pineapple-pouch.webp",
     "tag": "New",
-    "description": "Handcrafted with sustainable materials, this Sunny Pine combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "description": "Crafted with sustainable materials, this Sunny Pine combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
     "features": [
       "Made from 100% recycled materials",
       "Handcrafted by local artisans",
       "Eco-friendly and sustainable",
-      "Unique design, no two pieces are identical"
+      "Washable, tear resistant, durable",
+      "7.5 x 8.5  inches"
     ],
     "sizes": [
-      "S",
-      "M",
-      "6",
-      "7"
-    ]
+      {
+        "size": "S",
+        "price": "129.00"
+      },
+      {
+        "size": "M",
+        "price": "149.00"
+      },
+      {
+        "size": "L",
+        "price": "199.00"
+      }
+    ],
+    "category": "Pouches",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Sunny Pine",
+      "description": "Crafted with sustainable materials, this Sunny Pine combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece con...",
+      "urlHandle": "sunny-pine"
+    }
   },
   {
     "id": 10,
     "name": "Sunset Chevron",
-    "price": "\u20b9228.00",
+    "price": "199.00",
     "image": "/products/abstract-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Crafted with sustainable materials, this Sunset Chevron combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Washable, Tear Resistant, Durable",
+      "10 x 8 inches"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129.00"
+      },
+      {
+        "size": "M",
+        "price": "149.00"
+      },
+      {
+        "size": "L",
+        "price": "199.00"
+      }
+    ],
+    "category": "Pouches",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Sunset Chevron",
+      "description": "Crafted with sustainable materials, this Sunset Chevron combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece...",
+      "urlHandle": "sunset-chevron"
+    }
   },
   {
     "id": 11,
     "name": "Prism Flow",
-    "price": "\u20b9228.00",
+    "price": "\u20b9199.00",
     "image": "/products/colorful-spiral-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Crafted with sustainable materials, this Prism Flow combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Tear resistant, washable, durable",
+      "8.5 x 10 inches"
+    ],
+    "category": "Pouches",
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129.00"
+      },
+      {
+        "size": "M",
+        "price": "149.00"
+      },
+      {
+        "size": "L",
+        "price": "199.00"
+      }
+    ],
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Prism Flow",
+      "description": "Crafted with sustainable materials, this Prism Flow combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece con...",
+      "urlHandle": "prism-flow"
+    }
   },
   {
     "id": 12,
     "name": "Zade Stripes",
-    "price": "\u20b9228.00",
+    "price": "\u20b9199.00",
     "image": "/products/yellow-zig-zag-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Zade Stripes combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Crafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Tear resistant, durable, washable",
+      "10 x 8 inches"
+    ],
+    "category": "Pouches",
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129.00"
+      },
+      {
+        "size": "M",
+        "price": "149.00"
+      },
+      {
+        "size": "L",
+        "price": "199.00"
+      }
+    ],
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Zade Stripes",
+      "description": "Handcrafted with sustainable materials, this Zade Stripes combines traditional craftsmanship with modern design. Made from upcycled waste materials, each pie...",
+      "urlHandle": "zade-stripes"
+    }
   },
   {
     "id": 13,
     "name": "Gift Bag - Flamingo",
-    "price": "\u20b9113.00",
+    "price": "\u20b999.00",
     "image": "/products/gift-bag-flamingo.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Crafted with sustainable materials, this Gift Bag - Flamingo combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Crafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "7.8 x 8.8 x 4"
+    ],
+    "category": "Festive Bags",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 14,
     "name": "Funky Green and Pink Bottle Holder",
-    "price": "\u20b9205.00",
+    "price": "179.00",
     "image": "/products/funky-green-and-pink-bottle-holder.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Crafted with sustainable materials, this Funky Green and Pink Bottle Holder combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Crafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "Circular 5 dia x 11 inches H"
+    ],
+    "category": "Bottle Bags",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 15,
     "name": "SUNNY PINE",
     "price": "\u20b9449.00",
     "image": "/products/sunny-pine.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Crafted with sustainable materials, this SUNNY PINE set of 3. pouches, combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Crafted by local artisans",
+      "Eco-friendly and sustainable",
+      "4.5 x 9 inches, 8.5 x 7.8 inches, 8.5 x 10 inches",
+      "Durable, Tear resistant, washable"
+    ],
+    "category": "Pouches",
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
+    ],
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 16,
-    "name": "Lotus Bloom Tote",
-    "price": "\u20b9399.00",
+    "name": "Lotus Bloom",
+    "price": "\u20b999.00",
     "image": "/products/gift-bag-15.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Crafted with sustainable materials, this Lotus Bloom Tote combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Crafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "6.6 x 11 x 3 inches"
+    ],
+    "category": "Festive Bags",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 17,
     "name": "Gift Bag - More Dogs",
-    "price": "\u20b9148.00",
+    "price": "\u20b9129.00",
     "image": "/products/gift-bag-more-dogs.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Crafted with sustainable materials, this Gift Bag - More Dogs combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Crafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "8.8 x 11 x 3 inches"
+    ],
+    "category": "Festive Bags",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 18,
     "name": "Crimson Blossom Bag",
-    "price": "\u20b9499.00",
+    "price": "\u20b9149.00",
     "image": "/products/gift-bag-1.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Crafted with sustainable materials, this Crimson Blossom Bag combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Crafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "9 x 12 inches"
+    ],
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 19,
     "name": "Prism Flow",
-    "price": "\u20b9171.00",
+    "price": "\u20b9199.00",
     "image": "/products/colorful-spiral-art-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Prism Flow combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Crafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "10 x 8.5 inches"
+    ],
+    "category": "Pouches",
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129.00"
+      },
+      {
+        "size": "M",
+        "price": "149.00"
+      },
+      {
+        "size": "L",
+        "price": "199.00"
+      }
+    ],
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Prism Flow",
+      "description": "Handcrafted with sustainable materials, this Prism Flow combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece...",
+      "urlHandle": "prism-flow"
+    }
   },
   {
     "id": 20,
     "name": "Colorful Cash Pouch",
-    "price": "\u20b9148.00",
+    "price": "\u20b9149.00",
     "image": "/products/colorful-cash-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Colorful Cash Pouch combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "4 x 7 inches"
+    ],
+    "category": "Cash Pouches",
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
+    ],
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 21,
     "name": "Summer Vibe Pouch",
-    "price": "\u20b9148.00",
+    "price": "\u20b9129.00",
     "image": "/products/summer-pencil-pouch-1.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Summer Vibe Pouch combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "4.5 x 9 Inches"
+    ],
+    "category": "Pouches",
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "149"
+      },
+      {
+        "size": "L",
+        "price": "199"
+      }
+    ],
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Summer Vibe Pouch",
+      "description": "Handcrafted with sustainable materials, this Summer Vibe Pouch combines traditional craftsmanship with modern design. Made from upcycled waste materials, eac...",
+      "urlHandle": "summer-vibe-pouch"
+    }
   },
   {
     "id": 22,
-    "name": "Sunset Chevron",
+    "name": "Sunset Chevron Set of 3",
     "price": "\u20b9449.00",
     "image": "/products/sunset-chevron.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Sunset Chevron combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Crafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "4.5 x 9 , 7.5 x 8.5, 8.5 x 10 inches"
+    ],
+    "category": "Women Gift Sets",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 23,
     "name": "Color Block Triad Folder",
-    "price": "\u20b9343.00",
+    "price": "\u20b9299.00",
     "image": "/products/green-yellow-document-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Color Block Triad Folder combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "11 x 15 x 3"
+    ],
+    "category": "Files Folders",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 24,
     "name": "Gift Bag - Blue Print",
-    "price": "\u20b9148.00",
+    "price": "\u20b9129.00",
     "image": "/products/gift-bag-blue-print.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Gift Bag - Blue Print combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Crafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "8.8 x 11 x 3inches"
+    ],
+    "category": "Festive Bags",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 25,
     "name": "Sunny Pine",
-    "price": "\u20b9148.00",
+    "price": "\u20b9129.00",
     "image": "/products/pineapple-pencil-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Sunny Pine combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "4.5 x 9 inches"
+    ],
+    "category": "Pouches",
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "149"
+      },
+      {
+        "size": "L",
+        "price": "199"
+      }
+    ],
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Sunny Pine",
+      "description": "Handcrafted with sustainable materials, this Sunny Pine combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece...",
+      "urlHandle": "sunny-pine"
+    }
   },
   {
     "id": 26,
     "name": "Autumn Glow",
-    "price": "\u20b9171.00",
+    "price": "\u20b9149.00",
     "image": "/products/autumn-3-art-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Autumn Glow combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "7.8 x 8.5 inches",
+      "Durable, Tear resistant, washable"
+    ],
+    "category": "Pouches",
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129.00"
+      },
+      {
+        "size": "M",
+        "price": "149.00"
+      },
+      {
+        "size": "L",
+        "price": "199.00"
+      }
+    ],
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Autumn Glow",
+      "description": "Handcrafted with sustainable materials, this Autumn Glow combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piec...",
+      "urlHandle": "autumn-glow"
+    }
   },
   {
     "id": 27,
-    "name": "Lotus Blossom Carryall",
-    "price": "\u20b9499.00",
+    "name": "Lotus Blossom",
+    "price": "\u20b9149.00",
     "image": "/products/gift-bag-01.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Lotus Blossom Carryall combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "9 x 10 x 4 inches"
+    ],
+    "category": "Festive Bags",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 28,
     "name": "Floral Cash Pouch",
-    "price": "\u20b9148.00",
+    "price": "\u20b9149.00",
     "image": "/products/floral-cash-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Floral Cash Pouch combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "4 x7 inches"
+    ],
+    "category": "Cash Pouches",
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
+    ],
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 29,
     "name": "Peacock Bloom Bag",
-    "price": "\u20b9499.00",
+    "price": "\u20b9129.00",
     "image": "/products/gift-bag-10.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Peacock Bloom Bag combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "8.8 x 11 x 4. inches"
+    ],
+    "category": "Festive Bags",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 30,
     "name": "Butterfly Handle Bag - 100 Pieces",
     "price": "\u20b96,000.00",
     "image": "/products/butterfly-handle-bag.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Butterfly Handle Bag - 100 Pieces combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "10 x 12 x 4 inches"
+    ],
+    "category": "Festive Bags",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 31,
     "name": "Amber \u00c8lan Folder",
-    "price": "\u20b9286.00",
+    "price": "\u20b9249.00",
     "image": "/products/yellow-document-folder.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Amber \u00c8lan Folder combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "11 x15 inches",
+      "Magnetic enclosure"
+    ],
+    "category": "Files Folders",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 32,
     "name": "Blue & Green Cash Pouch",
-    "price": "\u20b9148.00",
+    "price": "\u20b9149.00",
     "image": "/products/blue-green-cash-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Blue & Green Cash Pouch combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "4 x 7 inches"
+    ],
+    "category": "Cash Pouches",
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
+    ],
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 33,
-    "name": "MAPLE GLOW",
+    "name": "Maple Glow Set of  3",
     "price": "\u20b9449.00",
     "image": "/products/maple-glow.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this MAPLE GLOW combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "4.5 x. 9, 7.5 x 8.5, 8.5 x 10 inches"
+    ],
+    "category": "Women Gift Sets",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 34,
     "name": "Blue & Golden Bag - 100 Pieces",
-    "price": "\u20b96,000.00",
+    "price": "\u20b97200.00",
     "image": "/products/blue-golden-bag.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Blue & Golden Bag - 100 Pieces combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "Customisable",
+      "11 x 14.5 x 4 inches"
+    ],
+    "category": "Festive Bags",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 35,
     "name": "Summer  Vibe",
-    "price": "\u20b9228.00",
+    "price": "\u20b9199.00",
     "image": "/products/summer-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Summer  Vibe combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "8.5 x 10  inches"
+    ],
+    "category": "Pouches",
+    "sizes": [
+      {
+        "size": "S",
+        "price": "199.00"
+      },
+      {
+        "size": "M",
+        "price": "199.00"
+      },
+      {
+        "size": "L",
+        "price": "199.00"
+      }
+    ],
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Summer  Vibe",
+      "description": "Handcrafted with sustainable materials, this Summer  Vibe combines traditional craftsmanship with modern design. Made from upcycled waste materials, each pie...",
+      "urlHandle": "summer-vibe"
+    }
   },
   {
     "id": 36,
     "name": "Exotic Pink Abstract File",
-    "price": "\u20b9269.00",
+    "price": "\u20b9229.00",
     "image": "/products/exotic-pink-abstract-file.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Exotic Pink Abstract File combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "10 x 14  inches"
+    ],
+    "category": "Files Folders",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 37,
     "name": "Mystic Bloom",
-    "price": "\u20b9148.00",
+    "price": "\u20b9129.00",
     "image": "/products/unicorn-spiral-pencil-pouch-1.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Crafted with sustainable materials, this Mystic Bloom combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "4.5 x 9 inches"
+    ],
+    "category": "Pouches",
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "149"
+      },
+      {
+        "size": "L",
+        "price": "199"
+      }
+    ],
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Mystic Bloom",
+      "description": "Crafted with sustainable materials, this Mystic Bloom combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece c...",
+      "urlHandle": "mystic-bloom"
+    }
   },
   {
     "id": 38,
     "name": "Navy Blue Bottle Holder",
-    "price": "\u20b9205.00",
+    "price": "\u20b9179.00",
     "image": "/products/navy-blue-bottle-holder.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Navy Blue Bottle Holder combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "5 inches Dia x 11 inches Height"
+    ],
+    "category": "Bottle Bags",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 39,
-    "name": "OCEAN STRIPE",
+    "name": "Ocean Stripe Set of 3",
     "price": "\u20b9449.00",
     "image": "/products/ocean-stripe.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this OCEAN STRIPE combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "4.5 x 9 inches, 7.8 x 8.5 inches x 8.5 x 10 inches"
+    ],
+    "category": "Corporate Gift Sets",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 40,
     "name": "Summer Vibe",
-    "price": "\u20b9171.00",
+    "price": "\u20b9149.00",
     "image": "/products/summer-art-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Crafted with sustainable materials, this Summer Vibe combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Crafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "7.8 x 8.8 inches"
+    ],
+    "category": "Pouches",
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129.00"
+      },
+      {
+        "size": "M",
+        "price": "149.00"
+      },
+      {
+        "size": "L",
+        "price": "199.00"
+      }
+    ],
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Summer Vibe",
+      "description": "Crafted with sustainable materials, this Summer Vibe combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece co...",
+      "urlHandle": "summer-vibe"
+    }
   },
   {
     "id": 41,
-    "name": "HELIOPHELIA",
+    "name": "Heliophelia Set of 3",
     "price": "\u20b9449.00",
     "image": "/products/heliophelia.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this HELIOPHELIA combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "4.5 x 9, 8.5 x 7.8 , 8.5 x 10 inches"
+    ],
+    "category": "Women Gift Sets",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 42,
     "name": "Helophelia Pencil Pouch",
-    "price": "\u20b9148.00",
+    "price": "\u20b9129.00",
     "image": "/products/helophelia-pencil-pouch-1.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Helophelia Pencil Pouch combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "4.5 x 9 inches"
+    ],
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "sizes": [
+      {
+        "size": "S",
+        "price": "\u20b9129.00"
+      },
+      {
+        "size": "M",
+        "price": "\u20b9149.00"
+      },
+      {
+        "size": "L",
+        "price": "\u20b9199.00"
+      }
+    ],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Helophelia Pencil Pouch",
+      "description": "Handcrafted with sustainable materials, this Helophelia Pencil Pouch combines traditional craftsmanship with modern design. Made from upcycled waste material...",
+      "urlHandle": "helophelia-pencil-pouch"
+    }
   },
   {
     "id": 43,
-    "name": "Indigo Lotus Gift Bag",
-    "price": "\u20b9399.00",
+    "name": "Indigo Lotus Pichwai Bag",
+    "price": "\u20b999.00",
     "image": "/products/gift-bag-20.webp",
-    "tag": "New"
-  },
-  {
-    "id": 44,
-    "name": "BOHO PATTERN",
-    "price": "\u20b9449.00",
-    "image": "/products/boho-pattern.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Indigo Lotus Gift Bag combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "6.6 x 11 x 3"
+    ],
+    "category": "Festive Bags",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 45,
     "name": "Blossom Glow Folder",
-    "price": "\u20b9343.00",
+    "price": "\u20b9299.00",
     "image": "/products/peepal-leaf-document-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Blossom Glow Folder combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "11 x 15 x 3"
+    ],
+    "category": "Files Folders",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 46,
-    "name": "Lotus Bloom Bag",
-    "price": "\u20b9449.00",
+    "name": "Green Lotus",
+    "price": "\u20b9129.00",
     "image": "/products/gift-bags-13.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Lotus Bloom Bag combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "11 x 12 x 4 inches"
+    ],
+    "category": "Festive Bags",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 47,
     "name": "Rainbow Bloom Bag",
-    "price": "\u20b9449.00",
+    "price": "\u20b999.00",
     "image": "/products/gift-bag-08.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Rainbow Bloom Bag combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "8.8 x 11 x 3",
+      "Durable, Tear resistant, washable"
+    ],
+    "category": "Festive Bags",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 48,
     "name": "Eco Bloom",
-    "price": "\u20b9228.00",
+    "price": "\u20b9199.00",
     "image": "/products/floral-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Eco Bloom combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "8.5 x 10 inches",
+      "Durable, Tear resistant, washable"
+    ],
+    "category": "Pouches",
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129.00"
+      },
+      {
+        "size": "M",
+        "price": "149.00"
+      },
+      {
+        "size": "L",
+        "price": "199.00"
+      }
+    ],
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Eco Bloom",
+      "description": "Handcrafted with sustainable materials, this Eco Bloom combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece...",
+      "urlHandle": "eco-bloom"
+    }
   },
   {
     "id": 49,
     "name": "Unicorn Notebook",
-    "price": "\u20b9171.00",
+    "price": "\u20b9149.00",
     "image": "/products/unicorn-notebook.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Unicorn Notebook combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "A6 Notebook, 160 Pages Ruled"
+    ],
+    "category": "Notebooks",
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
+    ],
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 50,
     "name": "RAIN LEAF",
     "price": "\u20b9449.00",
     "image": "/products/rain-leaf.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this RAIN LEAF combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "4.5 x 9 , 8.5 x 7.5 , 8.5 x 10 inches"
+    ],
+    "category": "Women Gift Sets",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 51,
     "name": "Imagination Water Bottle Bag",
-    "price": "\u20b9194.00",
+    "price": "\u20b9179.00",
     "image": "/products/imagination-water-bottle-bag.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Imagination Water Bottle Bag combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "11 x 5 x 5 inches"
+    ],
+    "category": "Bottle Bags",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 52,
     "name": "Hibiscus Bloom Bag",
-    "price": "\u20b9399.00",
+    "price": "\u20b999.00",
     "image": "/products/gift-bag-21.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Hibiscus Bloom Bag combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "6.6 x 11 x 3. inches"
+    ],
+    "category": "Festive Bags",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 53,
-    "name": "Peacock Bloom Pouch",
-    "price": "\u20b9449.00",
+    "name": "Peacock Bloom",
+    "price": "\u20b9129.00",
     "image": "/products/gift-bag-03.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Peacock Bloom Pouch combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "11 x 12 x 4 inches"
+    ],
+    "category": "Festive Bags",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 54,
-    "name": "Indigo Forest Tote",
-    "price": "\u20b9449.00",
+    "name": "Indigo Forest",
+    "price": "\u20b9129.00",
     "image": "/products/gift-bag-31.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Indigo Forest Tote combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "11 x 12 x 4"
+    ],
+    "category": "Festive Bags",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 55,
     "name": "Sustainable Caddy Bags",
     "price": "\u20b9599.00",
     "image": "/products/sustainable-caddy-bags.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Sustainable Caddy Bags combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "12 x 6 x 6 inches",
+      "Durable, Tear resistant, washable"
+    ],
+    "category": "Picnic Bags",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 56,
     "name": "Navy Blue Medallion",
-    "price": "\u20b9401.00",
+    "price": "\u20b9349.00",
     "image": "/products/navy-blue-medallion.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Navy Blue Medallion combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "Durable, Tear resistant, washable",
+      "13.5 x 14.5 x 4 inches"
+    ],
+    "category": "Tote Bags",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 57,
     "name": "Aesthetic Notes",
-    "price": "\u20b9171.00",
+    "price": "\u20b9149",
     "image": "/products/make-it-notebook.webp",
-    "tag": "New"
+    "tag": "New",
+    "description": "Handcrafted with sustainable materials, this Aesthetic Notes combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
+    "features": [
+      "Made from 100% recycled materials",
+      "Handcrafted by local artisans",
+      "Eco-friendly and sustainable",
+      "A6 Notebook, 160 pages ruled"
+    ],
+    "category": "Notebooks",
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
+    ],
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 58,
     "name": "Boho Pattern",
-    "price": "\u20b9171.00",
+    "price": "\u20b9149.00",
     "image": "/products/colorful-abstract-art-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "\u20b9129.00"
+      },
+      {
+        "size": "M",
+        "price": "\u20b9149.00"
+      },
+      {
+        "size": "L",
+        "price": "\u20b9199.00"
+      }
+    ],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Boho Pattern",
+      "description": "",
+      "urlHandle": "boho-pattern"
+    }
   },
   {
     "id": 59,
     "name": "Zade Strides",
     "price": "\u20b9449.00",
     "image": "/products/zade-strides.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 60,
     "name": "Carry Bag Summer",
-    "price": "\u20b9171.00",
+    "price": "\u20b9149",
     "image": "/products/carry-bag-summer.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "category": "gift bags",
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Carry Bag Summer",
+      "description": "",
+      "urlHandle": "carry-bag-summer"
+    }
   },
   {
     "id": 61,
     "name": "Gift Bag - Maroon Design",
-    "price": "\u20b9148.00",
+    "price": "\u20b9129",
     "image": "/products/gift-bag-maroon-design.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Gift Bag - Maroon Design",
+      "description": "",
+      "urlHandle": "gift-bag-maroon-design"
+    }
   },
   {
     "id": 62,
     "name": "Teal Tale Folder",
-    "price": "\u20b9286.00",
+    "price": "\u20b9249",
     "image": "/products/peacock-document-folder.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Teal Tale Folder",
+      "description": "",
+      "urlHandle": "teal-tale-folder"
+    }
   },
   {
     "id": 63,
     "name": "Carry Bag Leaf",
-    "price": "\u20b9171.00",
+    "price": "\u20b9149",
     "image": "/products/carry-bag-leaf.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Carry Bag Leaf",
+      "description": "",
+      "urlHandle": "carry-bag-leaf"
+    }
   },
   {
     "id": 64,
     "name": "Colorful Water Bottle Bag",
-    "price": "\u20b9194.00",
+    "price": "\u20b9179.00",
     "image": "/products/colorful-water-bottle-bag.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Colorful Water Bottle Bag",
+      "description": "",
+      "urlHandle": "colorful-water-bottle-bag"
+    }
   },
   {
     "id": 65,
     "name": "Make It Notebook",
-    "price": "\u20b9171.00",
+    "price": "\u20b9149.00",
     "image": "/products/make-it-notebook-1.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Make It Notebook",
+      "description": "",
+      "urlHandle": "make-it-notebook"
+    }
   },
   {
     "id": 66,
     "name": "AUTUMN GLOW",
     "price": "\u20b9449.00",
     "image": "/products/autumn-glow.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 67,
     "name": "Colorful Stripes Bottle Holder",
-    "price": "\u20b9205.00",
+    "price": "\u20b9179.00",
     "image": "/products/colorful-stripes-bottle-holder.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Colorful Stripes Bottle Holder",
+      "description": "",
+      "urlHandle": "colorful-stripes-bottle-holder"
+    }
   },
   {
     "id": 68,
     "name": "ECO BLOOM",
     "price": "\u20b9449.00",
     "image": "/products/eco-bloom.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 69,
     "name": "Lotus Blossom Gift Bag",
-    "price": "\u20b9499.00",
+    "price": "\u20b9149.00",
     "image": "/products/gift-bag-24.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Lotus Blossom Gift Bag",
+      "description": "",
+      "urlHandle": "lotus-blossom-gift-bag"
+    }
   },
   {
     "id": 70,
     "name": "Eco Wardrobe Organisers",
-    "price": "\u20b9349.00",
+    "price": "\u20b9399.00",
     "image": "/products/eco-wardrobe-organisers.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Eco Wardrobe Organisers",
+      "description": "",
+      "urlHandle": "eco-wardrobe-organisers"
+    }
   },
   {
     "id": 71,
     "name": "Twilight Bloom",
-    "price": "\u20b9228.00",
+    "price": "\u20b9199.00",
     "image": "/products/green-fabric-print-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Twilight Bloom",
+      "description": "",
+      "urlHandle": "twilight-bloom"
+    },
+    "sizes": [
+      {
+        "size": "S",
+        "price": "\u20b9129.00"
+      },
+      {
+        "size": "M",
+        "price": "\u20b9149.00"
+      },
+      {
+        "size": "L",
+        "price": "\u20b9199.00"
+      }
+    ]
   },
   {
     "id": 72,
@@ -578,406 +1816,1303 @@
       "Eco-friendly and sustainable",
       "Unique design, no two pieces are identical"
     ],
-    "sizes": [
-      "S"
-    ]
+    "metafields": {
+      "ecoCertification": "GRS",
+      "material": "a"
+    },
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Animal Water Bottle Bag",
+      "description": "Handcrafted with sustainable materials, this Animal Water Bottle Bag combines traditional craftsmanship with modern design. Made from upcycled waste material...",
+      "urlHandle": "animal-water-bottle-bag"
+    }
   },
   {
     "id": 73,
     "name": "Rain Leaf",
-    "price": "\u20b9171.00",
+    "price": "\u20b9149.00",
     "image": "/products/leaf-art-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Rain Leaf",
+      "description": "",
+      "urlHandle": "rain-leaf"
+    },
+    "sizes": [
+      {
+        "size": "S",
+        "price": "\u20b9129.00"
+      },
+      {
+        "size": "M",
+        "price": "\u20b9149.00"
+      },
+      {
+        "size": "L",
+        "price": "\u20b9199.00"
+      }
+    ]
   },
   {
     "id": 74,
     "name": "Lotus Bloom Gift Bag",
-    "price": "\u20b9449.00",
+    "price": "\u20b9199.00",
     "image": "/products/gift-bag-28.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Lotus Bloom Gift Bag",
+      "description": "",
+      "urlHandle": "lotus-bloom-gift-bag"
+    }
   },
   {
     "id": 75,
     "name": "Lotus Bloom Bag",
-    "price": "\u20b9449.00",
+    "price": "\u20b9199.00",
     "image": "/products/gift-bag-02.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Lotus Bloom Bag",
+      "description": "",
+      "urlHandle": "lotus-bloom-bag"
+    }
   },
   {
     "id": 76,
     "name": "Mystic Bloom",
-    "price": "\u20b9171.00",
+    "price": "\u20b9149.00",
     "image": "/products/unicorn-spiral-art-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Mystic Bloom",
+      "description": "",
+      "urlHandle": "mystic-bloom"
+    }
   },
   {
     "id": 77,
     "name": "Ethnic Ikat File",
-    "price": "\u20b9269.00",
+    "price": "\u20b9229.00",
     "image": "/products/ethnic-ikat-file.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Ethnic Ikat File",
+      "description": "",
+      "urlHandle": "ethnic-ikat-file"
+    }
   },
   {
     "id": 78,
     "name": "Lotus Bloom Gift Bag",
-    "price": "\u20b9449.00",
+    "price": "\u20b9129.00",
     "image": "/products/gift-bag-35.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Lotus Bloom Gift Bag",
+      "description": "",
+      "urlHandle": "lotus-bloom-gift-bag"
+    }
   },
   {
     "id": 79,
     "name": "Geometric Calm Folder",
-    "price": "\u20b9343.00",
+    "price": "\u20b9299.00",
     "image": "/products/geometric-blue-document-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Geometric Calm Folder",
+      "description": "",
+      "urlHandle": "geometric-calm-folder"
+    }
   },
   {
     "id": 80,
     "name": "MYSTIC BLOOM",
     "price": "\u20b9449.00",
     "image": "/products/mystic-bloom.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 81,
     "name": "Geometric",
-    "price": "\u20b9171.00",
+    "price": "\u20b9249.00",
     "image": "/products/geometric.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Geometric",
+      "description": "",
+      "urlHandle": "geometric"
+    }
   },
   {
     "id": 82,
     "name": "Gift Bags - Tropical",
-    "price": "\u20b9113.00",
+    "price": "\u20b999.00",
     "image": "/products/gift-bags-tropical.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Gift Bags - Tropical",
+      "description": "",
+      "urlHandle": "gift-bags-tropical"
+    }
   },
   {
     "id": 83,
     "name": "Orange Tropical",
-    "price": "\u20b9171.00",
+    "price": "\u20b9249.00",
     "image": "/products/orange-tropical.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Orange Tropical",
+      "description": "",
+      "urlHandle": "orange-tropical"
+    }
   },
   {
     "id": 84,
     "name": "IndigoTide Folder",
-    "price": "\u20b9286.00",
+    "price": "\u20b9249.00",
     "image": "/products/blue-document-folder.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "IndigoTide Folder",
+      "description": "",
+      "urlHandle": "indigotide-folder"
+    }
   },
   {
     "id": 85,
     "name": "Goldern Plaid Folder",
-    "price": "\u20b9343.00",
+    "price": "\u20b9299.00",
     "image": "/products/stripes-and-checks-document-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Goldern Plaid Folder",
+      "description": "",
+      "urlHandle": "goldern-plaid-folder"
+    }
   },
   {
     "id": 86,
     "name": "Mosaic Bloom",
-    "price": "\u20b9171.00",
+    "price": "\u20b9149.00",
     "image": "/products/bandini-art-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Mosaic Bloom",
+      "description": "",
+      "urlHandle": "mosaic-bloom"
+    },
+    "sizes": [
+      {
+        "size": "S",
+        "price": "\u20b9129.00"
+      },
+      {
+        "size": "M",
+        "price": "\u20b9149.00"
+      },
+      {
+        "size": "L",
+        "price": "\u20b9199.00"
+      }
+    ]
   },
   {
     "id": 87,
     "name": "Cardeco Stripes File",
-    "price": "\u20b9269.00",
+    "price": "\u20b9229.00",
     "image": "/products/cardeco-stripes-file.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Cardeco Stripes File",
+      "description": "",
+      "urlHandle": "cardeco-stripes-file"
+    }
   },
   {
     "id": 88,
     "name": "Modern Angular Sleeve",
-    "price": "\u20b9329.00",
+    "price": "\u20b9299.00",
     "image": "/products/modern-angular-design.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Modern Angular Sleeve",
+      "description": "",
+      "urlHandle": "modern-angular-sleeve"
+    }
   },
   {
     "id": 89,
     "name": "Mandala Design Cash Pouch",
-    "price": "\u20b9148.00",
+    "price": "\u20b9139.00",
     "image": "/products/mandala-design-cash-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Mandala Design Cash Pouch",
+      "description": "",
+      "urlHandle": "mandala-design-cash-pouch"
+    }
   },
   {
     "id": 90,
     "name": "Lotus Blossom Tote",
-    "price": "\u20b9499.00",
+    "price": "\u20b9129.00",
     "image": "/products/gift-bag-26.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Lotus Blossom Tote",
+      "description": "",
+      "urlHandle": "lotus-blossom-tote"
+    }
   },
   {
     "id": 91,
-    "name": "Boho Pattern ",
-    "price": "\u20b9228.00",
+    "name": "Boho Pattern",
+    "price": "\u20b9199.00",
     "image": "/products/colorful-abstract-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Boho Pattern",
+      "description": "",
+      "urlHandle": "boho-pattern"
+    },
+    "sizes": [
+      {
+        "size": "S",
+        "price": "\u20b9129.00"
+      },
+      {
+        "size": "M",
+        "price": "\u20b9149.00"
+      },
+      {
+        "size": "L",
+        "price": "\u20b9199.00"
+      }
+    ]
   },
   {
     "id": 92,
     "name": "Mermaid Life",
-    "price": "\u20b9688.00",
+    "price": "\u20b9599.00",
     "image": "/products/mermaid-life.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Mermaid Life",
+      "description": "",
+      "urlHandle": "mermaid-life"
+    }
   },
   {
     "id": 93,
     "name": "Maple Glow",
-    "price": "\u20b9228.00",
+    "price": "\u20b9199.00",
     "image": "/products/autumn-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Maple Glow",
+      "description": "",
+      "urlHandle": "maple-glow"
+    },
+    "sizes": [
+      {
+        "size": "S",
+        "price": "\u20b9129.00"
+      },
+      {
+        "size": "M",
+        "price": "\u20b9149.00"
+      },
+      {
+        "size": "L",
+        "price": "\u20b9199.00"
+      }
+    ]
   },
   {
     "id": 94,
     "name": "Blush Bloom Folder",
-    "price": "\u20b9289.00",
+    "price": "\u20b9249.00",
     "image": "/products/fabric-print-document-folder.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Blush Bloom Folder",
+      "description": "",
+      "urlHandle": "blush-bloom-folder"
+    }
   },
   {
     "id": 95,
     "name": "Gift Bag - Lemon",
-    "price": "\u20b9148.00",
+    "price": "\u20b9129.00",
     "image": "/products/gift-bag-lemon.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Gift Bag - Lemon",
+      "description": "",
+      "urlHandle": "gift-bag-lemon"
+    }
   },
   {
     "id": 96,
     "name": "Sunset Chevron",
-    "price": "\u20b9171.00",
+    "price": "\u20b9149.00",
     "image": "/products/abstract-zig-zag-art-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Sunset Chevron",
+      "description": "",
+      "urlHandle": "sunset-chevron"
+    },
+    "sizes": [
+      {
+        "size": "S",
+        "price": "\u20b9129.00"
+      },
+      {
+        "size": "M",
+        "price": "\u20b9149.00"
+      },
+      {
+        "size": "L",
+        "price": "\u20b9199.00"
+      }
+    ]
   },
   {
     "id": 97,
     "name": "Floral",
-    "price": "\u20b9688.00",
+    "price": "\u20b9599.00",
     "image": "/products/floral.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Floral",
+      "description": "",
+      "urlHandle": "floral"
+    }
   },
   {
     "id": 98,
     "name": "Mystic Bloom",
-    "price": "\u20b9228.00",
+    "price": "\u20b9199.00",
     "image": "/products/unicorn-spiral-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Mystic Bloom",
+      "description": "",
+      "urlHandle": "mystic-bloom"
+    },
+    "sizes": [
+      {
+        "size": "S",
+        "price": "\u20b9129.00"
+      },
+      {
+        "size": "M",
+        "price": "\u20b9149.00"
+      },
+      {
+        "size": "L",
+        "price": "\u20b9199.00"
+      }
+    ]
   },
   {
     "id": 99,
     "name": "Save the Date Bag -100 pieces",
     "price": "\u20b96,000.00",
     "image": "/products/save-the-date-bag.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 100,
     "name": "Blush Vale Folder",
-    "price": "\u20b9286.00",
+    "price": "\u20b9249.00",
     "image": "/products/floral-document-folder.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Blush Vale Folder",
+      "description": "",
+      "urlHandle": "blush-vale-folder"
+    }
   },
   {
     "id": 101,
     "name": "Helophelia Art Pouch",
-    "price": "\u20b9171.00",
+    "price": "\u20b9149.00",
     "image": "/products/helophelia-art-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Helophelia Art Pouch",
+      "description": "",
+      "urlHandle": "helophelia-art-pouch"
+    },
+    "sizes": [
+      {
+        "size": "S",
+        "price": "\u20b9129.00"
+      },
+      {
+        "size": "M",
+        "price": "\u20b9149.00"
+      },
+      {
+        "size": "L",
+        "price": "\u20b9199.00"
+      }
+    ]
   },
   {
     "id": 102,
     "name": "Purple Cash Pouch",
-    "price": "\u20b9148.00",
+    "price": "\u20b9139.00",
     "image": "/products/purple-cash-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Purple Cash Pouch",
+      "description": "",
+      "urlHandle": "purple-cash-pouch"
+    }
   },
   {
     "id": 103,
     "name": "Floral Bloom Gift Bag",
-    "price": "\u20b9499.00",
+    "price": "\u20b9129.00",
     "image": "/products/gift-bag-06.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Floral Bloom Gift Bag",
+      "description": "",
+      "urlHandle": "floral-bloom-gift-bag"
+    }
   },
   {
     "id": 104,
     "name": "Botanic Mandala Placemats",
-    "price": "\u20b9499.00",
+    "price": "\u20b9999.00",
     "image": "/products/botanic-mandala-placemats.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Botanic Mandala Placemats",
+      "description": "",
+      "urlHandle": "botanic-mandala-placemats"
+    }
   },
   {
     "id": 105,
     "name": "The Little Explorer Gift Set",
     "price": "\u20b9799.00",
     "image": "/products/the-little-explorer-gift-set.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "The Little Explorer Gift Set",
+      "description": "",
+      "urlHandle": "the-little-explorer-gift-set"
+    }
   },
   {
     "id": 106,
     "name": "Maple Glow",
-    "price": "\u20b9171.00",
+    "price": "\u20b9149.00",
     "image": "/products/autumn-art-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Maple Glow",
+      "description": "",
+      "urlHandle": "maple-glow"
+    },
+    "sizes": [
+      {
+        "size": "S",
+        "price": "\u20b9129.00"
+      },
+      {
+        "size": "M",
+        "price": "\u20b9149.00"
+      },
+      {
+        "size": "L",
+        "price": "\u20b9199.00"
+      }
+    ]
   },
   {
     "id": 107,
     "name": "Geo Spark Laptop Sleeve",
-    "price": "\u20b9329.00",
+    "price": "\u20b9399.00",
     "image": "/products/retro-triangles.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Geo Spark Laptop Sleeve",
+      "description": "",
+      "urlHandle": "geo-spark-laptop-sleeve"
+    }
   },
   {
     "id": 108,
     "name": "Carry Bag Korean",
-    "price": "\u20b9171.00",
+    "price": "\u20b9149.00",
     "image": "/products/carry-bag-korean.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Carry Bag Korean",
+      "description": "",
+      "urlHandle": "carry-bag-korean"
+    }
   },
   {
     "id": 109,
     "name": "Twilight Bloom",
-    "price": "\u20b9148.00",
+    "price": "\u20b9129.00",
     "image": "/products/green-fabric-print-pencil-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Twilight Bloom",
+      "description": "",
+      "urlHandle": "twilight-bloom"
+    },
+    "sizes": [
+      {
+        "size": "S",
+        "price": "\u20b9129.00"
+      },
+      {
+        "size": "M",
+        "price": "\u20b9149.00"
+      },
+      {
+        "size": "L",
+        "price": "\u20b9199.00"
+      }
+    ]
   },
   {
     "id": 110,
     "name": "Gift Bags - Village",
-    "price": "\u20b9113.00",
+    "price": "\u20b999.00",
     "image": "/products/gift-bags-village.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Gift Bags - Village",
+      "description": "",
+      "urlHandle": "gift-bags-village"
+    }
   },
   {
     "id": 111,
     "name": "Boho Pattern",
-    "price": "\u20b9148.00",
+    "price": "\u20b9129.00",
     "image": "/products/colorful-abstract-pencil-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Boho Pattern",
+      "description": "",
+      "urlHandle": "boho-pattern"
+    },
+    "sizes": [
+      {
+        "size": "S",
+        "price": "\u20b9129.00"
+      },
+      {
+        "size": "M",
+        "price": "\u20b9149.00"
+      },
+      {
+        "size": "L",
+        "price": "\u20b9199.00"
+      }
+    ]
   },
   {
     "id": 112,
     "name": "Ermis Canvas Laptop Bag",
-    "price": "\u20b93,999.00",
+    "price": "\u20b92,999.00",
     "image": "/products/ermis-canvas-laptop-bag.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Ermis Canvas Laptop Bag",
+      "description": "",
+      "urlHandle": "ermis-canvas-laptop-bag"
+    }
   },
   {
     "id": 113,
     "name": "Mandala Art Bag - 100 pieces",
     "price": "\u20b96,000.00",
     "image": "/products/mandala-art-bag.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Mandala Art Bag - 100 pieces",
+      "description": "",
+      "urlHandle": "mandala-art-bag-100-pieces"
+    }
   },
   {
     "id": 114,
     "name": "GEOVIBE",
     "price": "\u20b9449.00",
     "image": "/products/geovibe.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 115,
     "name": "Ocean Stripe",
-    "price": "\u20b9228.00",
+    "price": "\u20b9199.00",
     "image": "/products/blue-and-white-stripes-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Ocean Stripe",
+      "description": "",
+      "urlHandle": "ocean-stripe"
+    },
+    "sizes": [
+      {
+        "size": "S",
+        "price": "\u20b9129.00"
+      },
+      {
+        "size": "M",
+        "price": "\u20b9149.00"
+      },
+      {
+        "size": "L",
+        "price": "\u20b9199.00"
+      }
+    ]
   },
   {
     "id": 116,
     "name": "Pink Diamond Face",
-    "price": "\u20b9401.00",
+    "price": "\u20b9349.00",
     "image": "/products/pink-diamond-face.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Pink Diamond Face",
+      "description": "",
+      "urlHandle": "pink-diamond-face"
+    }
   },
   {
     "id": 117,
     "name": "Pink Thank You Bag - 100 Pieces",
-    "price": "\u20b96,000.00",
+    "price": "\u20b95,400.00",
     "image": "/products/pink-thank-you-bag.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Pink Thank You Bag - 100 Pieces",
+      "description": "",
+      "urlHandle": "pink-thank-you-bag-100-pieces"
+    }
   },
   {
     "id": 118,
     "name": "Lotus Bloom Gift Bag",
-    "price": "\u20b9399.00",
+    "price": "\u20b999.00",
     "image": "/products/gift-bag-19.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Lotus Bloom Gift Bag",
+      "description": "",
+      "urlHandle": "lotus-bloom-gift-bag"
+    }
   },
   {
     "id": 119,
     "name": "Geo Vibe",
-    "price": "\u20b9171.00",
+    "price": "\u20b9149.00",
     "image": "/products/abstract-art-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Geo Vibe",
+      "description": "",
+      "urlHandle": "geo-vibe"
+    }
   },
   {
     "id": 120,
     "name": "MOSAIC BLOOM",
     "price": "\u20b9449.00",
     "image": "/products/mosaic-bloom.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 121,
     "name": "Mermaid squad",
-    "price": "\u20b9688.00",
+    "price": "\u20b9499.00",
     "image": "/products/mermaid-squad.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Mermaid squad",
+      "description": "",
+      "urlHandle": "mermaid-squad"
+    }
   },
   {
     "id": 122,
     "name": "Pink & Grey Leaf Bottle Holder Water Bottle Bag",
-    "price": "\u20b9194.00",
+    "price": "\u20b9179.00",
     "image": "/products/leaf-water-bottle-bag.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Pink & Grey Leaf Bottle Holder Water Bottle Bag",
+      "description": "",
+      "urlHandle": "pink-grey-leaf-bottle-holder-water-bottle-bag"
+    }
   },
   {
     "id": 123,
     "name": "Lotus Blossom Gift Bag",
-    "price": "\u20b9399.00",
+    "price": "\u20b999.00",
     "image": "/products/gift-bag-3.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Lotus Blossom Gift Bag",
+      "description": "",
+      "urlHandle": "lotus-blossom-gift-bag"
+    }
   },
   {
     "id": 124,
     "name": "Eco Bloom",
-    "price": "\u20b9148.00",
+    "price": "\u20b9129.00",
     "image": "/products/floral-pencil-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Eco Bloom",
+      "description": "",
+      "urlHandle": "eco-bloom"
+    },
+    "sizes": [
+      {
+        "size": "S",
+        "price": "\u20b9129.00"
+      },
+      {
+        "size": "M",
+        "price": "\u20b9149.00"
+      },
+      {
+        "size": "L",
+        "price": "\u20b9199.00"
+      }
+    ]
   },
   {
     "id": 125,
     "name": "Marriage Bag - 100 Pieces",
     "price": "\u20b96,000.00",
     "image": "/products/marriage-bag.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 126,
     "name": "Heart Handle Bag - 100 Pieces",
     "price": "\u20b96,000.00",
     "image": "/products/heart-handle-bag.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 127,
     "name": "Geo Vibe",
-    "price": "\u20b9148.00",
+    "price": "\u20b9129.00",
     "image": "/products/abstract-pencil-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Geo Vibe",
+      "description": "",
+      "urlHandle": "geo-vibe"
+    }
   },
   {
     "id": 128,
     "name": "Lotus Bloom Gift Bag",
-    "price": "\u20b9399.00",
+    "price": "\u20b9129.00",
     "image": "/products/gift-bag-18.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Lotus Bloom Gift Bag",
+      "description": "",
+      "urlHandle": "lotus-bloom-gift-bag"
+    }
   },
   {
     "id": 129,
     "name": "Gift Bag - Traditional",
-    "price": "\u20b9123.00",
+    "price": "\u20b999.00",
     "image": "/products/gift-bag-traditional.webp",
     "tag": "New",
     "description": "Handcrafted with sustainable materials, this Gift Bag - Traditional combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.",
@@ -986,419 +3121,1362 @@
       "Handcrafted by local artisans",
       "Eco-friendly and sustainable",
       "Unique design, no two pieces are identical"
-    ]
+    ],
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Gift Bag - Traditional",
+      "description": "Handcrafted with sustainable materials, this Gift Bag - Traditional combines traditional craftsmanship with modern design. Made from upcycled waste materials...",
+      "urlHandle": "gift-bag-traditional"
+    }
   },
   {
     "id": 130,
     "name": "Sunset Chevron",
-    "price": "\u20b9148.00",
+    "price": "\u20b9129.00",
     "image": "/products/abstract-zig-zag-pencil-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Sunset Chevron",
+      "description": "",
+      "urlHandle": "sunset-chevron"
+    },
+    "sizes": [
+      {
+        "size": "S",
+        "price": "\u20b9129.00"
+      },
+      {
+        "size": "M",
+        "price": "\u20b9149.00"
+      },
+      {
+        "size": "L",
+        "price": "\u20b9199.00"
+      }
+    ]
   },
   {
     "id": 131,
     "name": "Sparkle Like a Unicorn",
-    "price": "\u20b9688.00",
+    "price": "\u20b9499.00",
     "image": "/products/sparkle-like-a-unicorn.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Sparkle Like a Unicorn",
+      "description": "",
+      "urlHandle": "sparkle-like-a-unicorn"
+    }
   },
   {
     "id": 132,
     "name": "Geometric Gradeint Sleeve",
-    "price": "\u20b9329.00",
+    "price": "\u20b9399.00",
     "image": "/products/geometric-gradeint.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Geometric Gradeint Sleeve",
+      "description": "",
+      "urlHandle": "geometric-gradeint-sleeve"
+    }
   },
   {
     "id": 133,
     "name": "Gift Bag- Blue",
-    "price": "\u20b9113.00",
+    "price": "\u20b999.00",
     "image": "/products/gift-bag-blue.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Gift Bag- Blue",
+      "description": "",
+      "urlHandle": "gift-bag-blue"
+    }
   },
   {
     "id": 134,
     "name": "Floral Bloom Gift Bag",
-    "price": "\u20b9449.00",
+    "price": "\u20b9129.00",
     "image": "/products/gift-bag-22.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Floral Bloom Gift Bag",
+      "description": "",
+      "urlHandle": "floral-bloom-gift-bag"
+    }
   },
   {
     "id": 135,
     "name": "Stripes",
-    "price": "\u20b9171.00",
+    "price": "\u20b9249.00",
     "image": "/products/stripes.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Stripes",
+      "description": "",
+      "urlHandle": "stripes"
+    }
   },
   {
     "id": 136,
     "name": "Black Aprese",
-    "price": "\u20b9401.00",
+    "price": "\u20b9349.00",
     "image": "/products/black-aprese.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Black Aprese",
+      "description": "",
+      "urlHandle": "black-aprese"
+    }
   },
   {
     "id": 137,
     "name": "Traditional Thank You Bag - 100 pieces",
     "price": "\u20b96,000.00",
     "image": "/products/traditional-thank-you-bag.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 138,
-    "name": "Rain Leaf ",
-    "price": "\u20b9148.00",
+    "name": "Rain Leaf",
+    "price": "\u20b9129.00",
     "image": "/products/leaf-pencil-pouch-1.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Rain Leaf",
+      "description": "",
+      "urlHandle": "rain-leaf"
+    },
+    "sizes": [
+      {
+        "size": "S",
+        "price": "\u20b9129.00"
+      },
+      {
+        "size": "M",
+        "price": "\u20b9149.00"
+      },
+      {
+        "size": "L",
+        "price": "\u20b9199.00"
+      }
+    ]
   },
   {
     "id": 139,
     "name": "Green Bonamaison",
-    "price": "\u20b9401.00",
+    "price": "\u20b9349.00",
     "image": "/products/t150b.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Green Bonamaison",
+      "description": "",
+      "urlHandle": "green-bonamaison"
+    }
   },
   {
     "id": 140,
     "name": "Gift Bag - Cherry Blossom",
-    "price": "\u20b9148.00",
+    "price": "\u20b9129.00",
     "image": "/products/gift-bag-cherry-blossom.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Gift Bag - Cherry Blossom",
+      "description": "",
+      "urlHandle": "gift-bag-cherry-blossom"
+    }
   },
   {
     "id": 141,
     "name": "Eco Bloom",
-    "price": "\u20b9171.00",
+    "price": "\u20b9149.00",
     "image": "/products/floral-art-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Eco Bloom",
+      "description": "",
+      "urlHandle": "eco-bloom"
+    },
+    "sizes": [
+      {
+        "size": "S",
+        "price": "\u20b9129.00"
+      },
+      {
+        "size": "M",
+        "price": "\u20b9149.00"
+      },
+      {
+        "size": "L",
+        "price": "\u20b9199.00"
+      }
+    ]
   },
   {
     "id": 142,
     "name": "Pastel Green Mandala Bottle Holder",
-    "price": "\u20b9205.00",
+    "price": "\u20b9179.00",
     "image": "/products/pastel-green-mandala-bottle-holder.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Pastel Green Mandala Bottle Holder",
+      "description": "",
+      "urlHandle": "pastel-green-mandala-bottle-holder"
+    }
   },
   {
     "id": 143,
     "name": "Indigo Cattle Canvas",
-    "price": "\u20b9449.00",
+    "price": "\u20b9129.00",
     "image": "/products/gift-bag.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Indigo Cattle Canvas",
+      "description": "",
+      "urlHandle": "indigo-cattle-canvas"
+    }
   },
   {
     "id": 144,
     "name": "Twilight Bloom",
-    "price": "\u20b9171.00",
+    "price": "\u20b9149.00",
     "image": "/products/green-fabric-print-art-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Twilight Bloom",
+      "description": "",
+      "urlHandle": "twilight-bloom"
+    },
+    "sizes": [
+      {
+        "size": "S",
+        "price": "\u20b9129.00"
+      },
+      {
+        "size": "M",
+        "price": "\u20b9149.00"
+      },
+      {
+        "size": "L",
+        "price": "\u20b9199.00"
+      }
+    ]
   },
   {
     "id": 145,
     "name": "Autumn Glow",
-    "price": "\u20b9228.00",
+    "price": "\u20b9199.00",
     "image": "/products/autumn-3-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Autumn Glow",
+      "description": "",
+      "urlHandle": "autumn-glow"
+    },
+    "sizes": [
+      {
+        "size": "s",
+        "price": "\u20b9129.00"
+      },
+      {
+        "size": "M",
+        "price": "\u20b9149.00"
+      },
+      {
+        "size": "L",
+        "price": "\u20b9199.00"
+      }
+    ]
   },
   {
     "id": 146,
     "name": "Floral Laptop Sleeve",
-    "price": "\u20b9329.00",
+    "price": "\u20b9399.00",
     "image": "/products/floral-laptop-sleeve.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Floral Laptop Sleeve",
+      "description": "",
+      "urlHandle": "floral-laptop-sleeve"
+    }
   },
   {
     "id": 147,
     "name": "Sunny Pine",
-    "price": "\u20b9171.00",
+    "price": "\u20b9149.00",
     "image": "/products/pineapple-art-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Sunny Pine",
+      "description": "",
+      "urlHandle": "sunny-pine"
+    },
+    "sizes": [
+      {
+        "size": "S",
+        "price": "\u20b9129.00"
+      },
+      {
+        "size": "M",
+        "price": "\u20b9149.00"
+      },
+      {
+        "size": "L",
+        "price": "\u20b9199.00"
+      }
+    ]
   },
   {
     "id": 148,
     "name": "Autumn Glow",
-    "price": "\u20b9148.00",
+    "price": "\u20b9129.00",
     "image": "/products/autumn-3-pencil-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Autumn Glow",
+      "description": "",
+      "urlHandle": "autumn-glow"
+    },
+    "sizes": [
+      {
+        "size": "S",
+        "price": "\u20b9129.00"
+      },
+      {
+        "size": "M",
+        "price": "\u20b9149.00"
+      },
+      {
+        "size": "L",
+        "price": "\u20b9199.00"
+      }
+    ]
   },
   {
     "id": 149,
-    "name": "Ocean Stripe ",
-    "price": "\u20b9148.00",
+    "name": "Ocean Stripe",
+    "price": "\u20b9129.00",
     "image": "/products/blue-and-white-stripes-pencil-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Ocean Stripe",
+      "description": "",
+      "urlHandle": "ocean-stripe"
+    },
+    "sizes": [
+      {
+        "size": "S",
+        "price": "\u20b9129.00"
+      },
+      {
+        "size": "M",
+        "price": "\u20b9149.00"
+      },
+      {
+        "size": "L",
+        "price": "\u20b9199.00"
+      }
+    ]
   },
   {
     "id": 150,
     "name": "Maple Glow",
-    "price": "\u20b9148.00",
+    "price": "\u20b9129.00",
     "image": "/products/autumn-pencil-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Maple Glow",
+      "description": "",
+      "urlHandle": "maple-glow"
+    },
+    "sizes": [
+      {
+        "size": "S",
+        "price": "\u20b9129.00"
+      },
+      {
+        "size": "M",
+        "price": "\u20b9149.00"
+      },
+      {
+        "size": "L",
+        "price": "\u20b9199.00"
+      }
+    ]
   },
   {
     "id": 151,
     "name": "Thank You Bag - 100 Pieces",
     "price": "\u20b96,000.00",
     "image": "/products/thank-you-bag.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 152,
     "name": "Crimson Bloom Bag",
-    "price": "\u20b9499.00",
+    "price": "\u20b9149.00",
     "image": "/products/gift-bag-12.webp",
-    "tag": "New"
-  },
-  {
-    "id": 153,
-    "name": "Pixie Gallop Gift Set",
-    "price": "\u20b9799.00",
-    "image": "/products/pixie-gallop-gift-set.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Crimson Bloom Bag",
+      "description": "",
+      "urlHandle": "crimson-bloom-bag"
+    }
   },
   {
     "id": 154,
     "name": "Prism Flow",
-    "price": "\u20b9148.00",
+    "price": "\u20b9129.00",
     "image": "/products/colorful-spiral-pencil-pouch-1.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Prism Flow",
+      "description": "",
+      "urlHandle": "prism-flow"
+    },
+    "sizes": [
+      {
+        "size": "S",
+        "price": "\u20b9129.00"
+      },
+      {
+        "size": "M",
+        "price": "\u20b9149.00"
+      },
+      {
+        "size": "L",
+        "price": "\u20b9199.00"
+      }
+    ]
   },
   {
     "id": 155,
     "name": "Rainbow Bloom Bag",
-    "price": "\u20b9399.00",
+    "price": "\u20b999.00",
     "image": "/products/gift-bag-16.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Rainbow Bloom Bag",
+      "description": "",
+      "urlHandle": "rainbow-bloom-bag"
+    }
   },
   {
     "id": 156,
     "name": "Festive Event Bag - 100 pieces",
     "price": "\u20b96,000.00",
     "image": "/products/festive-event-bag.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 157,
     "name": "Beep Beep",
-    "price": "\u20b9171.00",
+    "price": "\u20b9249.00",
     "image": "/products/beep-beep.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Beep Beep",
+      "description": "",
+      "urlHandle": "beep-beep"
+    }
   },
   {
     "id": 158,
     "name": "SUMMER VIBE",
     "price": "\u20b9449.00",
     "image": "/products/summer-vibe.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 159,
     "name": "Golden Bloom Gift Bag",
-    "price": "\u20b9449.00",
+    "price": "\u20b9149.00",
     "image": "/products/gift-bags.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Golden Bloom Gift Bag",
+      "description": "",
+      "urlHandle": "golden-bloom-gift-bag"
+    }
   },
   {
     "id": 160,
     "name": "Rain Leaf",
-    "price": "\u20b9228.00",
+    "price": "\u20b9199.00",
     "image": "/products/leaf-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Rain Leaf",
+      "description": "",
+      "urlHandle": "rain-leaf"
+    },
+    "sizes": [
+      {
+        "size": "S",
+        "price": "\u20b9129.00"
+      },
+      {
+        "size": "M",
+        "price": "\u20b9149.00"
+      },
+      {
+        "size": "L",
+        "price": "\u20b9199.00"
+      }
+    ]
   },
   {
     "id": 161,
-    "name": "Mosaic Bloom ",
-    "price": "\u20b9148.00",
+    "name": "Mosaic Bloom",
+    "price": "\u20b9129.00",
     "image": "/products/bandini-pencil-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Mosaic Bloom",
+      "description": "",
+      "urlHandle": "mosaic-bloom"
+    },
+    "sizes": [
+      {
+        "size": "S",
+        "price": "\u20b9129.00"
+      },
+      {
+        "size": "M",
+        "price": "\u20b9149.00"
+      },
+      {
+        "size": "L",
+        "price": "\u20b9199.00"
+      }
+    ]
   },
   {
     "id": 162,
     "name": "Love for Cars",
-    "price": "\u20b9688.00",
+    "price": "\u20b9499.00",
     "image": "/products/love-for-cars.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Love for Cars",
+      "description": "",
+      "urlHandle": "love-for-cars"
+    }
   },
   {
     "id": 163,
     "name": "Indian Wedding Bag - 100 pieces",
     "price": "\u20b96,000.00",
     "image": "/products/indian-wedding-bag.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 164,
     "name": "Red Bloom Placemat - Set of 6",
-    "price": "\u20b9499.00",
+    "price": "\u20b9999.00",
     "image": "/products/red-bloom-placemat-set-of-6.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Red Bloom Placemat - Set of 6",
+      "description": "",
+      "urlHandle": "red-bloom-placemat-set-of-6"
+    }
   },
   {
     "id": 165,
     "name": "Eco Tropic Placemats - Set of 6",
     "price": "\u20b9499.00",
     "image": "/products/eco-tropic-placemats-set-of-6.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 166,
-    "name": "Peacock Bloom Pouch",
-    "price": "\u20b9499.00",
+    "name": "Peacock Bloom gift bag",
+    "price": "\u20b9129.00",
     "image": "/products/gift-bag-25.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Peacock Bloom gift bag",
+      "description": "",
+      "urlHandle": "peacock-bloom-gift-bag"
+    }
   },
   {
     "id": 167,
     "name": "Grey Lozenge",
-    "price": "\u20b9401.00",
+    "price": "\u20b9349.00",
     "image": "/products/grey-lozenge.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Grey Lozenge",
+      "description": "",
+      "urlHandle": "grey-lozenge"
+    }
   },
   {
     "id": 168,
     "name": "Royal Wedding Bag - 100 Pieces",
     "price": "\u20b96,000.00",
     "image": "/products/royal-wedding-bag.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 169,
     "name": "Sunflower Bloom Bag",
-    "price": "\u20b9399.00",
+    "price": "\u20b999.00",
     "image": "/products/gift-bag-14.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Sunflower Bloom Bag",
+      "description": "",
+      "urlHandle": "sunflower-bloom-bag"
+    }
   },
   {
     "id": 170,
-    "name": "Rainbow Heritage Pouch",
-    "price": "\u20b9449.00",
+    "name": "Rainbow Heritage Gift Bag",
+    "price": "\u20b999.00",
     "image": "/products/gift-bag-32.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Rainbow Heritage Gift Bag",
+      "description": "",
+      "urlHandle": "rainbow-heritage-gift-bag"
+    }
   },
   {
     "id": 171,
     "name": "Lotus Grove Gift Bag",
-    "price": "\u20b9499.00",
+    "price": "\u20b999.00",
     "image": "/products/gift-bag-30.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Lotus Grove Gift Bag",
+      "description": "",
+      "urlHandle": "lotus-grove-gift-bag"
+    }
   },
   {
     "id": 172,
     "name": "Ocean Stripes",
-    "price": "\u20b9171.00",
+    "price": "\u20b9149.00",
     "image": "/products/blue-and-white-stripes-art-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Ocean Stripes",
+      "description": "",
+      "urlHandle": "ocean-stripes"
+    },
+    "sizes": [
+      {
+        "size": "S",
+        "price": "\u20b9129.00"
+      },
+      {
+        "size": "M",
+        "price": "\u20b9149.00"
+      },
+      {
+        "size": "L",
+        "price": "\u20b9199.00"
+      }
+    ]
   },
   {
     "id": 173,
     "name": "Enjoy the Little Things",
-    "price": "\u20b9171.00",
+    "price": "\u20b9249.00",
     "image": "/products/enjoy-the-little-things.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Enjoy the Little Things",
+      "description": "",
+      "urlHandle": "enjoy-the-little-things"
+    }
   },
   {
     "id": 174,
     "name": "Blue Wave Gift Bag",
-    "price": "\u20b9449.00",
+    "price": "\u20b999.00",
     "image": "/products/gift-bag-33.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Blue Wave Gift Bag",
+      "description": "",
+      "urlHandle": "blue-wave-gift-bag"
+    }
   },
   {
     "id": 175,
     "name": "Lotus Bloom Gift Bag",
-    "price": "\u20b9499.00",
+    "price": "\u20b999.00",
     "image": "/products/gift-bag-90.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Lotus Bloom Gift Bag",
+      "description": "",
+      "urlHandle": "lotus-bloom-gift-bag"
+    }
   },
   {
     "id": 176,
-    "name": "Mosaic Bloom ",
-    "price": "\u20b9228.00",
+    "name": "Mosaic Bloom",
+    "price": "\u20b9199.00",
     "image": "/products/bandini-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Mosaic Bloom",
+      "description": "",
+      "urlHandle": "mosaic-bloom"
+    },
+    "sizes": [
+      {
+        "size": "S",
+        "price": "\u20b9129.00"
+      },
+      {
+        "size": "M",
+        "price": "\u20b9149.00"
+      },
+      {
+        "size": "L",
+        "price": "\u20b9199.00"
+      }
+    ]
   },
   {
     "id": 177,
     "name": "Indigo Bloom Pouch",
-    "price": "\u20b9499.00",
+    "price": "\u20b999.00",
     "image": "/products/gift-bag-11.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Indigo Bloom Pouch",
+      "description": "",
+      "urlHandle": "indigo-bloom-pouch"
+    }
   },
   {
     "id": 178,
     "name": "Tropical Bloom Bag",
-    "price": "\u20b9449.00",
+    "price": "\u20b9129.00",
     "image": "/products/gift-bag-2.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Tropical Bloom Bag",
+      "description": "",
+      "urlHandle": "tropical-bloom-bag"
+    }
   },
   {
     "id": 179,
     "name": "Eco Felt Panda",
-    "price": "\u20b9171.00",
+    "price": "\u20b9249.00",
     "image": "/products/panda.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Eco Felt Panda",
+      "description": "",
+      "urlHandle": "eco-felt-panda"
+    }
   },
   {
     "id": 180,
     "name": "Geometric File",
-    "price": "\u20b9269.00",
+    "price": "\u20b9229.00",
     "image": "/products/geometric-file.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Geometric File",
+      "description": "",
+      "urlHandle": "geometric-file"
+    }
   },
   {
     "id": 181,
     "name": "Twilight Bloom",
     "price": "\u20b9449.00",
     "image": "/products/twilight-bloom.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 182,
     "name": "Baby Shower Bag - 100 pieces",
     "price": "\u20b96,000.00",
     "image": "/products/baby-shower-bag.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    }
   },
   {
     "id": 183,
-    "name": "Zade Strides",
-    "price": "\u20b9148.00",
+    "name": "Zade Stripes",
+    "price": "\u20b9129.00",
     "image": "/products/yellow-zig-zag-pencil-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Zade Stripes",
+      "description": "",
+      "urlHandle": "zade-stripes"
+    },
+    "sizes": [
+      {
+        "size": "S",
+        "price": "\u20b9129.00"
+      },
+      {
+        "size": "M",
+        "price": "\u20b9149.00"
+      },
+      {
+        "size": "L",
+        "price": "\u20b9199.00"
+      }
+    ]
   },
   {
     "id": 184,
     "name": "Eco Foliage Placemat- Set of 6",
-    "price": "\u20b9499.00",
+    "price": "\u20b9999.00",
     "image": "/products/eco-foliage-placemat-set-of-6.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Eco Foliage Placemat- Set of 6",
+      "description": "",
+      "urlHandle": "eco-foliage-placemat-set-of-6"
+    }
   },
   {
     "id": 185,
     "name": "Scarlet Geo Folder",
-    "price": "\u20b9343.00",
+    "price": "\u20b9299.00",
     "image": "/products/colorful-triangle-red-document-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Scarlet Geo Folder",
+      "description": "",
+      "urlHandle": "scarlet-geo-folder"
+    }
   },
   {
     "id": 186,
     "name": "Helophelia  Pouch",
-    "price": "\u20b9228.00",
+    "price": "\u20b9199.00",
     "image": "/products/helophelia-pouch.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Helophelia  Pouch",
+      "description": "",
+      "urlHandle": "helophelia-pouch"
+    },
+    "sizes": [
+      {
+        "size": "S",
+        "price": "\u20b9129.00"
+      },
+      {
+        "size": "M",
+        "price": "\u20b9149.00"
+      },
+      {
+        "size": "L",
+        "price": "\u20b9199.00"
+      }
+    ]
   },
   {
     "id": 187,
     "name": "Tropical Laptop Sleeve",
-    "price": "\u20b9329.00",
+    "price": "\u20b9399.00",
     "image": "/products/tropical-laptop-sleeve.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Tropical Laptop Sleeve",
+      "description": "",
+      "urlHandle": "tropical-laptop-sleeve"
+    }
   },
   {
     "id": 188,
     "name": "Retro Stripes Bottle Holder",
-    "price": "\u20b9205.00",
+    "price": "\u20b9179.00",
     "image": "/products/retro-stripes-bottle-holder.webp",
-    "tag": "New"
+    "tag": "New",
+    "metafields": {
+      "ecoCertification": "GRS"
+    },
+    "features": [],
+    "images": [],
+    "status": "active",
+    "vendor": "Trusser",
+    "collections": [],
+    "tags": [],
+    "seo": {
+      "title": "Retro Stripes Bottle Holder",
+      "description": "",
+      "urlHandle": "retro-stripes-bottle-holder"
+    }
   }
 ]

@@ -64,7 +64,7 @@ export const getCartItems = (): CartItem[] => {
         }
         return parsed
             .map((item, index) => normalizeCartItem(item, `item-${index + 1}`))
-            .filter((item) => item.quantity > 0);
+            .filter((item) => item.quantity > 0 && item.price > 0);
     } catch {
         return [];
     }
@@ -97,7 +97,9 @@ export const setCartItems = (items: CartItem[]) => {
     if (typeof window === 'undefined') {
         return;
     }
-    const normalized = items.map((item, index) => normalizeCartItem(item, `item-${index + 1}`));
+    const normalized = items
+        .map((item, index) => normalizeCartItem(item, `item-${index + 1}`))
+        .filter((item) => item.quantity > 0 && item.price > 0);
     window.localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(normalized));
     emitCartUpdate(normalized);
 };
@@ -105,6 +107,9 @@ export const setCartItems = (items: CartItem[]) => {
 export const addToCart = (item: Partial<CartItem>, quantity = 1) => {
     const items = getCartItems();
     const normalized = normalizeCartItem({ ...item, quantity }, `item-${items.length + 1}`);
+    if (normalized.price <= 0 || normalized.quantity <= 0) {
+        return items;
+    }
     const existingIndex = items.findIndex((entry) => entry.id === normalized.id);
 
     if (existingIndex >= 0) {

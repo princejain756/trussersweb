@@ -30,3 +30,4 @@ dist-ssr
 server/uploads
 
 # Runtime data
+backup/

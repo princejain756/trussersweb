@@ -150,7 +150,7 @@ const BanModal = ({
                             type="text"
                             value={value}
                             onChange={(e) => setValue(e.target.value)}
-                            placeholder={type === 'ip' ? '192.168.1.1' : type === 'email' ? 'example@email.com' : type === 'phone' ? '+91 9876543210' : 'Address to ban'}
+                            placeholder={type === 'ip' ? '192.168.1.1' : type === 'email' ? 'maitri@trusser.in' : type === 'phone' ? '+91 9876543210' : 'Address to ban'}
                             className="mt-1 w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-500"
                         />
                     </div>

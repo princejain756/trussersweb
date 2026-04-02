@@ -197,5 +197,17 @@
     "passwordSalt": "5c0cefb8a556bc14b03c12ad65d27603",
     "passwordHash": "a98587bcce13bea58a47be69fefffe742785d89615d56aa1401c80eaee9d10fa113a95250dcb89514ca88c292db8278ff8a8327a8c1fa4d38e52b4122d0956f6",
     "gstNumber": "29ADXPJ3352J1ZX"
+  },
+  {
+    "id": "29f4a405-9db3-4fe0-9650-1d92a016aaf7",
+    "fullName": "Sparsha",
+    "username": "Sparshaclicks",
+    "email": "sparsha.1404@gmail.com",
+    "phone": "+918143819009",
+    "createdAt": "2026-01-30T11:56:06.221Z",
+    "addresses": [],
+    "orders": [],
+    "passwordSalt": "d01bdf0e6c663e21b2e6894a12a893bd",
+    "passwordHash": "4c56175f6a94a1b5ed12a280262b474f278f74ae257887fd84fa29825b9678fc78eaa40c56dee931b12c0919b0e56e7dd0c057858f146169b174291c5f585318"
   }
 ]

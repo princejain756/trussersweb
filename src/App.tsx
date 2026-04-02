@@ -40,6 +40,9 @@ const ThemeEditor = lazy(() => import('./pages/admin/ThemeEditor').then(m => ({ 
 const Payments = lazy(() => import('./pages/admin/Payments').then(m => ({ default: m.Payments })));
 const Fraud = lazy(() => import('./pages/admin/Fraud').then(m => ({ default: m.Fraud })));
 const Newsletter = lazy(() => import('./pages/admin/Newsletter').then(m => ({ default: m.Newsletter })));
+const ImageLibrary = lazy(() => import('./pages/admin/ImageLibrary'));
+const AdminReviews = lazy(() => import('./pages/admin/Reviews').then(m => ({ default: m.Reviews })));
+const AdminProductEdit = lazy(() => import('./pages/admin/AdminProductEdit'));
 
 // Non-critical UI (delay until user interacts)
 const Chatbot = lazy(() => import('./components/Chatbot/Chatbot').then((m) => ({ default: m.Chatbot })));
@@ -116,6 +119,8 @@ function AppContent() {
           <Route path="/admin/payments" element={<Payments />} />
           <Route path="/admin/fraud" element={<Fraud />} />
           <Route path="/admin/products" element={<AdminDashboard />} />
+          <Route path="/admin/products/new" element={<AdminProductEdit />} />
+          <Route path="/admin/products/:id" element={<AdminProductEdit />} />
           <Route path="/admin/customers" element={<Customers />} />
           <Route path="/admin/marketing" element={<Marketing />} />
           <Route path="/admin/discounts" element={<Discounts />} />
@@ -125,6 +130,8 @@ function AppContent() {
           <Route path="/admin/online-store/editor" element={<ThemeEditor />} />
           <Route path="/admin/journal" element={<AdminJournal />} />
           <Route path="/admin/newsletter" element={<Newsletter />} />
+          <Route path="/admin/images" element={<ImageLibrary />} />
+          <Route path="/admin/reviews" element={<AdminReviews />} />
           <Route path="*" element={<Navigate to="/404.html" replace />} />
         </Routes>
       </Suspense>

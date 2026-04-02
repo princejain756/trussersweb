@@ -14,12 +14,13 @@
   {
     "id": "86690b2b-c883-4b6d-8ea7-da60373ccdaa",
     "email": "louisvuitton@louis.com",
-    "status": "active",
+    "status": "unsubscribed",
     "subscribedAt": "2026-01-03T18:04:31.977Z",
     "source": "footer",
     "clientInfo": {
       "ip": "122.171.18.111",
       "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
-    }
+    },
+    "unsubscribedAt": "2026-03-14T18:45:01.365Z"
   }
 ]

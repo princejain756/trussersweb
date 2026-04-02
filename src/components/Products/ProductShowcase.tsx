@@ -5,7 +5,9 @@ import { Button } from '../UI/Button';
 import { ArrowRight, Heart } from 'lucide-react';
 import { useRef, useState, useEffect, useMemo } from 'react';
 import categoriesData from '../../data/categories.json';
-import { formatPriceSimple } from '../../utils/currency';
+import productsData from '../../data/products.json';
+import { formatPriceRange } from '../../utils/currency';
+import type { SizeEntry } from '../../utils/currency';
 import { getWebsiteContent } from '../../utils/websiteContent';
 import { addToCart } from '../../utils/cart';
 
@@ -19,6 +21,8 @@ type ShopProduct = {
     categorySlug: string;
     price: string | number;
     tag?: string;
+    sizes?: SizeEntry[];
+    source?: 'catalog' | 'category';
 };
 
 type CategoryData = {
@@ -28,8 +32,48 @@ type CategoryData = {
         image?: string;
         price?: string | number;
         tag?: string;
+        sizes?: SizeEntry[];
     }>;
 };
+
+type ApiCatalogProduct = {
+    id: string | number;
+    name?: string;
+    image?: string;
+    category?: string;
+    price?: string | number;
+    tag?: string;
+    sizes?: SizeEntry[];
+};
+
+const parseBasePrice = (value: unknown): number => {
+    const numeric =
+        typeof value === 'number'
+            ? value
+            : Number(String(value ?? '').replace(/[₹$,\s]/g, ''));
+    return Number.isFinite(numeric) ? numeric : 0;
+};
+
+const parseVariantPrices = (sizes?: SizeEntry[]): number[] =>
+    (sizes ?? [])
+        .map((entry) => Number(String(entry.price ?? '').replace(/[₹$,\s]/g, '')))
+        .filter((value) => Number.isFinite(value) && value > 0);
+
+const getEffectiveDisplayPrice = (product: Pick<ShopProduct, 'price' | 'sizes'>): number => {
+    const variantPrices = parseVariantPrices(product.sizes);
+    if (variantPrices.length > 0) {
+        return Math.min(...variantPrices);
+    }
+    return parseBasePrice(product.price);
+};
+
+const slugify = (value: string) =>
+    value
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-');
 
 export const ProductShowcase = () => {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -38,9 +82,48 @@ export const ProductShowcase = () => {
     const [isMiniCartOpen, setIsMiniCartOpen] = useState(false);
     const [miniCartProduct, setMiniCartProduct] = useState<ShopProduct | null>(null);
     const content = getWebsiteContent();
+    const [catalogProducts, setCatalogProducts] = useState<ShopProduct[]>([]);
     const [categoryData, setCategoryData] = useState<Record<string, CategoryData>>(
         categoriesData as Record<string, CategoryData>
     );
+
+    useEffect(() => {
+        let isActive = true;
+        const loadCatalog = async () => {
+            try {
+                const response = await fetch(`${apiBaseUrl}/api/products`);
+                if (!response.ok) throw new Error('Failed to load catalog');
+                const data = (await response.json()) as ApiCatalogProduct[];
+                if (!isActive) return;
+                setCatalogProducts((Array.isArray(data) ? data : []).map((product) => ({
+                    id: product.id,
+                    name: product.name ?? 'Product',
+                    image: product.image ?? '/heroimage.webp',
+                    category: product.category?.trim() || 'Catalog',
+                    categorySlug: slugify(product.category?.trim() || 'Catalog'),
+                    price: product.price ?? '',
+                    tag: product.tag,
+                    sizes: product.sizes,
+                    source: 'catalog',
+                })));
+            } catch {
+                if (!isActive) return;
+                setCatalogProducts((productsData as ApiCatalogProduct[]).map((product) => ({
+                    id: product.id,
+                    name: product.name ?? 'Product',
+                    image: product.image ?? '/heroimage.webp',
+                    category: product.category?.trim() || 'Catalog',
+                    categorySlug: slugify(product.category?.trim() || 'Catalog'),
+                    price: product.price ?? '',
+                    tag: product.tag,
+                    sizes: product.sizes,
+                    source: 'catalog',
+                })));
+            }
+        };
+        loadCatalog();
+        return () => { isActive = false; };
+    }, []);
 
     useEffect(() => {
         let isActive = true;
@@ -60,45 +143,74 @@ export const ProductShowcase = () => {
         return () => { isActive = false; };
     }, []);
 
-    // Pick ONE product from EACH category that has a valid image
-    const products = useMemo<ShopProduct[]>(() => {
-        const curatedProducts: ShopProduct[] = [];
-
+    const categoryProducts = useMemo<ShopProduct[]>(() => {
+        const products: ShopProduct[] = [];
         Object.entries(categoryData).forEach(([categorySlug, catData]) => {
             const items = catData.products ?? [];
-
-            // Find the first product with a valid image
-            // Valid images: /products/*.webp or /products/categories/**/*.webp
-            const validProduct = items.find((product) => {
-                const img = product.image ?? '';
-                if (!img) return false;
-
-                // Must start with /products/ and end with a proper extension
-                const isValidPath = img.startsWith('/products/') &&
-                    (img.endsWith('.webp') || img.endsWith('.jpg') || img.endsWith('.png'));
-
-                // Exclude known placeholders or fallback images
-                const isNotPlaceholder = !img.includes('placeholder') &&
-                    !img.includes('heroimage');
-
-                return isValidPath && isNotPlaceholder;
-            });
-
-            if (validProduct) {
-                curatedProducts.push({
-                    id: `${categorySlug}-0`,
-                    name: validProduct.name ?? catData.name ?? categorySlug,
-                    image: validProduct.image!,
+            items.forEach((product, index) => {
+                products.push({
+                    id: `${categorySlug}-${index}`,
+                    name: product.name ?? `${catData.name ?? categorySlug} ${index + 1}`,
+                    image: product.image ?? '/heroimage.webp',
                     category: catData.name ?? categorySlug,
                     categorySlug,
-                    price: validProduct.price ?? 0,
-                    tag: validProduct.tag,
+                    price: product.price ?? '',
+                    tag: product.tag,
+                    sizes: product.sizes,
+                    source: 'category',
                 });
+            });
+        });
+        return products;
+    }, [categoryData]);
+
+    // Merge catalog + category, remove duplicates, then pick one valid priced product per category.
+    const products = useMemo<ShopProduct[]>(() => {
+        const merged = [...catalogProducts, ...categoryProducts];
+
+        const dedupedByNameImage = new Map<string, ShopProduct>();
+        merged.forEach((product) => {
+            const key = `${product.name.trim().toLowerCase()}|${String(product.image ?? '').toLowerCase()}`;
+            const existing = dedupedByNameImage.get(key);
+            if (!existing) {
+                dedupedByNameImage.set(key, product);
+                return;
+            }
+            const existingPrice = getEffectiveDisplayPrice(existing);
+            const nextPrice = getEffectiveDisplayPrice(product);
+            if (nextPrice > existingPrice) {
+                dedupedByNameImage.set(key, product);
+                return;
+            }
+            if (nextPrice === existingPrice && product.source === 'catalog' && existing.source !== 'catalog') {
+                dedupedByNameImage.set(key, product);
             }
         });
 
-        return curatedProducts;
-    }, [categoryData]);
+        const validProducts = Array.from(dedupedByNameImage.values()).filter((product) => {
+            const img = product.image ?? '';
+            const isValidPath = img.startsWith('/products/') &&
+                (img.endsWith('.webp') || img.endsWith('.jpg') || img.endsWith('.png'));
+            const isNotPlaceholder = !img.includes('placeholder') && !img.includes('heroimage');
+            const hasPositivePrice = getEffectiveDisplayPrice(product) > 0;
+            return isValidPath && isNotPlaceholder && hasPositivePrice;
+        });
+
+        const bestByCategory = new Map<string, ShopProduct>();
+        validProducts.forEach((product) => {
+            const key = product.categorySlug;
+            const existing = bestByCategory.get(key);
+            if (!existing) {
+                bestByCategory.set(key, product);
+                return;
+            }
+            if (getEffectiveDisplayPrice(product) > getEffectiveDisplayPrice(existing)) {
+                bestByCategory.set(key, product);
+            }
+        });
+
+        return Array.from(bestByCategory.values());
+    }, [catalogProducts, categoryProducts]);
 
     useEffect(() => {
         if (sliderRef.current && containerRef.current) {
@@ -125,14 +237,8 @@ export const ProductShowcase = () => {
     });
 
     const x = useTransform(scrollYProgress, (value) => `${-15 * value}%`);
-    const formatPrice = (price: string | number) => {
-        const numericPrice = typeof price === 'number'
-            ? price
-            : parseFloat(String(price).replace(/[₹$,\s]/g, ''));
-        if (!numericPrice || numericPrice <= 0) {
-            return 'Price on request';
-        }
-        return formatPriceSimple(price);
+    const formatPrice = (product: ShopProduct) => {
+        return formatPriceRange(product.sizes, product.price);
     };
 
     const handleQuickAdd = (product: ShopProduct) => {
@@ -228,7 +334,7 @@ export const ProductShowcase = () => {
                                 <div className="flex justify-between items-start">
                                     <div>
                                         <h3 className="mb-1 text-xl font-serif text-[#1A3C27]">{product.name}</h3>
-                                        <p className="text-[#5C5C5C] font-medium">{formatPrice(product.price)}</p>
+                                        <p className="text-[#5C5C5C] font-medium">{formatPrice(product)}</p>
                                     </div>
                                 </div>
                             </motion.div>
@@ -285,7 +391,7 @@ export const ProductShowcase = () => {
                                             <p className="text-sm font-semibold text-[#1A3C27] line-clamp-2">
                                                 {miniCartProduct.name}
                                             </p>
-                                            <p className="text-sm text-[#5C5C5C]">{formatPrice(miniCartProduct.price)}</p>
+                                            <p className="text-sm text-[#5C5C5C]">{formatPrice(miniCartProduct)}</p>
                                         </div>
                                     </div>
                                 )}

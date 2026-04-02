@@ -703,7 +703,7 @@ export const Checkout = () => {
                                                     <User className="w-5 h-5 text-[#C1A17C]" />
                                                     <input
                                                         type="text"
-                                                        placeholder="Aarav Sharma"
+                                                        placeholder="Maitri"
                                                         value={formValues.fullName}
                                                         onChange={(event) => updateField('fullName', event.target.value)}
                                                         className="w-full bg-transparent text-[#1A3C27] placeholder:text-[#9C8F84] focus:outline-none"
@@ -733,7 +733,7 @@ export const Checkout = () => {
                                                     <Mail className="w-5 h-5 text-[#C1A17C]" />
                                                     <input
                                                         type="email"
-                                                        placeholder="aarav@example.com"
+                                                        placeholder="maitri@trusser.in"
                                                         value={formValues.email}
                                                         onChange={(event) => updateField('email', event.target.value)}
                                                         className="w-full bg-transparent text-[#1A3C27] placeholder:text-[#9C8F84] focus:outline-none"

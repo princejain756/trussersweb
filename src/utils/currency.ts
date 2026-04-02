@@ -72,3 +72,57 @@ export const formatPriceSimple = (price: number | string, targetCurrency?: Curre
         return `₹${numericPrice.toLocaleString('en-IN')}`;
     }
 };
+
+// Type for size entries
+export type SizeEntry = { size: string; price: string | number };
+
+// Get price range from sizes - returns formatted string like "₹129-190" or "₹129" if all same
+export const formatPriceRange = (
+    sizes: SizeEntry[] | undefined,
+    fallbackPrice: string | number | undefined,
+    targetCurrency?: Currency
+): string => {
+    // If no sizes or empty, use fallback price
+    if (!sizes || sizes.length === 0) {
+        if (fallbackPrice !== undefined) {
+            return formatPriceSimple(fallbackPrice, targetCurrency);
+        }
+        return 'Price on request';
+    }
+
+    // Extract numeric prices from sizes
+    const prices = sizes
+        .map((s) => {
+            const p = typeof s.price === 'number' ? s.price : parseFloat(String(s.price).replace(/[₹$,\s]/g, ''));
+            return isNaN(p) ? null : p;
+        })
+        .filter((p): p is number => p !== null);
+
+    if (prices.length === 0) {
+        // All sizes have invalid prices, use fallback
+        if (fallbackPrice !== undefined) {
+            return formatPriceSimple(fallbackPrice, targetCurrency);
+        }
+        return 'Price on request';
+    }
+
+    const minPrice = Math.min(...prices);
+    const maxPrice = Math.max(...prices);
+
+    const currency = targetCurrency || getCurrency();
+    const symbol = getCurrencySymbol(currency);
+
+    // If all prices are the same, show just one price
+    if (minPrice === maxPrice) {
+        return formatPriceSimple(minPrice, targetCurrency);
+    }
+
+    // Show range
+    if (currency === 'USD') {
+        const minUsd = minPrice / 83;
+        const maxUsd = maxPrice / 83;
+        return `${symbol}${minUsd.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}-${maxUsd.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}`;
+    } else {
+        return `${symbol}${minPrice.toLocaleString('en-IN')}-${maxPrice.toLocaleString('en-IN')}`;
+    }
+};

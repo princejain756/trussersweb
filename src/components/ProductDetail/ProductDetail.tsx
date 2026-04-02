@@ -6,11 +6,13 @@ import { Navbar } from '../Layout/Navbar';
 import { Footer } from '../Layout/Footer';
 import productsData from '../../data/products.json';
 import categoriesData from '../../data/categories.json';
-import { useEffect, useRef, useState } from 'react';
-import { formatPriceSimple, getCurrency } from '../../utils/currency';
+import { useEffect, useRef, useState, useCallback } from 'react';
+import { formatPriceSimple, formatPriceRange, getCurrency } from '../../utils/currency';
 import { addToCart } from '../../utils/cart';
 import { Seo } from '../../seo/Seo';
 import { toAbsoluteUrl } from '../../seo/siteConfig';
+import { ReviewForm } from '../Reviews/ReviewForm';
+import { ReviewList } from '../Reviews/ReviewList';
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:5174';
 const defaultFeatures = [
@@ -23,19 +25,63 @@ const defaultFeatures = [
 const buildDefaultDescription = (name: string) =>
     `Handcrafted with sustainable materials, this ${name.toLowerCase()} combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.`;
 
+type SizeEntry = {
+    size: string;
+    price: string;
+};
+
 type ProductDetailData = {
     id: string | number;
     name: string;
     image: string;
+    images: string[];
     category?: string;
     categorySlug?: string;
     price: number | string;
     description?: string;
     features?: string[];
-    sizes?: string[];
+    sizes?: SizeEntry[];
     rating: number;
     reviews: number;
 };
+
+// Normalize sizes from API (handles both legacy string[] and new SizeEntry[])
+const normalizeSizesForDisplay = (sizes: unknown): SizeEntry[] => {
+    if (!sizes || !Array.isArray(sizes)) return [];
+    return sizes.map((item) => {
+        if (typeof item === 'string') {
+            return { size: item, price: '' };
+        }
+        if (typeof item === 'object' && item !== null) {
+            return {
+                size: String((item as any).size ?? ''),
+                price: String((item as any).price ?? '')
+            };
+        }
+        return { size: '', price: '' };
+    }).filter(s => s.size);
+};
+
+type ReviewData = {
+    id: string;
+    userName: string;
+    rating: number;
+    title: string;
+    content: string;
+    createdAt: string;
+};
+
+const parsePositivePrice = (value: unknown): number => {
+    const numeric =
+        typeof value === 'number'
+            ? value
+            : typeof value === 'string'
+                ? Number(value.replace(/[₹$,\s]/g, ''))
+                : Number.NaN;
+    return Number.isFinite(numeric) && numeric > 0 ? numeric : 0;
+};
+
+const categoryProductIdPattern = /^(.*)-(\d+)$/;
 
 export const ProductDetail = () => {
     const { id } = useParams();
@@ -46,14 +92,84 @@ export const ProductDetail = () => {
     const resetTimerRef = useRef<number | null>(null);
     const [quantity, setQuantity] = useState(1);
     const [selectedSize, setSelectedSize] = useState<string | null>(null);
+    const [productReviews, setProductReviews] = useState<ReviewData[]>([]);
+    const [reviewStats, setReviewStats] = useState({ total: 0, averageRating: 0 });
+    const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+
+    const fetchReviews = useCallback(async (productId: string) => {
+        try {
+            const response = await fetch(`${apiBaseUrl}/api/products/${productId}/reviews`);
+            if (response.ok) {
+                const data = await response.json();
+                setProductReviews(data.reviews || []);
+                setReviewStats(data.stats || { total: 0, averageRating: 0 });
+            }
+        } catch {
+            // Silent fail for reviews
+        }
+    }, []);
 
     useEffect(() => {
         let isActive = true;
         const loadProduct = async () => {
             setIsLoading(true);
 
-            const numericId = id && Number.isFinite(Number(id));
-            if (numericId) {
+            if (id) {
+                const categoryMatch = id.match(categoryProductIdPattern);
+                if (categoryMatch) {
+                    const categorySlug = categoryMatch[1];
+                    const categoryIndex = Number(categoryMatch[2]);
+                    let categorySource: Record<string, any> = categoriesData as Record<string, any>;
+                    try {
+                        const response = await fetch(`${apiBaseUrl}/api/categories`);
+                        if (response.ok) {
+                            categorySource = (await response.json()) as Record<string, any>;
+                        }
+                    } catch {
+                        // fall back to local data
+                    }
+
+                    const categoryData = categorySource[categorySlug];
+                    const categoryProduct = categoryData?.products?.[categoryIndex];
+                    if (categoryProduct && isActive) {
+                        const safeCategoryName =
+                            typeof categoryProduct?.name === 'string' && categoryProduct.name.trim()
+                                ? categoryProduct.name
+                                : 'Product';
+                        const description =
+                            typeof categoryProduct?.description === 'string' && categoryProduct.description.trim()
+                                ? categoryProduct.description
+                                : buildDefaultDescription(safeCategoryName);
+                        const features =
+                            Array.isArray(categoryProduct?.features) && categoryProduct.features.length > 0
+                                ? categoryProduct.features
+                                : defaultFeatures;
+                        const sizes = normalizeSizesForDisplay(categoryProduct?.sizes);
+                        const price =
+                            typeof categoryProduct?.price === 'number' || typeof categoryProduct?.price === 'string'
+                                ? categoryProduct.price
+                                : '';
+
+                        setProduct({
+                            id,
+                            name: safeCategoryName,
+                            image: categoryProduct.image ?? '',
+                            images: categoryProduct.images ?? [],
+                            category: categoryData?.name,
+                            categorySlug,
+                            price,
+                            description,
+                            features,
+                            sizes,
+                            rating: 4.8,
+                            reviews: Math.floor(Math.random() * 100) + 20,
+                        });
+                        setIsLoading(false);
+                        return;
+                    }
+                }
+
+                // Try API for catalog numeric IDs and slugs
                 try {
                     const response = await fetch(`${apiBaseUrl}/api/products/${id}`);
                     if (response.ok) {
@@ -63,11 +179,12 @@ export const ProductDetail = () => {
                         }
                         const features = Array.isArray(data?.features) ? data.features : undefined;
                         const description = typeof data?.description === 'string' ? data.description : undefined;
-                        const sizes = Array.isArray(data?.sizes) ? data.sizes : undefined;
+                        const sizes = normalizeSizesForDisplay(data?.sizes);
                         setProduct({
                             id: data?.id ?? id,
                             name: data?.name ?? 'Product',
                             image: data?.image ?? '',
+                            images: data?.images ?? [],
                             price: data?.price ?? '',
                             description,
                             features,
@@ -80,20 +197,23 @@ export const ProductDetail = () => {
                         return;
                     }
                 } catch (error) {
-                    // fall back to category data
+                    // fall back to local data
                 }
 
                 const localProduct = (productsData as any[]).find(
                     (item) => Number(item.id) === Number(id)
                 );
                 if (localProduct && isActive) {
+                    const sizes = normalizeSizesForDisplay((localProduct as any).sizes);
                     setProduct({
                         id: localProduct.id,
                         name: localProduct.name,
                         image: localProduct.image,
+                        images: localProduct.images ?? [],
                         price: localProduct.price,
                         description: localProduct.description ?? buildDefaultDescription(localProduct.name),
                         features: localProduct.features ?? defaultFeatures,
+                        sizes,
                         category: localProduct.category,
                         rating: 4.8,
                         reviews: 39,
@@ -133,19 +253,22 @@ export const ProductDetail = () => {
                             Array.isArray(prod?.features) && prod.features.length > 0
                                 ? prod.features
                                 : defaultFeatures;
+                        const sizes = normalizeSizesForDisplay(prod?.sizes);
                         const price =
                             typeof prod?.price === 'number' || typeof prod?.price === 'string'
                                 ? prod.price
-                                : 'Price on request';
+                                : '';
                         fallback = {
                             id,
                             name: safeName,
                             image: prod.image ?? '',
+                            images: prod.images ?? [],
                             category: categoryData.name,
                             categorySlug: categorySlug,
                             price,
                             description,
                             features,
+                            sizes,
                             rating: 4.8,
                             reviews: Math.floor(Math.random() * 100) + 20,
                         };
@@ -189,6 +312,12 @@ export const ProductDetail = () => {
         setSelectedSize(null);
     }, [product?.id]);
 
+    useEffect(() => {
+        if (id) {
+            fetchReviews(id);
+        }
+    }, [id, fetchReviews]);
+
     if (isLoading) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-[#F4EFEC]">
@@ -221,20 +350,36 @@ export const ProductDetail = () => {
     const resolvedFeatures = Array.isArray(product.features) && product.features.length > 0
         ? product.features
         : defaultFeatures;
-    const formattedPrice =
-        typeof product.price === 'number'
-            ? formatPriceSimple(product.price)
-            : typeof product.price === 'string' && product.price.trim()
-                ? formatPriceSimple(product.price)
-                : 'Price on request';
+
+    // Check if product has sizes - if so, require size selection to show price
+    const hasSizes = product.sizes && product.sizes.length > 0;
+    const useSizePricing = hasSizes;
+    const selectedSizeEntry = selectedSize
+        ? product.sizes?.find((s) => s.size === selectedSize)
+        : null;
+    // Only show size price when a size is selected (if product has sizes)
+    const effectivePrice = useSizePricing
+        ? (selectedSizeEntry?.price || null)
+        : product.price;
+
+    // Show price range when no size is selected, otherwise show selected size price
+    const formattedPrice = useSizePricing && !selectedSize
+        ? formatPriceRange(product.sizes, product.price)
+        : (typeof effectivePrice === 'number'
+            ? formatPriceSimple(effectivePrice)
+            : typeof effectivePrice === 'string' && effectivePrice.trim()
+                ? formatPriceSimple(effectivePrice)
+                : 'Price on request');
     const imageSrc = product.image?.trim() ? product.image : '/heroimage.webp';
+    // Combine primary image with additional images for gallery
+    const allImages = [imageSrc, ...(product.images || []).filter(img => img && img !== product.image)];
     const freeShippingText = getCurrency() === 'USD' ? 'On orders over $12' : 'On orders over ₹999';
-    const cartPrice =
-        typeof product.price === 'number'
-            ? product.price
-            : typeof product.price === 'string'
-                ? Number(product.price.replace(/[₹$,\s]/g, '')) || 0
-                : 0;
+    const cartPrice = useSizePricing
+        ? parsePositivePrice(selectedSizeEntry?.price)
+        : parsePositivePrice(effectivePrice);
+
+    // Disable purchase if size isn't selected or final price is not purchasable.
+    const canPurchase = (useSizePricing ? !!selectedSize : true) && cartPrice > 0;
 
     const cartItem = {
         id: String(product.id),
@@ -250,6 +395,7 @@ export const ProductDetail = () => {
     const decrementQuantity = () => setQuantity((prev) => Math.max(1, prev - 1));
 
     const handleAddToCart = () => {
+        if (!canPurchase) return;
         addToCart(cartItem);
         setWasAdded(true);
         if (resetTimerRef.current) {
@@ -259,6 +405,7 @@ export const ProductDetail = () => {
     };
 
     const handleBuyNow = () => {
+        if (!canPurchase) return;
         addToCart(cartItem);
         navigate('/checkout', { state: { items: [cartItem] } });
     };
@@ -326,26 +473,68 @@ export const ProductDetail = () => {
                     </motion.button>
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
-                        {/* Image Section */}
+                        {/* Image Section with Gallery */}
                         <motion.div
                             initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                            className="relative aspect-[4/5] lg:aspect-square w-full overflow-hidden rounded-2xl bg-[#E8DFD4]"
+                            className="space-y-4"
                         >
-                            <motion.img
-                                src={imageSrc}
-                                alt={safeName}
-                                className="h-full w-full object-cover"
-                                onError={(event) => {
-                                    event.currentTarget.src = '/heroimage.webp';
-                                }}
-                            />
-                            {product.category && (
-                                <div className="absolute top-6 left-6">
-                                    <span className="bg-white/90 backdrop-blur-md px-4 py-2 text-sm font-bold uppercase tracking-wider text-[#1A3C27] rounded-sm shadow-sm">
-                                        {product.category}
-                                    </span>
+                            {/* Main Image */}
+                            <div className="relative aspect-[4/5] lg:aspect-square w-full overflow-hidden rounded-2xl bg-[#E8DFD4]">
+                                <motion.img
+                                    key={selectedImageIndex}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ duration: 0.3 }}
+                                    src={allImages[selectedImageIndex] || imageSrc}
+                                    alt={`${safeName} - Image ${selectedImageIndex + 1}`}
+                                    className="h-full w-full object-cover"
+                                    onError={(event) => {
+                                        event.currentTarget.src = '/heroimage.webp';
+                                    }}
+                                />
+                                {product.category && (
+                                    <div className="absolute top-6 left-6">
+                                        <span className="bg-white/90 backdrop-blur-md px-4 py-2 text-sm font-bold uppercase tracking-wider text-[#1A3C27] rounded-sm shadow-sm">
+                                            {product.category}
+                                        </span>
+                                    </div>
+                                )}
+                                {/* Image counter */}
+                                {allImages.length > 1 && (
+                                    <div className="absolute bottom-4 right-4 bg-black/50 backdrop-blur-sm text-white text-sm px-3 py-1.5 rounded-full">
+                                        {selectedImageIndex + 1} / {allImages.length}
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Thumbnail Gallery */}
+                            {allImages.length > 1 && (
+                                <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+                                    {allImages.map((img, idx) => (
+                                        <button
+                                            key={idx}
+                                            type="button"
+                                            onClick={() => setSelectedImageIndex(idx)}
+                                            className={`
+                                                relative flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden transition-all duration-200
+                                                ${selectedImageIndex === idx
+                                                    ? 'ring-2 ring-[#1A3C27] ring-offset-2'
+                                                    : 'ring-1 ring-[#E8DFD4] hover:ring-[#C1A17C]'
+                                                }
+                                            `}
+                                        >
+                                            <img
+                                                src={img}
+                                                alt={`${safeName} thumbnail ${idx + 1}`}
+                                                className="w-full h-full object-cover"
+                                                onError={(event) => {
+                                                    event.currentTarget.src = '/heroimage.webp';
+                                                }}
+                                            />
+                                        </button>
+                                    ))}
                                 </div>
                             )}
                         </motion.div>
@@ -395,21 +584,21 @@ export const ProductDetail = () => {
                                     <div className="mb-10">
                                         <h3 className="font-serif text-xl text-[#1A3C27] mb-4">Select Size</h3>
                                         <div className="flex flex-wrap gap-3">
-                                            {product.sizes.map((size) => (
+                                            {product.sizes.map((sizeEntry) => (
                                                 <button
-                                                    key={size}
+                                                    key={sizeEntry.size}
                                                     type="button"
-                                                    onClick={() => setSelectedSize(size)}
+                                                    onClick={() => setSelectedSize(sizeEntry.size)}
                                                     className={`
                                                         min-w-[3rem] px-5 py-3 rounded-full text-sm font-semibold
                                                         transition-all duration-200 ease-out
-                                                        ${selectedSize === size
+                                                        ${selectedSize === sizeEntry.size
                                                             ? 'bg-[#1A3C27] text-white shadow-lg scale-105'
                                                             : 'bg-white/80 text-[#1A3C27] border border-[#E8DFD4] hover:border-[#1A3C27] hover:bg-[#1A3C27]/5'
                                                         }
                                                     `}
                                                 >
-                                                    {size}
+                                                    {sizeEntry.size}
                                                 </button>
                                             ))}
                                         </div>
@@ -444,15 +633,25 @@ export const ProductDetail = () => {
                                     <div className="flex flex-col sm:flex-row gap-4">
                                         <Button
                                             onClick={handleAddToCart}
-                                            className="flex-1 py-6 text-lg bg-[#2D5F3F] hover:bg-[#1A3C27] text-white shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1"
+                                            disabled={!canPurchase}
+                                            className={`flex-1 py-6 text-lg shadow-xl transition-all ${canPurchase
+                                                ? 'bg-[#2D5F3F] hover:bg-[#1A3C27] text-white hover:shadow-2xl hover:-translate-y-1'
+                                                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                                                }`}
                                         >
                                             <ShoppingBag className="mr-3" size={20} />
-                                            {wasAdded ? 'Added to Cart' : 'Add to Cart'}
+                                            {!canPurchase
+                                                ? (useSizePricing && !selectedSize ? 'Select a Size' : 'Unavailable')
+                                                : wasAdded ? 'Added to Cart' : 'Add to Cart'}
                                         </Button>
                                         <Button
                                             variant="outline"
                                             onClick={handleBuyNow}
-                                            className="flex-1 py-6 text-lg border-[#1A3C27] text-[#1A3C27] hover:bg-[#1A3C27] hover:text-white transition-all"
+                                            disabled={!canPurchase}
+                                            className={`flex-1 py-6 text-lg transition-all ${canPurchase
+                                                ? 'border-[#1A3C27] text-[#1A3C27] hover:bg-[#1A3C27] hover:text-white'
+                                                : 'border-gray-300 text-gray-400 cursor-not-allowed'
+                                                }`}
                                         >
                                             Buy Now
                                         </Button>
@@ -492,6 +691,36 @@ export const ProductDetail = () => {
                             </motion.div>
                         </div>
                     </div>
+                    {/* Customer Reviews Section */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.4 }}
+                        className="mt-16 lg:mt-24"
+                    >
+                        <h2 className="font-serif text-3xl lg:text-4xl text-[#1A3C27] mb-8">
+                            Customer Reviews
+                        </h2>
+
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+                            {/* Review List */}
+                            <div>
+                                <ReviewList
+                                    reviews={productReviews}
+                                    averageRating={reviewStats.averageRating || product.rating}
+                                    totalReviews={reviewStats.total || product.reviews}
+                                />
+                            </div>
+
+                            {/* Review Form */}
+                            <div>
+                                <ReviewForm
+                                    productId={String(product.id)}
+                                    onSuccess={() => fetchReviews(String(product.id))}
+                                />
+                            </div>
+                        </div>
+                    </motion.div>
                 </div>
             </main>
             <Footer />

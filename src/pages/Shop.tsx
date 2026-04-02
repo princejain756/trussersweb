@@ -23,6 +23,8 @@ import { useSearchParams } from 'react-router-dom';
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:5174';
 
+type SizeEntry = { size: string; price: string | number };
+
 const slugify = (value: string) =>
     value
         .toLowerCase()
@@ -39,6 +41,8 @@ type ShopProduct = {
     categorySlug: string;
     price: string | number;
     tag?: string;
+    sizes?: SizeEntry[];
+    source?: 'catalog' | 'category';
 };
 
 type CategoryData = {
@@ -48,6 +52,7 @@ type CategoryData = {
         image?: string;
         price?: string | number;
         tag?: string;
+        sizes?: SizeEntry[];
     }>;
 };
 
@@ -67,6 +72,15 @@ type ApiCatalogProduct = {
     category?: string;
     price: string | number;
     tag?: string;
+    sizes?: SizeEntry[];
+};
+
+const parseBasePrice = (value: unknown): number => {
+    const numeric =
+        typeof value === 'number'
+            ? value
+            : Number(String(value ?? '').replace(/[₹$,\s]/g, ''));
+    return Number.isFinite(numeric) ? numeric : 0;
 };
 
 const FloatingOrb = ({ delay = 0, size = 300, color = '#C1A17C' }: { delay?: number; size?: number; color?: string }) => (
@@ -410,73 +424,85 @@ export const Shop = () => {
         setSearchQuery(urlSearchQuery ?? '');
     }, [searchParams]);
 
-	    useEffect(() => {
-	        let isActive = true;
-	        const loadCatalog = async () => {
-	            try {
-	                const response = await fetch(`${apiBaseUrl}/api/products`);
-	                if (!response.ok) throw new Error('Failed to load catalog');
-	                const data = (await response.json()) as ApiCatalogProduct[];
-	                if (!isActive) return;
-	                const normalized = data.map((product) => ({
-	                    id: product.id,
-	                    name: product.name,
-	                    image: product.image,
-	                    category: product.category?.trim() || 'Catalog',
-	                    categorySlug: slugify(product.category?.trim() || 'Catalog'),
-	                    price: product.price,
-	                    tag: product.tag,
-	                }));
-	                setCatalogProducts(normalized);
-	            } catch {
-	                if (!isActive) return;
-	                const fallback = (productsData as ApiCatalogProduct[]).map((product) => ({
-	                    id: product.id,
-	                    name: product.name,
-	                    image: product.image,
-	                    category: product.category?.trim() || 'Catalog',
-	                    categorySlug: slugify(product.category?.trim() || 'Catalog'),
-	                    price: product.price,
-	                    tag: product.tag,
-	                }));
-	                setCatalogProducts(fallback);
-	            }
-	        };
-	        loadCatalog();
-	        return () => { isActive = false; };
-	    }, []);
+    useEffect(() => {
+        let isActive = true;
+        const loadCatalog = async () => {
+            try {
+                const response = await fetch(`${apiBaseUrl}/api/products`);
+                if (!response.ok) throw new Error('Failed to load catalog');
+                const data = (await response.json()) as ApiCatalogProduct[];
+                if (!isActive) return;
+                const normalized = data.map((product) => ({
+                    id: product.id,
+                    name: product.name,
+                    image: product.image,
+                    category: product.category?.trim() || 'Catalog',
+                    categorySlug: slugify(product.category?.trim() || 'Catalog'),
+                    price: product.price,
+                    tag: product.tag,
+                    sizes: product.sizes,
+                    source: 'catalog' as const,
+                }));
+                setCatalogProducts(normalized);
+            } catch {
+                if (!isActive) return;
+                const fallback = (productsData as ApiCatalogProduct[]).map((product) => ({
+                    id: product.id,
+                    name: product.name,
+                    image: product.image,
+                    category: product.category?.trim() || 'Catalog',
+                    categorySlug: slugify(product.category?.trim() || 'Catalog'),
+                    price: product.price,
+                    tag: product.tag,
+                    sizes: product.sizes,
+                    source: 'catalog' as const,
+                }));
+                setCatalogProducts(fallback);
+            }
+        };
+        loadCatalog();
+        return () => { isActive = false; };
+    }, []);
 
-	    useEffect(() => {
-	        let isActive = true;
-	        const loadCategories = async () => {
-	            try {
-	                const response = await fetch(`${apiBaseUrl}/api/categories`);
-	                if (!response.ok) throw new Error('Failed to load categories');
-	                const data = (await response.json()) as Record<string, CategoryData>;
-	                if (!isActive) return;
-	                setCategoryData(data ?? {});
-	            } catch {
-	                if (!isActive) return;
-	                setCategoryData(categoriesData as Record<string, CategoryData>);
-	            }
-	        };
-	        loadCategories();
-	        return () => { isActive = false; };
-	    }, []);
+    useEffect(() => {
+        let isActive = true;
+        const loadCategories = async () => {
+            try {
+                const response = await fetch(`${apiBaseUrl}/api/categories`);
+                if (!response.ok) throw new Error('Failed to load categories');
+                const data = (await response.json()) as Record<string, CategoryData>;
+                if (!isActive) return;
+                setCategoryData(data ?? {});
+            } catch {
+                if (!isActive) return;
+                setCategoryData(categoriesData as Record<string, CategoryData>);
+            }
+        };
+        loadCategories();
+        return () => { isActive = false; };
+    }, []);
 
     const categoryProducts = useMemo<ShopProduct[]>(() => {
         const products: ShopProduct[] = [];
         Object.entries(categoryData).forEach(([categorySlug, catData]) => {
             const items = catData.products ?? [];
             items.forEach((product, index) => {
+                const normalizedPrice =
+                    typeof product.price === 'number'
+                        ? product.price
+                        : typeof product.price === 'string'
+                            ? product.price
+                            : '';
                 products.push({
                     id: `${categorySlug}-${index}`,
                     name: product.name ?? `${catData.name ?? categorySlug} ${index + 1}`,
                     image: product.image ?? '/heroimage.webp',
                     category: catData.name ?? categorySlug,
                     categorySlug,
-                    price: product.price || 0,
+                    price: normalizedPrice,
                     tag: product.tag ?? (index < 3 ? 'New' : undefined),
+                    sizes: product.sizes,
+                    source: 'category',
                 });
             });
         });
@@ -487,24 +513,46 @@ export const Shop = () => {
         return [...catalogProducts, ...categoryProducts];
     }, [catalogProducts, categoryProducts]);
 
+    const uniqueProducts = useMemo(() => {
+        const bestByKey = new Map<string, ShopProduct>();
+
+        allProducts.forEach((product) => {
+            const key = `${slugify(product.name)}|${String(product.image ?? '').toLowerCase()}`;
+            const existing = bestByKey.get(key);
+            if (!existing) {
+                bestByKey.set(key, product);
+                return;
+            }
+
+            const existingPrice = parseBasePrice(existing.price);
+            const nextPrice = parseBasePrice(product.price);
+            if (nextPrice > existingPrice) {
+                bestByKey.set(key, product);
+                return;
+            }
+            if (nextPrice === existingPrice && product.source === 'catalog' && existing.source !== 'catalog') {
+                bestByKey.set(key, product);
+            }
+        });
+
+        return Array.from(bestByKey.values());
+    }, [allProducts]);
+
     // Recalculate global min/max prices when products change
     useEffect(() => {
-        if (allProducts.length > 0) {
-            const prices = allProducts.map(p => {
-                if (typeof p.price === 'number') return p.price;
-                return parseFloat(String(p.price).replace(/[^0-9.]/g, '')) || 0;
-            });
+        if (uniqueProducts.length > 0) {
+            const prices = uniqueProducts.map((p) => parseBasePrice(p.price));
             const min = Math.floor(Math.min(...prices));
             const max = Math.ceil(Math.max(...prices));
             setMinPrice(min);
             setMaxPrice(max);
             setPriceRange([min, max]); // Reset range when data loads
         }
-    }, [allProducts]);
+    }, [uniqueProducts]);
 
     const categories = useMemo(() => {
         const totals = new Map<string, { slug: string; name: string; count: number }>();
-        allProducts.forEach((product) => {
+        uniqueProducts.forEach((product) => {
             const slug = product.categorySlug;
             const name = product.category;
             const current = totals.get(slug);
@@ -514,18 +562,16 @@ export const Shop = () => {
         const cats = Array.from(totals.values()).sort((a, b) => a.name.localeCompare(b.name));
         const totalCount = cats.reduce((sum, cat) => sum + cat.count, 0);
         return [{ slug: 'all', name: 'All Products', count: totalCount }, ...cats];
-    }, [allProducts]);
+    }, [uniqueProducts]);
 
     const filteredAndSortedProducts = useMemo(() => {
-        let result = allProducts.filter(product => {
+        let result = uniqueProducts.filter(product => {
             const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                 product.category.toLowerCase().includes(searchQuery.toLowerCase());
             const matchesCategory = selectedCategory === 'all' || product.categorySlug === selectedCategory;
 
             // Price Filtering
-            const productPrice = typeof product.price === 'number'
-                ? product.price
-                : parseFloat(String(product.price).replace(/[^0-9.]/g, '')) || 0;
+            const productPrice = parseBasePrice(product.price);
             const matchesPrice = productPrice >= priceRange[0] && productPrice <= priceRange[1];
 
             return matchesSearch && matchesCategory && matchesPrice;
@@ -534,13 +580,13 @@ export const Shop = () => {
         result = [...result].sort((a, b) => {
             switch (sortBy) {
                 case 'price-asc': {
-                    const priceA = typeof a.price === 'number' ? a.price : parseFloat(String(a.price).replace(/[^0-9.]/g, '')) || 0;
-                    const priceB = typeof b.price === 'number' ? b.price : parseFloat(String(b.price).replace(/[^0-9.]/g, '')) || 0;
+                    const priceA = parseBasePrice(a.price);
+                    const priceB = parseBasePrice(b.price);
                     return priceA - priceB;
                 }
                 case 'price-desc': {
-                    const priceA = typeof a.price === 'number' ? a.price : parseFloat(String(a.price).replace(/[^0-9.]/g, '')) || 0;
-                    const priceB = typeof b.price === 'number' ? b.price : parseFloat(String(b.price).replace(/[^0-9.]/g, '')) || 0;
+                    const priceA = parseBasePrice(a.price);
+                    const priceB = parseBasePrice(b.price);
                     return priceB - priceA;
                 }
                 case 'name-asc':
@@ -552,7 +598,7 @@ export const Shop = () => {
         });
 
         return result;
-    }, [searchQuery, selectedCategory, allProducts, sortBy, priceRange]);
+    }, [searchQuery, selectedCategory, uniqueProducts, sortBy, priceRange]);
 
     const visibleProducts = filteredAndSortedProducts.slice(0, visibleCount);
 
@@ -658,11 +704,11 @@ export const Shop = () => {
                             />
 
                             <div className="flex-1 min-w-0">
-	                                <motion.div
-	                                    initial={{ opacity: 0, y: -20 }}
-	                                    animate={{ opacity: 1, y: 0 }}
-	                                    className="sticky top-24 sm:top-28 z-30 mb-8"
-	                                >
+                                <motion.div
+                                    initial={{ opacity: 0, y: -20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="sticky top-24 sm:top-28 z-30 mb-8"
+                                >
                                     <div className="bg-white/70 backdrop-blur-xl rounded-2xl border border-white/60 shadow-lg shadow-[#1A3C27]/5 p-4">
                                         <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-between">
                                             <div className="flex items-center gap-4">

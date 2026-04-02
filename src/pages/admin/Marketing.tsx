@@ -240,7 +240,7 @@ export const Marketing = () => {
                 {/* Footer Link */}
                 <p className="text-center text-sm text-gray-500">
                     Learn more about <a href="#" className="text-blue-600 hover:underline">marketing campaigns</a> and how{' '}
-                    <a href="#" className="text-blue-600 hover:underline">Shopify syncs report data</a>.
+                    <a href="#" className="text-blue-600 hover:underline">Ecomsh syncs report data</a>.
                 </p>
             </div>
         </AdminLayout>

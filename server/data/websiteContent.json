@@ -1,7 +1,7 @@
 {
   "hero": {
     "heading": "Turning Waste Into Purpose",
-    "subheading": "Premium stationery & lifestyle goods crafted from recycled bottles. Simple. Sustainable. New.aaaa",
+    "subheading": "Premium stationery & lifestyle goods crafted from recycled bottles. Simple. Sustainable.",
     "ctaText": "Shop Sustainable Goods",
     "ctaLink": "/shop",
     "backgroundImage": "/heroimage.webp"
@@ -29,7 +29,7 @@
     "email": "info@trusser.in",
     "address": "Made with \u2665 in India"
   },
-  "lastSaved": "2026-01-03T17:52:56.844Z",
+  "lastSaved": "2026-03-14T18:50:12.767Z",
   "instagramEmbeds": [
     {
       "id": "ig1",

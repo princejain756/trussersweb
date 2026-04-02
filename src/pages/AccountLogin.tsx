@@ -109,7 +109,7 @@ export const AccountLogin = () => {
                                             type="email"
                                             value={email}
                                             onChange={(event) => setEmail(event.target.value)}
-                                            placeholder="you@example.com"
+                                            placeholder="maitri@trusser.in"
                                             className="w-full bg-transparent text-[#1A3C27] placeholder:text-[#9C8F84] focus:outline-none"
                                         />
                                     </div>

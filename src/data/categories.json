@@ -7,22 +7,78 @@
       {
         "name": "Carry Bag Korean",
         "image": "/products/carry-bag-korean.webp",
-        "filename": "carry-bag-korean.webp"
+        "filename": "carry-bag-korean.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Carry Bag Leaf",
         "image": "/products/carry-bag-leaf.webp",
-        "filename": "carry-bag-leaf.webp"
+        "filename": "carry-bag-leaf.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Carry Bag Planet",
         "image": "/products/carry-bag-planet.webp",
-        "filename": "carry-bag-planet.webp"
+        "filename": "carry-bag-planet.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Carry Bag Summer",
         "image": "/products/carry-bag-summer.webp",
-        "filename": "carry-bag-summer.webp"
+        "filename": "carry-bag-summer.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       }
     ]
   },
@@ -34,12 +90,40 @@
       {
         "name": "Pixie Gallop Gift Set",
         "image": "/products/pixie-gallop-gift-set.webp",
-        "filename": "pixie-gallop-gift-set.webp"
+        "filename": "pixie-gallop-gift-set.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "The Little Explorer Gift Set",
         "image": "/products/the-little-explorer-gift-set.webp",
-        "filename": "the-little-explorer-gift-set.webp"
+        "filename": "the-little-explorer-gift-set.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       }
     ]
   },
@@ -51,102 +135,382 @@
       {
         "name": "Heliophile Bloom Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-1.webp",
-        "filename": "women-gift-sets-1.webp"
+        "filename": "women-gift-sets-1.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Pine Sunshine Pouch Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-2.webp",
-        "filename": "women-gift-sets-2.webp"
+        "filename": "women-gift-sets-2.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Lotus Bloom Gift Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-3.webp",
-        "filename": "women-gift-sets-3.webp"
+        "filename": "women-gift-sets-3.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Ocean Stripe Pouch Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-4.webp",
-        "filename": "women-gift-sets-4.webp"
+        "filename": "women-gift-sets-4.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Zestful Zig Zag Pouch Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-5.webp",
-        "filename": "women-gift-sets-5.webp"
+        "filename": "women-gift-sets-5.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Autumn Leaf Pouch Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-6.webp",
-        "filename": "women-gift-sets-6.webp"
+        "filename": "women-gift-sets-6.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Tropical Bloom Pouch Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-7.webp",
-        "filename": "women-gift-sets-7.webp"
+        "filename": "women-gift-sets-7.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "GeoVibe Pouch Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-8.webp",
-        "filename": "women-gift-sets-8.webp"
+        "filename": "women-gift-sets-8.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Lotus Bloom Gift Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-9.webp",
-        "filename": "women-gift-sets-9.webp"
+        "filename": "women-gift-sets-9.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Rain Leaf Pouch Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-10.webp",
-        "filename": "women-gift-sets-10.webp"
+        "filename": "women-gift-sets-10.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Sunset Chevron Pouch Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-11.webp",
-        "filename": "women-gift-sets-11.webp"
+        "filename": "women-gift-sets-11.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Mosaic Bloom Pouch Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-12.webp",
-        "filename": "women-gift-sets-12.webp"
+        "filename": "women-gift-sets-12.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Sunbeam Fabric Pouch Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-13.webp",
-        "filename": "women-gift-sets-13.webp"
+        "filename": "women-gift-sets-13.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Lotus Bloom Tote",
         "image": "/products/categories/women-gift-sets/women-gift-sets-14.webp",
-        "filename": "women-gift-sets-14.webp"
+        "filename": "women-gift-sets-14.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Maple Autumn Pouch Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-15.webp",
-        "filename": "women-gift-sets-15.webp"
+        "filename": "women-gift-sets-15.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Autumn Leaf Pouch Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-16.webp",
-        "filename": "women-gift-sets-16.webp"
+        "filename": "women-gift-sets-16.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Prism Flow Pouch Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-17.webp",
-        "filename": "women-gift-sets-17.webp"
+        "filename": "women-gift-sets-17.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Maple Autumn Pouch Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-18.webp",
-        "filename": "women-gift-sets-18.webp"
+        "filename": "women-gift-sets-18.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Boho Pattern Pouch Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-19.webp",
-        "filename": "women-gift-sets-19.webp"
+        "filename": "women-gift-sets-19.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Pine Palm Pouch Set",
         "image": "/products/categories/women-gift-sets/women-gift-sets-20.webp",
-        "filename": "women-gift-sets-20.webp"
+        "filename": "women-gift-sets-20.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       }
     ]
   },
@@ -158,42 +522,154 @@
       {
         "name": "Enjoy The Little Things",
         "image": "/products/enjoy-the-little-things.webp",
-        "filename": "enjoy-the-little-things.webp"
+        "filename": "enjoy-the-little-things.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Mermaid Life",
         "image": "/products/mermaid-life.webp",
-        "filename": "mermaid-life.webp"
+        "filename": "mermaid-life.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Mermaid Squad",
         "image": "/products/mermaid-squad.webp",
-        "filename": "mermaid-squad.webp"
+        "filename": "mermaid-squad.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Panda",
         "image": "/products/panda.webp",
-        "filename": "panda.webp"
+        "filename": "panda.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Sparkle Like A Unicorn",
         "image": "/products/sparkle-like-a-unicorn.webp",
-        "filename": "sparkle-like-a-unicorn.webp"
+        "filename": "sparkle-like-a-unicorn.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Unicorn Notebook",
         "image": "/products/unicorn-notebook.webp",
-        "filename": "unicorn-notebook.webp"
+        "filename": "unicorn-notebook.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Unicorn Spiral Art Pouch",
         "image": "/products/unicorn-spiral-art-pouch.webp",
-        "filename": "unicorn-spiral-art-pouch.webp"
+        "filename": "unicorn-spiral-art-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Unicorn Spiral Pouch",
         "image": "/products/unicorn-spiral-pouch.webp",
-        "filename": "unicorn-spiral-pouch.webp"
+        "filename": "unicorn-spiral-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       }
     ]
   },
@@ -205,57 +681,211 @@
       {
         "name": "Animal Water Bottle Bag",
         "image": "/products/animal-water-bottle-bag.webp",
-        "filename": "animal-water-bottle-bag.webp"
+        "filename": "animal-water-bottle-bag.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Breathe Water Bottle Bag",
         "image": "/products/breathe-water-bottle-bag.webp",
-        "filename": "breathe-water-bottle-bag.webp"
+        "filename": "breathe-water-bottle-bag.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Colorful Stripes Bottle Holder",
         "image": "/products/colorful-stripes-bottle-holder.webp",
-        "filename": "colorful-stripes-bottle-holder.webp"
+        "filename": "colorful-stripes-bottle-holder.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Colorful Water Bottle Bag",
         "image": "/products/colorful-water-bottle-bag.webp",
-        "filename": "colorful-water-bottle-bag.webp"
+        "filename": "colorful-water-bottle-bag.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Funky Green And Pink Bottle Holder",
         "image": "/products/funky-green-and-pink-bottle-holder.webp",
-        "filename": "funky-green-and-pink-bottle-holder.webp"
+        "filename": "funky-green-and-pink-bottle-holder.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Imagination Water Bottle Bag",
         "image": "/products/imagination-water-bottle-bag.webp",
-        "filename": "imagination-water-bottle-bag.webp"
+        "filename": "imagination-water-bottle-bag.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Leaf Water Bottle Bag",
         "image": "/products/leaf-water-bottle-bag.webp",
-        "filename": "leaf-water-bottle-bag.webp"
+        "filename": "leaf-water-bottle-bag.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Navy Blue Bottle Holder",
         "image": "/products/navy-blue-bottle-holder.webp",
-        "filename": "navy-blue-bottle-holder.webp"
+        "filename": "navy-blue-bottle-holder.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Pastel Green Mandala Bottle Holder",
         "image": "/products/pastel-green-mandala-bottle-holder.webp",
-        "filename": "pastel-green-mandala-bottle-holder.webp"
+        "filename": "pastel-green-mandala-bottle-holder.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Retro Stripes Bottle Holder",
         "image": "/products/retro-stripes-bottle-holder.webp",
-        "filename": "retro-stripes-bottle-holder.webp"
+        "filename": "retro-stripes-bottle-holder.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "T150B",
         "image": "/products/t150b.webp",
-        "filename": "t150b.webp"
+        "filename": "t150b.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       }
     ]
   },
@@ -267,72 +897,268 @@
       {
         "name": "Azure Imagination Bottle Carrier",
         "image": "/products/categories/bottle-bags/bottle-bags-1.webp",
-        "filename": "bottle-bags-1.webp"
+        "filename": "bottle-bags-1.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Blue Animal Bottle Carrier",
         "image": "/products/categories/bottle-bags/bottle-bags-2.webp",
-        "filename": "bottle-bags-2.webp"
+        "filename": "bottle-bags-2.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Pink Triangle Bottle Carrier",
         "image": "/products/categories/bottle-bags/bottle-bags-3.webp",
-        "filename": "bottle-bags-3.webp"
+        "filename": "bottle-bags-3.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Blue Dino Bottle Carrier",
         "image": "/products/categories/bottle-bags/bottle-bags-4.webp",
-        "filename": "bottle-bags-4.webp"
+        "filename": "bottle-bags-4.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Rainbow Striped Recycled Carry",
         "image": "/products/categories/bottle-bags/bottle-bags-5.webp",
-        "filename": "bottle-bags-5.webp"
+        "filename": "bottle-bags-5.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Blue Animal Bottle Carrier",
         "image": "/products/categories/bottle-bags/bottle-bags-6.webp",
-        "filename": "bottle-bags-6.webp"
+        "filename": "bottle-bags-6.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Patchwork Revival Bottle Carrier",
         "image": "/products/categories/bottle-bags/bottle-bags-7.webp",
-        "filename": "bottle-bags-7.webp"
+        "filename": "bottle-bags-7.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Striped Recycled Carry",
         "image": "/products/categories/bottle-bags/bottle-bags-8.webp",
-        "filename": "bottle-bags-8.webp"
+        "filename": "bottle-bags-8.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Navy Dot Bottle Carrier",
         "image": "/products/categories/bottle-bags/bottle-bags-9.webp",
-        "filename": "bottle-bags-9.webp"
+        "filename": "bottle-bags-9.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Blue Animal Bottle Carrier",
         "image": "/products/categories/bottle-bags/bottle-bags-10.webp",
-        "filename": "bottle-bags-10.webp"
+        "filename": "bottle-bags-10.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Azure Imagination Bottle Carrier",
         "image": "/products/categories/bottle-bags/bottle-bags-11.webp",
-        "filename": "bottle-bags-11.webp"
+        "filename": "bottle-bags-11.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Blue Dino Bottle Carrier",
         "image": "/products/categories/bottle-bags/bottle-bags-12.webp",
-        "filename": "bottle-bags-12.webp"
+        "filename": "bottle-bags-12.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Pink Blossom Bottle Carrier",
         "image": "/products/categories/bottle-bags/bottle-bags-13.webp",
-        "filename": "bottle-bags-13.webp"
+        "filename": "bottle-bags-13.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Rainbow Striped Bottle Carrier",
         "image": "/products/categories/bottle-bags/bottle-bags-14.webp",
-        "filename": "bottle-bags-14.webp"
+        "filename": "bottle-bags-14.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       }
     ]
   },
@@ -344,112 +1170,420 @@
       {
         "name": "Baby Shower Bag",
         "image": "/products/baby-shower-bag.webp",
-        "filename": "baby-shower-bag.webp"
+        "filename": "baby-shower-bag.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Blue Wedding Bag",
         "image": "/products/blue-wedding-bag.webp",
-        "filename": "blue-wedding-bag.webp"
+        "filename": "blue-wedding-bag.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Festive Event Bag",
         "image": "/products/festive-event-bag.webp",
-        "filename": "festive-event-bag.webp"
+        "filename": "festive-event-bag.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Gift Bag Blue Print",
         "image": "/products/gift-bag-blue-print.webp",
-        "filename": "gift-bag-blue-print.webp"
+        "filename": "gift-bag-blue-print.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Gift Bag Blue",
         "image": "/products/gift-bag-blue.webp",
-        "filename": "gift-bag-blue.webp"
+        "filename": "gift-bag-blue.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Gift Bag Cherry Blossom",
         "image": "/products/gift-bag-cherry-blossom.webp",
-        "filename": "gift-bag-cherry-blossom.webp"
+        "filename": "gift-bag-cherry-blossom.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Gift Bag Flamingo",
         "image": "/products/gift-bag-flamingo.webp",
-        "filename": "gift-bag-flamingo.webp"
+        "filename": "gift-bag-flamingo.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Gift Bag Lemon",
         "image": "/products/gift-bag-lemon.webp",
-        "filename": "gift-bag-lemon.webp"
+        "filename": "gift-bag-lemon.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Gift Bag Maroon Design",
         "image": "/products/gift-bag-maroon-design.webp",
-        "filename": "gift-bag-maroon-design.webp"
+        "filename": "gift-bag-maroon-design.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Gift Bag More Dogs",
         "image": "/products/gift-bag-more-dogs.webp",
-        "filename": "gift-bag-more-dogs.webp"
+        "filename": "gift-bag-more-dogs.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Gift Bag Traditional",
         "image": "/products/gift-bag-traditional.webp",
-        "filename": "gift-bag-traditional.webp"
+        "filename": "gift-bag-traditional.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Gift Bag",
         "image": "/products/gift-bag.webp",
-        "filename": "gift-bag.webp"
+        "filename": "gift-bag.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Gift Bags Tropical",
         "image": "/products/gift-bags-tropical.webp",
-        "filename": "gift-bags-tropical.webp"
+        "filename": "gift-bags-tropical.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Gift Bags Village",
         "image": "/products/gift-bags-village.webp",
-        "filename": "gift-bags-village.webp"
+        "filename": "gift-bags-village.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Gift Bags",
         "image": "/products/gift-bags.webp",
-        "filename": "gift-bags.webp"
+        "filename": "gift-bags.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Indian Wedding Bag",
         "image": "/products/indian-wedding-bag.webp",
-        "filename": "indian-wedding-bag.webp"
+        "filename": "indian-wedding-bag.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Marriage Bag",
         "image": "/products/marriage-bag.webp",
-        "filename": "marriage-bag.webp"
+        "filename": "marriage-bag.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Pink Thank You Bag",
         "image": "/products/pink-thank-you-bag.webp",
-        "filename": "pink-thank-you-bag.webp"
+        "filename": "pink-thank-you-bag.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Royal Wedding Bag",
         "image": "/products/royal-wedding-bag.webp",
-        "filename": "royal-wedding-bag.webp"
+        "filename": "royal-wedding-bag.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Save The Date Bag",
         "image": "/products/save-the-date-bag.webp",
-        "filename": "save-the-date-bag.webp"
+        "filename": "save-the-date-bag.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Thank You Bag",
         "image": "/products/thank-you-bag.webp",
-        "filename": "thank-you-bag.webp"
+        "filename": "thank-you-bag.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Traditional Thank You Bag",
         "image": "/products/traditional-thank-you-bag.webp",
-        "filename": "traditional-thank-you-bag.webp"
+        "filename": "traditional-thank-you-bag.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       }
     ]
   },
@@ -461,32 +1595,116 @@
       {
         "name": "Posters 1",
         "image": "/products/categories/posters/posters-1.webp",
-        "filename": "posters-1.webp"
+        "filename": "posters-1.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Posters 2",
         "image": "/products/categories/posters/posters-2.webp",
-        "filename": "posters-2.webp"
+        "filename": "posters-2.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Posters 3",
         "image": "/products/categories/posters/posters-3.webp",
-        "filename": "posters-3.webp"
+        "filename": "posters-3.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Posters 4",
         "image": "/products/categories/posters/posters-4.webp",
-        "filename": "posters-4.webp"
+        "filename": "posters-4.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Posters 5",
         "image": "/products/categories/posters/posters-5.webp",
-        "filename": "posters-5.webp"
+        "filename": "posters-5.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Posters 6",
         "image": "/products/categories/posters/posters-6.webp",
-        "filename": "posters-6.webp"
+        "filename": "posters-6.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       }
     ]
   },
@@ -498,27 +1716,97 @@
       {
         "name": "Lotus Bloom Laundry",
         "image": "/products/categories/laundry-bags/laundry-bags-1.webp",
-        "filename": "laundry-bags-1.webp"
+        "filename": "laundry-bags-1.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Lotus Bloom Laundry",
         "image": "/products/categories/laundry-bags/laundry-bags-2.webp",
-        "filename": "laundry-bags-2.webp"
+        "filename": "laundry-bags-2.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Lotus Bloom Laundry",
         "image": "/products/categories/laundry-bags/laundry-bags-3.webp",
-        "filename": "laundry-bags-3.webp"
+        "filename": "laundry-bags-3.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Lotus Bloom Laundry",
         "image": "/products/categories/laundry-bags/laundry-bags-4.webp",
-        "filename": "laundry-bags-4.webp"
+        "filename": "laundry-bags-4.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Lotus Bloom Laundry",
         "image": "/products/categories/laundry-bags/laundry-bags-5.webp",
-        "filename": "laundry-bags-5.webp"
+        "filename": "laundry-bags-5.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       }
     ]
   },
@@ -530,7 +1818,21 @@
       {
         "name": "Botanic Mandala Placemats",
         "image": "/products/botanic-mandala-placemats.webp",
-        "filename": "botanic-mandala-placemats.webp"
+        "filename": "botanic-mandala-placemats.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       }
     ]
   },
@@ -542,27 +1844,97 @@
       {
         "name": "Blue Green Cash Pouch",
         "image": "/products/blue-green-cash-pouch.webp",
-        "filename": "blue-green-cash-pouch.webp"
+        "filename": "blue-green-cash-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Colorful Cash Pouch",
         "image": "/products/colorful-cash-pouch.webp",
-        "filename": "colorful-cash-pouch.webp"
+        "filename": "colorful-cash-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Floral Cash Pouch",
         "image": "/products/floral-cash-pouch.webp",
-        "filename": "floral-cash-pouch.webp"
+        "filename": "floral-cash-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Mandala Design Cash Pouch",
         "image": "/products/mandala-design-cash-pouch.webp",
-        "filename": "mandala-design-cash-pouch.webp"
+        "filename": "mandala-design-cash-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Purple Cash Pouch",
         "image": "/products/purple-cash-pouch.webp",
-        "filename": "purple-cash-pouch.webp"
+        "filename": "purple-cash-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       }
     ]
   },
@@ -574,27 +1946,97 @@
       {
         "name": "Luggage Tags 1",
         "image": "/products/categories/luggage-tags/luggage-tags-1.webp",
-        "filename": "luggage-tags-1.webp"
+        "filename": "luggage-tags-1.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Luggage Tags 2",
         "image": "/products/categories/luggage-tags/luggage-tags-2.webp",
-        "filename": "luggage-tags-2.webp"
+        "filename": "luggage-tags-2.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Luggage Tags 3",
         "image": "/products/categories/luggage-tags/luggage-tags-3.webp",
-        "filename": "luggage-tags-3.webp"
+        "filename": "luggage-tags-3.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Luggage Tags 4",
         "image": "/products/categories/luggage-tags/luggage-tags-4.webp",
-        "filename": "luggage-tags-4.webp"
+        "filename": "luggage-tags-4.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Luggage Tags 5",
         "image": "/products/categories/luggage-tags/luggage-tags-5.webp",
-        "filename": "luggage-tags-5.webp"
+        "filename": "luggage-tags-5.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       }
     ]
   },
@@ -606,7 +2048,21 @@
       {
         "name": "Sustainable Caddy Bags",
         "image": "/products/sustainable-caddy-bags.webp",
-        "filename": "sustainable-caddy-bags.webp"
+        "filename": "sustainable-caddy-bags.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       }
     ]
   },
@@ -618,27 +2074,97 @@
       {
         "name": "Passport Holders 1",
         "image": "/products/categories/passport-holders/passport-holders-1.webp",
-        "filename": "passport-holders-1.webp"
+        "filename": "passport-holders-1.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Passport Holders 2",
         "image": "/products/categories/passport-holders/passport-holders-2.webp",
-        "filename": "passport-holders-2.webp"
+        "filename": "passport-holders-2.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Passport Holders 3",
         "image": "/products/categories/passport-holders/passport-holders-3.webp",
-        "filename": "passport-holders-3.webp"
+        "filename": "passport-holders-3.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Passport Holders 4",
         "image": "/products/categories/passport-holders/passport-holders-4.webp",
-        "filename": "passport-holders-4.webp"
+        "filename": "passport-holders-4.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Passport Holders 5",
         "image": "/products/categories/passport-holders/passport-holders-5.webp",
-        "filename": "passport-holders-5.webp"
+        "filename": "passport-holders-5.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       }
     ]
   },
@@ -650,27 +2176,97 @@
       {
         "name": "Keychains 1",
         "image": "/products/categories/keychains/keychains-1.webp",
-        "filename": "keychains-1.webp"
+        "filename": "keychains-1.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Keychains 2",
         "image": "/products/categories/keychains/keychains-2.webp",
-        "filename": "keychains-2.webp"
+        "filename": "keychains-2.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Keychains 3",
         "image": "/products/categories/keychains/keychains-3.webp",
-        "filename": "keychains-3.webp"
+        "filename": "keychains-3.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Keychains 4",
         "image": "/products/categories/keychains/keychains-4.webp",
-        "filename": "keychains-4.webp"
+        "filename": "keychains-4.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Keychains 5",
         "image": "/products/categories/keychains/keychains-5.webp",
-        "filename": "keychains-5.webp"
+        "filename": "keychains-5.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       }
     ]
   },
@@ -682,7 +2278,21 @@
       {
         "name": "Make It Notebook",
         "image": "/products/make-it-notebook.webp",
-        "filename": "make-it-notebook.webp"
+        "filename": "make-it-notebook.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       }
     ]
   },
@@ -694,227 +2304,857 @@
       {
         "name": "Abstract Art Pouch",
         "image": "/products/abstract-art-pouch.webp",
-        "filename": "abstract-art-pouch.webp"
+        "filename": "abstract-art-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Abstract Pencil Pouch",
         "image": "/products/abstract-pencil-pouch.webp",
-        "filename": "abstract-pencil-pouch.webp"
+        "filename": "abstract-pencil-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Abstract Pouch",
         "image": "/products/abstract-pouch.webp",
-        "filename": "abstract-pouch.webp"
+        "filename": "abstract-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Abstract Zig Zag Art Pouch",
         "image": "/products/abstract-zig-zag-art-pouch.webp",
-        "filename": "abstract-zig-zag-art-pouch.webp"
+        "filename": "abstract-zig-zag-art-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Abstract Zig Zag Pencil Pouch",
         "image": "/products/abstract-zig-zag-pencil-pouch.webp",
-        "filename": "abstract-zig-zag-pencil-pouch.webp"
+        "filename": "abstract-zig-zag-pencil-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Autumn 3 Art Pouch",
         "image": "/products/autumn-3-art-pouch.webp",
-        "filename": "autumn-3-art-pouch.webp"
+        "filename": "autumn-3-art-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Autumn 3 Pencil Pouch",
         "image": "/products/autumn-3-pencil-pouch.webp",
-        "filename": "autumn-3-pencil-pouch.webp"
+        "filename": "autumn-3-pencil-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Autumn 3 Pouch",
         "image": "/products/autumn-3-pouch.webp",
-        "filename": "autumn-3-pouch.webp"
+        "filename": "autumn-3-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Autumn Art Pouch",
         "image": "/products/autumn-art-pouch.webp",
-        "filename": "autumn-art-pouch.webp"
+        "filename": "autumn-art-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Autumn Pencil Pouch",
         "image": "/products/autumn-pencil-pouch.webp",
-        "filename": "autumn-pencil-pouch.webp"
+        "filename": "autumn-pencil-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Autumn Pouch",
         "image": "/products/autumn-pouch.webp",
-        "filename": "autumn-pouch.webp"
+        "filename": "autumn-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Bandini Art Pouch",
         "image": "/products/bandini-art-pouch.webp",
-        "filename": "bandini-art-pouch.webp"
+        "filename": "bandini-art-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Bandini Pencil Pouch",
         "image": "/products/bandini-pencil-pouch.webp",
-        "filename": "bandini-pencil-pouch.webp"
+        "filename": "bandini-pencil-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Bandini Pouch",
         "image": "/products/bandini-pouch.webp",
-        "filename": "bandini-pouch.webp"
+        "filename": "bandini-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Blue And White Stripes Art Pouch",
         "image": "/products/blue-and-white-stripes-art-pouch.webp",
-        "filename": "blue-and-white-stripes-art-pouch.webp"
+        "filename": "blue-and-white-stripes-art-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Blue And White Stripes Pencil Pouch",
         "image": "/products/blue-and-white-stripes-pencil-pouch.webp",
-        "filename": "blue-and-white-stripes-pencil-pouch.webp"
+        "filename": "blue-and-white-stripes-pencil-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Blue And White Stripes Pouch",
         "image": "/products/blue-and-white-stripes-pouch.webp",
-        "filename": "blue-and-white-stripes-pouch.webp"
+        "filename": "blue-and-white-stripes-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Colorful Abstract Art Pouch",
         "image": "/products/colorful-abstract-art-pouch.webp",
-        "filename": "colorful-abstract-art-pouch.webp"
+        "filename": "colorful-abstract-art-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Colorful Abstract Pencil Pouch",
         "image": "/products/colorful-abstract-pencil-pouch.webp",
-        "filename": "colorful-abstract-pencil-pouch.webp"
+        "filename": "colorful-abstract-pencil-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Colorful Abstract Pouch",
         "image": "/products/colorful-abstract-pouch.webp",
-        "filename": "colorful-abstract-pouch.webp"
+        "filename": "colorful-abstract-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Colorful Spiral Art Pouch",
         "image": "/products/colorful-spiral-art-pouch.webp",
-        "filename": "colorful-spiral-art-pouch.webp"
+        "filename": "colorful-spiral-art-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Colorful Spiral Pouch",
         "image": "/products/colorful-spiral-pouch.webp",
-        "filename": "colorful-spiral-pouch.webp"
+        "filename": "colorful-spiral-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Colorful Triangle Red Document Pouch",
         "image": "/products/colorful-triangle-red-document-pouch.webp",
-        "filename": "colorful-triangle-red-document-pouch.webp"
+        "filename": "colorful-triangle-red-document-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Floral Art Pouch",
         "image": "/products/floral-art-pouch.webp",
-        "filename": "floral-art-pouch.webp"
+        "filename": "floral-art-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Floral Pencil Pouch",
         "image": "/products/floral-pencil-pouch.webp",
-        "filename": "floral-pencil-pouch.webp"
+        "filename": "floral-pencil-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Floral Pouch",
         "image": "/products/floral-pouch.webp",
-        "filename": "floral-pouch.webp"
+        "filename": "floral-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Geometric Blue Document Pouch",
         "image": "/products/geometric-blue-document-pouch.webp",
-        "filename": "geometric-blue-document-pouch.webp"
+        "filename": "geometric-blue-document-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Green Fabric Print Art Pouch",
         "image": "/products/green-fabric-print-art-pouch.webp",
-        "filename": "green-fabric-print-art-pouch.webp"
+        "filename": "green-fabric-print-art-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Green Fabric Print Pencil Pouch",
         "image": "/products/green-fabric-print-pencil-pouch.webp",
-        "filename": "green-fabric-print-pencil-pouch.webp"
+        "filename": "green-fabric-print-pencil-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Green Fabric Print Pouch",
         "image": "/products/green-fabric-print-pouch.webp",
-        "filename": "green-fabric-print-pouch.webp"
+        "filename": "green-fabric-print-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Green Yellow Document Pouch",
         "image": "/products/green-yellow-document-pouch.webp",
-        "filename": "green-yellow-document-pouch.webp"
+        "filename": "green-yellow-document-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Helophelia Art Pouch",
         "image": "/products/helophelia-art-pouch.webp",
-        "filename": "helophelia-art-pouch.webp"
+        "filename": "helophelia-art-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Helophelia Pouch",
         "image": "/products/helophelia-pouch.webp",
-        "filename": "helophelia-pouch.webp"
+        "filename": "helophelia-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Leaf Art Pouch",
         "image": "/products/leaf-art-pouch.webp",
-        "filename": "leaf-art-pouch.webp"
+        "filename": "leaf-art-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Leaf Pouch",
         "image": "/products/leaf-pouch.webp",
-        "filename": "leaf-pouch.webp"
+        "filename": "leaf-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Peepal Leaf Document Pouch",
         "image": "/products/peepal-leaf-document-pouch.webp",
-        "filename": "peepal-leaf-document-pouch.webp"
+        "filename": "peepal-leaf-document-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Pineapple Art Pouch",
         "image": "/products/pineapple-art-pouch.webp",
-        "filename": "pineapple-art-pouch.webp"
+        "filename": "pineapple-art-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Pineapple Pencil Pouch",
         "image": "/products/pineapple-pencil-pouch.webp",
-        "filename": "pineapple-pencil-pouch.webp"
+        "filename": "pineapple-pencil-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Pineapple Pouch",
         "image": "/products/pineapple-pouch.webp",
-        "filename": "pineapple-pouch.webp"
+        "filename": "pineapple-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Stripes And Checks Document Pouch",
         "image": "/products/stripes-and-checks-document-pouch.webp",
-        "filename": "stripes-and-checks-document-pouch.webp"
+        "filename": "stripes-and-checks-document-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Summer Art Pouch",
         "image": "/products/summer-art-pouch.webp",
-        "filename": "summer-art-pouch.webp"
+        "filename": "summer-art-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Summer Pouch",
         "image": "/products/summer-pouch.webp",
-        "filename": "summer-pouch.webp"
+        "filename": "summer-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Yellow Zig Zag Art Pouch",
         "image": "/products/yellow-zig-zag-art-pouch.webp",
-        "filename": "yellow-zig-zag-art-pouch.webp"
+        "filename": "yellow-zig-zag-art-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Yellow Zig Zag Pencil Pouch",
         "image": "/products/yellow-zig-zag-pencil-pouch.webp",
-        "filename": "yellow-zig-zag-pencil-pouch.webp"
+        "filename": "yellow-zig-zag-pencil-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Yellow Zig Zag Pouch",
         "image": "/products/yellow-zig-zag-pouch.webp",
-        "filename": "yellow-zig-zag-pouch.webp"
+        "filename": "yellow-zig-zag-pouch.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       }
     ]
   },
@@ -926,47 +3166,173 @@
       {
         "name": "Blue Document Folder",
         "image": "/products/blue-document-folder.webp",
-        "filename": "blue-document-folder.webp"
+        "filename": "blue-document-folder.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Cardeco Stripes File",
         "image": "/products/cardeco-stripes-file.webp",
-        "filename": "cardeco-stripes-file.webp"
+        "filename": "cardeco-stripes-file.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Ethnic Ikat File",
         "image": "/products/ethnic-ikat-file.webp",
-        "filename": "ethnic-ikat-file.webp"
+        "filename": "ethnic-ikat-file.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Exotic Pink Abstract File",
         "image": "/products/exotic-pink-abstract-file.webp",
-        "filename": "exotic-pink-abstract-file.webp"
+        "filename": "exotic-pink-abstract-file.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Fabric Print Document Folder",
         "image": "/products/fabric-print-document-folder.webp",
-        "filename": "fabric-print-document-folder.webp"
+        "filename": "fabric-print-document-folder.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Floral Document Folder",
         "image": "/products/floral-document-folder.webp",
-        "filename": "floral-document-folder.webp"
+        "filename": "floral-document-folder.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Geometric File",
         "image": "/products/geometric-file.webp",
-        "filename": "geometric-file.webp"
+        "filename": "geometric-file.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Peacock Document Folder",
         "image": "/products/peacock-document-folder.webp",
-        "filename": "peacock-document-folder.webp"
+        "filename": "peacock-document-folder.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Yellow Document Folder",
         "image": "/products/yellow-document-folder.webp",
-        "filename": "yellow-document-folder.webp"
+        "filename": "yellow-document-folder.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       }
     ]
   },
@@ -978,27 +3344,97 @@
       {
         "name": "Desk Mouse Pads 1",
         "image": "/products/categories/desk-mouse-pads/desk-mouse-pads-1.webp",
-        "filename": "desk-mouse-pads-1.webp"
+        "filename": "desk-mouse-pads-1.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Desk Mouse Pads 2",
         "image": "/products/categories/desk-mouse-pads/desk-mouse-pads-2.webp",
-        "filename": "desk-mouse-pads-2.webp"
+        "filename": "desk-mouse-pads-2.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Desk Mouse Pads 3",
         "image": "/products/categories/desk-mouse-pads/desk-mouse-pads-3.webp",
-        "filename": "desk-mouse-pads-3.webp"
+        "filename": "desk-mouse-pads-3.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Desk Mouse Pads 4",
         "image": "/products/categories/desk-mouse-pads/desk-mouse-pads-4.webp",
-        "filename": "desk-mouse-pads-4.webp"
+        "filename": "desk-mouse-pads-4.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Desk Mouse Pads 5",
         "image": "/products/categories/desk-mouse-pads/desk-mouse-pads-5.webp",
-        "filename": "desk-mouse-pads-5.webp"
+        "filename": "desk-mouse-pads-5.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       }
     ]
   },
@@ -1010,17 +3446,59 @@
       {
         "name": "Ermis Canvas Laptop Bag",
         "image": "/products/ermis-canvas-laptop-bag.webp",
-        "filename": "ermis-canvas-laptop-bag.webp"
+        "filename": "ermis-canvas-laptop-bag.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Floral Laptop Sleeve",
         "image": "/products/floral-laptop-sleeve.webp",
-        "filename": "floral-laptop-sleeve.webp"
+        "filename": "floral-laptop-sleeve.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       },
       {
         "name": "Tropical Laptop Sleeve",
         "image": "/products/tropical-laptop-sleeve.webp",
-        "filename": "tropical-laptop-sleeve.webp"
+        "filename": "tropical-laptop-sleeve.webp",
+        "sizes": [
+          {
+            "size": "S",
+            "price": ""
+          },
+          {
+            "size": "M",
+            "price": ""
+          },
+          {
+            "size": "L",
+            "price": ""
+          }
+        ]
       }
     ]
   }

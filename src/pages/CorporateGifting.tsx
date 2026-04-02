@@ -30,24 +30,28 @@ const giftCategories = [
         description: 'Curated onboarding essentials for new team members',
         image: '/products/categories/corporate-gift-sets/corporate-gift-sets-8.webp',
         accent: '#C1A17C',
+        link: '/shop?category=corporate-gift-sets',
     },
     {
         title: 'Event Hampers',
         description: 'Premium gift boxes for conferences & celebrations',
         image: '/products/categories/women-gift-sets/women-gift-sets-1.webp',
         accent: '#4A8B60',
+        link: '/shop?category=women-gift-sets',
     },
     {
         title: 'Festive Collections',
         description: 'Seasonal gifting for Diwali, Christmas & more',
         image: '/products/categories/festive-bags/festive-bags-1.webp',
         accent: '#D45D48',
+        link: '/shop?category=festive-bags',
     },
     {
         title: 'Custom Bundles',
         description: 'Fully personalized gift sets with your branding',
         image: '/products/categories/women-gift-sets/women-gift-sets-5.webp',
         accent: '#2D5F3F',
+        link: '#quote-form',
     },
 ];
 
@@ -482,8 +486,18 @@ ${quoteForm.name || 'Customer'}`
                         </AnimatedSection>
 
                         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {giftCategories.map((category, index) => (
-                                <AnimatedSection key={index} delay={index * 0.15}>
+                            {giftCategories.map((category, index) => {
+                                const isAnchorLink = category.link.startsWith('#');
+
+                                const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+                                    e.preventDefault();
+                                    const element = document.querySelector(category.link);
+                                    if (element) {
+                                        element.scrollIntoView({ behavior: 'smooth' });
+                                    }
+                                };
+
+                                const cardContent = (
                                     <motion.div
                                         whileHover={{ y: -12 }}
                                         className="group relative rounded-3xl overflow-hidden cursor-pointer aspect-[3/4]"
@@ -519,8 +533,22 @@ ${quoteForm.name || 'Customer'}`
                                             </motion.div>
                                         </div>
                                     </motion.div>
-                                </AnimatedSection>
-                            ))}
+                                );
+
+                                return (
+                                    <AnimatedSection key={index} delay={index * 0.15}>
+                                        {isAnchorLink ? (
+                                            <a href={category.link} onClick={handleAnchorClick} className="block">
+                                                {cardContent}
+                                            </a>
+                                        ) : (
+                                            <Link to={category.link} className="block">
+                                                {cardContent}
+                                            </Link>
+                                        )}
+                                    </AnimatedSection>
+                                );
+                            })}
                         </div>
                     </div>
                 </section>
@@ -696,7 +724,7 @@ ${quoteForm.name || 'Customer'}`
                 {/* ═══════════════════════════════════════════════════════════════════════════
                     CONTACT / CTA SECTION
                 ═══════════════════════════════════════════════════════════════════════════ */}
-                <section className="py-24 lg:py-32 bg-[#1A3C27] relative overflow-hidden">
+                <section id="quote-form" className="py-24 lg:py-32 bg-[#1A3C27] relative overflow-hidden">
                     {/* Decorative Elements */}
                     <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-[#2D5F3F]/50 to-transparent" />
                     <div className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full bg-[#C1A17C]/10 blur-[100px]" />

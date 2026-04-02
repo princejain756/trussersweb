@@ -2,7 +2,8 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Button } from './Button';
 import { Heart, Eye } from 'lucide-react';
-import { formatPriceSimple } from '../../utils/currency';
+import { formatPriceRange } from '../../utils/currency';
+import type { SizeEntry } from '../../utils/currency';
 import { useState } from 'react';
 
 interface Product {
@@ -12,6 +13,7 @@ interface Product {
     image: string;
     tag?: string;
     category?: string;
+    sizes?: SizeEntry[];
 }
 
 interface ProductCardProps {
@@ -21,9 +23,7 @@ interface ProductCardProps {
 
 export const ProductCard = ({ product, index = 0 }: ProductCardProps) => {
     const [isHovered, setIsHovered] = useState(false);
-    const formattedPrice = typeof product.price === 'number'
-        ? formatPriceSimple(product.price)
-        : formatPriceSimple(product.price);
+    const formattedPrice = formatPriceRange(product.sizes, product.price);
 
     return (
         <motion.div
@@ -155,4 +155,3 @@ export const ProductCard = ({ product, index = 0 }: ProductCardProps) => {
         </motion.div>
     );
 };
-

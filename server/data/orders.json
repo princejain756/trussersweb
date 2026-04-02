@@ -371,6 +371,65 @@
       "capturedAt": "2026-01-08T19:59:29.887Z"
     },
     "fulfillmentStatus": "cancelled",
-    "cancelledAt": "2026-01-08T20:00:02.833Z"
+    "cancelledAt": "2026-01-08T20:00:02.833Z",
+    "restockedAt": "2026-01-12T12:45:42.265Z",
+    "restockedBy": "admin"
+  },
+  {
+    "id": "5a7fb3e0-19d1-4bc6-83a4-7cf614eafb35",
+    "sequence": 1008,
+    "orderNumber": "#1008",
+    "createdAt": "2026-02-03T11:18:23.805Z",
+    "customer": {
+      "fullName": "Manvi Sood",
+      "username": "manvisood24",
+      "email": "manvisood24@gmail.com",
+      "phone": "+918219071256"
+    },
+    "shipping": {
+      "address1": "D/O NAVEEN SOOD, H.NO.133,WARD NO.1 , RAMSHILLA",
+      "address2": "Kullu",
+      "city": "Kullu",
+      "state": "Himachal Pradesh",
+      "pincode": "175101",
+      "country": "India"
+    },
+    "items": [
+      {
+        "id": "1",
+        "name": "Mermaid Life",
+        "image": "/products/mermaid-life.webp",
+        "price": 0,
+        "quantity": 1
+      },
+      {
+        "id": "2",
+        "name": "Carry Bag Planet",
+        "image": "/products/carry-bag-planet.webp",
+        "price": 0,
+        "quantity": 1
+      }
+    ],
+    "pricing": {
+      "subtotal": 0,
+      "shipping": 199,
+      "taxes": 0,
+      "total": 199
+    },
+    "invoice": {
+      "requested": false
+    },
+    "payment": {
+      "method": "razorpay",
+      "status": "failed",
+      "providerOrderId": "order_SBeaWdtwv16cL2",
+      "failureReason": "cancelled",
+      "failedAt": "2026-02-03T11:18:35.324Z"
+    },
+    "clientInfo": {
+      "ip": "47.15.185.81",
+      "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Mobile Safari/537.36",
+      "capturedAt": "2026-02-03T11:18:23.805Z"
+    }
   }
 ]

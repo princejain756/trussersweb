@@ -20,6 +20,11 @@ import categoriesData from '../data/categories.json';
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:5174';
 
+type SizeEntry = {
+    size: string;
+    price: string;
+};
+
 type ProductSource = 'catalog' | 'category';
 
 type Product = {
@@ -31,7 +36,7 @@ type Product = {
     tag?: string;
     description?: string;
     features?: string[];
-    sizes?: string[];
+    sizes?: SizeEntry[];
     category?: string;
     categorySlug?: string;
     categoryIndex?: number;
@@ -49,7 +54,7 @@ type CategoryData = {
         tag?: string;
         description?: string;
         features?: string[];
-        sizes?: string[];
+        sizes?: SizeEntry[] | string[];
     }>;
 };
 
@@ -60,7 +65,7 @@ type ProductDraft = {
     tag: string;
     description: string;
     features: string[];
-    sizes: string[];
+    sizes: SizeEntry[];
     category: string;
 };
 
@@ -98,11 +103,29 @@ const buildAuthHeaders = (): Record<string, string> => {
     return token ? { 'X-Admin-Key': token } : {};
 };
 
-const buildDefaultDescription = (name: string) =>
-    `Handcrafted with sustainable materials, this ${name} combines traditional craftsmanship with modern design. Made from upcycled waste materials, each piece contributes to environmental conservation while offering premium quality.`;
-
 const normalizeFeatureList = (features: string[]) =>
     features.map((feature) => feature.trim()).filter(Boolean);
+
+const parsePriceValue = (value: string) => Number(value.replace(/[₹$,\s]/g, ''));
+const hasPositivePrice = (value: string) => {
+    const parsed = parsePriceValue(value);
+    return Number.isFinite(parsed) && parsed > 0;
+};
+
+const validatePricing = (price: string, sizes: SizeEntry[]) => {
+    const normalizedSizes = sizes.filter((size) => size.size.trim());
+    if (normalizedSizes.length > 0) {
+        const hasInvalidVariant = normalizedSizes.some((size) => !hasPositivePrice(size.price));
+        if (hasInvalidVariant) {
+            return 'Each variant must have a valid price greater than 0.';
+        }
+        return null;
+    }
+    if (!hasPositivePrice(price)) {
+        return 'Set a valid main price greater than 0 when no variants are configured.';
+    }
+    return null;
+};
 
 const slugify = (value: string) =>
     value
@@ -111,6 +134,17 @@ const slugify = (value: string) =>
         .replace(/[^a-z0-9\s-]/g, '')
         .replace(/\s+/g, '-')
         .replace(/-+/g, '-');
+
+// Convert legacy sizes (string[] or mixed) to SizeEntry[]
+const normalizeSizes = (sizes: SizeEntry[] | string[] | undefined): SizeEntry[] => {
+    if (!sizes || !Array.isArray(sizes)) return [];
+    return sizes.map((item) => {
+        if (typeof item === 'string') {
+            return { size: item, price: '' };
+        }
+        return { size: item.size ?? '', price: String(item.price ?? '') };
+    });
+};
 
 export const AdminDashboard = () => {
     const navigate = useNavigate();
@@ -141,6 +175,16 @@ export const AdminDashboard = () => {
         sizes: [],
         category: '',
     });
+    const [newProductSamePriceMode, setNewProductSamePriceMode] = useState(true);
+    const [editSamePriceMode, setEditSamePriceMode] = useState<Record<string, boolean>>({});
+    const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+
+    const showToast = useCallback((message: string, type: 'success' | 'error' = 'error') => {
+        setToast({ type, message });
+        window.setTimeout(() => {
+            setToast((current) => (current?.message === message ? null : current));
+        }, 3000);
+    }, []);
 
     const uploadImage = async (file: File) => {
         const formData = new FormData();
@@ -307,7 +351,7 @@ export const AdminDashboard = () => {
                     tag?: string;
                     description?: string;
                     features?: string[];
-                    sizes?: string[];
+                    sizes?: SizeEntry[] | string[];
                     category?: string;
                 }>;
                 const normalized = (Array.isArray(data) ? data : []).map((product) => ({
@@ -319,7 +363,7 @@ export const AdminDashboard = () => {
                     tag: product.tag,
                     description: product.description,
                     features: product.features,
-                    sizes: product.sizes ?? [],
+                    sizes: normalizeSizes(product.sizes),
                     category: product.category,
                     categorySlug: product.category ? slugify(product.category) : 'catalog',
                 }));
@@ -403,25 +447,6 @@ export const AdminDashboard = () => {
             window.localStorage.removeItem('adminUser');
         }
         navigate('/admin');
-    };
-
-    const beginEdit = (product: Product) => {
-        const fallbackDescription = buildDefaultDescription(product.name);
-        const fallbackFeatures = product.features?.length ? product.features : defaultFeatures;
-        setEditing((prev) => ({ ...prev, [product.id]: true }));
-        setDrafts((prev) => ({
-            ...prev,
-            [product.id]: {
-                name: product.name,
-                price: product.price,
-                image: product.image,
-                tag: product.tag ?? '',
-                description: product.description?.trim() || fallbackDescription,
-                features: [...fallbackFeatures],
-                sizes: [...(product.sizes ?? [])],
-                category: product.category ?? '',
-            },
-        }));
     };
 
     const cancelEdit = (id: string) => {
@@ -528,25 +553,30 @@ export const AdminDashboard = () => {
         if (!draft) {
             return;
         }
+        const pricingError = validatePricing(draft.price, draft.sizes);
+        if (pricingError) {
+            setError(pricingError);
+            setNotice('');
+            showToast(pricingError, 'error');
+            return;
+        }
 
         setSaving((prev) => ({ ...prev, [id]: true }));
         setError('');
         setNotice('');
 
         try {
-            const payload: Record<string, string | string[]> = {
+            const payload: Record<string, string | string[] | SizeEntry[]> = {
                 name: draft.name.trim(),
                 price: draft.price.trim(),
                 image: draft.image.trim(),
                 tag: draft.tag.trim(),
                 description: draft.description.trim(),
                 features: normalizeFeatureList(draft.features),
-                sizes: draft.sizes.map(s => s.trim()).filter(Boolean),
+                sizes: draft.sizes.filter(s => s.size.trim()),
                 category: draft.category.trim(),
             };
-            if (product.source === 'category') {
-                delete payload.category;
-            }
+
 
             const isCategoryProduct = product.source === 'category';
             if (isCategoryProduct && (!product.categorySlug || product.categoryIndex === undefined)) {
@@ -693,6 +723,13 @@ export const AdminDashboard = () => {
 
     const handleCreate = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        const pricingError = validatePricing(newProduct.price, newProduct.sizes);
+        if (pricingError) {
+            setError(pricingError);
+            setNotice('');
+            showToast(pricingError, 'error');
+            return;
+        }
         setError('');
         setNotice('');
         setCreating(true);
@@ -705,7 +742,7 @@ export const AdminDashboard = () => {
                 tag: newProduct.tag.trim(),
                 description: newProduct.description.trim(),
                 features: normalizeFeatureList(newProduct.features),
-                sizes: newProduct.sizes.map(s => s.trim()).filter(Boolean),
+                sizes: newProduct.sizes.filter(s => s.size.trim()),
                 category: newProduct.category.trim(),
             };
 
@@ -736,7 +773,7 @@ export const AdminDashboard = () => {
                 tag: data?.tag,
                 description: data?.description,
                 features: Array.isArray(data?.features) ? data.features : payload.features,
-                sizes: Array.isArray(data?.sizes) ? data.sizes : payload.sizes,
+                sizes: normalizeSizes(data?.sizes) ?? payload.sizes,
                 category: data?.category ?? payload.category,
                 categorySlug: data?.category ? slugify(data.category) : 'catalog',
             };
@@ -764,9 +801,10 @@ export const AdminDashboard = () => {
     };
 
     const createFeaturesReady = normalizeFeatureList(newProduct.features).length > 0;
+    const createPricingReady = validatePricing(newProduct.price, newProduct.sizes) === null;
     const createReady =
         !!newProduct.name.trim() &&
-        !!newProduct.price.trim() &&
+        createPricingReady &&
         !!newProduct.image.trim() &&
         !!newProduct.description.trim() &&
         createFeaturesReady;
@@ -785,6 +823,16 @@ export const AdminDashboard = () => {
                     animate={{ y: [0, -24, 0], opacity: [0.4, 0.65, 0.4] }}
                     transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
                 />
+                {toast && (
+                    <div
+                        className={`fixed right-6 top-24 z-[120] rounded-xl border px-4 py-3 text-sm shadow-lg ${toast.type === 'success'
+                            ? 'bg-[#E8F5EC] border-[#2D5F3F]/30 text-[#1A3C27]'
+                            : 'bg-[#FFF1EF] border-[#D45D48]/30 text-[#8B2E22]'
+                            }`}
+                    >
+                        {toast.message}
+                    </div>
+                )}
 
                 <div className="relative mx-auto w-full max-w-[1400px] px-6 py-14 lg:px-10">
                     <datalist id="admin-category-list">
@@ -1013,24 +1061,91 @@ export const AdminDashboard = () => {
                                     <div>
                                         <div className="flex flex-wrap items-center justify-between gap-3">
                                             <label className="text-xs font-semibold uppercase tracking-[0.18em] text-[#2D5F3F]">
-                                                Available Sizes
+                                                Available Sizes & Prices
                                             </label>
+                                            <div className="flex items-center gap-3">
+                                                <label className="flex items-center gap-2 text-xs text-[#5C5C5C] cursor-pointer">
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={newProductSamePriceMode}
+                                                        onChange={(e) => {
+                                                            setNewProductSamePriceMode(e.target.checked);
+                                                            if (e.target.checked && newProduct.sizes.length > 0) {
+                                                                const firstPrice = newProduct.sizes[0]?.price ?? '';
+                                                                setNewProduct(prev => ({
+                                                                    ...prev,
+                                                                    sizes: prev.sizes.map(s => ({ ...s, price: firstPrice }))
+                                                                }));
+                                                            }
+                                                        }}
+                                                        className="h-4 w-4 rounded border-[#E2D6C8] text-[#2D5F3F] focus:ring-[#2D5F3F]"
+                                                    />
+                                                    Same price for all
+                                                </label>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setNewProduct(prev => ({
+                                                        ...prev,
+                                                        sizes: [...prev.sizes, { size: '', price: newProductSamePriceMode ? (prev.sizes[0]?.price ?? '') : '' }]
+                                                    }))}
+                                                    className="rounded-full border border-[#2D5F3F] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.1em] text-[#2D5F3F] transition hover:bg-[#2D5F3F] hover:text-white"
+                                                >
+                                                    + Add Size
+                                                </button>
+                                            </div>
                                         </div>
-                                        <div className="mt-2">
-                                            <input
-                                                type="text"
-                                                defaultValue=""
-                                                onBlur={(event) => {
-                                                    const value = event.target.value;
-                                                    const sizes = value.split(',').map(s => s.trim()).filter(Boolean);
-                                                    setNewProduct((prev) => ({ ...prev, sizes }));
-                                                }}
-                                                className="w-full rounded-2xl border border-[#E2D6C8] bg-white px-4 py-3 text-sm text-[#1A1A1A] focus:border-[#2D5F3F] focus:outline-none focus:ring-2 focus:ring-[#2D5F3F]/20"
-                                                placeholder="S, M, L, XL, XXL (comma-separated)"
-                                            />
-                                            <p className="mt-2 text-xs text-[#9C8F84]">
-                                                Optional. Enter sizes like S, M, L or 6, 7, 8, 9
-                                            </p>
+                                        <div className="mt-3 space-y-2">
+                                            {newProduct.sizes.length === 0 ? (
+                                                <p className="text-xs text-[#9C8F84] italic">No sizes added. Click "Add Size" to add size options with prices.</p>
+                                            ) : (
+                                                newProduct.sizes.map((sizeEntry, index) => (
+                                                    <div key={index} className="flex items-center gap-2">
+                                                        <input
+                                                            type="text"
+                                                            value={sizeEntry.size}
+                                                            onChange={(e) => {
+                                                                const newSizes = [...newProduct.sizes];
+                                                                newSizes[index] = { ...newSizes[index], size: e.target.value };
+                                                                setNewProduct(prev => ({ ...prev, sizes: newSizes }));
+                                                            }}
+                                                            className="w-24 rounded-xl border border-[#E2D6C8] bg-white px-3 py-2 text-sm text-[#1A1A1A] focus:border-[#2D5F3F] focus:outline-none focus:ring-2 focus:ring-[#2D5F3F]/20"
+                                                            placeholder="Size"
+                                                        />
+                                                        <input
+                                                            type="text"
+                                                            value={sizeEntry.price}
+                                                            onChange={(e) => {
+                                                                if (newProductSamePriceMode) {
+                                                                    // Apply to all sizes when same price mode is on
+                                                                    setNewProduct(prev => ({
+                                                                        ...prev,
+                                                                        sizes: prev.sizes.map(s => ({ ...s, price: e.target.value }))
+                                                                    }));
+                                                                } else {
+                                                                    const newSizes = [...newProduct.sizes];
+                                                                    newSizes[index] = { ...newSizes[index], price: e.target.value };
+                                                                    setNewProduct(prev => ({ ...prev, sizes: newSizes }));
+                                                                }
+                                                            }}
+                                                            className="flex-1 rounded-xl border border-[#E2D6C8] bg-white px-3 py-2 text-sm text-[#1A1A1A] focus:border-[#2D5F3F] focus:outline-none focus:ring-2 focus:ring-[#2D5F3F]/20"
+                                                            placeholder="Price (e.g. 299)"
+                                                        />
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => {
+                                                                setNewProduct(prev => ({
+                                                                    ...prev,
+                                                                    sizes: prev.sizes.filter((_, i) => i !== index)
+                                                                }));
+                                                            }}
+                                                            className="flex h-9 w-9 items-center justify-center rounded-full border border-[#E2D6C8] text-[#5C5C5C] transition hover:border-[#D45D48] hover:text-[#D45D48]"
+                                                            aria-label="Remove size"
+                                                        >
+                                                            <X size={16} />
+                                                        </button>
+                                                    </div>
+                                                ))
+                                            )}
                                         </div>
                                     </div>
 
@@ -1135,15 +1250,24 @@ export const AdminDashboard = () => {
                                             Showing {filteredProducts.length} of {allProducts.length} products
                                         </p>
                                     </div>
-                                    <div className="relative w-full max-w-xs">
-                                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#5C5C5C]" size={16} />
-                                        <input
-                                            type="text"
-                                            value={searchQuery}
-                                            onChange={(event) => setSearchQuery(event.target.value)}
-                                            placeholder="Search by name, price, tag, feature, category"
-                                            className="w-full rounded-full border border-[#E2D6C8] bg-white py-2.5 pl-10 pr-4 text-sm text-[#1A1A1A] focus:border-[#2D5F3F] focus:outline-none focus:ring-2 focus:ring-[#2D5F3F]/20"
-                                        />
+                                    <div className="flex items-center gap-3">
+                                        <div className="relative w-full max-w-xs">
+                                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#5C5C5C]" size={16} />
+                                            <input
+                                                type="text"
+                                                value={searchQuery}
+                                                onChange={(event) => setSearchQuery(event.target.value)}
+                                                placeholder="Search by name, price, tag, feature, category"
+                                                className="w-full rounded-full border border-[#E2D6C8] bg-white py-2.5 pl-10 pr-4 text-sm text-[#1A1A1A] focus:border-[#2D5F3F] focus:outline-none focus:ring-2 focus:ring-[#2D5F3F]/20"
+                                            />
+                                        </div>
+                                        <Link
+                                            to="/admin/products/new"
+                                            className="inline-flex items-center gap-2 rounded-full bg-[#1A3C27] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#2D5F3F] transition-colors"
+                                        >
+                                            <Plus size={16} />
+                                            Add product
+                                        </Link>
                                     </div>
                                 </div>
 
@@ -1252,16 +1376,13 @@ export const AdminDashboard = () => {
                                                                 </Button>
                                                             </>
                                                         ) : (
-                                                            <Button
-                                                                type="button"
-                                                                size="sm"
-                                                                variant="outline"
-                                                                className="rounded-full border-[#1A3C27] px-4 py-2 text-xs text-[#1A3C27]"
-                                                                onClick={() => beginEdit(product)}
+                                                            <Link
+                                                                to={`/admin/products/${product.id}`}
+                                                                className="inline-flex items-center rounded-full border border-[#1A3C27] px-4 py-2 text-xs text-[#1A3C27] hover:bg-[#1A3C27] hover:text-white transition-colors"
                                                             >
                                                                 <Edit3 className="mr-2 h-3 w-3" />
                                                                 Edit
-                                                            </Button>
+                                                            </Link>
                                                         )}
                                                         <Button
                                                             type="button"
@@ -1300,12 +1421,7 @@ export const AdminDashboard = () => {
                                                                             onChange={(event) =>
                                                                                 updateDraft(product.id, field, event.target.value)
                                                                             }
-                                                                            disabled={field === 'category' && isCategoryProduct}
-                                                                            readOnly={field === 'category' && isCategoryProduct}
-                                                                            className={`mt-2 w-full rounded-2xl border border-[#E2D6C8] px-3 py-2 text-sm focus:border-[#2D5F3F] focus:outline-none focus:ring-2 focus:ring-[#2D5F3F]/20 ${field === 'category' && isCategoryProduct
-                                                                                ? 'bg-[#F4EFEC] text-[#9B8F82]'
-                                                                                : 'bg-white text-[#1A1A1A]'
-                                                                                }`}
+                                                                            className="mt-2 w-full rounded-2xl border border-[#E2D6C8] bg-white px-3 py-2 text-sm text-[#1A1A1A] focus:border-[#2D5F3F] focus:outline-none focus:ring-2 focus:ring-[#2D5F3F]/20"
                                                                         />
                                                                     </div>
                                                                 ))}
@@ -1421,25 +1537,80 @@ export const AdminDashboard = () => {
                                                             <div>
                                                                 <div className="flex flex-wrap items-center justify-between gap-3">
                                                                     <label className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#2D5F3F]">
-                                                                        Available Sizes
+                                                                        Available Sizes & Prices
                                                                     </label>
+                                                                    <div className="flex items-center gap-2">
+                                                                        <label className="flex items-center gap-1.5 text-[10px] text-[#5C5C5C] cursor-pointer">
+                                                                            <input
+                                                                                type="checkbox"
+                                                                                checked={editSamePriceMode[product.id] ?? true}
+                                                                                onChange={(e) => {
+                                                                                    setEditSamePriceMode(prev => ({ ...prev, [product.id]: e.target.checked }));
+                                                                                    if (e.target.checked && display.sizes.length > 0) {
+                                                                                        const firstPrice = display.sizes[0]?.price ?? '';
+                                                                                        updateDraft(product.id, 'sizes', display.sizes.map(s => ({ ...s, price: firstPrice })));
+                                                                                    }
+                                                                                }}
+                                                                                className="h-3.5 w-3.5 rounded border-[#E2D6C8] text-[#2D5F3F] focus:ring-[#2D5F3F]"
+                                                                            />
+                                                                            Same price
+                                                                        </label>
+                                                                        <button
+                                                                            type="button"
+                                                                            onClick={() => {
+                                                                                const samePriceOn = editSamePriceMode[product.id] ?? true;
+                                                                                updateDraft(product.id, 'sizes', [...display.sizes, { size: '', price: samePriceOn ? (display.sizes[0]?.price ?? '') : '' }]);
+                                                                            }}
+                                                                            className="rounded-full border border-[#2D5F3F] px-2 py-0.5 text-[10px] font-semibold text-[#2D5F3F] transition hover:bg-[#2D5F3F] hover:text-white"
+                                                                        >
+                                                                            + Size
+                                                                        </button>
+                                                                    </div>
                                                                 </div>
-                                                                <div className="mt-2">
-                                                                    <input
-                                                                        type="text"
-                                                                        key={`sizes-input-${product.id}-${display.sizes.join(',')}`}
-                                                                        defaultValue={display.sizes.join(', ')}
-                                                                        onBlur={(event) => {
-                                                                            const value = event.target.value;
-                                                                            const sizes = value.split(',').map(s => s.trim()).filter(Boolean);
-                                                                            updateDraft(product.id, 'sizes', sizes);
-                                                                        }}
-                                                                        className="w-full rounded-2xl border border-[#E2D6C8] bg-white px-3 py-2 text-sm text-[#1A1A1A] focus:border-[#2D5F3F] focus:outline-none focus:ring-2 focus:ring-[#2D5F3F]/20"
-                                                                        placeholder="S, M, L, XL, XXL"
-                                                                    />
-                                                                    <p className="mt-1.5 text-[10px] text-[#9C8F84]">
-                                                                        Comma-separated: S, M, L or 6, 7, 8
-                                                                    </p>
+                                                                <div className="mt-2 space-y-1.5">
+                                                                    {display.sizes.length === 0 ? (
+                                                                        <p className="text-[10px] text-[#9C8F84] italic">No sizes. Click "+ Size" to add.</p>
+                                                                    ) : (
+                                                                        display.sizes.map((sizeEntry, index) => (
+                                                                            <div key={index} className="flex items-center gap-1.5">
+                                                                                <input
+                                                                                    type="text"
+                                                                                    value={sizeEntry.size}
+                                                                                    onChange={(e) => {
+                                                                                        const newSizes = [...display.sizes];
+                                                                                        newSizes[index] = { ...newSizes[index], size: e.target.value };
+                                                                                        updateDraft(product.id, 'sizes', newSizes);
+                                                                                    }}
+                                                                                    className="w-16 rounded-xl border border-[#E2D6C8] bg-white px-2 py-1.5 text-xs text-[#1A1A1A] focus:border-[#2D5F3F] focus:outline-none"
+                                                                                    placeholder="Size"
+                                                                                />
+                                                                                <input
+                                                                                    type="text"
+                                                                                    value={sizeEntry.price}
+                                                                                    onChange={(e) => {
+                                                                                        const samePriceOn = editSamePriceMode[product.id] ?? true;
+                                                                                        if (samePriceOn) {
+                                                                                            updateDraft(product.id, 'sizes', display.sizes.map(s => ({ ...s, price: e.target.value })));
+                                                                                        } else {
+                                                                                            const newSizes = [...display.sizes];
+                                                                                            newSizes[index] = { ...newSizes[index], price: e.target.value };
+                                                                                            updateDraft(product.id, 'sizes', newSizes);
+                                                                                        }
+                                                                                    }}
+                                                                                    className="flex-1 rounded-xl border border-[#E2D6C8] bg-white px-2 py-1.5 text-xs text-[#1A1A1A] focus:border-[#2D5F3F] focus:outline-none"
+                                                                                    placeholder="Price"
+                                                                                />
+                                                                                <button
+                                                                                    type="button"
+                                                                                    onClick={() => updateDraft(product.id, 'sizes', display.sizes.filter((_, i) => i !== index))}
+                                                                                    className="flex h-7 w-7 items-center justify-center rounded-full border border-[#E2D6C8] text-[#5C5C5C] transition hover:border-[#D45D48] hover:text-[#D45D48]"
+                                                                                    aria-label="Remove size"
+                                                                                >
+                                                                                    <X size={12} />
+                                                                                </button>
+                                                                            </div>
+                                                                        ))
+                                                                    )}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1457,4 +1628,3 @@ export const AdminDashboard = () => {
         </AdminLayout>
     );
 };
-

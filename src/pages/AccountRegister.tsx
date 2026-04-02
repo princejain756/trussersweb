@@ -106,7 +106,7 @@ export const AccountRegister = () => {
                                             type="text"
                                             value={form.fullName}
                                             onChange={(event) => updateField('fullName', event.target.value)}
-                                            placeholder="Aarav Sharma"
+                                            placeholder="Maitri"
                                             className="w-full bg-transparent text-[#1A3C27] placeholder:text-[#9C8F84] focus:outline-none"
                                         />
                                     </div>
@@ -134,7 +134,7 @@ export const AccountRegister = () => {
                                             type="email"
                                             value={form.email}
                                             onChange={(event) => updateField('email', event.target.value)}
-                                            placeholder="you@example.com"
+                                            placeholder="maitri@trusser.in"
                                             className="w-full bg-transparent text-[#1A3C27] placeholder:text-[#9C8F84] focus:outline-none"
                                         />
                                     </div>

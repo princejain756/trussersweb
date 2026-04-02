@@ -22,6 +22,8 @@ import {
     Newspaper,
     AlertCircle,
     Truck,
+    Image,
+    MessageSquare,
 } from 'lucide-react';
 
 interface Notification {
@@ -56,6 +58,8 @@ const navItems: NavItem[] = [
     { name: 'Discounts', path: '/admin/discounts', icon: Percent },
     { name: 'Journal', path: '/admin/journal', icon: BookOpen },
     { name: 'Newsletter', path: '/admin/newsletter', icon: Newspaper },
+    { name: 'Image Library', path: '/admin/images', icon: Image },
+    { name: 'Reviews', path: '/admin/reviews', icon: MessageSquare },
 ];
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:5174';

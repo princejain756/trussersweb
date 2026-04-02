@@ -188,10 +188,18 @@ export const Navbar = () => {
         return results;
     }, [categories]);
 
-    const allSearchProducts = useMemo(
-        () => [...catalogProducts, ...categoryProducts],
-        [catalogProducts, categoryProducts]
-    );
+    const allSearchProducts = useMemo(() => {
+        const merged = [...catalogProducts, ...categoryProducts];
+        const byKey = new Map<string, SearchProduct>();
+        merged.forEach((product) => {
+            const key = `${product.name.trim().toLowerCase()}|${String(product.image ?? '').toLowerCase()}`;
+            if (!byKey.has(key)) {
+                // Catalog products are added first, so duplicates from category are ignored.
+                byKey.set(key, product);
+            }
+        });
+        return Array.from(byKey.values());
+    }, [catalogProducts, categoryProducts]);
 
     // Search functionality
     useEffect(() => {

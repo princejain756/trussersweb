@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name": "Bottle Bags #1",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/bottle-bags/bottle-bags-1.webp",
     "category": "Bottle Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -11,12 +11,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 2,
     "name": "Bottle Bags #11",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/bottle-bags/bottle-bags-11.webp",
     "category": "Bottle Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -25,12 +39,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 3,
     "name": "Bottle Bags #12",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/bottle-bags/bottle-bags-12.webp",
     "category": "Bottle Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -39,12 +67,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 4,
     "name": "Bottle Bags #13",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/bottle-bags/bottle-bags-13.webp",
     "category": "Bottle Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -53,12 +95,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 5,
     "name": "Bottle Bags #14",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/bottle-bags/bottle-bags-14.webp",
     "category": "Bottle Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -67,12 +123,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 6,
     "name": "Bottle Bags #3",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/bottle-bags/bottle-bags-3.webp",
     "category": "Bottle Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -81,12 +151,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 7,
     "name": "Bottle Bags #4",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/bottle-bags/bottle-bags-4.webp",
     "category": "Bottle Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -95,12 +179,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 8,
     "name": "Bottle Bags #5",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/bottle-bags/bottle-bags-5.webp",
     "category": "Bottle Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -109,12 +207,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 9,
     "name": "Bottle Bags #7",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/bottle-bags/bottle-bags-7.webp",
     "category": "Bottle Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -123,12 +235,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 10,
     "name": "Bottle Bags #8",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/bottle-bags/bottle-bags-8.webp",
     "category": "Bottle Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -137,12 +263,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 11,
     "name": "Bottle Bags #9",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/bottle-bags/bottle-bags-9.webp",
     "category": "Bottle Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -151,12 +291,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 12,
     "name": "Bottles #1",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/bottles/bottles-1.webp",
     "category": "Bottles",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -165,12 +319,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 13,
     "name": "Bottles #10",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/bottles/bottles-10.webp",
     "category": "Bottles",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -179,12 +347,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 14,
     "name": "Bottles #3",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/bottles/bottles-3.webp",
     "category": "Bottles",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -193,12 +375,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 15,
     "name": "Bottles #5",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/bottles/bottles-5.webp",
     "category": "Bottles",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -207,12 +403,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 16,
     "name": "Bottles #6",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/bottles/bottles-6.webp",
     "category": "Bottles",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -221,12 +431,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 17,
     "name": "Cash Pouches #10",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/cash-pouches/cash-pouches-10.webp",
     "category": "Cash Pouches",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -235,12 +459,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 18,
     "name": "Cash Pouches #3",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/cash-pouches/cash-pouches-3.webp",
     "category": "Cash Pouches",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -249,12 +487,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 19,
     "name": "Cash Pouches #4",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/cash-pouches/cash-pouches-4.webp",
     "category": "Cash Pouches",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -263,12 +515,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 20,
     "name": "Cash Pouches #5",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/cash-pouches/cash-pouches-5.webp",
     "category": "Cash Pouches",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -277,12 +543,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 21,
     "name": "Cash Pouches #6",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/cash-pouches/cash-pouches-6.webp",
     "category": "Cash Pouches",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -291,12 +571,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 22,
     "name": "Cash Pouches #7",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/cash-pouches/cash-pouches-7.webp",
     "category": "Cash Pouches",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -305,12 +599,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 23,
     "name": "Corporate Gift Sets #3",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/corporate-gift-sets/corporate-gift-sets-3.webp",
     "category": "Corporate Gift Sets",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -319,12 +627,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 24,
     "name": "Corporate Gift Sets #4",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/corporate-gift-sets/corporate-gift-sets-4.webp",
     "category": "Corporate Gift Sets",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -333,12 +655,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 25,
     "name": "Corporate Gift Sets #8",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/corporate-gift-sets/corporate-gift-sets-8.webp",
     "category": "Corporate Gift Sets",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -347,12 +683,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 26,
     "name": "Festive Bags #1",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/festive-bags/festive-bags-1.webp",
     "category": "Festive Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -361,12 +711,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 27,
     "name": "Festive Bags #10",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/festive-bags/festive-bags-10.webp",
     "category": "Festive Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -375,12 +739,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 28,
     "name": "Festive Bags #11",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/festive-bags/festive-bags-11.webp",
     "category": "Festive Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -389,12 +767,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 29,
     "name": "Festive Bags #12",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/festive-bags/festive-bags-12.webp",
     "category": "Festive Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -403,12 +795,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 30,
     "name": "Festive Bags #13",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/festive-bags/festive-bags-13.webp",
     "category": "Festive Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -417,12 +823,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 31,
     "name": "Festive Bags #14",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/festive-bags/festive-bags-14.webp",
     "category": "Festive Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -431,12 +851,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 32,
     "name": "Festive Bags #15",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/festive-bags/festive-bags-15.webp",
     "category": "Festive Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -445,12 +879,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 33,
     "name": "Festive Bags #16",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/festive-bags/festive-bags-16.webp",
     "category": "Festive Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -459,12 +907,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 34,
     "name": "Festive Bags #17",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/festive-bags/festive-bags-17.webp",
     "category": "Festive Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -473,12 +935,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 35,
     "name": "Festive Bags #18",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/festive-bags/festive-bags-18.webp",
     "category": "Festive Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -487,12 +963,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 36,
     "name": "Festive Bags #2",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/festive-bags/festive-bags-2.webp",
     "category": "Festive Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -501,12 +991,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 37,
     "name": "Festive Bags #20",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/festive-bags/festive-bags-20.webp",
     "category": "Festive Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -515,12 +1019,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 38,
     "name": "Festive Bags #21",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/festive-bags/festive-bags-21.webp",
     "category": "Festive Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -529,12 +1047,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 39,
     "name": "Festive Bags #3",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/festive-bags/festive-bags-3.webp",
     "category": "Festive Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -543,12 +1075,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 40,
     "name": "Festive Bags #4",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/festive-bags/festive-bags-4.webp",
     "category": "Festive Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -557,12 +1103,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 41,
     "name": "Festive Bags #5",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/festive-bags/festive-bags-5.webp",
     "category": "Festive Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -571,12 +1131,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 42,
     "name": "Festive Bags #6",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/festive-bags/festive-bags-6.webp",
     "category": "Festive Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -585,12 +1159,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 43,
     "name": "Festive Bags #7",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/festive-bags/festive-bags-7.webp",
     "category": "Festive Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -599,12 +1187,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 44,
     "name": "Festive Bags #8",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/festive-bags/festive-bags-8.webp",
     "category": "Festive Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -613,12 +1215,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 45,
     "name": "Festive Bags #9",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/festive-bags/festive-bags-9.webp",
     "category": "Festive Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -627,12 +1243,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 46,
     "name": "Files & Folders #10",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/files-folders/files-folders-10.webp",
     "category": "Files & Folders",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -641,12 +1271,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 47,
     "name": "Files & Folders #11",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/files-folders/files-folders-11.webp",
     "category": "Files & Folders",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -655,12 +1299,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 48,
     "name": "Files & Folders #13",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/files-folders/files-folders-13.webp",
     "category": "Files & Folders",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -669,12 +1327,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 49,
     "name": "Files & Folders #14",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/files-folders/files-folders-14.webp",
     "category": "Files & Folders",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -683,12 +1355,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 50,
     "name": "Files & Folders #15",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/files-folders/files-folders-15.webp",
     "category": "Files & Folders",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -697,12 +1383,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 51,
     "name": "Files & Folders #16",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/files-folders/files-folders-16.webp",
     "category": "Files & Folders",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -711,12 +1411,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 52,
     "name": "Files & Folders #17",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/files-folders/files-folders-17.webp",
     "category": "Files & Folders",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -725,12 +1439,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 53,
     "name": "Files & Folders #18",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/files-folders/files-folders-18.webp",
     "category": "Files & Folders",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -739,12 +1467,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 54,
     "name": "Files & Folders #19",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/files-folders/files-folders-19.webp",
     "category": "Files & Folders",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -753,12 +1495,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 55,
     "name": "Files & Folders #2",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/files-folders/files-folders-2.webp",
     "category": "Files & Folders",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -767,12 +1523,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 56,
     "name": "Files & Folders #6",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/files-folders/files-folders-6.webp",
     "category": "Files & Folders",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -781,12 +1551,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 57,
     "name": "Files & Folders #8",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/files-folders/files-folders-8.webp",
     "category": "Files & Folders",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -795,12 +1579,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 58,
     "name": "Files & Folders #9",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/files-folders/files-folders-9.webp",
     "category": "Files & Folders",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -809,12 +1607,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 59,
     "name": "Laptop Sleeves #1",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/laptop-sleeves/laptop-sleeves-1.webp",
     "category": "Laptop Sleeves",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -823,12 +1635,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 60,
     "name": "Laptop Sleeves #10",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/laptop-sleeves/laptop-sleeves-10.webp",
     "category": "Laptop Sleeves",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -837,12 +1663,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 61,
     "name": "Laptop Sleeves #12",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/laptop-sleeves/laptop-sleeves-12.webp",
     "category": "Laptop Sleeves",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -851,12 +1691,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 62,
     "name": "Laptop Sleeves #2",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/laptop-sleeves/laptop-sleeves-2.webp",
     "category": "Laptop Sleeves",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -865,12 +1719,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 63,
     "name": "Laptop Sleeves #3",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/laptop-sleeves/laptop-sleeves-3.webp",
     "category": "Laptop Sleeves",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -879,12 +1747,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 64,
     "name": "Laptop Sleeves #8",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/laptop-sleeves/laptop-sleeves-8.webp",
     "category": "Laptop Sleeves",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -893,12 +1775,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 65,
     "name": "Laptop Sleeves #9",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/laptop-sleeves/laptop-sleeves-9.webp",
     "category": "Laptop Sleeves",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -907,12 +1803,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 66,
     "name": "Notebooks #1",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/notebooks/notebooks-1.webp",
     "category": "Notebooks",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -921,12 +1831,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 67,
     "name": "Notebooks #10",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/notebooks/notebooks-10.webp",
     "category": "Notebooks",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -935,12 +1859,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 68,
     "name": "Notebooks #11",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/notebooks/notebooks-11.webp",
     "category": "Notebooks",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -949,12 +1887,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 69,
     "name": "Notebooks #12",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/notebooks/notebooks-12.webp",
     "category": "Notebooks",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -963,12 +1915,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 70,
     "name": "Notebooks #14",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/notebooks/notebooks-14.webp",
     "category": "Notebooks",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -977,12 +1943,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 71,
     "name": "Notebooks #4",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/notebooks/notebooks-4.webp",
     "category": "Notebooks",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -991,12 +1971,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 72,
     "name": "Notebooks #5",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/notebooks/notebooks-5.webp",
     "category": "Notebooks",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1005,12 +1999,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 73,
     "name": "Notebooks #6",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/notebooks/notebooks-6.webp",
     "category": "Notebooks",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1019,12 +2027,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 74,
     "name": "Notebooks #9",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/notebooks/notebooks-9.webp",
     "category": "Notebooks",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1033,12 +2055,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 75,
     "name": "Picnic Bags #5",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/picnic-bags/picnic-bags-5.webp",
     "category": "Picnic Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1047,12 +2083,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 76,
     "name": "Picnic Bags #6",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/picnic-bags/picnic-bags-6.webp",
     "category": "Picnic Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1061,12 +2111,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 77,
     "name": "Pouches #1",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/pouches/pouches-1.webp",
     "category": "Pouches",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1075,12 +2139,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 78,
     "name": "Pouches #10",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/pouches/pouches-10.webp",
     "category": "Pouches",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1089,12 +2167,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 79,
     "name": "Pouches #11",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/pouches/pouches-11.webp",
     "category": "Pouches",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1103,12 +2195,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 80,
     "name": "Pouches #12",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/pouches/pouches-12.webp",
     "category": "Pouches",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1117,12 +2223,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 81,
     "name": "Pouches #13",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/pouches/pouches-13.webp",
     "category": "Pouches",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1131,12 +2251,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 82,
     "name": "Pouches #15",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/pouches/pouches-15.webp",
     "category": "Pouches",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1145,12 +2279,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 83,
     "name": "Pouches #16",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/pouches/pouches-16.webp",
     "category": "Pouches",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1159,12 +2307,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 84,
     "name": "Pouches #19",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/pouches/pouches-19.webp",
     "category": "Pouches",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1173,12 +2335,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 85,
     "name": "Pouches #20",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/pouches/pouches-20.webp",
     "category": "Pouches",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1187,12 +2363,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 86,
     "name": "Pouches #3",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/pouches/pouches-3.webp",
     "category": "Pouches",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1201,12 +2391,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 87,
     "name": "Pouches #5",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/pouches/pouches-5.webp",
     "category": "Pouches",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1215,12 +2419,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 88,
     "name": "Pouches #6",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/pouches/pouches-6.webp",
     "category": "Pouches",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1229,12 +2447,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 89,
     "name": "Pouches #7",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/pouches/pouches-7.webp",
     "category": "Pouches",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1243,12 +2475,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 90,
     "name": "Pouches #9",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/pouches/pouches-9.webp",
     "category": "Pouches",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1257,12 +2503,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 91,
     "name": "Table Mat & Coasters #1",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/table-mat-coasters/table-mat-coasters-1.webp",
     "category": "Table Mat & Coasters",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1271,12 +2531,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 92,
     "name": "Table Mat & Coasters #6",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/table-mat-coasters/table-mat-coasters-6.webp",
     "category": "Table Mat & Coasters",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1285,12 +2559,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 93,
     "name": "Table Mat & Coasters #7",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/table-mat-coasters/table-mat-coasters-7.webp",
     "category": "Table Mat & Coasters",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1299,12 +2587,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 94,
     "name": "Table Mat & Coasters #8",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/table-mat-coasters/table-mat-coasters-8.webp",
     "category": "Table Mat & Coasters",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1313,12 +2615,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 95,
     "name": "Tote Bags #10",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/tote-bags/tote-bags-10.webp",
     "category": "Tote Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1327,12 +2643,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 96,
     "name": "Tote Bags #3",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/tote-bags/tote-bags-3.webp",
     "category": "Tote Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1341,12 +2671,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 97,
     "name": "Tote Bags #4",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/tote-bags/tote-bags-4.webp",
     "category": "Tote Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1355,12 +2699,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 98,
     "name": "Tote Bags #5",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/tote-bags/tote-bags-5.webp",
     "category": "Tote Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1369,12 +2727,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 99,
     "name": "Tote Bags #6",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/tote-bags/tote-bags-6.webp",
     "category": "Tote Bags",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1383,12 +2755,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 100,
     "name": "Women Gift Sets #1",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/women-gift-sets/women-gift-sets-1.webp",
     "category": "Women Gift Sets",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1397,12 +2783,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 101,
     "name": "Women Gift Sets #10",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/women-gift-sets/women-gift-sets-10.webp",
     "category": "Women Gift Sets",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1411,12 +2811,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 102,
     "name": "Women Gift Sets #11",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/women-gift-sets/women-gift-sets-11.webp",
     "category": "Women Gift Sets",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1425,12 +2839,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 103,
     "name": "Women Gift Sets #12",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/women-gift-sets/women-gift-sets-12.webp",
     "category": "Women Gift Sets",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1439,12 +2867,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 104,
     "name": "Women Gift Sets #13",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/women-gift-sets/women-gift-sets-13.webp",
     "category": "Women Gift Sets",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1453,12 +2895,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 105,
     "name": "Women Gift Sets #15",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/women-gift-sets/women-gift-sets-15.webp",
     "category": "Women Gift Sets",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1467,12 +2923,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 106,
     "name": "Women Gift Sets #16",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/women-gift-sets/women-gift-sets-16.webp",
     "category": "Women Gift Sets",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1481,12 +2951,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 107,
     "name": "Women Gift Sets #17",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/women-gift-sets/women-gift-sets-17.webp",
     "category": "Women Gift Sets",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1495,12 +2979,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 108,
     "name": "Women Gift Sets #18",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/women-gift-sets/women-gift-sets-18.webp",
     "category": "Women Gift Sets",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1509,12 +3007,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 109,
     "name": "Women Gift Sets #19",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/women-gift-sets/women-gift-sets-19.webp",
     "category": "Women Gift Sets",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1523,12 +3035,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 110,
     "name": "Women Gift Sets #2",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/women-gift-sets/women-gift-sets-2.webp",
     "category": "Women Gift Sets",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1537,12 +3063,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 111,
     "name": "Women Gift Sets #20",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/women-gift-sets/women-gift-sets-20.webp",
     "category": "Women Gift Sets",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1551,12 +3091,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 112,
     "name": "Women Gift Sets #4",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/women-gift-sets/women-gift-sets-4.webp",
     "category": "Women Gift Sets",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1565,12 +3119,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 113,
     "name": "Women Gift Sets #5",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/women-gift-sets/women-gift-sets-5.webp",
     "category": "Women Gift Sets",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1579,12 +3147,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 114,
     "name": "Women Gift Sets #6",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/women-gift-sets/women-gift-sets-6.webp",
     "category": "Women Gift Sets",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1593,12 +3175,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 115,
     "name": "Women Gift Sets #7",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/women-gift-sets/women-gift-sets-7.webp",
     "category": "Women Gift Sets",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1607,12 +3203,26 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   },
   {
     "id": 116,
     "name": "Women Gift Sets #8",
-    "price": "\u20b9299.00",
+    "price": "₹299.00",
     "image": "/products/categories/women-gift-sets/women-gift-sets-8.webp",
     "category": "Women Gift Sets",
     "description": "Handcrafted with sustainable materials, combining traditional craftsmanship with modern design.",
@@ -1621,6 +3231,20 @@
       "Handcrafted by local artisans",
       "Sustainable and durable",
       "Unique design"
+    ],
+    "sizes": [
+      {
+        "size": "S",
+        "price": "129"
+      },
+      {
+        "size": "M",
+        "price": "129"
+      },
+      {
+        "size": "L",
+        "price": "129"
+      }
     ]
   }
 ]
